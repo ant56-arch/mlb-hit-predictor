@@ -1,8 +1,9 @@
-name: Daily MLB Hit Predictions
+yamlname: Daily MLB Hit Predictions
 
 on:
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '0 12 * * *'   # 8am ET (12pm UTC)
+    - cron: '0 20 * * *'   # 4pm ET (8pm UTC)
   workflow_dispatch:
 
 jobs:
