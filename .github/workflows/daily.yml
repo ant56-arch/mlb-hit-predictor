@@ -1,4 +1,4 @@
-yamlname: Daily MLB Hit Predictions
+name: Daily MLB Hit Predictions
 
 on:
   schedule:
