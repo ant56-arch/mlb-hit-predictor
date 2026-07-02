@@ -1,0 +1,4 @@
+pybaseball==2.2.7
+requests==2.31.0
+pandas==2.1.4
+resend==0.8.0
