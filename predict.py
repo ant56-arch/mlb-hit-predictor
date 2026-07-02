@@ -10,6 +10,7 @@ TODAY = date.today().strftime("%B %d, %Y")
 TODAY_ISO = date.today().strftime("%Y-%m-%d")
 START_14 = (date.today() - timedelta(days=14)).strftime("%Y-%m-%d")
 YEAR = datetime.now().year
+MAX_PER_PARK = 2  # cap picks from any single ballpark
 
 # ── Park factors (all 30 MLB stadiums, league avg = 1.0) ─────────────────────
 PARK_FACTORS = {
@@ -30,6 +31,7 @@ PARK_FACTORS = {
     "Target Field": 1.00,
     "Busch Stadium": 0.99,
     "Dodger Stadium": 0.99,
+    "UNIQLO Field at Dodger Stadium": 0.99,
     "Progressive Field": 0.99,
     "PNC Park": 0.98,
     "Nationals Park": 0.97,
@@ -56,6 +58,7 @@ def get_todays_games():
             home = game.get("teams", {}).get("home", {})
             away_pitcher = away.get("probablePitcher", {})
             home_pitcher = home.get("probablePitcher", {})
+            venue = game.get("venue", {}).get("name", "")
             games.append({
                 "game_id": game["gamePk"],
                 "away_team": away.get("team", {}).get("name", ""),
@@ -66,8 +69,8 @@ def get_todays_games():
                 "away_pitcher_name": away_pitcher.get("fullName", "TBD"),
                 "home_pitcher_id": home_pitcher.get("id"),
                 "home_pitcher_name": home_pitcher.get("fullName", "TBD"),
-                "venue": game.get("venue", {}).get("name", ""),
-                "park_factor": PARK_FACTORS.get(game.get("venue", {}).get("name", ""), 1.0),
+                "venue": venue,
+                "park_factor": PARK_FACTORS.get(venue, 1.0),
             })
     return games
 
@@ -94,7 +97,7 @@ def get_pitcher_stats(pitcher_id):
             }
     return {"era": 4.50, "whip": 1.30, "k_per9": 8.0, "hand": hand}
 
-# ── Step 3: Season batter stats from MLB Stats API ───────────────────────────
+# ── Step 3: Season batter stats ───────────────────────────────────────────────
 def get_batter_stats():
     url = (
         f"https://statsapi.mlb.com/api/v1/stats"
@@ -136,42 +139,84 @@ def get_batter_stats():
             pass
     return players
 
-# ── Step 4: Statcast advanced metrics from Baseball Savant ───────────────────
+# ── Step 4: Statcast from Baseball Savant (with fallback) ────────────────────
 def get_statcast_metrics():
-    url = (
-        f"https://baseballsavant.mlb.com/leaderboard/custom"
-        f"?year={YEAR}&type=batter&filter=&sort=4&sortDir=desc"
-        f"&min=100&selections=player_id,player_name,exit_velocity_avg,barrel_batted_rate,hard_hit_percent"
-        f"&chart=false&x=exit_velocity_avg&y=exit_velocity_avg&r=no&chartType=beeswarm&csv=true"
-    )
-    try:
-        r = requests.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0"})
-        lines = r.text.strip().split("\n")
-        if len(lines) < 2:
-            return {}
-        headers = [h.strip().strip('"') for h in lines[0].split(",")]
-        metrics = {}
-        for line in lines[1:]:
-            vals = [v.strip().strip('"') for v in line.split(",")]
-            if len(vals) < len(headers):
+    urls_to_try = [
+        (
+            f"https://baseballsavant.mlb.com/leaderboard/custom"
+            f"?year={YEAR}&type=batter&filter=&sort=4&sortDir=desc"
+            f"&min=100&selections=player_id,player_name,exit_velocity_avg,barrel_batted_rate,hard_hit_percent"
+            f"&chart=false&x=exit_velocity_avg&y=exit_velocity_avg&r=no&chartType=beeswarm&csv=true"
+        ),
+        (
+            f"https://baseballsavant.mlb.com/leaderboard/expected_statistics"
+            f"?type=batter&year={YEAR}&position=&team=&min=100&csv=true"
+        ),
+    ]
+
+    req_headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "text/csv,text/html,application/xhtml+xml,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://baseballsavant.mlb.com/",
+    }
+
+    EV_COLS = ["exit_velocity_avg", "avg_hit_speed", "avg_exit_velocity", "launch_speed"]
+    BARREL_COLS = ["barrel_batted_rate", "brl_percent", "barrel_rate", "brl_pa", "barrel_pct"]
+    HH_COLS = ["hard_hit_percent", "hard_hit_rate", "hardhit_percent", "hard_hit_pct"]
+    PID_COLS = ["player_id", "batter", "pitcher_id"]
+
+    def find_col(row, candidates):
+        for c in candidates:
+            val = row.get(c, "")
+            if val and val not in ("", "null", "None"):
+                return val
+        return ""
+
+    for url in urls_to_try:
+        try:
+            r = requests.get(url, timeout=25, headers=req_headers)
+            print(f"Statcast status: {r.status_code} from {url[:60]}...")
+            if r.status_code != 200:
                 continue
-            row = dict(zip(headers, vals))
-            pid = row.get("player_id", "")
-            if not pid:
+            lines = r.text.strip().split("\n")
+            if len(lines) < 2:
+                print("Statcast returned no data rows, trying next URL.")
                 continue
-            try:
-                metrics[int(pid)] = {
-                    "exit_velo": float(row.get("exit_velocity_avg") or 0) or None,
-                    "barrel_pct": float(row.get("barrel_batted_rate") or 0) or None,
-                    "hard_hit_pct": float(row.get("hard_hit_percent") or 0) or None,
-                }
-            except:
-                continue
-        print(f"Loaded Statcast metrics for {len(metrics)} players.")
-        return metrics
-    except Exception as e:
-        print(f"Statcast fetch failed: {e} — skipping advanced metrics.")
-        return {}
+            cols = [h.strip().strip('"').lower() for h in lines[0].split(",")]
+            print(f"Statcast columns found: {cols[:10]}...")
+            metrics = {}
+            for line in lines[1:]:
+                vals = [v.strip().strip('"') for v in line.split(",")]
+                if len(vals) < len(cols):
+                    continue
+                row = dict(zip(cols, vals))
+                pid_raw = find_col(row, PID_COLS)
+                ev_raw = find_col(row, EV_COLS)
+                barrel_raw = find_col(row, BARREL_COLS)
+                hh_raw = find_col(row, HH_COLS)
+                if not pid_raw:
+                    continue
+                try:
+                    metrics[int(float(pid_raw))] = {
+                        "exit_velo": float(ev_raw) if ev_raw else None,
+                        "barrel_pct": float(barrel_raw) if barrel_raw else None,
+                        "hard_hit_pct": float(hh_raw) if hh_raw else None,
+                    }
+                except:
+                    continue
+            if metrics:
+                print(f"Loaded Statcast metrics for {len(metrics)} players.")
+                print(f"Sample: {list(metrics.items())[:2]}")
+                return metrics
+            else:
+                print("Parsed 0 metrics from this URL, trying next.")
+        except Exception as e:
+            print(f"Statcast attempt failed: {e}")
+            continue
+
+    print("All Statcast sources failed — advanced metrics will show as dashes.")
+    return {}
 
 # ── Step 5: Recent 14-day form ────────────────────────────────────────────────
 def get_recent_avg(player_id):
@@ -196,7 +241,7 @@ def score_player(p, pitcher, park_factor, is_home):
     recent = get_recent_avg(p["id"])
     recent_score = (recent / 0.300) * 22 if recent else 11.0
 
-    # 2. Advanced metrics group — 20 pts
+    # 2. Advanced metrics — 20 pts
     ev = p.get("exit_velo")
     ev_score = max(0, min(1, (ev - 84) / 10)) * 7 if ev else 3.5
     barrel = p.get("barrel_pct")
@@ -227,7 +272,7 @@ def score_player(p, pitcher, park_factor, is_home):
     total = recent_score + advanced_score + pitcher_score + season_score + platoon_score + park_score + home_score
     return round(total, 2), recent
 
-# ── Step 7: Build ranked picks ────────────────────────────────────────────────
+# ── Step 7: Build ranked picks (with park cap) ────────────────────────────────
 def get_top_picks(players, games, statcast):
     for p in players:
         sc = statcast.get(p["id"], {})
@@ -266,7 +311,19 @@ def get_top_picks(players, games, statcast):
         })
 
     scored.sort(key=lambda x: x["score"], reverse=True)
-    top = scored[:10]
+
+    # Park cap — max 2 picks per venue
+    park_counts = {}
+    top = []
+    for p in scored:
+        venue = p["venue"]
+        count = park_counts.get(venue, 0)
+        if count < MAX_PER_PARK:
+            top.append(p)
+            park_counts[venue] = count + 1
+        if len(top) == 10:
+            break
+
     max_score = top[0]["score"] if top else 1
     for p in top:
         p["confidence"] = round((p["score"] / max_score) * 100, 1)
@@ -371,6 +428,10 @@ def main():
     picks = get_top_picks(players, games, statcast)
     if picks:
         print(f"Top pick: {picks[0]['name']} ({picks[0]['confidence']}%)")
+        venues = {}
+        for p in picks:
+            venues[p["venue"]] = venues.get(p["venue"], 0) + 1
+        print(f"Park distribution: {venues}")
     else:
         print("No picks found.")
 
