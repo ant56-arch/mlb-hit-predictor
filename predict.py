@@ -49,7 +49,7 @@ PARK_FACTORS = {
     "Sahlen Field": 1.00,
 }
 
-# ── Step 1: Today's games (sorted by start time, filtered by run) ─────────────
+# ── Step 1: Today's games ─────────────────────────────────────────────────────
 def get_todays_games():
     url = "https://statsapi.mlb.com/api/v1/schedule?sportId=1&hydrate=probablePitcher,lineups"
     r = requests.get(url, timeout=15)
@@ -61,8 +61,6 @@ def get_todays_games():
             away_pitcher = away.get("probablePitcher", {})
             home_pitcher = home.get("probablePitcher", {})
             venue = game.get("venue", {}).get("name", "")
-
-            # Parse game time to ET
             game_time_utc_str = game.get("gameDate", "")
             game_time_et = None
             game_hour_et = 0
@@ -70,13 +68,11 @@ def get_todays_games():
                 try:
                     game_time_utc = datetime.strptime(game_time_utc_str, "%Y-%m-%dT%H:%M:%SZ")
                     game_time_utc = game_time_utc.replace(tzinfo=timezone.utc)
-                    # EDT is UTC-4
                     et_offset = timezone(timedelta(hours=-4))
                     game_time_et = game_time_utc.astimezone(et_offset)
                     game_hour_et = game_time_et.hour
                 except:
                     pass
-
             games.append({
                 "game_id": game["gamePk"],
                 "away_team": away.get("team", {}).get("name", ""),
@@ -93,17 +89,12 @@ def get_todays_games():
                 "game_hour_et": game_hour_et,
                 "game_time_str": game_time_et.strftime("%-I:%M %p ET") if game_time_et else "TBD",
             })
-
-    # Sort all games earliest to latest
     games.sort(key=lambda x: x["game_time_et"] or datetime.max.replace(tzinfo=timezone.utc))
-
-    # Filter for afternoon run — only games starting after 4pm ET
     if IS_AFTERNOON:
         games = [g for g in games if g["game_hour_et"] >= 16]
         print(f"Afternoon run — filtered to {len(games)} games starting at 4pm ET or later.")
     else:
         print(f"Morning run — showing all {len(games)} games sorted earliest to latest.")
-
     return games
 
 # ── Step 2: Pitcher stats ─────────────────────────────────────────────────────
@@ -152,6 +143,7 @@ def get_batter_stats():
             "id": entry.get("player", {}).get("id"),
             "name": entry.get("player", {}).get("fullName", "Unknown"),
             "team_id": entry.get("team", {}).get("id"),
+            "team_name": entry.get("team", {}).get("name", ""),
             "avg": avg,
             "obp": obp,
             "slg": slg,
@@ -240,7 +232,6 @@ def get_statcast_metrics():
         except Exception as e:
             print(f"Statcast attempt failed: {e}")
             continue
-
     print("All Statcast sources failed — advanced metrics will show as dashes.")
     return {}
 
@@ -360,7 +351,9 @@ def build_email(picks, games):
         <tr style="border-bottom:1px solid #f0f0f0;">
           <td style="padding:10px 8px;font-weight:600;font-size:15px;">{medal}</td>
           <td style="padding:10px 8px;">
-            <div style="font-weight:600;font-size:14px;color:#111;">{p['name']} {platoon}</div>
+            <div style="font-weight:600;font-size:14px;color:#111;">
+              {p['name']} <span style="font-size:11px;font-weight:400;color:#888;">· {p['team_name']}</span> {platoon}
+            </div>
             <div style="font-size:11px;color:#444;margin-top:3px;">
               vs {p['opp_pitcher']} ({p['pitcher_hand']}HP) · ERA {p['pitcher_era']:.2f} · WHIP {p['pitcher_whip']:.2f} · K/9 {p['pitcher_k9']:.1f}
             </div>
@@ -401,7 +394,7 @@ def build_email(picks, games):
         <table style="width:100%;border-collapse:collapse;">
           <tr style="background:#f8f8f8;">
             <th style="padding:8px;text-align:left;font-size:11px;color:#888;width:32px;">#</th>
-            <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PLAYER · MATCHUP · STATCAST</th>
+            <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PLAYER · TEAM · MATCHUP · STATCAST</th>
             <th style="padding:8px;text-align:right;font-size:11px;color:#888;">SCORE</th>
           </tr>
           {rows}
