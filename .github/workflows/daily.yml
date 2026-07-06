@@ -2,8 +2,8 @@ name: Daily MLB Hit Predictions
 
 on:
   schedule:
-    - cron: '0 12 * * *'   # 8am ET (12pm UTC)
-    - cron: '0 20 * * *'   # 4pm ET (8pm UTC)
+    - cron: '0 12 * * *'   # 8am ET (12pm UTC during EDT)
+    - cron: '0 20 * * *'   # 4pm ET (8pm UTC during EDT)
   workflow_dispatch:
 
 jobs:
@@ -24,4 +24,5 @@ jobs:
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           TO_EMAIL: anthonytrotta56@gmail.com
+          RUN_HOUR_ET: ${{ github.event.schedule == '0 20 * * *' && '16' || '8' }}
         run: python predict.py
