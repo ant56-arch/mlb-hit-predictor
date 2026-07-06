@@ -14,39 +14,43 @@ MAX_PER_PARK = 2
 RUN_HOUR_ET = int(os.environ.get("RUN_HOUR_ET", "8"))
 IS_AFTERNOON = RUN_HOUR_ET >= 16
 
-# ── Park factors ──────────────────────────────────────────────────────────────
+# ── Park factors (all 30 MLB stadiums, league avg = 1.0) ─────────────────────
 PARK_FACTORS = {
-    "Coors Field": 1.15,
-    "Great American Ball Park": 1.08,
-    "Fenway Park": 1.07,
-    "Globe Life Field": 1.05,
-    "Minute Maid Park": 1.04,
-    "American Family Field": 1.04,
-    "Camden Yards": 1.03,
-    "Wrigley Field": 1.03,
-    "Truist Park": 1.02,
-    "Chase Field": 1.02,
-    "Citizens Bank Park": 1.02,
-    "Yankee Stadium": 1.01,
-    "Kauffman Stadium": 1.00,
-    "Angel Stadium": 1.00,
-    "Target Field": 1.00,
-    "Busch Stadium": 0.99,
-    "Dodger Stadium": 0.99,
-    "UNIQLO Field at Dodger Stadium": 0.99,
-    "Progressive Field": 0.99,
-    "PNC Park": 0.98,
-    "Nationals Park": 0.97,
-    "T-Mobile Park": 0.97,
-    "Tropicana Field": 0.97,
-    "Comerica Park": 0.96,
-    "Guaranteed Rate Field": 0.96,
-    "Petco Park": 0.96,
-    "Oracle Park": 0.95,
-    "loanDepot park": 0.95,
-    "Citi Field": 0.95,
-    "Oakland Coliseum": 0.94,
-    "Sahlen Field": 1.00,
+    # Hitter friendly
+    "Coors Field": 1.15,                        # Colorado Rockies
+    "Great American Ball Park": 1.08,           # Cincinnati Reds
+    "Fenway Park": 1.07,                        # Boston Red Sox
+    "Globe Life Field": 1.05,                   # Texas Rangers
+    "Daikin Park": 1.04,                        # Houston Astros (formerly Minute Maid Park)
+    "American Family Field": 1.04,              # Milwaukee Brewers
+    "Wrigley Field": 1.03,                      # Chicago Cubs
+    "Oriole Park at Camden Yards": 1.03,        # Baltimore Orioles
+    "Camden Yards": 1.03,                       # fallback alias
+    "Truist Park": 1.02,                        # Atlanta Braves
+    "Chase Field": 1.02,                        # Arizona Diamondbacks
+    "Citizens Bank Park": 1.02,                 # Philadelphia Phillies
+    # Neutral
+    "Yankee Stadium": 1.01,                     # New York Yankees
+    "Rogers Centre": 1.00,                      # Toronto Blue Jays
+    "Kauffman Stadium": 1.00,                   # Kansas City Royals
+    "Angel Stadium": 1.00,                      # Los Angeles Angels
+    "Target Field": 1.00,                       # Minnesota Twins
+    "Sutter Health Park": 1.00,                 # Oakland Athletics (Sacramento temp)
+    "Busch Stadium": 0.99,                      # St. Louis Cardinals
+    "Dodger Stadium": 0.99,                     # Los Angeles Dodgers
+    "UNIQLO Field at Dodger Stadium": 0.99,     # fallback alias
+    "Progressive Field": 0.99,                  # Cleveland Guardians
+    # Pitcher friendly
+    "PNC Park": 0.98,                           # Pittsburgh Pirates
+    "Nationals Park": 0.97,                     # Washington Nationals
+    "T-Mobile Park": 0.97,                      # Seattle Mariners
+    "Tropicana Field": 0.97,                    # Tampa Bay Rays
+    "Comerica Park": 0.96,                      # Detroit Tigers
+    "Rate Field": 0.96,                         # Chicago White Sox (formerly Guaranteed Rate Field)
+    "Petco Park": 0.96,                         # San Diego Padres
+    "Oracle Park": 0.95,                        # San Francisco Giants
+    "loanDepot park": 0.95,                     # Miami Marlins
+    "Citi Field": 0.95,                         # New York Mets
 }
 
 # ── Step 1: Today's games ─────────────────────────────────────────────────────
