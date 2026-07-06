@@ -1,7 +1,7 @@
 import os
 import requests
 import resend
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, timedelta, timezone
 
 # ── Config ────────────────────────────────────────────────────────────────────
 resend.api_key = os.environ["RESEND_API_KEY"]
@@ -10,9 +10,11 @@ TODAY = date.today().strftime("%B %d, %Y")
 TODAY_ISO = date.today().strftime("%Y-%m-%d")
 START_14 = (date.today() - timedelta(days=14)).strftime("%Y-%m-%d")
 YEAR = datetime.now().year
-MAX_PER_PARK = 2  # cap picks from any single ballpark
+MAX_PER_PARK = 2
+RUN_HOUR_ET = int(os.environ.get("RUN_HOUR_ET", "8"))
+IS_AFTERNOON = RUN_HOUR_ET >= 16
 
-# ── Park factors (all 30 MLB stadiums, league avg = 1.0) ─────────────────────
+# ── Park factors ──────────────────────────────────────────────────────────────
 PARK_FACTORS = {
     "Coors Field": 1.15,
     "Great American Ball Park": 1.08,
@@ -47,7 +49,7 @@ PARK_FACTORS = {
     "Sahlen Field": 1.00,
 }
 
-# ── Step 1: Today's games ─────────────────────────────────────────────────────
+# ── Step 1: Today's games (sorted by start time, filtered by run) ─────────────
 def get_todays_games():
     url = "https://statsapi.mlb.com/api/v1/schedule?sportId=1&hydrate=probablePitcher,lineups"
     r = requests.get(url, timeout=15)
@@ -59,6 +61,22 @@ def get_todays_games():
             away_pitcher = away.get("probablePitcher", {})
             home_pitcher = home.get("probablePitcher", {})
             venue = game.get("venue", {}).get("name", "")
+
+            # Parse game time to ET
+            game_time_utc_str = game.get("gameDate", "")
+            game_time_et = None
+            game_hour_et = 0
+            if game_time_utc_str:
+                try:
+                    game_time_utc = datetime.strptime(game_time_utc_str, "%Y-%m-%dT%H:%M:%SZ")
+                    game_time_utc = game_time_utc.replace(tzinfo=timezone.utc)
+                    # EDT is UTC-4
+                    et_offset = timezone(timedelta(hours=-4))
+                    game_time_et = game_time_utc.astimezone(et_offset)
+                    game_hour_et = game_time_et.hour
+                except:
+                    pass
+
             games.append({
                 "game_id": game["gamePk"],
                 "away_team": away.get("team", {}).get("name", ""),
@@ -71,7 +89,21 @@ def get_todays_games():
                 "home_pitcher_name": home_pitcher.get("fullName", "TBD"),
                 "venue": venue,
                 "park_factor": PARK_FACTORS.get(venue, 1.0),
+                "game_time_et": game_time_et,
+                "game_hour_et": game_hour_et,
+                "game_time_str": game_time_et.strftime("%-I:%M %p ET") if game_time_et else "TBD",
             })
+
+    # Sort all games earliest to latest
+    games.sort(key=lambda x: x["game_time_et"] or datetime.max.replace(tzinfo=timezone.utc))
+
+    # Filter for afternoon run — only games starting after 4pm ET
+    if IS_AFTERNOON:
+        games = [g for g in games if g["game_hour_et"] >= 16]
+        print(f"Afternoon run — filtered to {len(games)} games starting at 4pm ET or later.")
+    else:
+        print(f"Morning run — showing all {len(games)} games sorted earliest to latest.")
+
     return games
 
 # ── Step 2: Pitcher stats ─────────────────────────────────────────────────────
@@ -139,7 +171,7 @@ def get_batter_stats():
             pass
     return players
 
-# ── Step 4: Statcast from Baseball Savant (with fallback) ────────────────────
+# ── Step 4: Statcast metrics ──────────────────────────────────────────────────
 def get_statcast_metrics():
     urls_to_try = [
         (
@@ -153,14 +185,12 @@ def get_statcast_metrics():
             f"?type=batter&year={YEAR}&position=&team=&min=100&csv=true"
         ),
     ]
-
     req_headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
         "Accept": "text/csv,text/html,application/xhtml+xml,*/*;q=0.8",
         "Accept-Language": "en-US,en;q=0.9",
         "Referer": "https://baseballsavant.mlb.com/",
     }
-
     EV_COLS = ["exit_velocity_avg", "avg_hit_speed", "avg_exit_velocity", "launch_speed"]
     BARREL_COLS = ["barrel_batted_rate", "brl_percent", "barrel_rate", "brl_pa", "barrel_pct"]
     HH_COLS = ["hard_hit_percent", "hard_hit_rate", "hardhit_percent", "hard_hit_pct"]
@@ -181,7 +211,6 @@ def get_statcast_metrics():
                 continue
             lines = r.text.strip().split("\n")
             if len(lines) < 2:
-                print("Statcast returned no data rows, trying next URL.")
                 continue
             cols = [h.strip().strip('"').lower() for h in lines[0].split(",")]
             print(f"Statcast columns found: {cols[:10]}...")
@@ -207,10 +236,7 @@ def get_statcast_metrics():
                     continue
             if metrics:
                 print(f"Loaded Statcast metrics for {len(metrics)} players.")
-                print(f"Sample: {list(metrics.items())[:2]}")
                 return metrics
-            else:
-                print("Parsed 0 metrics from this URL, trying next.")
         except Exception as e:
             print(f"Statcast attempt failed: {e}")
             continue
@@ -237,11 +263,8 @@ def get_recent_avg(player_id):
 
 # ── Step 6: Score each player ─────────────────────────────────────────────────
 def score_player(p, pitcher, park_factor, is_home):
-    # 1. Recent form — 22 pts
     recent = get_recent_avg(p["id"])
     recent_score = (recent / 0.300) * 22 if recent else 11.0
-
-    # 2. Advanced metrics — 20 pts
     ev = p.get("exit_velo")
     ev_score = max(0, min(1, (ev - 84) / 10)) * 7 if ev else 3.5
     barrel = p.get("barrel_pct")
@@ -250,29 +273,18 @@ def score_player(p, pitcher, park_factor, is_home):
     hh_score = max(0, min(1, (hard_hit - 25) / 30)) * 4 if hard_hit else 2.0
     ops_score = max(0, min(1, (p["ops"] - 0.600) / 0.400)) * 2
     advanced_score = ev_score + barrel_score + hh_score + ops_score
-
-    # 3. Pitcher matchup — 18 pts
     era_norm = max(0, min(1, (6.00 - pitcher["era"]) / 4.00))
     whip_norm = max(0, min(1, (1.80 - pitcher["whip"]) / 0.80))
     k_norm = max(0, min(1, (14.0 - pitcher["k_per9"]) / 10.0))
     pitcher_score = (1 - (era_norm * 0.4 + whip_norm * 0.35 + k_norm * 0.25)) * 18
-
-    # 4. Season batting average — 15 pts
     season_score = max(0, min(1, p["avg"] / 0.350)) * 15
-
-    # 5. Platoon advantage — 12 pts
     platoon_score = 12 if p["hand"] != pitcher["hand"] else 6
-
-    # 6. Park factor — 8 pts
     park_score = max(0, min(1, (park_factor - 0.90) / 0.25)) * 8
-
-    # 7. Home vs away — 5 pts
     home_score = 5 if is_home else 2.5
-
     total = recent_score + advanced_score + pitcher_score + season_score + platoon_score + park_score + home_score
     return round(total, 2), recent
 
-# ── Step 7: Build ranked picks (with park cap) ────────────────────────────────
+# ── Step 7: Build ranked picks ────────────────────────────────────────────────
 def get_top_picks(players, games, statcast):
     for p in players:
         sc = statcast.get(p["id"], {})
@@ -308,11 +320,10 @@ def get_top_picks(players, games, statcast):
             "pitcher_whip": pitcher["whip"],
             "pitcher_k9": pitcher["k_per9"],
             "pitcher_hand": pitcher["hand"],
+            "game_time_str": info["game"]["game_time_str"],
         })
 
     scored.sort(key=lambda x: x["score"], reverse=True)
-
-    # Park cap — max 2 picks per venue
     park_counts = {}
     top = []
     for p in scored:
@@ -331,6 +342,9 @@ def get_top_picks(players, games, statcast):
 
 # ── Step 8: Build email ───────────────────────────────────────────────────────
 def build_email(picks, games):
+    edition = "4pm Evening Edition" if IS_AFTERNOON else "8am Morning Edition"
+    game_note = "Games starting 4pm ET or later" if IS_AFTERNOON else "All games today · earliest to latest"
+
     rows = ""
     for i, p in enumerate(picks, 1):
         conf = p["confidence"]
@@ -354,20 +368,21 @@ def build_email(picks, games):
               AVG {p['avg']:.3f} · OPS {p['ops']:.3f} · {recent_str} · {home_away} · {p['venue']}
             </div>
             <div style="font-size:11px;color:#888;margin-top:2px;">
-              Exit Velo {ev_str} · Barrel% {barrel_str} · Hard Hit% {hh_str}
+              🕐 {p['game_time_str']} · Exit Velo {ev_str} · Barrel% {barrel_str} · Hard Hit% {hh_str}
             </div>
           </td>
           <td style="padding:10px 8px;text-align:right;font-weight:700;font-size:16px;color:{color};vertical-align:top;">{conf:.0f}%</td>
         </tr>"""
 
     game_rows = ""
-    for g in games[:8]:
+    for g in games:
         pf = g["park_factor"]
         pf_str = f"🟢 +{int((pf-1)*100)}%" if pf > 1.02 else f"🔴 {int((pf-1)*100)}%" if pf < 0.98 else "⚪ Neutral"
         game_rows += f"""
         <tr style="border-bottom:1px solid #f0f0f0;">
           <td style="padding:8px;font-size:12px;color:#333;">{g['away_team']} @ {g['home_team']}</td>
           <td style="padding:8px;font-size:11px;color:#888;">{g['away_pitcher_name']} vs {g['home_pitcher_name']}</td>
+          <td style="padding:8px;font-size:11px;color:#666;white-space:nowrap;">{g['game_time_str']}</td>
           <td style="padding:8px;font-size:11px;color:#888;white-space:nowrap;">{pf_str}</td>
         </tr>"""
 
@@ -375,7 +390,7 @@ def build_email(picks, games):
     <div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;background:#fff;">
       <div style="background:#0a0a0a;padding:24px;text-align:center;">
         <h1 style="color:#fff;margin:0;font-size:22px;letter-spacing:2px;">⚾ BTS EDGE</h1>
-        <p style="color:#888;margin:4px 0 0;font-size:12px;">Daily Hit Predictions · {TODAY}</p>
+        <p style="color:#888;margin:4px 0 0;font-size:12px;">{edition} · {TODAY}</p>
       </div>
       <div style="padding:12px 24px;background:#f8f8f8;font-size:11px;color:#888;text-align:center;line-height:1.8;">
         <strong style="color:#555;">Scoring model:</strong>
@@ -393,11 +408,14 @@ def build_email(picks, games):
         </table>
       </div>
       <div style="padding:0 24px 24px;">
-        <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">Today's Games</h2>
+        <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">
+          Today's Games <span style="font-size:11px;font-weight:400;color:#888;">· {game_note}</span>
+        </h2>
         <table style="width:100%;border-collapse:collapse;">
           <tr style="background:#f8f8f8;">
             <th style="padding:8px;text-align:left;font-size:11px;color:#888;">MATCHUP</th>
             <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PITCHERS</th>
+            <th style="padding:8px;text-align:left;font-size:11px;color:#888;">TIME</th>
             <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PARK</th>
           </tr>
           {game_rows}
@@ -405,7 +423,7 @@ def build_email(picks, games):
       </div>
       <div style="background:#f8f8f8;padding:16px 24px;text-align:center;">
         <p style="font-size:11px;color:#aaa;margin:0;">
-          BTS Edge · Automated daily at 8am ET · MLB Stats API + Baseball Savant Statcast
+          BTS Edge · {edition} · MLB Stats API + Baseball Savant Statcast
         </p>
       </div>
     </div>"""
@@ -413,18 +431,21 @@ def build_email(picks, games):
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
-    print("Fetching today's games...")
-    games = get_todays_games()
-    print(f"Found {len(games)} games.")
+    edition = "4pm Evening Edition" if IS_AFTERNOON else "8am Morning Edition"
+    print(f"Running {edition}...")
 
-    print("Fetching season batter stats...")
+    games = get_todays_games()
+    print(f"Found {len(games)} games for this edition.")
+
+    if not games:
+        print("No games found for this time window — skipping email.")
+        return
+
     players = get_batter_stats()
     print(f"Found {len(players)} qualified batters.")
 
-    print("Fetching Statcast advanced metrics from Baseball Savant...")
     statcast = get_statcast_metrics()
 
-    print("Scoring players with full model...")
     picks = get_top_picks(players, games, statcast)
     if picks:
         print(f"Top pick: {picks[0]['name']} ({picks[0]['confidence']}%)")
@@ -434,13 +455,14 @@ def main():
         print(f"Park distribution: {venues}")
     else:
         print("No picks found.")
+        return
 
-    print("Sending email...")
     html = build_email(picks, games)
+    subject = f"⚾ BTS Edge {edition} — {TODAY}"
     resend.Emails.send({
         "from": "onboarding@resend.dev",
         "to": TO_EMAIL,
-        "subject": f"⚾ BTS Edge Picks — {TODAY}",
+        "subject": subject,
         "html": html,
     })
     print("Email sent successfully!")
