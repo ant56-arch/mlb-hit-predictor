@@ -2,15 +2,20 @@ name: Daily MLB Hit Predictions
 
 on:
   schedule:
-    - cron: '0 12 * * *'   # 8am ET (12pm UTC during EDT)
-    - cron: '0 20 * * *'   # 4pm ET (8pm UTC during EDT)
+    - cron: '0 12 * * *'   # 8am ET
+    - cron: '0 20 * * *'   # 4pm ET
+    - cron: '0 6 * * *'    # 2am ET (results check)
   workflow_dispatch:
 
 jobs:
   predict:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -24,5 +29,13 @@ jobs:
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           TO_EMAIL: anthonytrotta56@gmail.com
-          RUN_HOUR_ET: ${{ github.event.schedule == '0 20 * * *' && '16' || '8' }}
+          RUN_HOUR_ET: ${{ github.event.schedule == '0 20 * * *' && '16' || github.event.schedule == '0 6 * * *' && '2' || '8' }}
         run: python predict.py
+
+      - name: Commit picks history
+        run: |
+          git config user.name "BTS Edge Bot"
+          git config user.email "bot@btsedge.com"
+          git add picks_history.json || true
+          git diff --staged --quiet || git commit -m "Update picks history $(date -u '+%Y-%m-%d')"
+          git push || true
