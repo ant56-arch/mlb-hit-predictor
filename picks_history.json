@@ -63,26 +63,6 @@
     },
     {
       "date": "2026-07-08",
-      "player_id": 518692,
-      "player_name": "Freddie Freeman",
-      "team": "Los Angeles Dodgers",
-      "game_id": 823928,
-      "confidence": 97.9,
-      "factors": {
-        "recent_form": 28.45,
-        "advanced_metrics": 10.39,
-        "pitcher_matchup": 7.04,
-        "season_avg": 12.6,
-        "platoon": 12,
-        "park_factor": 2.88,
-        "home_away": 5
-      },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
-    },
-    {
-      "date": "2026-07-08",
       "player_id": 656811,
       "player_name": "Ryan O'Hearn",
       "team": "Pittsburgh Pirates",
@@ -113,6 +93,26 @@
         "advanced_metrics": 10.13,
         "pitcher_matchup": 7.2,
         "season_avg": 14.01,
+        "platoon": 12,
+        "park_factor": 1.6,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-08",
+      "player_id": 665742,
+      "player_name": "Juan Soto",
+      "team": "New York Mets",
+      "game_id": 823605,
+      "confidence": 96.1,
+      "factors": {
+        "recent_form": 22.0,
+        "advanced_metrics": 10.93,
+        "pitcher_matchup": 12.62,
+        "season_avg": 12.81,
         "platoon": 12,
         "park_factor": 1.6,
         "home_away": 5
@@ -163,6 +163,26 @@
     },
     {
       "date": "2026-07-08",
+      "player_id": 687859,
+      "player_name": "Troy Johnston",
+      "team": "Colorado Rockies",
+      "game_id": 823928,
+      "confidence": 92.4,
+      "factors": {
+        "recent_form": 21.71,
+        "advanced_metrics": 10.04,
+        "pitcher_matchup": 11.52,
+        "season_avg": 13.29,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-08",
       "player_id": 669003,
       "player_name": "Garrett Mitchell",
       "team": "Milwaukee Brewers",
@@ -176,26 +196,6 @@
         "platoon": 12,
         "park_factor": 2.88,
         "home_away": 2.5
-      },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
-    },
-    {
-      "date": "2026-07-08",
-      "player_id": 665742,
-      "player_name": "Juan Soto",
-      "team": "New York Mets",
-      "game_id": 823605,
-      "confidence": 91.2,
-      "factors": {
-        "recent_form": 22.0,
-        "advanced_metrics": 10.93,
-        "pitcher_matchup": 8.66,
-        "season_avg": 12.81,
-        "platoon": 12,
-        "park_factor": 1.6,
-        "home_away": 5
       },
       "got_hit": null,
       "hits": null,
