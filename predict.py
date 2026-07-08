@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 import resend
 from datetime import datetime, date, timedelta, timezone
@@ -8,54 +9,66 @@ resend.api_key = os.environ["RESEND_API_KEY"]
 TO_EMAIL = os.environ["TO_EMAIL"]
 TODAY = date.today().strftime("%B %d, %Y")
 TODAY_ISO = date.today().strftime("%Y-%m-%d")
+YESTERDAY_ISO = (date.today() - timedelta(days=1)).strftime("%Y-%m-%d")
 START_14 = (date.today() - timedelta(days=14)).strftime("%Y-%m-%d")
 YEAR = datetime.now().year
 MAX_PER_PARK = 2
 RUN_HOUR_ET = int(os.environ.get("RUN_HOUR_ET", "8"))
-IS_AFTERNOON = RUN_HOUR_ET >= 16
+IS_AFTERNOON = RUN_HOUR_ET == 16
+IS_RESULTS = RUN_HOUR_ET == 2
+HISTORY_FILE = "picks_history.json"
 
-# ── Park factors (all 30 MLB stadiums, league avg = 1.0) ─────────────────────
+# ── Park factors ──────────────────────────────────────────────────────────────
 PARK_FACTORS = {
-    # Hitter friendly
-    "Coors Field": 1.15,                        # Colorado Rockies
-    "Great American Ball Park": 1.08,           # Cincinnati Reds
-    "Fenway Park": 1.07,                        # Boston Red Sox
-    "Globe Life Field": 1.05,                   # Texas Rangers
-    "Daikin Park": 1.04,                        # Houston Astros (formerly Minute Maid Park)
-    "American Family Field": 1.04,              # Milwaukee Brewers
-    "Wrigley Field": 1.03,                      # Chicago Cubs
-    "Oriole Park at Camden Yards": 1.03,        # Baltimore Orioles
-    "Camden Yards": 1.03,                       # fallback alias
-    "Truist Park": 1.02,                        # Atlanta Braves
-    "Chase Field": 1.02,                        # Arizona Diamondbacks
-    "Citizens Bank Park": 1.02,                 # Philadelphia Phillies
-    # Neutral
-    "Yankee Stadium": 1.01,                     # New York Yankees
-    "Rogers Centre": 1.00,                      # Toronto Blue Jays
-    "Kauffman Stadium": 1.00,                   # Kansas City Royals
-    "Angel Stadium": 1.00,                      # Los Angeles Angels
-    "Target Field": 1.00,                       # Minnesota Twins
-    "Sutter Health Park": 1.00,                 # Oakland Athletics (Sacramento temp)
-    "Busch Stadium": 0.99,                      # St. Louis Cardinals
-    "Dodger Stadium": 0.99,                     # Los Angeles Dodgers
-    "UNIQLO Field at Dodger Stadium": 0.99,     # fallback alias
-    "Progressive Field": 0.99,                  # Cleveland Guardians
-    # Pitcher friendly
-    "PNC Park": 0.98,                           # Pittsburgh Pirates
-    "Nationals Park": 0.97,                     # Washington Nationals
-    "T-Mobile Park": 0.97,                      # Seattle Mariners
-    "Tropicana Field": 0.97,                    # Tampa Bay Rays
-    "Comerica Park": 0.96,                      # Detroit Tigers
-    "Rate Field": 0.96,                         # Chicago White Sox (formerly Guaranteed Rate Field)
-    "Petco Park": 0.96,                         # San Diego Padres
-    "Oracle Park": 0.95,                        # San Francisco Giants
-    "loanDepot park": 0.95,                     # Miami Marlins
-    "Citi Field": 0.95,                         # New York Mets
+    "Coors Field": 1.15,
+    "Great American Ball Park": 1.08,
+    "Fenway Park": 1.07,
+    "Globe Life Field": 1.05,
+    "Daikin Park": 1.04,
+    "American Family Field": 1.04,
+    "Wrigley Field": 1.03,
+    "Oriole Park at Camden Yards": 1.03,
+    "Camden Yards": 1.03,
+    "Truist Park": 1.02,
+    "Chase Field": 1.02,
+    "Citizens Bank Park": 1.02,
+    "Yankee Stadium": 1.01,
+    "Rogers Centre": 1.00,
+    "Kauffman Stadium": 1.00,
+    "Angel Stadium": 1.00,
+    "Target Field": 1.00,
+    "Sutter Health Park": 1.00,
+    "Busch Stadium": 0.99,
+    "Dodger Stadium": 0.99,
+    "UNIQLO Field at Dodger Stadium": 0.99,
+    "Progressive Field": 0.99,
+    "PNC Park": 0.98,
+    "Nationals Park": 0.97,
+    "T-Mobile Park": 0.97,
+    "Tropicana Field": 0.97,
+    "Comerica Park": 0.96,
+    "Rate Field": 0.96,
+    "Petco Park": 0.96,
+    "Oracle Park": 0.95,
+    "loanDepot park": 0.95,
+    "Citi Field": 0.95,
 }
 
+# ── Load / save picks history ─────────────────────────────────────────────────
+def load_history():
+    try:
+        with open(HISTORY_FILE, "r") as f:
+            return json.load(f)
+    except:
+        return {"season": YEAR, "picks": []}
+
+def save_history(history):
+    with open(HISTORY_FILE, "w") as f:
+        json.dump(history, f, indent=2)
+
 # ── Step 1: Today's games ─────────────────────────────────────────────────────
-def get_todays_games():
-    url = "https://statsapi.mlb.com/api/v1/schedule?sportId=1&hydrate=probablePitcher,lineups"
+def get_todays_games(target_date=TODAY_ISO):
+    url = f"https://statsapi.mlb.com/api/v1/schedule?sportId=1&date={target_date}&hydrate=probablePitcher,lineups"
     r = requests.get(url, timeout=15)
     games = []
     for date_entry in r.json().get("dates", []):
@@ -92,13 +105,11 @@ def get_todays_games():
                 "game_time_et": game_time_et,
                 "game_hour_et": game_hour_et,
                 "game_time_str": game_time_et.strftime("%-I:%M %p ET") if game_time_et else "TBD",
+                "status": game.get("status", {}).get("abstractGameState", "Preview"),
             })
     games.sort(key=lambda x: x["game_time_et"] or datetime.max.replace(tzinfo=timezone.utc))
     if IS_AFTERNOON:
         games = [g for g in games if g["game_hour_et"] >= 16]
-        print(f"Afternoon run — filtered to {len(games)} games starting at 4pm ET or later.")
-    else:
-        print(f"Morning run — showing all {len(games)} games sorted earliest to latest.")
     return games
 
 # ── Step 2: Pitcher stats ─────────────────────────────────────────────────────
@@ -202,14 +213,12 @@ def get_statcast_metrics():
     for url in urls_to_try:
         try:
             r = requests.get(url, timeout=25, headers=req_headers)
-            print(f"Statcast status: {r.status_code} from {url[:60]}...")
             if r.status_code != 200:
                 continue
             lines = r.text.strip().split("\n")
             if len(lines) < 2:
                 continue
             cols = [h.strip().strip('"').lower() for h in lines[0].split(",")]
-            print(f"Statcast columns found: {cols[:10]}...")
             metrics = {}
             for line in lines[1:]:
                 vals = [v.strip().strip('"') for v in line.split(",")]
@@ -236,7 +245,7 @@ def get_statcast_metrics():
         except Exception as e:
             print(f"Statcast attempt failed: {e}")
             continue
-    print("All Statcast sources failed — advanced metrics will show as dashes.")
+    print("All Statcast sources failed.")
     return {}
 
 # ── Step 5: Recent 14-day form ────────────────────────────────────────────────
@@ -277,7 +286,17 @@ def score_player(p, pitcher, park_factor, is_home):
     park_score = max(0, min(1, (park_factor - 0.90) / 0.25)) * 8
     home_score = 5 if is_home else 2.5
     total = recent_score + advanced_score + pitcher_score + season_score + platoon_score + park_score + home_score
-    return round(total, 2), recent
+
+    factors = {
+        "recent_form": round(recent_score, 2),
+        "advanced_metrics": round(advanced_score, 2),
+        "pitcher_matchup": round(pitcher_score, 2),
+        "season_avg": round(season_score, 2),
+        "platoon": round(platoon_score, 2),
+        "park_factor": round(park_score, 2),
+        "home_away": round(home_score, 2),
+    }
+    return round(total, 2), recent, factors
 
 # ── Step 7: Build ranked picks ────────────────────────────────────────────────
 def get_top_picks(players, games, statcast):
@@ -302,11 +321,12 @@ def get_top_picks(players, games, statcast):
         if pid not in pitcher_cache:
             pitcher_cache[pid] = get_pitcher_stats(pid)
         pitcher = pitcher_cache[pid]
-        total, recent = score_player(p, pitcher, info["game"]["park_factor"], info["is_home"])
+        total, recent, factors = score_player(p, pitcher, info["game"]["park_factor"], info["is_home"])
         scored.append({
             **p,
             "score": total,
             "recent_avg": recent,
+            "factors": factors,
             "opp_pitcher": info["opp_pitcher_name"],
             "venue": info["game"]["venue"],
             "park_factor": info["game"]["park_factor"],
@@ -316,6 +336,8 @@ def get_top_picks(players, games, statcast):
             "pitcher_k9": pitcher["k_per9"],
             "pitcher_hand": pitcher["hand"],
             "game_time_str": info["game"]["game_time_str"],
+            "game_id": info["game"]["game_id"],
+            "game_status": info["game"]["status"],
         })
 
     scored.sort(key=lambda x: x["score"], reverse=True)
@@ -335,11 +357,176 @@ def get_top_picks(players, games, statcast):
         p["confidence"] = round((p["score"] / max_score) * 100, 1)
     return top
 
-# ── Step 8: Build email ───────────────────────────────────────────────────────
-def build_email(picks, games):
-    edition = "4pm Evening Edition" if IS_AFTERNOON else "8am Morning Edition"
-    game_note = "Games starting 4pm ET or later" if IS_AFTERNOON else "All games today · earliest to latest"
+# ── Step 8: Save picks to history ─────────────────────────────────────────────
+def save_picks(picks, history):
+    # Remove any existing picks for today to avoid duplicates
+    history["picks"] = [p for p in history["picks"] if p["date"] != TODAY_ISO]
+    for p in picks:
+        history["picks"].append({
+            "date": TODAY_ISO,
+            "player_id": p["id"],
+            "player_name": p["name"],
+            "team": p["team_name"],
+            "game_id": p["game_id"],
+            "confidence": p["confidence"],
+            "factors": p["factors"],
+            "got_hit": None,
+            "hits": None,
+            "at_bats": None,
+        })
+    save_history(history)
+    print(f"Saved {len(picks)} picks to history.")
 
+# ── Step 9: Check box scores for hit results ──────────────────────────────────
+def check_results(history, target_date):
+    updated = 0
+    for pick in history["picks"]:
+        if pick["date"] != target_date or pick["got_hit"] is not None:
+            continue
+        try:
+            url = f"https://statsapi.mlb.com/api/v1/game/{pick['game_id']}/boxscore"
+            r = requests.get(url, timeout=15)
+            data = r.json()
+            # Search both teams for the player
+            for side in ["away", "home"]:
+                players = data.get("teams", {}).get(side, {}).get("players", {})
+                for key, player_data in players.items():
+                    if player_data.get("person", {}).get("id") == pick["player_id"]:
+                        stats = player_data.get("stats", {}).get("batting", {})
+                        hits = int(stats.get("hits", 0))
+                        ab = int(stats.get("atBats", 0))
+                        pick["got_hit"] = hits > 0
+                        pick["hits"] = hits
+                        pick["at_bats"] = ab
+                        updated += 1
+                        print(f"{pick['player_name']}: {hits}/{ab}")
+                        break
+        except Exception as e:
+            print(f"Error checking {pick['player_name']}: {e}")
+    save_history(history)
+    print(f"Updated results for {updated} players.")
+    return history
+
+# ── Step 10: Get yesterday's results for email ────────────────────────────────
+def get_yesterday_results(history):
+    yesterday_picks = [p for p in history["picks"] if p["date"] == YESTERDAY_ISO]
+    if not yesterday_picks:
+        return None
+    completed = [p for p in yesterday_picks if p["got_hit"] is not None]
+    hits = sum(1 for p in completed if p["got_hit"])
+    return {
+        "picks": yesterday_picks,
+        "completed": len(completed),
+        "hits": hits,
+        "total": len(yesterday_picks),
+    }
+
+# ── Step 11: Get season stats for email ───────────────────────────────────────
+def get_season_stats(history):
+    all_picks = [p for p in history["picks"] if p["got_hit"] is not None]
+    if not all_picks:
+        return None
+
+    total = len(all_picks)
+    hits = sum(1 for p in all_picks if p["got_hit"])
+    hit_rate = round((hits / total) * 100, 1) if total > 0 else 0
+
+    # Weekly breakdown — last 2 weeks
+    today = date.today()
+    weeks = []
+    for w in range(2):
+        week_end = today - timedelta(days=w * 7)
+        week_start = week_end - timedelta(days=6)
+        week_picks = [
+            p for p in all_picks
+            if week_start.strftime("%Y-%m-%d") <= p["date"] <= week_end.strftime("%Y-%m-%d")
+        ]
+        if week_picks:
+            w_hits = sum(1 for p in week_picks if p["got_hit"])
+            weeks.append({
+                "label": "This week" if w == 0 else "Last week",
+                "hits": w_hits,
+                "total": len(week_picks),
+                "rate": round((w_hits / len(week_picks)) * 100, 1),
+            })
+
+    # Factor performance — which factor score correlates best with hits
+    factor_names = ["recent_form", "advanced_metrics", "pitcher_matchup", "season_avg", "platoon", "park_factor", "home_away"]
+    factor_hits = {f: {"hits": 0, "total": 0} for f in factor_names}
+    for pick in all_picks:
+        if not pick.get("factors"):
+            continue
+        # Find the top factor for this pick
+        top_factor = max(pick["factors"], key=lambda k: pick["factors"][k])
+        factor_hits[top_factor]["total"] += 1
+        if pick["got_hit"]:
+            factor_hits[top_factor]["hits"] += 1
+
+    factor_rates = []
+    for f, data in factor_hits.items():
+        if data["total"] >= 3:
+            rate = round((data["hits"] / data["total"]) * 100, 1)
+            factor_rates.append({"factor": f.replace("_", " ").title(), "rate": rate, "total": data["total"]})
+    factor_rates.sort(key=lambda x: x["rate"], reverse=True)
+
+    return {
+        "total": total,
+        "hits": hits,
+        "hit_rate": hit_rate,
+        "weeks": weeks,
+        "best_factor": factor_rates[0] if factor_rates else None,
+        "worst_factor": factor_rates[-1] if factor_rates else None,
+    }
+
+# ── Step 12: Check morning pick statuses for 4pm email ───────────────────────
+def get_morning_pick_statuses(history, games):
+    today_picks = [p for p in history["picks"] if p["date"] == TODAY_ISO]
+    if not today_picks:
+        return []
+
+    # Build game status lookup
+    game_status = {g["game_id"]: g["status"] for g in get_todays_games()}
+
+    statuses = []
+    for pick in today_picks:
+        status = "pending"
+        hits = None
+        ab = None
+        g_status = game_status.get(pick["game_id"], "Preview")
+
+        if g_status == "Final":
+            try:
+                url = f"https://statsapi.mlb.com/api/v1/game/{pick['game_id']}/boxscore"
+                r = requests.get(url, timeout=15)
+                data = r.json()
+                for side in ["away", "home"]:
+                    players = data.get("teams", {}).get(side, {}).get("players", {})
+                    for key, player_data in players.items():
+                        if player_data.get("person", {}).get("id") == pick["player_id"]:
+                            s = player_data.get("stats", {}).get("batting", {})
+                            hits = int(s.get("hits", 0))
+                            ab = int(s.get("atBats", 0))
+                            status = "hit" if hits > 0 else "no_hit"
+                            break
+            except:
+                status = "pending"
+        elif g_status == "Live":
+            status = "in_progress"
+        else:
+            status = "not_started"
+
+        statuses.append({
+            "player_name": pick["player_name"],
+            "team": pick["team"],
+            "confidence": pick["confidence"],
+            "status": status,
+            "hits": hits,
+            "ab": ab,
+        })
+    return statuses
+
+# ── Step 13: Build morning email ──────────────────────────────────────────────
+def build_morning_email(picks, games, yesterday_results, season_stats):
     rows = ""
     for i, p in enumerate(picks, 1):
         conf = p["confidence"]
@@ -383,11 +570,90 @@ def build_email(picks, games):
           <td style="padding:8px;font-size:11px;color:#888;white-space:nowrap;">{pf_str}</td>
         </tr>"""
 
+    # Yesterday's results section
+    results_html = ""
+    if yesterday_results and yesterday_results["completed"] > 0:
+        r = yesterday_results
+        pct = round((r["hits"] / r["completed"]) * 100) if r["completed"] > 0 else 0
+        result_rows = ""
+        for pick in r["picks"]:
+            if pick["got_hit"] is None:
+                icon = "⏳"
+                color = "#888"
+                result_str = "Pending"
+            elif pick["got_hit"]:
+                icon = "🟢"
+                color = "#0F6E56"
+                result_str = f"Hit ({pick['hits']}-{pick['at_bats']})"
+            else:
+                icon = "🔴"
+                color = "#A32D2D"
+                result_str = f"No Hit (0-{pick['at_bats']})"
+            result_rows += f"""
+            <tr style="border-bottom:1px solid #f0f0f0;">
+              <td style="padding:8px;font-size:13px;color:#111;">{icon} {pick['player_name']}</td>
+              <td style="padding:8px;font-size:11px;color:#888;">{pick['team']}</td>
+              <td style="padding:8px;font-size:12px;font-weight:500;color:{color};">{result_str}</td>
+              <td style="padding:8px;font-size:11px;color:#888;">{pick['confidence']}% conf</td>
+            </tr>"""
+
+        results_html = f"""
+        <div style="padding:0 24px 24px;">
+          <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">
+            Yesterday's Results
+            <span style="font-size:12px;font-weight:400;color:#888;">· {r['hits']}/{r['completed']} hits ({pct}%)</span>
+          </h2>
+          <table style="width:100%;border-collapse:collapse;">
+            <tr style="background:#f8f8f8;">
+              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PLAYER</th>
+              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">TEAM</th>
+              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">RESULT</th>
+              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">CONFIDENCE</th>
+            </tr>
+            {result_rows}
+          </table>
+        </div>"""
+
+    # Season tracker section
+    season_html = ""
+    if season_stats:
+        s = season_stats
+        week_rows = ""
+        for w in s["weeks"]:
+            week_rows += f"""
+            <tr style="border-bottom:1px solid #f0f0f0;">
+              <td style="padding:8px;font-size:12px;color:#333;">{w['label']}</td>
+              <td style="padding:8px;font-size:12px;color:#111;font-weight:500;">{w['hits']}/{w['total']} hits</td>
+              <td style="padding:8px;font-size:12px;font-weight:600;color:{'#0F6E56' if w['rate'] >= 65 else '#BA7517' if w['rate'] >= 55 else '#A32D2D'};">{w['rate']}%</td>
+            </tr>"""
+
+        best = f"<span style='color:#0F6E56;font-weight:500;'>{s['best_factor']['factor']} ({s['best_factor']['rate']}%)</span>" if s.get("best_factor") else "—"
+        worst = f"<span style='color:#A32D2D;font-weight:500;'>{s['worst_factor']['factor']} ({s['worst_factor']['rate']}%)</span>" if s.get("worst_factor") else "—"
+
+        season_html = f"""
+        <div style="padding:0 24px 24px;">
+          <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">
+            Season Tracker
+            <span style="font-size:12px;font-weight:400;color:#888;">· {s['hits']}/{s['total']} picks · {s['hit_rate']}% overall</span>
+          </h2>
+          <table style="width:100%;border-collapse:collapse;">
+            {week_rows}
+            <tr style="border-bottom:1px solid #f0f0f0;">
+              <td style="padding:8px;font-size:12px;color:#333;">Best factor</td>
+              <td colspan="2" style="padding:8px;font-size:12px;">{best}</td>
+            </tr>
+            <tr>
+              <td style="padding:8px;font-size:12px;color:#333;">Worst factor</td>
+              <td colspan="2" style="padding:8px;font-size:12px;">{worst}</td>
+            </tr>
+          </table>
+        </div>"""
+
     html = f"""
     <div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;background:#fff;">
       <div style="background:#0a0a0a;padding:24px;text-align:center;">
         <h1 style="color:#fff;margin:0;font-size:22px;letter-spacing:2px;">⚾ BTS EDGE</h1>
-        <p style="color:#888;margin:4px 0 0;font-size:12px;">{edition} · {TODAY}</p>
+        <p style="color:#888;margin:4px 0 0;font-size:12px;">8am Morning Edition · {TODAY}</p>
       </div>
       <div style="padding:12px 24px;background:#f8f8f8;font-size:11px;color:#888;text-align:center;line-height:1.8;">
         <strong style="color:#555;">Scoring model:</strong>
@@ -406,7 +672,7 @@ def build_email(picks, games):
       </div>
       <div style="padding:0 24px 24px;">
         <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">
-          Today's Games <span style="font-size:11px;font-weight:400;color:#888;">· {game_note}</span>
+          Today's Games <span style="font-size:11px;font-weight:400;color:#888;">· All games · earliest to latest</span>
         </h2>
         <table style="width:100%;border-collapse:collapse;">
           <tr style="background:#f8f8f8;">
@@ -418,9 +684,155 @@ def build_email(picks, games):
           {game_rows}
         </table>
       </div>
+      {results_html}
+      {season_html}
       <div style="background:#f8f8f8;padding:16px 24px;text-align:center;">
         <p style="font-size:11px;color:#aaa;margin:0;">
-          BTS Edge · {edition} · MLB Stats API + Baseball Savant Statcast
+          BTS Edge · 8am Morning Edition · MLB Stats API + Baseball Savant Statcast
+        </p>
+      </div>
+    </div>"""
+    return html
+
+# ── Step 14: Build afternoon email ────────────────────────────────────────────
+def build_afternoon_email(picks, games, morning_statuses):
+    rows = ""
+    for i, p in enumerate(picks, 1):
+        conf = p["confidence"]
+        color = "#0F6E56" if conf >= 90 else "#BA7517" if conf >= 80 else "#555"
+        medal = ["🥇","🥈","🥉"][i-1] if i <= 3 else f"#{i}"
+        recent_str = f".{int(p['recent_avg']*1000):03d} L14" if p["recent_avg"] else "—"
+        home_away = "Home" if p["is_home"] else "Away"
+        platoon = "✅ Platoon" if p["hand"] != p["pitcher_hand"] else ""
+        ev_str = f"{p['exit_velo']:.1f} mph" if p["exit_velo"] else "—"
+        barrel_str = f"{p['barrel_pct']:.1f}%" if p["barrel_pct"] else "—"
+        hh_str = f"{p['hard_hit_pct']:.1f}%" if p["hard_hit_pct"] else "—"
+        rows += f"""
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:10px 8px;font-weight:600;font-size:15px;">{medal}</td>
+          <td style="padding:10px 8px;">
+            <div style="font-weight:600;font-size:14px;color:#111;">
+              {p['name']} <span style="font-size:11px;font-weight:400;color:#888;">· {p['team_name']}</span> {platoon}
+            </div>
+            <div style="font-size:11px;color:#444;margin-top:3px;">
+              vs {p['opp_pitcher']} ({p['pitcher_hand']}HP) · ERA {p['pitcher_era']:.2f} · WHIP {p['pitcher_whip']:.2f} · K/9 {p['pitcher_k9']:.1f}
+            </div>
+            <div style="font-size:11px;color:#666;margin-top:2px;">
+              AVG {p['avg']:.3f} · OPS {p['ops']:.3f} · {recent_str} · {home_away} · {p['venue']}
+            </div>
+            <div style="font-size:11px;color:#888;margin-top:2px;">
+              🕐 {p['game_time_str']} · Exit Velo {ev_str} · Barrel% {barrel_str} · Hard Hit% {hh_str}
+            </div>
+          </td>
+          <td style="padding:10px 8px;text-align:right;font-weight:700;font-size:16px;color:{color};vertical-align:top;">{conf:.0f}%</td>
+        </tr>"""
+
+    game_rows = ""
+    for g in games:
+        pf = g["park_factor"]
+        pf_str = f"🟢 +{int((pf-1)*100)}%" if pf > 1.02 else f"🔴 {int((pf-1)*100)}%" if pf < 0.98 else "⚪ Neutral"
+        game_rows += f"""
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:8px;font-size:12px;color:#333;">{g['away_team']} @ {g['home_team']}</td>
+          <td style="padding:8px;font-size:11px;color:#888;">{g['away_pitcher_name']} vs {g['home_pitcher_name']}</td>
+          <td style="padding:8px;font-size:11px;color:#666;white-space:nowrap;">{g['game_time_str']}</td>
+          <td style="padding:8px;font-size:11px;color:#888;white-space:nowrap;">{pf_str}</td>
+        </tr>"""
+
+    # Morning pick status section
+    status_rows = ""
+    if morning_statuses:
+        for s in morning_statuses:
+            if s["status"] == "hit":
+                icon = "🟢"
+                badge_bg = "#EAF3DE"
+                badge_color = "#27500A"
+                result = f"Hit ({s['hits']}-{s['ab']})"
+            elif s["status"] == "no_hit":
+                icon = "🔴"
+                badge_bg = "#FDECEA"
+                badge_color = "#A32D2D"
+                result = f"No Hit (0-{s['ab']})"
+            elif s["status"] == "in_progress":
+                icon = "🕐"
+                badge_bg = "#FFF8E6"
+                badge_color = "#854F0B"
+                result = "In Progress"
+            else:
+                icon = "⏳"
+                badge_bg = "#F5F5F5"
+                badge_color = "#666"
+                result = "Not Started"
+
+            status_rows += f"""
+            <tr style="border-bottom:1px solid #f0f0f0;">
+              <td style="padding:8px;">
+                <span style="background:{badge_bg};color:{badge_color};padding:2px 8px;border-radius:12px;font-size:11px;font-weight:500;">
+                  {icon} {result}
+                </span>
+              </td>
+              <td style="padding:8px;font-size:13px;color:#111;font-weight:500;">{s['player_name']}</td>
+              <td style="padding:8px;font-size:11px;color:#888;">{s['team']}</td>
+              <td style="padding:8px;font-size:11px;color:#888;">{s['confidence']}% conf</td>
+            </tr>"""
+
+    status_html = ""
+    if status_rows:
+        status_html = f"""
+        <div style="padding:0 24px 24px;">
+          <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">
+            Morning Pick Status
+          </h2>
+          <table style="width:100%;border-collapse:collapse;">
+            <tr style="background:#f8f8f8;">
+              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">RESULT</th>
+              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PLAYER</th>
+              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">TEAM</th>
+              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">CONFIDENCE</th>
+            </tr>
+            {status_rows}
+          </table>
+        </div>"""
+
+    html = f"""
+    <div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;background:#fff;">
+      <div style="background:#0a0a0a;padding:24px;text-align:center;">
+        <h1 style="color:#fff;margin:0;font-size:22px;letter-spacing:2px;">⚾ BTS EDGE</h1>
+        <p style="color:#888;margin:4px 0 0;font-size:12px;">4pm Evening Edition · {TODAY}</p>
+      </div>
+      <div style="padding:12px 24px;background:#f8f8f8;font-size:11px;color:#888;text-align:center;line-height:1.8;">
+        <strong style="color:#555;">Scoring model:</strong>
+        Recent form 22% · Advanced metrics 20% · Pitcher matchup 18% · Season AVG 15% · Platoon 12% · Park factor 8% · Home/Away 5%
+      </div>
+      <div style="padding:24px;">
+        <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">Tonight's Top {len(picks)} Picks</h2>
+        <table style="width:100%;border-collapse:collapse;">
+          <tr style="background:#f8f8f8;">
+            <th style="padding:8px;text-align:left;font-size:11px;color:#888;width:32px;">#</th>
+            <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PLAYER · TEAM · MATCHUP · STATCAST</th>
+            <th style="padding:8px;text-align:right;font-size:11px;color:#888;">SCORE</th>
+          </tr>
+          {rows}
+        </table>
+      </div>
+      <div style="padding:0 24px 24px;">
+        <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">
+          Tonight's Games <span style="font-size:11px;font-weight:400;color:#888;">· 4pm ET or later</span>
+        </h2>
+        <table style="width:100%;border-collapse:collapse;">
+          <tr style="background:#f8f8f8;">
+            <th style="padding:8px;text-align:left;font-size:11px;color:#888;">MATCHUP</th>
+            <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PITCHERS</th>
+            <th style="padding:8px;text-align:left;font-size:11px;color:#888;">TIME</th>
+            <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PARK</th>
+          </tr>
+          {game_rows}
+        </table>
+      </div>
+      {status_html}
+      <div style="background:#f8f8f8;padding:16px 24px;text-align:center;">
+        <p style="font-size:11px;color:#aaa;margin:0;">
+          BTS Edge · 4pm Evening Edition · MLB Stats API + Baseball Savant Statcast
         </p>
       </div>
     </div>"""
@@ -428,14 +840,21 @@ def build_email(picks, games):
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
-    edition = "4pm Evening Edition" if IS_AFTERNOON else "8am Morning Edition"
-    print(f"Running {edition}...")
+    history = load_history()
 
-    games = get_todays_games()
-    print(f"Found {len(games)} games for this edition.")
+    # 2am results run — silent, no email
+    if IS_RESULTS:
+        print("Running 2am results check...")
+        history = check_results(history, YESTERDAY_ISO)
+        print("Results check complete.")
+        return
 
-    if not games:
-        print("No games found for this time window — skipping email.")
+    print(f"Fetching today's games...")
+    all_games = get_todays_games()
+    print(f"Found {len(all_games)} games.")
+
+    if not all_games:
+        print("No games found — skipping.")
         return
 
     players = get_batter_stats()
@@ -443,19 +862,24 @@ def main():
 
     statcast = get_statcast_metrics()
 
-    picks = get_top_picks(players, games, statcast)
-    if picks:
-        print(f"Top pick: {picks[0]['name']} ({picks[0]['confidence']}%)")
-        venues = {}
-        for p in picks:
-            venues[p["venue"]] = venues.get(p["venue"], 0) + 1
-        print(f"Park distribution: {venues}")
-    else:
+    picks = get_top_picks(players, all_games, statcast)
+    if not picks:
         print("No picks found.")
         return
+    print(f"Top pick: {picks[0]['name']} ({picks[0]['confidence']}%)")
 
-    html = build_email(picks, games)
-    subject = f"⚾ BTS Edge {edition} — {TODAY}"
+    if IS_AFTERNOON:
+        morning_statuses = get_morning_pick_statuses(history, all_games)
+        html = build_afternoon_email(picks, all_games, morning_statuses)
+        subject = f"⚾ BTS Edge 4pm Evening Edition — {TODAY}"
+    else:
+        # Morning run — save picks first
+        save_picks(picks, history)
+        yesterday_results = get_yesterday_results(history)
+        season_stats = get_season_stats(history)
+        html = build_morning_email(picks, all_games, yesterday_results, season_stats)
+        subject = f"⚾ BTS Edge 8am Morning Edition — {TODAY}"
+
     resend.Emails.send({
         "from": "onboarding@resend.dev",
         "to": TO_EMAIL,
