@@ -400,6 +400,206 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 4
+    },
+    {
+      "date": "2026-07-10",
+      "player_id": 691718,
+      "player_name": "Pete Crow-Armstrong",
+      "team": "Chicago Cubs",
+      "game_id": 824493,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 25.01,
+        "advanced_metrics": 10.65,
+        "pitcher_matchup": 18.0,
+        "season_avg": 12.69,
+        "platoon": 12,
+        "park_factor": 5.76,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-10",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "San Francisco Giants",
+      "game_id": 823200,
+      "confidence": 95.6,
+      "factors": {
+        "recent_form": 25.89,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 14.18,
+        "season_avg": 13.97,
+        "platoon": 12,
+        "park_factor": 1.6,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-10",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "Washington Nationals",
+      "game_id": 822709,
+      "confidence": 89.6,
+      "factors": {
+        "recent_form": 32.56,
+        "advanced_metrics": 10.47,
+        "pitcher_matchup": 8.86,
+        "season_avg": 12.47,
+        "platoon": 6,
+        "park_factor": 2.24,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-10",
+      "player_id": 805808,
+      "player_name": "Kevin McGonigle",
+      "team": "Detroit Tigers",
+      "game_id": 824252,
+      "confidence": 89.6,
+      "factors": {
+        "recent_form": 23.32,
+        "advanced_metrics": 10.09,
+        "pitcher_matchup": 12.93,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 1.92,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-10",
+      "player_id": 693304,
+      "player_name": "Nick Gonzales",
+      "team": "Pittsburgh Pirates",
+      "game_id": 823357,
+      "confidence": 88.6,
+      "factors": {
+        "recent_form": 28.97,
+        "advanced_metrics": 9.82,
+        "pitcher_matchup": 11.05,
+        "season_avg": 13.29,
+        "platoon": 6,
+        "park_factor": 2.56,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-10",
+      "player_id": 673548,
+      "player_name": "Seiya Suzuki",
+      "team": "Chicago Cubs",
+      "game_id": 824493,
+      "confidence": 88.0,
+      "factors": {
+        "recent_form": 22.44,
+        "advanced_metrics": 10.07,
+        "pitcher_matchup": 18.0,
+        "season_avg": 11.4,
+        "platoon": 6,
+        "park_factor": 5.76,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-10",
+      "player_id": 672640,
+      "player_name": "Otto Lopez",
+      "team": "Miami Marlins",
+      "game_id": 823845,
+      "confidence": 87.7,
+      "factors": {
+        "recent_form": 27.65,
+        "advanced_metrics": 10.5,
+        "pitcher_matchup": 4.43,
+        "season_avg": 14.79,
+        "platoon": 12,
+        "park_factor": 1.6,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-10",
+      "player_id": 656811,
+      "player_name": "Ryan O'Hearn",
+      "team": "Pittsburgh Pirates",
+      "game_id": 823357,
+      "confidence": 87.5,
+      "factors": {
+        "recent_form": 22.59,
+        "advanced_metrics": 10.18,
+        "pitcher_matchup": 11.05,
+        "season_avg": 12.39,
+        "platoon": 12,
+        "park_factor": 2.56,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-10",
+      "player_id": 802415,
+      "player_name": "Chandler Simpson",
+      "team": "Tampa Bay Rays",
+      "game_id": 822955,
+      "confidence": 86.7,
+      "factors": {
+        "recent_form": 25.08,
+        "advanced_metrics": 9.27,
+        "pitcher_matchup": 9.61,
+        "season_avg": 11.87,
+        "platoon": 12,
+        "park_factor": 2.24,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-10",
+      "player_id": 682985,
+      "player_name": "Riley Greene",
+      "team": "Detroit Tigers",
+      "game_id": 824252,
+      "confidence": 85.5,
+      "factors": {
+        "recent_form": 19.58,
+        "advanced_metrics": 10.2,
+        "pitcher_matchup": 12.93,
+        "season_avg": 12.39,
+        "platoon": 12,
+        "park_factor": 1.92,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
