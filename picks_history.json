@@ -600,6 +600,206 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 1
+    },
+    {
+      "date": "2026-07-11",
+      "player_id": 669003,
+      "player_name": "Garrett Mitchell",
+      "team": "Milwaukee Brewers",
+      "game_id": 823356,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 30.43,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 10.33,
+        "season_avg": 11.74,
+        "platoon": 12,
+        "park_factor": 2.56,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-11",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 823198,
+      "confidence": 99.8,
+      "factors": {
+        "recent_form": 27.5,
+        "advanced_metrics": 10.33,
+        "pitcher_matchup": 12.66,
+        "season_avg": 12.9,
+        "platoon": 12,
+        "park_factor": 1.6,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-11",
+      "player_id": 693304,
+      "player_name": "Nick Gonzales",
+      "team": "Pittsburgh Pirates",
+      "game_id": 823356,
+      "confidence": 99.0,
+      "factors": {
+        "recent_form": 30.43,
+        "advanced_metrics": 9.82,
+        "pitcher_matchup": 5.75,
+        "season_avg": 13.29,
+        "platoon": 12,
+        "park_factor": 2.56,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-11",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "San Francisco Giants",
+      "game_id": 823198,
+      "confidence": 98.9,
+      "factors": {
+        "recent_form": 28.23,
+        "advanced_metrics": 10.16,
+        "pitcher_matchup": 13.66,
+        "season_avg": 14.19,
+        "platoon": 6,
+        "park_factor": 1.6,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-11",
+      "player_id": 686797,
+      "player_name": "Brooks Lee",
+      "team": "Minnesota Twins",
+      "game_id": 823682,
+      "confidence": 97.8,
+      "factors": {
+        "recent_form": 23.98,
+        "advanced_metrics": 9.72,
+        "pitcher_matchup": 13.19,
+        "season_avg": 10.84,
+        "platoon": 12,
+        "park_factor": 3.2,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-11",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823926,
+      "confidence": 96.0,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.37,
+        "pitcher_matchup": 9.27,
+        "season_avg": 12.56,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-11",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "Washington Nationals",
+      "game_id": 822711,
+      "confidence": 94.7,
+      "factors": {
+        "recent_form": 30.58,
+        "advanced_metrics": 10.41,
+        "pitcher_matchup": 2.96,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 2.24,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-11",
+      "player_id": 677594,
+      "player_name": "Julio Rodr\u00edguez",
+      "team": "Seattle Mariners",
+      "game_id": 822953,
+      "confidence": 94.5,
+      "factors": {
+        "recent_form": 36.67,
+        "advanced_metrics": 9.73,
+        "pitcher_matchup": 7.05,
+        "season_avg": 11.1,
+        "platoon": 6,
+        "park_factor": 2.24,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-11",
+      "player_id": 673548,
+      "player_name": "Seiya Suzuki",
+      "team": "Chicago Cubs",
+      "game_id": 824492,
+      "confidence": 94.0,
+      "factors": {
+        "recent_form": 23.03,
+        "advanced_metrics": 10.09,
+        "pitcher_matchup": 9.9,
+        "season_avg": 11.57,
+        "platoon": 12,
+        "park_factor": 5.76,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-11",
+      "player_id": 665742,
+      "player_name": "Juan Soto",
+      "team": "New York Mets",
+      "game_id": 823603,
+      "confidence": 93.1,
+      "factors": {
+        "recent_form": 23.25,
+        "advanced_metrics": 10.94,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.73,
+        "platoon": 12,
+        "park_factor": 1.6,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
