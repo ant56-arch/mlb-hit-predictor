@@ -1040,6 +1040,206 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 4
+    },
+    {
+      "date": "2026-07-17",
+      "player_id": 664983,
+      "player_name": "Jake McCarthy",
+      "team": "Colorado Rockies",
+      "game_id": 824332,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 23.76,
+        "advanced_metrics": 10.31,
+        "pitcher_matchup": 10.25,
+        "season_avg": 12.9,
+        "platoon": 12,
+        "park_factor": 8.0,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-17",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 824332,
+      "confidence": 99.6,
+      "factors": {
+        "recent_form": 23.69,
+        "advanced_metrics": 10.28,
+        "pitcher_matchup": 10.25,
+        "season_avg": 12.69,
+        "platoon": 12,
+        "park_factor": 8.0,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-17",
+      "player_id": 700250,
+      "player_name": "Ben Rice",
+      "team": "New York Yankees",
+      "game_id": 823524,
+      "confidence": 98.3,
+      "factors": {
+        "recent_form": 26.47,
+        "advanced_metrics": 10.86,
+        "pitcher_matchup": 11.03,
+        "season_avg": 11.96,
+        "platoon": 12,
+        "park_factor": 3.52,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-17",
+      "player_id": 666018,
+      "player_name": "Jonathan Aranda",
+      "team": "Tampa Bay Rays",
+      "game_id": 824737,
+      "confidence": 92.5,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.32,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.73,
+        "platoon": 12,
+        "park_factor": 5.44,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-17",
+      "player_id": 691718,
+      "player_name": "Pete Crow-Armstrong",
+      "team": "Chicago Cubs",
+      "game_id": 824655,
+      "confidence": 91.9,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.59,
+        "pitcher_matchup": 6.92,
+        "season_avg": 12.47,
+        "platoon": 12,
+        "park_factor": 4.16,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-17",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824170,
+      "confidence": 91.1,
+      "factors": {
+        "recent_form": 22.44,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 6.38,
+        "season_avg": 13.63,
+        "platoon": 12,
+        "park_factor": 4.48,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-17",
+      "player_id": 677587,
+      "player_name": "Brayan Rocchio",
+      "team": "Cleveland Guardians",
+      "game_id": 824414,
+      "confidence": 90.0,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 9.76,
+        "pitcher_matchup": 8.08,
+        "season_avg": 11.83,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-17",
+      "player_id": 689414,
+      "player_name": "Liam Hicks",
+      "team": "Miami Marlins",
+      "game_id": 823766,
+      "confidence": 89.9,
+      "factors": {
+        "recent_form": 27.21,
+        "advanced_metrics": 10.11,
+        "pitcher_matchup": 5.22,
+        "season_avg": 12.43,
+        "platoon": 12,
+        "park_factor": 4.48,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-17",
+      "player_id": 669003,
+      "player_name": "Garrett Mitchell",
+      "team": "Milwaukee Brewers",
+      "game_id": 823766,
+      "confidence": 89.7,
+      "factors": {
+        "recent_form": 23.83,
+        "advanced_metrics": 10.11,
+        "pitcher_matchup": 6.62,
+        "season_avg": 11.74,
+        "platoon": 12,
+        "park_factor": 4.48,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-17",
+      "player_id": 695578,
+      "player_name": "James Wood",
+      "team": "Washington Nationals",
+      "game_id": 824981,
+      "confidence": 89.5,
+      "factors": {
+        "recent_form": 31.75,
+        "advanced_metrics": 10.93,
+        "pitcher_matchup": 7.23,
+        "season_avg": 11.96,
+        "platoon": 6,
+        "park_factor": 3.2,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
