@@ -1057,9 +1057,9 @@
         "park_factor": 8.0,
         "home_away": 5
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 1,
+      "at_bats": 3
     },
     {
       "date": "2026-07-17",
@@ -1077,9 +1077,9 @@
         "park_factor": 8.0,
         "home_away": 5
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 1,
+      "at_bats": 4
     },
     {
       "date": "2026-07-17",
@@ -1097,9 +1097,9 @@
         "park_factor": 3.52,
         "home_away": 5
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 2,
+      "at_bats": 4
     },
     {
       "date": "2026-07-17",
@@ -1117,9 +1117,9 @@
         "park_factor": 5.44,
         "home_away": 2.5
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": false,
+      "hits": 0,
+      "at_bats": 4
     },
     {
       "date": "2026-07-17",
@@ -1137,9 +1137,9 @@
         "park_factor": 4.16,
         "home_away": 5
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": false,
+      "hits": 0,
+      "at_bats": 3
     },
     {
       "date": "2026-07-17",
@@ -1157,9 +1157,9 @@
         "park_factor": 4.48,
         "home_away": 5
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 2,
+      "at_bats": 3
     },
     {
       "date": "2026-07-17",
@@ -1177,9 +1177,9 @@
         "park_factor": 2.88,
         "home_away": 5
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": false,
+      "hits": 0,
+      "at_bats": 0
     },
     {
       "date": "2026-07-17",
@@ -1197,9 +1197,9 @@
         "park_factor": 4.48,
         "home_away": 2.5
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 1,
+      "at_bats": 4
     },
     {
       "date": "2026-07-17",
@@ -1217,9 +1217,9 @@
         "park_factor": 4.48,
         "home_away": 5
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 2,
+      "at_bats": 4
     },
     {
       "date": "2026-07-17",
@@ -1237,9 +1237,9 @@
         "park_factor": 3.2,
         "home_away": 2.5
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 1,
+      "at_bats": 5
     }
   ]
 }
