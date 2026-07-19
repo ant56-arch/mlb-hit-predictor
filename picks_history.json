@@ -1440,6 +1440,206 @@
       "got_hit": true,
       "hits": 3,
       "at_bats": 5
+    },
+    {
+      "date": "2026-07-19",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 824330,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 26.47,
+        "advanced_metrics": 10.35,
+        "pitcher_matchup": 15.24,
+        "season_avg": 12.94,
+        "platoon": 12,
+        "park_factor": 8.0,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-19",
+      "player_id": 664983,
+      "player_name": "Jake McCarthy",
+      "team": "Colorado Rockies",
+      "game_id": 824330,
+      "confidence": 93.3,
+      "factors": {
+        "recent_form": 20.39,
+        "advanced_metrics": 10.32,
+        "pitcher_matchup": 15.24,
+        "season_avg": 12.99,
+        "platoon": 12,
+        "park_factor": 8.0,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-19",
+      "player_id": 700250,
+      "player_name": "Ben Rice",
+      "team": "New York Yankees",
+      "game_id": 823521,
+      "confidence": 91.5,
+      "factors": {
+        "recent_form": 30.21,
+        "advanced_metrics": 10.87,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.09,
+        "platoon": 12,
+        "park_factor": 3.52,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-19",
+      "player_id": 669003,
+      "player_name": "Garrett Mitchell",
+      "team": "Milwaukee Brewers",
+      "game_id": 823764,
+      "confidence": 86.3,
+      "factors": {
+        "recent_form": 26.84,
+        "advanced_metrics": 10.18,
+        "pitcher_matchup": 7.02,
+        "season_avg": 12.13,
+        "platoon": 12,
+        "park_factor": 4.48,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-19",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 824897,
+      "confidence": 86.2,
+      "factors": {
+        "recent_form": 27.72,
+        "advanced_metrics": 10.02,
+        "pitcher_matchup": 7.66,
+        "season_avg": 11.31,
+        "platoon": 12,
+        "park_factor": 3.84,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-19",
+      "player_id": 694384,
+      "player_name": "Nolan Schanuel",
+      "team": "Los Angeles Angels",
+      "game_id": 824007,
+      "confidence": 86.1,
+      "factors": {
+        "recent_form": 32.27,
+        "advanced_metrics": 9.69,
+        "pitcher_matchup": 3.67,
+        "season_avg": 11.7,
+        "platoon": 12,
+        "park_factor": 3.2,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-19",
+      "player_id": 807712,
+      "player_name": "Luke Keaschall",
+      "team": "Minnesota Twins",
+      "game_id": 824653,
+      "confidence": 84.2,
+      "factors": {
+        "recent_form": 29.33,
+        "advanced_metrics": 9.52,
+        "pitcher_matchup": 6.99,
+        "season_avg": 11.27,
+        "platoon": 12,
+        "park_factor": 4.16,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-19",
+      "player_id": 695578,
+      "player_name": "James Wood",
+      "team": "Washington Nationals",
+      "game_id": 824978,
+      "confidence": 82.6,
+      "factors": {
+        "recent_form": 25.23,
+        "advanced_metrics": 10.84,
+        "pitcher_matchup": 14.78,
+        "season_avg": 11.79,
+        "platoon": 6,
+        "park_factor": 3.2,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-19",
+      "player_id": 672640,
+      "player_name": "Otto Lopez",
+      "team": "Miami Marlins",
+      "game_id": 823764,
+      "confidence": 82.2,
+      "factors": {
+        "recent_form": 20.39,
+        "advanced_metrics": 10.37,
+        "pitcher_matchup": 9.93,
+        "season_avg": 14.36,
+        "platoon": 12,
+        "park_factor": 4.48,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-19",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824168,
+      "confidence": 82.1,
+      "factors": {
+        "recent_form": 20.97,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 6.74,
+        "season_avg": 13.71,
+        "platoon": 12,
+        "park_factor": 4.48,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
