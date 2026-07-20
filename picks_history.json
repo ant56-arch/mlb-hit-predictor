@@ -1640,6 +1640,206 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 4
+    },
+    {
+      "date": "2026-07-20",
+      "player_id": 694384,
+      "player_name": "Nolan Schanuel",
+      "team": "Los Angeles Angels",
+      "game_id": 824006,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 34.25,
+        "advanced_metrics": 9.72,
+        "pitcher_matchup": 7.95,
+        "season_avg": 11.96,
+        "platoon": 12,
+        "park_factor": 3.2,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-20",
+      "player_id": 669003,
+      "player_name": "Garrett Mitchell",
+      "team": "Milwaukee Brewers",
+      "game_id": 823762,
+      "confidence": 97.1,
+      "factors": {
+        "recent_form": 27.5,
+        "advanced_metrics": 10.13,
+        "pitcher_matchup": 10.5,
+        "season_avg": 12.0,
+        "platoon": 12,
+        "park_factor": 4.48,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-20",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 824898,
+      "confidence": 95.4,
+      "factors": {
+        "recent_form": 32.78,
+        "advanced_metrics": 10.21,
+        "pitcher_matchup": 10.55,
+        "season_avg": 11.83,
+        "platoon": 6,
+        "park_factor": 3.84,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-20",
+      "player_id": 700250,
+      "player_name": "Ben Rice",
+      "team": "New York Yankees",
+      "game_id": 823522,
+      "confidence": 93.6,
+      "factors": {
+        "recent_form": 28.97,
+        "advanced_metrics": 10.84,
+        "pitcher_matchup": 6.33,
+        "season_avg": 12.04,
+        "platoon": 12,
+        "park_factor": 3.52,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-20",
+      "player_id": 696100,
+      "player_name": "Hunter Goodman",
+      "team": "Colorado Rockies",
+      "game_id": 824328,
+      "confidence": 92.7,
+      "factors": {
+        "recent_form": 21.71,
+        "advanced_metrics": 10.44,
+        "pitcher_matchup": 9.79,
+        "season_avg": 11.01,
+        "platoon": 12,
+        "park_factor": 8.0,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-20",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824167,
+      "confidence": 92.1,
+      "factors": {
+        "recent_form": 23.03,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 8.26,
+        "season_avg": 13.67,
+        "platoon": 12,
+        "park_factor": 4.48,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-20",
+      "player_id": 682928,
+      "player_name": "CJ Abrams",
+      "team": "Washington Nationals",
+      "game_id": 824328,
+      "confidence": 92.0,
+      "factors": {
+        "recent_form": 25.15,
+        "advanced_metrics": 10.35,
+        "pitcher_matchup": 13.52,
+        "season_avg": 11.87,
+        "platoon": 6,
+        "park_factor": 8.0,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-20",
+      "player_id": 607043,
+      "player_name": "Brandon Nimmo",
+      "team": "Texas Rangers",
+      "game_id": 822874,
+      "confidence": 87.9,
+      "factors": {
+        "recent_form": 22.95,
+        "advanced_metrics": 9.78,
+        "pitcher_matchup": 8.11,
+        "season_avg": 11.27,
+        "platoon": 12,
+        "park_factor": 4.8,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-20",
+      "player_id": 673548,
+      "player_name": "Seiya Suzuki",
+      "team": "Chicago Cubs",
+      "game_id": 824654,
+      "confidence": 87.5,
+      "factors": {
+        "recent_form": 25.89,
+        "advanced_metrics": 10.13,
+        "pitcher_matchup": 10.73,
+        "season_avg": 11.7,
+        "platoon": 6,
+        "park_factor": 4.16,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-20",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824087,
+      "confidence": 86.1,
+      "factors": {
+        "recent_form": 21.63,
+        "advanced_metrics": 9.96,
+        "pitcher_matchup": 9.31,
+        "season_avg": 11.27,
+        "platoon": 12,
+        "park_factor": 3.2,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
