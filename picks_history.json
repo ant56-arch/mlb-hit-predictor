@@ -2240,6 +2240,206 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 4
+    },
+    {
+      "date": "2026-07-23",
+      "player_id": 802415,
+      "player_name": "Chandler Simpson",
+      "team": "Tampa Bay Rays",
+      "game_id": 822785,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 31.68,
+        "advanced_metrics": 9.39,
+        "pitcher_matchup": 13.93,
+        "season_avg": 12.47,
+        "platoon": 12,
+        "park_factor": 3.2,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-23",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 824893,
+      "confidence": 91.4,
+      "factors": {
+        "recent_form": 31.68,
+        "advanced_metrics": 10.21,
+        "pitcher_matchup": 9.36,
+        "season_avg": 11.79,
+        "platoon": 6,
+        "park_factor": 3.84,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-23",
+      "player_id": 691406,
+      "player_name": "Junior Caminero",
+      "team": "Tampa Bay Rays",
+      "game_id": 822785,
+      "confidence": 90.8,
+      "factors": {
+        "recent_form": 28.6,
+        "advanced_metrics": 10.7,
+        "pitcher_matchup": 13.93,
+        "season_avg": 12.43,
+        "platoon": 6,
+        "park_factor": 3.2,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-23",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824406,
+      "confidence": 88.5,
+      "factors": {
+        "recent_form": 25.01,
+        "advanced_metrics": 10.03,
+        "pitcher_matchup": 8.18,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-23",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823042,
+      "confidence": 84.5,
+      "factors": {
+        "recent_form": 21.78,
+        "advanced_metrics": 10.02,
+        "pitcher_matchup": 8.3,
+        "season_avg": 11.96,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-23",
+      "player_id": 677587,
+      "player_name": "Brayan Rocchio",
+      "team": "Cleveland Guardians",
+      "game_id": 824406,
+      "confidence": 83.6,
+      "factors": {
+        "recent_form": 21.63,
+        "advanced_metrics": 9.73,
+        "pitcher_matchup": 8.18,
+        "season_avg": 11.79,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-23",
+      "player_id": 665487,
+      "player_name": "Fernando Tatis Jr.",
+      "team": "San Diego Padres",
+      "game_id": 824893,
+      "confidence": 78.1,
+      "factors": {
+        "recent_form": 22.59,
+        "advanced_metrics": 9.8,
+        "pitcher_matchup": 3.52,
+        "season_avg": 12.26,
+        "platoon": 12,
+        "park_factor": 3.84,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-23",
+      "player_id": 545121,
+      "player_name": "Ildemaro Vargas",
+      "team": "Arizona Diamondbacks",
+      "game_id": 823042,
+      "confidence": 77.5,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 9.56,
+        "pitcher_matchup": 3.31,
+        "season_avg": 11.31,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 2.5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-23",
+      "player_id": 693307,
+      "player_name": "Dillon Dingler",
+      "team": "Detroit Tigers",
+      "game_id": 824247,
+      "confidence": 75.5,
+      "factors": {
+        "recent_form": 25.3,
+        "advanced_metrics": 10.34,
+        "pitcher_matchup": 4.16,
+        "season_avg": 11.61,
+        "platoon": 6,
+        "park_factor": 1.92,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-23",
+      "player_id": 805808,
+      "player_name": "Kevin McGonigle",
+      "team": "Detroit Tigers",
+      "game_id": 824247,
+      "confidence": 73.0,
+      "factors": {
+        "recent_form": 16.94,
+        "advanced_metrics": 10.07,
+        "pitcher_matchup": 4.16,
+        "season_avg": 12.09,
+        "platoon": 12,
+        "park_factor": 1.92,
+        "home_away": 5
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
