@@ -1,12 +1,12 @@
 name: One-Time Research Data Pull
 
 on:
-  workflow_dispatch:  # manual trigger only — never runs automatically
+  workflow_dispatch:
 
 jobs:
   pull_research_data:
     runs-on: ubuntu-latest
-    timeout-minutes: 60  # this job takes a while, give it room
+    timeout-minutes: 60
     permissions:
       contents: write
     steps:
@@ -25,10 +25,13 @@ jobs:
       - name: Run research data pull
         run: python research/pull_season_data.py
 
+      - name: Run merge and analysis
+        run: python research/merge_and_analyze.py
+
       - name: Commit research data
         run: |
           git config user.name "BTS Edge Bot"
           git config user.email "bot@btsedge.com"
-          git add research_gamelogs.json || true
-          git diff --staged --quiet || git commit -m "Add research season data pull"
+          git add research_gamelogs.json combined_gamelogs.json || true
+          git diff --staged --quiet || git commit -m "Update research data and analysis"
           git push || true
