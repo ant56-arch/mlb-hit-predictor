@@ -2440,6 +2440,216 @@
       "got_hit": null,
       "hits": null,
       "at_bats": null
+    },
+    {
+      "date": "2026-07-24",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824573,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 37.77,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 6.39,
+        "season_avg": 14.06,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-24",
+      "player_id": 545121,
+      "player_name": "Ildemaro Vargas",
+      "team": "Arizona Diamondbacks",
+      "game_id": 822707,
+      "confidence": 95.9,
+      "factors": {
+        "recent_form": 28.38,
+        "advanced_metrics": 9.61,
+        "pitcher_matchup": 15.86,
+        "season_avg": 11.57,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-24",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823031,
+      "confidence": 92.0,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.07,
+        "pitcher_matchup": 13.42,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-24",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 824812,
+      "confidence": 91.7,
+      "factors": {
+        "recent_form": 29.7,
+        "advanced_metrics": 10.23,
+        "pitcher_matchup": 8.66,
+        "season_avg": 11.79,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-24",
+      "player_id": 807712,
+      "player_name": "Luke Keaschall",
+      "team": "Minnesota Twins",
+      "game_id": 823680,
+      "confidence": 90.7,
+      "factors": {
+        "recent_form": 23.54,
+        "advanced_metrics": 9.5,
+        "pitcher_matchup": 14.5,
+        "season_avg": 11.19,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-24",
+      "player_id": 691406,
+      "player_name": "Junior Caminero",
+      "team": "Tampa Bay Rays",
+      "game_id": 822952,
+      "confidence": 89.8,
+      "factors": {
+        "recent_form": 26.84,
+        "advanced_metrics": 10.66,
+        "pitcher_matchup": 8.92,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-24",
+      "player_id": 676391,
+      "player_name": "Ernie Clement",
+      "team": "Toronto Blue Jays",
+      "game_id": 824733,
+      "confidence": 89.1,
+      "factors": {
+        "recent_form": 21.49,
+        "advanced_metrics": 9.71,
+        "pitcher_matchup": 13.32,
+        "season_avg": 12.69,
+        "platoon": 12,
+        "park_factor": 4.08,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-24",
+      "player_id": 575929,
+      "player_name": "Willson Contreras",
+      "team": "Boston Red Sox",
+      "game_id": 824733,
+      "confidence": 88.0,
+      "factors": {
+        "recent_form": 30.87,
+        "advanced_metrics": 10.74,
+        "pitcher_matchup": 6.57,
+        "season_avg": 12.56,
+        "platoon": 6,
+        "park_factor": 4.08,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-24",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "San Francisco Giants",
+      "game_id": 823196,
+      "confidence": 87.6,
+      "factors": {
+        "recent_form": 18.92,
+        "advanced_metrics": 10.03,
+        "pitcher_matchup": 14.59,
+        "season_avg": 13.71,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-24",
+      "player_id": 693304,
+      "player_name": "Nick Gonzales",
+      "team": "Pittsburgh Pirates",
+      "game_id": 823352,
+      "confidence": 87.1,
+      "factors": {
+        "recent_form": 25.08,
+        "advanced_metrics": 9.93,
+        "pitcher_matchup": 7.7,
+        "season_avg": 13.41,
+        "platoon": 12,
+        "park_factor": 1.92,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
