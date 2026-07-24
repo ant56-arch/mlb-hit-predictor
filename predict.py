@@ -1,5 +1,6 @@
 import os
 import json
+import re
 import requests
 import resend
 from datetime import datetime, date, timedelta, timezone
@@ -54,6 +55,13 @@ PARK_FACTORS = {
     "Citi Field": 0.95,
 }
 
+# Domed / retractable-roof parks — weather rarely a factor
+DOME_PARKS = {
+    "Tropicana Field", "Rogers Centre", "Chase Field", "T-Mobile Park",
+    "American Family Field", "Daikin Park", "loanDepot park", "Globe Life Field",
+    "Truist Park",
+}
+
 # ── Load / save picks history ─────────────────────────────────────────────────
 def load_history():
     try:
@@ -66,9 +74,51 @@ def save_history(history):
     with open(HISTORY_FILE, "w") as f:
         json.dump(history, f, indent=2)
 
+# ── Weather parsing helper ────────────────────────────────────────────────────
+def parse_weather(weather_block, venue):
+    """
+    Returns {'wind_score': 0-1 float, 'wind_desc': str, 'temp': int or None}
+    wind_score: 1.0 = strong wind blowing out, 0.5 = neutral/crosswind/calm, 0.0 = wind blowing in
+    """
+    if venue in DOME_PARKS:
+        return {"wind_score": 0.5, "wind_desc": "Indoors", "temp": None}
+
+    if not weather_block:
+        return {"wind_score": 0.5, "wind_desc": "No data", "temp": None}
+
+    wind_str = weather_block.get("wind", "") or ""
+    temp_str = weather_block.get("temp", "")
+    temp = None
+    try:
+        temp = int(temp_str)
+    except:
+        pass
+
+    wind_lower = wind_str.lower()
+    speed_match = re.search(r"(\d+)\s*mph", wind_lower)
+    speed = int(speed_match.group(1)) if speed_match else 0
+
+    if "out to" in wind_lower or "out, l to r" in wind_lower or "out, r to l" in wind_lower:
+        if speed >= 10:
+            return {"wind_score": 1.0, "wind_desc": wind_str, "temp": temp}
+        elif speed >= 5:
+            return {"wind_score": 0.75, "wind_desc": wind_str, "temp": temp}
+        else:
+            return {"wind_score": 0.6, "wind_desc": wind_str, "temp": temp}
+    elif "in from" in wind_lower:
+        if speed >= 10:
+            return {"wind_score": 0.0, "wind_desc": wind_str, "temp": temp}
+        elif speed >= 5:
+            return {"wind_score": 0.25, "wind_desc": wind_str, "temp": temp}
+        else:
+            return {"wind_score": 0.4, "wind_desc": wind_str, "temp": temp}
+    else:
+        # crosswind (L to R / R to L), calm, or unrecognized format
+        return {"wind_score": 0.5, "wind_desc": wind_str or "Calm", "temp": temp}
+
 # ── Step 1: Today's games ─────────────────────────────────────────────────────
 def get_todays_games(target_date=TODAY_ISO):
-    url = f"https://statsapi.mlb.com/api/v1/schedule?sportId=1&date={target_date}&hydrate=probablePitcher,lineups"
+    url = f"https://statsapi.mlb.com/api/v1/schedule?sportId=1&date={target_date}&hydrate=probablePitcher,lineups,weather"
     r = requests.get(url, timeout=15)
     games = []
     for date_entry in r.json().get("dates", []):
@@ -90,6 +140,9 @@ def get_todays_games(target_date=TODAY_ISO):
                     game_hour_et = game_time_et.hour
                 except:
                     pass
+
+            weather = parse_weather(game.get("weather"), venue)
+
             games.append({
                 "game_id": game["gamePk"],
                 "away_team": away.get("team", {}).get("name", ""),
@@ -106,6 +159,9 @@ def get_todays_games(target_date=TODAY_ISO):
                 "game_hour_et": game_hour_et,
                 "game_time_str": game_time_et.strftime("%-I:%M %p ET") if game_time_et else "TBD",
                 "status": game.get("status", {}).get("abstractGameState", "Preview"),
+                "wind_score": weather["wind_score"],
+                "wind_desc": weather["wind_desc"],
+                "temp": weather["temp"],
             })
     games.sort(key=lambda x: x["game_time_et"] or datetime.max.replace(tzinfo=timezone.utc))
     if IS_AFTERNOON:
@@ -265,8 +321,35 @@ def get_recent_avg(player_id):
         pass
     return None
 
+# ── Step 5b: Current hitting streak ──────────────────────────────────────────
+def get_hit_streak(player_id):
+    url = (
+        f"https://statsapi.mlb.com/api/v1/people/{player_id}/stats"
+        f"?stats=gameLog&group=hitting&season={YEAR}"
+    )
+    try:
+        r = requests.get(url, timeout=10)
+        splits = r.json().get("stats", [])[0].get("splits", [])
+        if not splits:
+            return 0
+        splits = list(reversed(splits))
+        streak = 0
+        for g in splits:
+            st = g.get("stat", {})
+            hits = int(st.get("hits", 0))
+            ab = int(st.get("atBats", 0))
+            if ab == 0:
+                continue
+            if hits > 0:
+                streak += 1
+            else:
+                break
+        return streak
+    except:
+        return 0
+
 # ── Step 6: Score each player ─────────────────────────────────────────────────
-def score_player(p, pitcher, park_factor, is_home):
+def score_player(p, pitcher, park_factor, is_home, wind_score):
     recent = get_recent_avg(p["id"])
     recent_score = (recent / 0.300) * 22 if recent else 11.0
     ev = p.get("exit_velo")
@@ -283,9 +366,11 @@ def score_player(p, pitcher, park_factor, is_home):
     pitcher_score = (1 - (era_norm * 0.4 + whip_norm * 0.35 + k_norm * 0.25)) * 18
     season_score = max(0, min(1, p["avg"] / 0.350)) * 15
     platoon_score = 12 if p["hand"] != pitcher["hand"] else 6
-    park_score = max(0, min(1, (park_factor - 0.90) / 0.25)) * 8
-    home_score = 5 if is_home else 2.5
-    total = recent_score + advanced_score + pitcher_score + season_score + platoon_score + park_score + home_score
+    park_score = max(0, min(1, (park_factor - 0.90) / 0.25)) * 6
+    home_score = 3 if is_home else 1.5
+    weather_score = wind_score * 4
+    total = (recent_score + advanced_score + pitcher_score + season_score +
+             platoon_score + park_score + home_score + weather_score)
 
     factors = {
         "recent_form": round(recent_score, 2),
@@ -295,6 +380,7 @@ def score_player(p, pitcher, park_factor, is_home):
         "platoon": round(platoon_score, 2),
         "park_factor": round(park_score, 2),
         "home_away": round(home_score, 2),
+        "weather": round(weather_score, 2),
     }
     return round(total, 2), recent, factors
 
@@ -321,7 +407,9 @@ def get_top_picks(players, games, statcast):
         if pid not in pitcher_cache:
             pitcher_cache[pid] = get_pitcher_stats(pid)
         pitcher = pitcher_cache[pid]
-        total, recent, factors = score_player(p, pitcher, info["game"]["park_factor"], info["is_home"])
+        total, recent, factors = score_player(
+            p, pitcher, info["game"]["park_factor"], info["is_home"], info["game"]["wind_score"]
+        )
         scored.append({
             **p,
             "score": total,
@@ -338,6 +426,9 @@ def get_top_picks(players, games, statcast):
             "game_time_str": info["game"]["game_time_str"],
             "game_id": info["game"]["game_id"],
             "game_status": info["game"]["status"],
+            "wind_score": info["game"]["wind_score"],
+            "wind_desc": info["game"]["wind_desc"],
+            "temp": info["game"]["temp"],
         })
 
     scored.sort(key=lambda x: x["score"], reverse=True)
@@ -355,6 +446,10 @@ def get_top_picks(players, games, statcast):
     max_score = top[0]["score"] if top else 1
     for p in top:
         p["confidence"] = round((p["score"] / max_score) * 100, 1)
+
+    for p in top:
+        p["hit_streak"] = get_hit_streak(p["id"])
+
     return top
 
 # ── Step 8: Save picks to history ─────────────────────────────────────────────
@@ -447,12 +542,14 @@ def get_season_stats(history):
                 "rate": round((w_hits / len(week_picks)) * 100, 1),
             })
 
-    factor_names = ["recent_form", "advanced_metrics", "pitcher_matchup", "season_avg", "platoon", "park_factor", "home_away"]
+    factor_names = ["recent_form", "advanced_metrics", "pitcher_matchup", "season_avg", "platoon", "park_factor", "home_away", "weather"]
     factor_hits = {f: {"hits": 0, "total": 0} for f in factor_names}
     for pick in all_picks:
         if not pick.get("factors"):
             continue
         top_factor = max(pick["factors"], key=lambda k: pick["factors"][k])
+        if top_factor not in factor_hits:
+            continue
         factor_hits[top_factor]["total"] += 1
         if pick["got_hit"]:
             factor_hits[top_factor]["hits"] += 1
@@ -523,32 +620,52 @@ def get_morning_pick_statuses(history, games):
 def build_reason(p):
     reasons = []
     recent = p["recent_avg"]
-    if recent and recent >= 0.350:
+    streak = p.get("hit_streak", 0)
+
+    if streak >= 3:
+        reasons.append(f"on a {streak}-game hit streak")
+    elif recent and recent >= 0.350:
         reasons.append(f"hitting .{int(recent*1000):03d} over his last 14 games")
     elif recent and recent >= 0.300:
         reasons.append(f"solid recent form (.{int(recent*1000):03d} L14)")
+
     if p["pitcher_era"] >= 5.0:
         reasons.append(f"opposing pitcher has a {p['pitcher_era']:.2f} ERA")
     elif p["pitcher_era"] <= 3.00:
         reasons.append(f"still gets the nod despite a tough {p['pitcher_era']:.2f} ERA arm")
+
     if p["hand"] != p["pitcher_hand"]:
         reasons.append("favorable opposite-handed matchup")
+
+    if p.get("wind_score", 0.5) >= 0.75:
+        reasons.append("wind blowing out today")
+
     if p["park_factor"] >= 1.03:
         reasons.append("hitter-friendly park")
+
     if p["avg"] >= 0.300:
         reasons.append(f"{p['avg']:.3f} season hitter")
+
     if not reasons:
         reasons.append("strong all-around profile")
-    return " · ".join(reasons[:3])
+
+    return " · ".join(reasons[:2])
 
 # ── Helper: build one player row (shared by both emails) ─────────────────────
 def build_player_row(p, i):
     conf = p["confidence"]
     color = "#0F6E56" if conf >= 90 else "#BA7517" if conf >= 80 else "#555"
     medal = ["🥇", "🥈", "🥉"][i - 1] if i <= 3 else f"#{i}"
-    recent_str = f".{int(p['recent_avg']*1000):03d}" if p["recent_avg"] else "—"
     home_away = "Home" if p["is_home"] else "Away"
     reason_str = build_reason(p)
+    streak = p.get("hit_streak", 0)
+    streak_str = f"{streak}-game hit streak" if streak > 0 else "No active streak"
+
+    weather_bit = ""
+    if p.get("wind_desc") and p["wind_desc"] not in ("Indoors", "No data", "Calm"):
+        weather_bit = f" · {p['wind_desc']}"
+    elif p.get("wind_desc") == "Indoors":
+        weather_bit = " · Indoors"
 
     return f"""
     <tr style="border-bottom:1px solid #f0f0f0;">
@@ -558,13 +675,13 @@ def build_player_row(p, i):
           {p['name']} <span style="font-size:11px;font-weight:400;color:#888;">· {p['team_name']}</span>
         </div>
         <div style="font-size:12px;color:#333;margin-top:4px;">
-          <strong>Facing:</strong> {p['opp_pitcher']} ({p['pitcher_hand']}HP, {p['pitcher_era']:.2f} ERA) · {home_away} · {p['game_time_str']}
+          <strong>Facing:</strong> {p['opp_pitcher']} ({p['pitcher_hand']}HP, {p['pitcher_era']:.2f} ERA) · {home_away} · {p['game_time_str']}{weather_bit}
         </div>
         <div style="font-size:12px;color:#0F6E56;margin-top:4px;">
           <strong>Why:</strong> {reason_str}
         </div>
         <div style="font-size:11px;color:#888;margin-top:4px;">
-          Season AVG {p['avg']:.3f} · Last 14 days {recent_str}
+          Season AVG {p['avg']:.3f} · {streak_str}
         </div>
       </td>
       <td style="padding:10px 8px;text-align:right;font-weight:700;font-size:16px;color:{color};vertical-align:top;">{conf:.0f}%</td>
@@ -671,7 +788,7 @@ def build_morning_email(picks, games, yesterday_results, season_stats):
       </div>
       <div style="padding:12px 24px;background:#f8f8f8;font-size:11px;color:#888;text-align:center;line-height:1.8;">
         <strong style="color:#555;">Scoring model:</strong>
-        Recent form 22% · Advanced metrics 20% · Pitcher matchup 18% · Season AVG 15% · Platoon 12% · Park factor 8% · Home/Away 5%
+        Recent form 22% · Advanced metrics 20% · Pitcher matchup 18% · Season AVG 15% · Platoon 12% · Park factor 6% · Home/Away 3% · Weather 4%
       </div>
       <div style="padding:24px;">
         <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">Today's Top {len(picks)} Picks</h2>
@@ -786,7 +903,7 @@ def build_afternoon_email(picks, games, morning_statuses):
       </div>
       <div style="padding:12px 24px;background:#f8f8f8;font-size:11px;color:#888;text-align:center;line-height:1.8;">
         <strong style="color:#555;">Scoring model:</strong>
-        Recent form 22% · Advanced metrics 20% · Pitcher matchup 18% · Season AVG 15% · Platoon 12% · Park factor 8% · Home/Away 5%
+        Recent form 22% · Advanced metrics 20% · Pitcher matchup 18% · Season AVG 15% · Platoon 12% · Park factor 6% · Home/Away 3% · Weather 4%
       </div>
       <div style="padding:24px;">
         <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">Tonight's Top {len(picks)} Picks</h2>
