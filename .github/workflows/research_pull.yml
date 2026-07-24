@@ -1,0 +1,34 @@
+name: One-Time Research Data Pull
+
+on:
+  workflow_dispatch:  # manual trigger only — never runs automatically
+
+jobs:
+  pull_research_data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60  # this job takes a while, give it room
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run research data pull
+        run: python research/pull_season_data.py
+
+      - name: Commit research data
+        run: |
+          git config user.name "BTS Edge Bot"
+          git config user.email "bot@btsedge.com"
+          git add research_gamelogs.json || true
+          git diff --staged --quiet || git commit -m "Add research season data pull"
+          git push || true
