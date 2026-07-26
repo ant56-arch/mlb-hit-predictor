@@ -2860,6 +2860,216 @@
       "got_hit": true,
       "hits": 2,
       "at_bats": 4
+    },
+    {
+      "date": "2026-07-26",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824572,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 31.09,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 8.11,
+        "season_avg": 13.93,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-26",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 824810,
+      "confidence": 97.5,
+      "factors": {
+        "recent_form": 30.07,
+        "advanced_metrics": 10.23,
+        "pitcher_matchup": 8.43,
+        "season_avg": 11.7,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-26",
+      "player_id": 545121,
+      "player_name": "Ildemaro Vargas",
+      "team": "Arizona Diamondbacks",
+      "game_id": 822706,
+      "confidence": 96.9,
+      "factors": {
+        "recent_form": 30.36,
+        "advanced_metrics": 9.6,
+        "pitcher_matchup": 9.46,
+        "season_avg": 11.57,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.4
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-26",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823599,
+      "confidence": 95.0,
+      "factors": {
+        "recent_form": 25.89,
+        "advanced_metrics": 10.34,
+        "pitcher_matchup": 11.32,
+        "season_avg": 12.81,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-26",
+      "player_id": 807712,
+      "player_name": "Luke Keaschall",
+      "team": "Minnesota Twins",
+      "game_id": 823678,
+      "confidence": 94.4,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 9.52,
+        "pitcher_matchup": 12.04,
+        "season_avg": 11.14,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-26",
+      "player_id": 669127,
+      "player_name": "Shea Langeliers",
+      "team": "Athletics",
+      "game_id": 823678,
+      "confidence": 92.0,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.14,
+        "pitcher_matchup": 10.86,
+        "season_avg": 11.27,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-26",
+      "player_id": 607043,
+      "player_name": "Brandon Nimmo",
+      "team": "Texas Rangers",
+      "game_id": 822870,
+      "confidence": 91.5,
+      "factors": {
+        "recent_form": 27.21,
+        "advanced_metrics": 9.84,
+        "pitcher_matchup": 5.04,
+        "season_avg": 11.53,
+        "platoon": 12,
+        "park_factor": 3.6,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-26",
+      "player_id": 575929,
+      "player_name": "Willson Contreras",
+      "team": "Boston Red Sox",
+      "game_id": 824730,
+      "confidence": 90.9,
+      "factors": {
+        "recent_form": 26.4,
+        "advanced_metrics": 10.71,
+        "pitcher_matchup": 9.04,
+        "season_avg": 12.47,
+        "platoon": 6,
+        "park_factor": 4.08,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-26",
+      "player_id": 682928,
+      "player_name": "CJ Abrams",
+      "team": "Washington Nationals",
+      "game_id": 822706,
+      "confidence": 89.8,
+      "factors": {
+        "recent_form": 32.78,
+        "advanced_metrics": 10.61,
+        "pitcher_matchup": 3.82,
+        "season_avg": 12.56,
+        "platoon": 6,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.4
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-26",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823028,
+      "confidence": 89.8,
+      "factors": {
+        "recent_form": 29.33,
+        "advanced_metrics": 10.06,
+        "pitcher_matchup": 8.04,
+        "season_avg": 12.21,
+        "platoon": 6,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
