@@ -196,7 +196,7 @@ def get_batter_stats():
     url = (
         f"https://statsapi.mlb.com/api/v1/stats"
         f"?stats=season&group=hitting&season={YEAR}"
-        f"&limit=300&sortStat=avg&order=desc"
+        f"&limit=100&sortStat=ops&order=desc"
     )
     r = requests.get(url, timeout=15)
     players = []
