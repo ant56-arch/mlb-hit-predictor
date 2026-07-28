@@ -3280,6 +3280,216 @@
       "got_hit": true,
       "hits": 2,
       "at_bats": 4
+    },
+    {
+      "date": "2026-07-28",
+      "player_id": 682928,
+      "player_name": "CJ Abrams",
+      "team": "Washington Nationals",
+      "game_id": 822703,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 33.95,
+        "advanced_metrics": 10.69,
+        "pitcher_matchup": 9.4,
+        "season_avg": 12.64,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-28",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823923,
+      "confidence": 96.3,
+      "factors": {
+        "recent_form": 30.21,
+        "advanced_metrics": 10.36,
+        "pitcher_matchup": 9.54,
+        "season_avg": 12.9,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-28",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823026,
+      "confidence": 93.6,
+      "factors": {
+        "recent_form": 28.67,
+        "advanced_metrics": 10.06,
+        "pitcher_matchup": 9.76,
+        "season_avg": 12.26,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-28",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 823598,
+      "confidence": 90.0,
+      "factors": {
+        "recent_form": 30.73,
+        "advanced_metrics": 10.25,
+        "pitcher_matchup": 7.29,
+        "season_avg": 11.83,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-28",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824489,
+      "confidence": 87.1,
+      "factors": {
+        "recent_form": 23.76,
+        "advanced_metrics": 10.0,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.09,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-28",
+      "player_id": 682829,
+      "player_name": "Elly De La Cruz",
+      "team": "Cincinnati Reds",
+      "game_id": 824489,
+      "confidence": 86.4,
+      "factors": {
+        "recent_form": 23.03,
+        "advanced_metrics": 10.3,
+        "pitcher_matchup": 7.2,
+        "season_avg": 11.91,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-28",
+      "player_id": 575929,
+      "player_name": "Willson Contreras",
+      "team": "Boston Red Sox",
+      "game_id": 824976,
+      "confidence": 85.6,
+      "factors": {
+        "recent_form": 22.0,
+        "advanced_metrics": 10.67,
+        "pitcher_matchup": 10.2,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-28",
+      "player_id": 693307,
+      "player_name": "Dillon Dingler",
+      "team": "Detroit Tigers",
+      "game_id": 824243,
+      "confidence": 84.0,
+      "factors": {
+        "recent_form": 27.72,
+        "advanced_metrics": 10.34,
+        "pitcher_matchup": 9.51,
+        "season_avg": 11.7,
+        "platoon": 6,
+        "park_factor": 1.44,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-28",
+      "player_id": 693304,
+      "player_name": "Nick Gonzales",
+      "team": "Pittsburgh Pirates",
+      "game_id": 823350,
+      "confidence": 83.8,
+      "factors": {
+        "recent_form": 27.28,
+        "advanced_metrics": 9.91,
+        "pitcher_matchup": 7.9,
+        "season_avg": 13.5,
+        "platoon": 6,
+        "park_factor": 1.92,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-28",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824003,
+      "confidence": 83.4,
+      "factors": {
+        "recent_form": 27.21,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 7.27,
+        "season_avg": 13.84,
+        "platoon": 6,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
