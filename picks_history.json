@@ -3700,6 +3700,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 4
+    },
+    {
+      "date": "2026-07-30",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 824894,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 31.61,
+        "advanced_metrics": 10.29,
+        "pitcher_matchup": 11.36,
+        "season_avg": 12.09,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-30",
+      "player_id": 682928,
+      "player_name": "CJ Abrams",
+      "team": "Washington Nationals",
+      "game_id": 824894,
+      "confidence": 92.9,
+      "factors": {
+        "recent_form": 29.92,
+        "advanced_metrics": 10.63,
+        "pitcher_matchup": 7.72,
+        "season_avg": 12.51,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-30",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823921,
+      "confidence": 92.7,
+      "factors": {
+        "recent_form": 28.97,
+        "advanced_metrics": 10.34,
+        "pitcher_matchup": 7.58,
+        "season_avg": 12.94,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-30",
+      "player_id": 693304,
+      "player_name": "Nick Gonzales",
+      "team": "Pittsburgh Pirates",
+      "game_id": 824488,
+      "confidence": 89.3,
+      "factors": {
+        "recent_form": 26.25,
+        "advanced_metrics": 9.89,
+        "pitcher_matchup": 12.61,
+        "season_avg": 13.5,
+        "platoon": 6,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-30",
+      "player_id": 664040,
+      "player_name": "Brandon Lowe",
+      "team": "Pittsburgh Pirates",
+      "game_id": 824488,
+      "confidence": 89.1,
+      "factors": {
+        "recent_form": 22.59,
+        "advanced_metrics": 10.03,
+        "pitcher_matchup": 12.61,
+        "season_avg": 10.84,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-30",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823023,
+      "confidence": 86.0,
+      "factors": {
+        "recent_form": 26.77,
+        "advanced_metrics": 10.03,
+        "pitcher_matchup": 5.11,
+        "season_avg": 12.21,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-30",
+      "player_id": 691406,
+      "player_name": "Junior Caminero",
+      "team": "Tampa Bay Rays",
+      "game_id": 822946,
+      "confidence": 82.6,
+      "factors": {
+        "recent_form": 22.59,
+        "advanced_metrics": 10.57,
+        "pitcher_matchup": 12.39,
+        "season_avg": 12.13,
+        "platoon": 6,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-30",
+      "player_id": 660271,
+      "player_name": "Shohei Ohtani",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823921,
+      "confidence": 81.4,
+      "factors": {
+        "recent_form": 19.58,
+        "advanced_metrics": 10.66,
+        "pitcher_matchup": 7.58,
+        "season_avg": 12.39,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-30",
+      "player_id": 665487,
+      "player_name": "Fernando Tatis Jr.",
+      "team": "San Diego Padres",
+      "game_id": 823271,
+      "confidence": 81.1,
+      "factors": {
+        "recent_form": 25.96,
+        "advanced_metrics": 9.78,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.26,
+        "platoon": 6,
+        "park_factor": 1.44,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-30",
+      "player_id": 641355,
+      "player_name": "Cody Bellinger",
+      "team": "New York Yankees",
+      "game_id": 824568,
+      "confidence": 79.9,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 9.85,
+        "pitcher_matchup": 5.75,
+        "season_avg": 11.1,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
