@@ -3910,6 +3910,216 @@
       "got_hit": null,
       "hits": null,
       "at_bats": null
+    },
+    {
+      "date": "2026-07-31",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824164,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 25.59,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 7.54,
+        "season_avg": 13.76,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-31",
+      "player_id": 693304,
+      "player_name": "Nick Gonzales",
+      "team": "Pittsburgh Pirates",
+      "game_id": 824486,
+      "confidence": 99.5,
+      "factors": {
+        "recent_form": 26.99,
+        "advanced_metrics": 9.92,
+        "pitcher_matchup": 13.62,
+        "season_avg": 13.54,
+        "platoon": 6,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-31",
+      "player_id": 664040,
+      "player_name": "Brandon Lowe",
+      "team": "Pittsburgh Pirates",
+      "game_id": 824486,
+      "confidence": 97.7,
+      "factors": {
+        "recent_form": 22.15,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 13.62,
+        "season_avg": 10.84,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-31",
+      "player_id": 682928,
+      "player_name": "CJ Abrams",
+      "team": "Washington Nationals",
+      "game_id": 824892,
+      "confidence": 97.4,
+      "factors": {
+        "recent_form": 27.65,
+        "advanced_metrics": 10.59,
+        "pitcher_matchup": 7.2,
+        "season_avg": 12.39,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-31",
+      "player_id": 668930,
+      "player_name": "Brice Turang",
+      "team": "Milwaukee Brewers",
+      "game_id": 823999,
+      "confidence": 96.3,
+      "factors": {
+        "recent_form": 22.73,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 13.0,
+        "season_avg": 11.61,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-31",
+      "player_id": 665487,
+      "player_name": "Fernando Tatis Jr.",
+      "team": "San Diego Padres",
+      "game_id": 823272,
+      "confidence": 96.2,
+      "factors": {
+        "recent_form": 25.37,
+        "advanced_metrics": 9.77,
+        "pitcher_matchup": 9.49,
+        "season_avg": 12.21,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-31",
+      "player_id": 693307,
+      "player_name": "Dillon Dingler",
+      "team": "Detroit Tigers",
+      "game_id": 824975,
+      "confidence": 95.7,
+      "factors": {
+        "recent_form": 22.95,
+        "advanced_metrics": 10.24,
+        "pitcher_matchup": 12.29,
+        "season_avg": 11.49,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-31",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 824325,
+      "confidence": 91.4,
+      "factors": {
+        "recent_form": 20.17,
+        "advanced_metrics": 10.21,
+        "pitcher_matchup": 5.61,
+        "season_avg": 12.56,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-31",
+      "player_id": 641343,
+      "player_name": "Jake Bauers",
+      "team": "Milwaukee Brewers",
+      "game_id": 823999,
+      "confidence": 91.4,
+      "factors": {
+        "recent_form": 18.85,
+        "advanced_metrics": 10.3,
+        "pitcher_matchup": 13.0,
+        "season_avg": 11.44,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-07-31",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824407,
+      "confidence": 90.9,
+      "factors": {
+        "recent_form": 21.63,
+        "advanced_metrics": 9.96,
+        "pitcher_matchup": 14.36,
+        "season_avg": 12.0,
+        "platoon": 6,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
