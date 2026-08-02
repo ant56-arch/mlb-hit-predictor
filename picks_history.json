@@ -4330,6 +4330,216 @@
       "got_hit": true,
       "hits": 3,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-02",
+      "player_id": 682928,
+      "player_name": "CJ Abrams",
+      "team": "Washington Nationals",
+      "game_id": 824891,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 29.33,
+        "advanced_metrics": 10.62,
+        "pitcher_matchup": 9.61,
+        "season_avg": 12.43,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-02",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 822783,
+      "confidence": 99.7,
+      "factors": {
+        "recent_form": 25.3,
+        "advanced_metrics": 10.04,
+        "pitcher_matchup": 14.71,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-02",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824163,
+      "confidence": 98.6,
+      "factors": {
+        "recent_form": 26.18,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 7.82,
+        "season_avg": 13.89,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-02",
+      "player_id": 641355,
+      "player_name": "Cody Bellinger",
+      "team": "New York Yankees",
+      "game_id": 824648,
+      "confidence": 92.4,
+      "factors": {
+        "recent_form": 25.52,
+        "advanced_metrics": 9.85,
+        "pitcher_matchup": 9.18,
+        "season_avg": 11.1,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-02",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 824891,
+      "confidence": 92.2,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.19,
+        "pitcher_matchup": 7.81,
+        "season_avg": 11.79,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-02",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823919,
+      "confidence": 91.8,
+      "factors": {
+        "recent_form": 34.54,
+        "advanced_metrics": 10.38,
+        "pitcher_matchup": 2.39,
+        "season_avg": 13.29,
+        "platoon": 6,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-02",
+      "player_id": 691720,
+      "player_name": "Kyle Karros",
+      "team": "Colorado Rockies",
+      "game_id": 824323,
+      "confidence": 90.5,
+      "factors": {
+        "recent_form": 26.03,
+        "advanced_metrics": 9.98,
+        "pitcher_matchup": 8.26,
+        "season_avg": 11.49,
+        "platoon": 6,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-02",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 824323,
+      "confidence": 90.3,
+      "factors": {
+        "recent_form": 18.33,
+        "advanced_metrics": 10.22,
+        "pitcher_matchup": 8.26,
+        "season_avg": 12.73,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-02",
+      "player_id": 693307,
+      "player_name": "Dillon Dingler",
+      "team": "Detroit Tigers",
+      "game_id": 824971,
+      "confidence": 88.5,
+      "factors": {
+        "recent_form": 22.15,
+        "advanced_metrics": 10.24,
+        "pitcher_matchup": 9.32,
+        "season_avg": 11.49,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-02",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "San Francisco Giants",
+      "game_id": 823270,
+      "confidence": 88.4,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 5.55,
+        "season_avg": 14.06,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
