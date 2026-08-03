@@ -4540,6 +4540,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 5
+    },
+    {
+      "date": "2026-08-03",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824160,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 30.73,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 12.76,
+        "season_avg": 14.14,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-03",
+      "player_id": 682928,
+      "player_name": "CJ Abrams",
+      "team": "Washington Nationals",
+      "game_id": 823431,
+      "confidence": 89.9,
+      "factors": {
+        "recent_form": 26.4,
+        "advanced_metrics": 10.59,
+        "pitcher_matchup": 12.36,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-03",
+      "player_id": 691720,
+      "player_name": "Kyle Karros",
+      "team": "Colorado Rockies",
+      "game_id": 824324,
+      "confidence": 89.5,
+      "factors": {
+        "recent_form": 27.13,
+        "advanced_metrics": 9.98,
+        "pitcher_matchup": 8.08,
+        "season_avg": 11.49,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-03",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 824647,
+      "confidence": 88.7,
+      "factors": {
+        "recent_form": 36.67,
+        "advanced_metrics": 10.37,
+        "pitcher_matchup": 5.99,
+        "season_avg": 13.29,
+        "platoon": 6,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-03",
+      "player_id": 641343,
+      "player_name": "Jake Bauers",
+      "team": "Milwaukee Brewers",
+      "game_id": 823757,
+      "confidence": 88.1,
+      "factors": {
+        "recent_form": 26.47,
+        "advanced_metrics": 10.38,
+        "pitcher_matchup": 9.65,
+        "season_avg": 11.57,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-03",
+      "player_id": 668930,
+      "player_name": "Brice Turang",
+      "team": "Milwaukee Brewers",
+      "game_id": 823757,
+      "confidence": 86.8,
+      "factors": {
+        "recent_form": 25.52,
+        "advanced_metrics": 10.13,
+        "pitcher_matchup": 9.65,
+        "season_avg": 11.61,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-03",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "Washington Nationals",
+      "game_id": 823431,
+      "confidence": 85.0,
+      "factors": {
+        "recent_form": 22.44,
+        "advanced_metrics": 10.37,
+        "pitcher_matchup": 12.36,
+        "season_avg": 12.13,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-03",
+      "player_id": 691406,
+      "player_name": "Junior Caminero",
+      "team": "Tampa Bay Rays",
+      "game_id": 824324,
+      "confidence": 84.1,
+      "factors": {
+        "recent_form": 21.85,
+        "advanced_metrics": 10.59,
+        "pitcher_matchup": 14.81,
+        "season_avg": 12.09,
+        "platoon": 6,
+        "park_factor": 6.0,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-03",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "San Francisco Giants",
+      "game_id": 822867,
+      "confidence": 83.1,
+      "factors": {
+        "recent_form": 22.29,
+        "advanced_metrics": 10.0,
+        "pitcher_matchup": 8.66,
+        "season_avg": 13.89,
+        "platoon": 12,
+        "park_factor": 3.6,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-03",
+      "player_id": 641355,
+      "player_name": "Cody Bellinger",
+      "team": "New York Yankees",
+      "game_id": 823520,
+      "confidence": 80.6,
+      "factors": {
+        "recent_form": 25.89,
+        "advanced_metrics": 9.85,
+        "pitcher_matchup": 5.26,
+        "season_avg": 11.1,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
