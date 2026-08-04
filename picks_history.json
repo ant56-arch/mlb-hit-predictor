@@ -4750,6 +4750,216 @@
       "got_hit": null,
       "hits": null,
       "at_bats": null
+    },
+    {
+      "date": "2026-08-04",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 824645,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 36.67,
+        "advanced_metrics": 10.36,
+        "pitcher_matchup": 5.42,
+        "season_avg": 13.24,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-04",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824161,
+      "confidence": 95.0,
+      "factors": {
+        "recent_form": 27.94,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 6.61,
+        "season_avg": 14.14,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-04",
+      "player_id": 691720,
+      "player_name": "Kyle Karros",
+      "team": "Colorado Rockies",
+      "game_id": 824321,
+      "confidence": 93.5,
+      "factors": {
+        "recent_form": 28.82,
+        "advanced_metrics": 10.01,
+        "pitcher_matchup": 11.4,
+        "season_avg": 11.61,
+        "platoon": 6,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-04",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 824321,
+      "confidence": 93.1,
+      "factors": {
+        "recent_form": 21.19,
+        "advanced_metrics": 10.21,
+        "pitcher_matchup": 11.4,
+        "season_avg": 12.69,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-04",
+      "player_id": 641343,
+      "player_name": "Jake Bauers",
+      "team": "Milwaukee Brewers",
+      "game_id": 823756,
+      "confidence": 91.3,
+      "factors": {
+        "recent_form": 28.53,
+        "advanced_metrics": 10.39,
+        "pitcher_matchup": 6.13,
+        "season_avg": 11.57,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-04",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "New York Yankees",
+      "game_id": 823517,
+      "confidence": 86.6,
+      "factors": {
+        "recent_form": 22.81,
+        "advanced_metrics": 10.41,
+        "pitcher_matchup": 7.91,
+        "season_avg": 12.21,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-04",
+      "player_id": 660271,
+      "player_name": "Shohei Ohtani",
+      "team": "Los Angeles Dodgers",
+      "game_id": 824645,
+      "confidence": 86.5,
+      "factors": {
+        "recent_form": 25.59,
+        "advanced_metrics": 10.7,
+        "pitcher_matchup": 5.42,
+        "season_avg": 12.6,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-04",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 824888,
+      "confidence": 86.3,
+      "factors": {
+        "recent_form": 19.87,
+        "advanced_metrics": 10.16,
+        "pitcher_matchup": 11.16,
+        "season_avg": 11.66,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-04",
+      "player_id": 668930,
+      "player_name": "Brice Turang",
+      "team": "Milwaukee Brewers",
+      "game_id": 823756,
+      "confidence": 86.1,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 6.13,
+        "season_avg": 11.53,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-04",
+      "player_id": 621566,
+      "player_name": "Matt Olson",
+      "team": "Atlanta Braves",
+      "game_id": 824888,
+      "confidence": 85.3,
+      "factors": {
+        "recent_form": 19.07,
+        "advanced_metrics": 10.41,
+        "pitcher_matchup": 11.16,
+        "season_avg": 11.4,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
