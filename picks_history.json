@@ -4960,6 +4960,216 @@
       "got_hit": true,
       "hits": 2,
       "at_bats": 3
+    },
+    {
+      "date": "2026-08-05",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824158,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 26.18,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 11.71,
+        "season_avg": 14.1,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-05",
+      "player_id": 677649,
+      "player_name": "Ezequiel Duran",
+      "team": "Texas Rangers",
+      "game_id": 822866,
+      "confidence": 99.1,
+      "factors": {
+        "recent_form": 25.45,
+        "advanced_metrics": 9.96,
+        "pitcher_matchup": 14.64,
+        "season_avg": 11.91,
+        "platoon": 12,
+        "park_factor": 3.6,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-05",
+      "player_id": 682928,
+      "player_name": "CJ Abrams",
+      "team": "Washington Nationals",
+      "game_id": 823429,
+      "confidence": 95.6,
+      "factors": {
+        "recent_form": 24.93,
+        "advanced_metrics": 10.55,
+        "pitcher_matchup": 13.57,
+        "season_avg": 12.26,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-05",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 824646,
+      "confidence": 95.1,
+      "factors": {
+        "recent_form": 37.47,
+        "advanced_metrics": 10.36,
+        "pitcher_matchup": 5.55,
+        "season_avg": 13.29,
+        "platoon": 6,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-05",
+      "player_id": 701398,
+      "player_name": "Sal Stewart",
+      "team": "Cincinnati Reds",
+      "game_id": 824482,
+      "confidence": 94.6,
+      "factors": {
+        "recent_form": 22.73,
+        "advanced_metrics": 10.07,
+        "pitcher_matchup": 13.83,
+        "season_avg": 10.93,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-05",
+      "player_id": 641343,
+      "player_name": "Jake Bauers",
+      "team": "Milwaukee Brewers",
+      "game_id": 823753,
+      "confidence": 92.5,
+      "factors": {
+        "recent_form": 27.21,
+        "advanced_metrics": 10.39,
+        "pitcher_matchup": 7.57,
+        "season_avg": 11.57,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-05",
+      "player_id": 702284,
+      "player_name": "Cole Young",
+      "team": "Seattle Mariners",
+      "game_id": 823106,
+      "confidence": 92.3,
+      "factors": {
+        "recent_form": 27.5,
+        "advanced_metrics": 9.73,
+        "pitcher_matchup": 9.59,
+        "season_avg": 11.44,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-05",
+      "player_id": 682829,
+      "player_name": "Elly De La Cruz",
+      "team": "Cincinnati Reds",
+      "game_id": 824482,
+      "confidence": 91.1,
+      "factors": {
+        "recent_form": 18.7,
+        "advanced_metrics": 10.28,
+        "pitcher_matchup": 13.83,
+        "season_avg": 11.83,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-05",
+      "player_id": 668930,
+      "player_name": "Brice Turang",
+      "team": "Milwaukee Brewers",
+      "game_id": 823753,
+      "confidence": 90.0,
+      "factors": {
+        "recent_form": 25.52,
+        "advanced_metrics": 10.09,
+        "pitcher_matchup": 7.57,
+        "season_avg": 11.49,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-05",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823516,
+      "confidence": 88.8,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.15,
+        "pitcher_matchup": 8.97,
+        "season_avg": 12.34,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
