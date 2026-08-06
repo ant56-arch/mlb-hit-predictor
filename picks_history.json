@@ -5170,6 +5170,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-06",
+      "player_id": 641343,
+      "player_name": "Jake Bauers",
+      "team": "Milwaukee Brewers",
+      "game_id": 823754,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 30.73,
+        "advanced_metrics": 10.39,
+        "pitcher_matchup": 7.45,
+        "season_avg": 11.57,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-06",
+      "player_id": 682829,
+      "player_name": "Elly De La Cruz",
+      "team": "Cincinnati Reds",
+      "game_id": 824481,
+      "confidence": 91.9,
+      "factors": {
+        "recent_form": 20.75,
+        "advanced_metrics": 10.28,
+        "pitcher_matchup": 9.79,
+        "season_avg": 11.87,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-06",
+      "player_id": 664040,
+      "player_name": "Brandon Lowe",
+      "team": "Pittsburgh Pirates",
+      "game_id": 823754,
+      "confidence": 91.1,
+      "factors": {
+        "recent_form": 24.93,
+        "advanced_metrics": 10.0,
+        "pitcher_matchup": 8.63,
+        "season_avg": 10.89,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-06",
+      "player_id": 691718,
+      "player_name": "Pete Crow-Armstrong",
+      "team": "Chicago Cubs",
+      "game_id": 824664,
+      "confidence": 90.2,
+      "factors": {
+        "recent_form": 23.98,
+        "advanced_metrics": 10.69,
+        "pitcher_matchup": 5.49,
+        "season_avg": 12.34,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-06",
+      "player_id": 678882,
+      "player_name": "Ceddanne Rafaela",
+      "team": "Boston Red Sox",
+      "game_id": 824729,
+      "confidence": 90.2,
+      "factors": {
+        "recent_form": 24.93,
+        "advanced_metrics": 10.02,
+        "pitcher_matchup": 10.29,
+        "season_avg": 12.3,
+        "platoon": 6,
+        "park_factor": 4.08,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-06",
+      "player_id": 668227,
+      "player_name": "Randy Arozarena",
+      "team": "Seattle Mariners",
+      "game_id": 823105,
+      "confidence": 89.9,
+      "factors": {
+        "recent_form": 22.44,
+        "advanced_metrics": 10.18,
+        "pitcher_matchup": 8.91,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-06",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 824885,
+      "confidence": 85.7,
+      "factors": {
+        "recent_form": 18.7,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 8.6,
+        "season_avg": 11.66,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-06",
+      "player_id": 701398,
+      "player_name": "Sal Stewart",
+      "team": "Cincinnati Reds",
+      "game_id": 824481,
+      "confidence": 85.5,
+      "factors": {
+        "recent_form": 22.73,
+        "advanced_metrics": 10.06,
+        "pitcher_matchup": 9.79,
+        "season_avg": 10.93,
+        "platoon": 6,
+        "park_factor": 4.32,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-06",
+      "player_id": 671739,
+      "player_name": "Michael Harris II",
+      "team": "Atlanta Braves",
+      "game_id": 824885,
+      "confidence": 85.2,
+      "factors": {
+        "recent_form": 17.6,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 8.6,
+        "season_avg": 12.43,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-06",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 824804,
+      "confidence": 84.3,
+      "factors": {
+        "recent_form": 18.77,
+        "advanced_metrics": 10.01,
+        "pitcher_matchup": 13.3,
+        "season_avg": 10.63,
+        "platoon": 6,
+        "park_factor": 3.12,
+        "home_away": 3,
+        "weather": 3.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
