@@ -5380,6 +5380,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 3
+    },
+    {
+      "date": "2026-08-07",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 825051,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 35.05,
+        "advanced_metrics": 10.35,
+        "pitcher_matchup": 10.23,
+        "season_avg": 13.29,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-07",
+      "player_id": 641343,
+      "player_name": "Jake Bauers",
+      "team": "Milwaukee Brewers",
+      "game_id": 823750,
+      "confidence": 95.0,
+      "factors": {
+        "recent_form": 30.73,
+        "advanced_metrics": 10.39,
+        "pitcher_matchup": 9.89,
+        "season_avg": 11.57,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-07",
+      "player_id": 660271,
+      "player_name": "Shohei Ohtani",
+      "team": "Los Angeles Dodgers",
+      "game_id": 825051,
+      "confidence": 94.0,
+      "factors": {
+        "recent_form": 29.99,
+        "advanced_metrics": 10.77,
+        "pitcher_matchup": 10.23,
+        "season_avg": 12.73,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-07",
+      "player_id": 669364,
+      "player_name": "Xavier Edwards",
+      "team": "Miami Marlins",
+      "game_id": 823836,
+      "confidence": 89.2,
+      "factors": {
+        "recent_form": 20.02,
+        "advanced_metrics": 9.82,
+        "pitcher_matchup": 17.49,
+        "season_avg": 12.34,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-07",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823024,
+      "confidence": 87.8,
+      "factors": {
+        "recent_form": 23.39,
+        "advanced_metrics": 10.15,
+        "pitcher_matchup": 11.6,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-07",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "New York Yankees",
+      "game_id": 823515,
+      "confidence": 86.9,
+      "factors": {
+        "recent_form": 23.03,
+        "advanced_metrics": 10.37,
+        "pitcher_matchup": 10.73,
+        "season_avg": 12.13,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-07",
+      "player_id": 678882,
+      "player_name": "Ceddanne Rafaela",
+      "team": "Boston Red Sox",
+      "game_id": 824727,
+      "confidence": 86.2,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.0,
+        "pitcher_matchup": 13.47,
+        "season_avg": 12.3,
+        "platoon": 6,
+        "park_factor": 4.08,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-07",
+      "player_id": 668930,
+      "player_name": "Brice Turang",
+      "team": "Milwaukee Brewers",
+      "game_id": 823750,
+      "confidence": 85.6,
+      "factors": {
+        "recent_form": 23.03,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 9.89,
+        "season_avg": 11.4,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-07",
+      "player_id": 669065,
+      "player_name": "Kyle Stowers",
+      "team": "Miami Marlins",
+      "game_id": 823836,
+      "confidence": 84.5,
+      "factors": {
+        "recent_form": 18.33,
+        "advanced_metrics": 9.85,
+        "pitcher_matchup": 17.49,
+        "season_avg": 9.94,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-07",
+      "player_id": 607043,
+      "player_name": "Brandon Nimmo",
+      "team": "Texas Rangers",
+      "game_id": 822863,
+      "confidence": 84.4,
+      "factors": {
+        "recent_form": 23.39,
+        "advanced_metrics": 9.94,
+        "pitcher_matchup": 7.97,
+        "season_avg": 11.74,
+        "platoon": 12,
+        "park_factor": 3.6,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
