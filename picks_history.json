@@ -5590,6 +5590,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 3
+    },
+    {
+      "date": "2026-08-08",
+      "player_id": 641343,
+      "player_name": "Jake Bauers",
+      "team": "Milwaukee Brewers",
+      "game_id": 823752,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 29.33,
+        "advanced_metrics": 10.36,
+        "pitcher_matchup": 7.66,
+        "season_avg": 11.49,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-08",
+      "player_id": 681082,
+      "player_name": "Bryson Stott",
+      "team": "Philadelphia Phillies",
+      "game_id": 823426,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 25.08,
+        "advanced_metrics": 9.72,
+        "pitcher_matchup": 13.44,
+        "season_avg": 11.06,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-08",
+      "player_id": 678882,
+      "player_name": "Ceddanne Rafaela",
+      "team": "Boston Red Sox",
+      "game_id": 824726,
+      "confidence": 99.6,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.0,
+        "pitcher_matchup": 11.03,
+        "season_avg": 12.39,
+        "platoon": 12,
+        "park_factor": 4.08,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-08",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "Philadelphia Phillies",
+      "game_id": 823426,
+      "confidence": 99.4,
+      "factors": {
+        "recent_form": 21.56,
+        "advanced_metrics": 10.03,
+        "pitcher_matchup": 13.44,
+        "season_avg": 13.84,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-08",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 825049,
+      "confidence": 98.6,
+      "factors": {
+        "recent_form": 30.29,
+        "advanced_metrics": 10.3,
+        "pitcher_matchup": 5.93,
+        "season_avg": 13.16,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-08",
+      "player_id": 660271,
+      "player_name": "Shohei Ohtani",
+      "team": "Los Angeles Dodgers",
+      "game_id": 825049,
+      "confidence": 95.6,
+      "factors": {
+        "recent_form": 27.94,
+        "advanced_metrics": 10.76,
+        "pitcher_matchup": 5.93,
+        "season_avg": 12.69,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-08",
+      "player_id": 691720,
+      "player_name": "Kyle Karros",
+      "team": "Colorado Rockies",
+      "game_id": 823021,
+      "confidence": 94.7,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 9.96,
+        "pitcher_matchup": 11.41,
+        "season_avg": 11.53,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-08",
+      "player_id": 808982,
+      "player_name": "Jung Hoo Lee",
+      "team": "San Francisco Giants",
+      "game_id": 823188,
+      "confidence": 94.4,
+      "factors": {
+        "recent_form": 25.01,
+        "advanced_metrics": 9.94,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.99,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-08",
+      "player_id": 650489,
+      "player_name": "Willi Castro",
+      "team": "Colorado Rockies",
+      "game_id": 823021,
+      "confidence": 94.3,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 9.83,
+        "pitcher_matchup": 11.41,
+        "season_avg": 11.4,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-08",
+      "player_id": 701807,
+      "player_name": "Carson Benge",
+      "team": "New York Mets",
+      "game_id": 823348,
+      "confidence": 93.8,
+      "factors": {
+        "recent_form": 26.11,
+        "advanced_metrics": 9.71,
+        "pitcher_matchup": 9.52,
+        "season_avg": 11.57,
+        "platoon": 12,
+        "park_factor": 1.92,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
