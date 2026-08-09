@@ -5800,6 +5800,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 0
+    },
+    {
+      "date": "2026-08-09",
+      "player_id": 681082,
+      "player_name": "Bryson Stott",
+      "team": "Philadelphia Phillies",
+      "game_id": 823425,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 28.97,
+        "advanced_metrics": 9.76,
+        "pitcher_matchup": 12.22,
+        "season_avg": 11.19,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-09",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "Philadelphia Phillies",
+      "game_id": 823425,
+      "confidence": 98.1,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.04,
+        "pitcher_matchup": 12.22,
+        "season_avg": 13.89,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-09",
+      "player_id": 677951,
+      "player_name": "Bobby Witt Jr.",
+      "team": "Kansas City Royals",
+      "game_id": 824078,
+      "confidence": 96.2,
+      "factors": {
+        "recent_form": 30.87,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 6.33,
+        "season_avg": 12.26,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-09",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "New York Yankees",
+      "game_id": 823513,
+      "confidence": 93.1,
+      "factors": {
+        "recent_form": 26.91,
+        "advanced_metrics": 10.36,
+        "pitcher_matchup": 7.33,
+        "season_avg": 12.09,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-09",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823020,
+      "confidence": 91.8,
+      "factors": {
+        "recent_form": 19.14,
+        "advanced_metrics": 10.11,
+        "pitcher_matchup": 14.72,
+        "season_avg": 12.13,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-09",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 823268,
+      "confidence": 90.8,
+      "factors": {
+        "recent_form": 23.91,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 8.66,
+        "season_avg": 13.93,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-09",
+      "player_id": 669065,
+      "player_name": "Kyle Stowers",
+      "team": "Miami Marlins",
+      "game_id": 823835,
+      "confidence": 89.7,
+      "factors": {
+        "recent_form": 21.85,
+        "advanced_metrics": 9.9,
+        "pitcher_matchup": 13.38,
+        "season_avg": 10.24,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-09",
+      "player_id": 669364,
+      "player_name": "Xavier Edwards",
+      "team": "Miami Marlins",
+      "game_id": 823835,
+      "confidence": 89.3,
+      "factors": {
+        "recent_form": 19.58,
+        "advanced_metrics": 9.8,
+        "pitcher_matchup": 13.38,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-09",
+      "player_id": 693304,
+      "player_name": "Nick Gonzales",
+      "team": "Pittsburgh Pirates",
+      "game_id": 823345,
+      "confidence": 89.2,
+      "factors": {
+        "recent_form": 21.85,
+        "advanced_metrics": 9.82,
+        "pitcher_matchup": 9.35,
+        "season_avg": 13.24,
+        "platoon": 12,
+        "park_factor": 1.92,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-09",
+      "player_id": 677649,
+      "player_name": "Ezequiel Duran",
+      "team": "Texas Rangers",
+      "game_id": 822862,
+      "confidence": 88.4,
+      "factors": {
+        "recent_form": 22.81,
+        "advanced_metrics": 9.92,
+        "pitcher_matchup": 7.38,
+        "season_avg": 11.79,
+        "platoon": 12,
+        "park_factor": 3.6,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
