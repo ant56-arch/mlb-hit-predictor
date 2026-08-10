@@ -6010,6 +6010,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-10",
+      "player_id": 681624,
+      "player_name": "Andy Pages",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823918,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 25.45,
+        "advanced_metrics": 9.98,
+        "pitcher_matchup": 8.56,
+        "season_avg": 11.66,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-10",
+      "player_id": 701807,
+      "player_name": "Carson Benge",
+      "team": "New York Mets",
+      "game_id": 824887,
+      "confidence": 99.2,
+      "factors": {
+        "recent_form": 28.31,
+        "advanced_metrics": 9.72,
+        "pitcher_matchup": 6.16,
+        "season_avg": 11.66,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-10",
+      "player_id": 650490,
+      "player_name": "Yandy D\u00edaz",
+      "team": "Tampa Bay Rays",
+      "game_id": 824969,
+      "confidence": 98.1,
+      "factors": {
+        "recent_form": 19.14,
+        "advanced_metrics": 10.11,
+        "pitcher_matchup": 13.49,
+        "season_avg": 12.77,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-10",
+      "player_id": 664983,
+      "player_name": "Jake McCarthy",
+      "team": "Colorado Rockies",
+      "game_id": 825048,
+      "confidence": 97.5,
+      "factors": {
+        "recent_form": 26.4,
+        "advanced_metrics": 10.3,
+        "pitcher_matchup": 4.74,
+        "season_avg": 13.11,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-10",
+      "player_id": 689414,
+      "player_name": "Liam Hicks",
+      "team": "Tampa Bay Rays",
+      "game_id": 824969,
+      "confidence": 97.5,
+      "factors": {
+        "recent_form": 25.37,
+        "advanced_metrics": 10.03,
+        "pitcher_matchup": 13.49,
+        "season_avg": 12.13,
+        "platoon": 6,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-10",
+      "player_id": 660271,
+      "player_name": "Shohei Ohtani",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823918,
+      "confidence": 97.4,
+      "factors": {
+        "recent_form": 27.94,
+        "advanced_metrics": 10.69,
+        "pitcher_matchup": 8.56,
+        "season_avg": 12.51,
+        "platoon": 6,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-10",
+      "player_id": 681082,
+      "player_name": "Bryson Stott",
+      "team": "Philadelphia Phillies",
+      "game_id": 823018,
+      "confidence": 97.3,
+      "factors": {
+        "recent_form": 26.99,
+        "advanced_metrics": 9.78,
+        "pitcher_matchup": 7.09,
+        "season_avg": 11.27,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-10",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823018,
+      "confidence": 97.1,
+      "factors": {
+        "recent_form": 17.89,
+        "advanced_metrics": 10.13,
+        "pitcher_matchup": 13.29,
+        "season_avg": 12.13,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-10",
+      "player_id": 677800,
+      "player_name": "Wilyer Abreu",
+      "team": "Boston Red Sox",
+      "game_id": 822780,
+      "confidence": 94.7,
+      "factors": {
+        "recent_form": 20.02,
+        "advanced_metrics": 9.95,
+        "pitcher_matchup": 12.04,
+        "season_avg": 10.93,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-10",
+      "player_id": 641343,
+      "player_name": "Jake Bauers",
+      "team": "Milwaukee Brewers",
+      "game_id": 823265,
+      "confidence": 94.0,
+      "factors": {
+        "recent_form": 26.03,
+        "advanced_metrics": 10.41,
+        "pitcher_matchup": 5.3,
+        "season_avg": 11.61,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
