@@ -6220,6 +6220,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-11",
+      "player_id": 677951,
+      "player_name": "Bobby Witt Jr.",
+      "team": "Kansas City Royals",
+      "game_id": 823917,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 23.47,
+        "advanced_metrics": 10.01,
+        "pitcher_matchup": 18.0,
+        "season_avg": 12.09,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-11",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 823917,
+      "confidence": 96.6,
+      "factors": {
+        "recent_form": 27.35,
+        "advanced_metrics": 10.03,
+        "pitcher_matchup": 18.0,
+        "season_avg": 11.4,
+        "platoon": 6,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-11",
+      "player_id": 689414,
+      "player_name": "Liam Hicks",
+      "team": "Tampa Bay Rays",
+      "game_id": 824970,
+      "confidence": 94.0,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.02,
+        "pitcher_matchup": 11.89,
+        "season_avg": 12.09,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-11",
+      "player_id": 607043,
+      "player_name": "Brandon Nimmo",
+      "team": "Texas Rangers",
+      "game_id": 823997,
+      "confidence": 93.9,
+      "factors": {
+        "recent_form": 23.39,
+        "advanced_metrics": 9.96,
+        "pitcher_matchup": 13.19,
+        "season_avg": 11.83,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-11",
+      "player_id": 666018,
+      "player_name": "Jonathan Aranda",
+      "team": "Tampa Bay Rays",
+      "game_id": 824970,
+      "confidence": 93.8,
+      "factors": {
+        "recent_form": 23.98,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 11.89,
+        "season_avg": 12.34,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-11",
+      "player_id": 641343,
+      "player_name": "Jake Bauers",
+      "team": "Milwaukee Brewers",
+      "game_id": 823264,
+      "confidence": 91.5,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.4,
+        "pitcher_matchup": 10.91,
+        "season_avg": 11.61,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-11",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "New York Yankees",
+      "game_id": 823512,
+      "confidence": 90.7,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.31,
+        "pitcher_matchup": 7.35,
+        "season_avg": 11.96,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-11",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 823186,
+      "confidence": 90.6,
+      "factors": {
+        "recent_form": 23.39,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 8.66,
+        "season_avg": 13.84,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-11",
+      "player_id": 668930,
+      "player_name": "Brice Turang",
+      "team": "Milwaukee Brewers",
+      "game_id": 823264,
+      "confidence": 88.8,
+      "factors": {
+        "recent_form": 22.59,
+        "advanced_metrics": 10.08,
+        "pitcher_matchup": 10.91,
+        "season_avg": 11.57,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-11",
+      "player_id": 650489,
+      "player_name": "Willi Castro",
+      "team": "Colorado Rockies",
+      "game_id": 825046,
+      "confidence": 88.0,
+      "factors": {
+        "recent_form": 23.17,
+        "advanced_metrics": 9.79,
+        "pitcher_matchup": 8.84,
+        "season_avg": 11.31,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
