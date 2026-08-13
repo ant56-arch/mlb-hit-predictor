@@ -6640,6 +6640,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-13",
+      "player_id": 681082,
+      "player_name": "Bryson Stott",
+      "team": "Philadelphia Phillies",
+      "game_id": 823669,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 27.5,
+        "advanced_metrics": 9.79,
+        "pitcher_matchup": 7.9,
+        "season_avg": 11.4,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-13",
+      "player_id": 677800,
+      "player_name": "Wilyer Abreu",
+      "team": "Boston Red Sox",
+      "game_id": 822776,
+      "confidence": 99.5,
+      "factors": {
+        "recent_form": 22.73,
+        "advanced_metrics": 9.96,
+        "pitcher_matchup": 12.61,
+        "season_avg": 10.89,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-13",
+      "player_id": 678882,
+      "player_name": "Ceddanne Rafaela",
+      "team": "Boston Red Sox",
+      "game_id": 822776,
+      "confidence": 95.5,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 9.96,
+        "pitcher_matchup": 12.61,
+        "season_avg": 12.26,
+        "platoon": 6,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-13",
+      "player_id": 607043,
+      "player_name": "Brandon Nimmo",
+      "team": "Texas Rangers",
+      "game_id": 823995,
+      "confidence": 94.6,
+      "factors": {
+        "recent_form": 24.93,
+        "advanced_metrics": 9.93,
+        "pitcher_matchup": 5.86,
+        "season_avg": 11.83,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-13",
+      "player_id": 669065,
+      "player_name": "Kyle Stowers",
+      "team": "Miami Marlins",
+      "game_id": 823829,
+      "confidence": 93.9,
+      "factors": {
+        "recent_form": 23.76,
+        "advanced_metrics": 9.95,
+        "pitcher_matchup": 7.65,
+        "season_avg": 10.37,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-13",
+      "player_id": 681624,
+      "player_name": "Andy Pages",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823915,
+      "confidence": 93.7,
+      "factors": {
+        "recent_form": 21.56,
+        "advanced_metrics": 9.96,
+        "pitcher_matchup": 7.58,
+        "season_avg": 11.57,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-13",
+      "player_id": 641343,
+      "player_name": "Jake Bauers",
+      "team": "Milwaukee Brewers",
+      "game_id": 823915,
+      "confidence": 93.4,
+      "factors": {
+        "recent_form": 20.97,
+        "advanced_metrics": 10.37,
+        "pitcher_matchup": 9.07,
+        "season_avg": 11.49,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-13",
+      "player_id": 805367,
+      "player_name": "Chase Meidroth",
+      "team": "Chicago White Sox",
+      "game_id": 824561,
+      "confidence": 92.5,
+      "factors": {
+        "recent_form": 20.97,
+        "advanced_metrics": 9.81,
+        "pitcher_matchup": 7.85,
+        "season_avg": 11.83,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-13",
+      "player_id": 691718,
+      "player_name": "Pete Crow-Armstrong",
+      "team": "Chicago Cubs",
+      "game_id": 822696,
+      "confidence": 92.1,
+      "factors": {
+        "recent_form": 20.75,
+        "advanced_metrics": 10.64,
+        "pitcher_matchup": 7.84,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-13",
+      "player_id": 547180,
+      "player_name": "Bryce Harper",
+      "team": "Philadelphia Phillies",
+      "game_id": 823669,
+      "confidence": 89.5,
+      "factors": {
+        "recent_form": 19.65,
+        "advanced_metrics": 10.36,
+        "pitcher_matchup": 7.9,
+        "season_avg": 10.89,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
