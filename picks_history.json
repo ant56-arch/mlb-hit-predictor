@@ -6850,6 +6850,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-14",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 823993,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 27.5,
+        "advanced_metrics": 10.03,
+        "pitcher_matchup": 13.96,
+        "season_avg": 11.49,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-14",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824159,
+      "confidence": 93.8,
+      "factors": {
+        "recent_form": 23.91,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 6.79,
+        "season_avg": 13.8,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-14",
+      "player_id": 608324,
+      "player_name": "Alex Bregman",
+      "team": "Chicago Cubs",
+      "game_id": 824643,
+      "confidence": 93.1,
+      "factors": {
+        "recent_form": 22.59,
+        "advanced_metrics": 9.77,
+        "pitcher_matchup": 11.9,
+        "season_avg": 10.89,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-14",
+      "player_id": 673548,
+      "player_name": "Seiya Suzuki",
+      "team": "Chicago Cubs",
+      "game_id": 824643,
+      "confidence": 91.9,
+      "factors": {
+        "recent_form": 20.46,
+        "advanced_metrics": 10.19,
+        "pitcher_matchup": 11.9,
+        "season_avg": 11.61,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-14",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 822942,
+      "confidence": 91.5,
+      "factors": {
+        "recent_form": 26.18,
+        "advanced_metrics": 10.16,
+        "pitcher_matchup": 9.37,
+        "season_avg": 11.1,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-14",
+      "player_id": 664983,
+      "player_name": "Jake McCarthy",
+      "team": "Colorado Rockies",
+      "game_id": 823185,
+      "confidence": 91.1,
+      "factors": {
+        "recent_form": 25.37,
+        "advanced_metrics": 10.21,
+        "pitcher_matchup": 8.53,
+        "season_avg": 12.86,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-14",
+      "player_id": 677951,
+      "player_name": "Bobby Witt Jr.",
+      "team": "Kansas City Royals",
+      "game_id": 823993,
+      "confidence": 90.6,
+      "factors": {
+        "recent_form": 25.15,
+        "advanced_metrics": 10.02,
+        "pitcher_matchup": 13.96,
+        "season_avg": 12.21,
+        "platoon": 6,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-14",
+      "player_id": 607043,
+      "player_name": "Brandon Nimmo",
+      "team": "Texas Rangers",
+      "game_id": 824968,
+      "confidence": 90.5,
+      "factors": {
+        "recent_form": 24.93,
+        "advanced_metrics": 9.92,
+        "pitcher_matchup": 8.66,
+        "season_avg": 11.74,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-14",
+      "player_id": 682928,
+      "player_name": "CJ Abrams",
+      "team": "Washington Nationals",
+      "game_id": 823591,
+      "confidence": 90.4,
+      "factors": {
+        "recent_form": 17.97,
+        "advanced_metrics": 10.49,
+        "pitcher_matchup": 15.75,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-14",
+      "player_id": 679529,
+      "player_name": "Spencer Torkelson",
+      "team": "Detroit Tigers",
+      "game_id": 824237,
+      "confidence": 89.0,
+      "factors": {
+        "recent_form": 29.63,
+        "advanced_metrics": 9.75,
+        "pitcher_matchup": 4.2,
+        "season_avg": 9.94,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
