@@ -7060,6 +7060,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-15",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824400,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.0,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-15",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824157,
+      "confidence": 99.2,
+      "factors": {
+        "recent_form": 23.32,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 5.29,
+        "season_avg": 13.84,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-15",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 823990,
+      "confidence": 98.2,
+      "factors": {
+        "recent_form": 32.12,
+        "advanced_metrics": 10.1,
+        "pitcher_matchup": 7.27,
+        "season_avg": 11.7,
+        "platoon": 6,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-15",
+      "player_id": 677951,
+      "player_name": "Bobby Witt Jr.",
+      "team": "Kansas City Royals",
+      "game_id": 823990,
+      "confidence": 97.4,
+      "factors": {
+        "recent_form": 25.08,
+        "advanced_metrics": 10.03,
+        "pitcher_matchup": 7.27,
+        "season_avg": 12.21,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-15",
+      "player_id": 679529,
+      "player_name": "Spencer Torkelson",
+      "team": "Detroit Tigers",
+      "game_id": 824239,
+      "confidence": 97.2,
+      "factors": {
+        "recent_form": 26.55,
+        "advanced_metrics": 9.74,
+        "pitcher_matchup": 7.69,
+        "season_avg": 9.94,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-15",
+      "player_id": 669065,
+      "player_name": "Kyle Stowers",
+      "team": "Miami Marlins",
+      "game_id": 824480,
+      "confidence": 96.6,
+      "factors": {
+        "recent_form": 22.0,
+        "advanced_metrics": 9.95,
+        "pitcher_matchup": 9.77,
+        "season_avg": 10.37,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-15",
+      "player_id": 701807,
+      "player_name": "Carson Benge",
+      "team": "New York Mets",
+      "game_id": 823588,
+      "confidence": 95.7,
+      "factors": {
+        "recent_form": 25.01,
+        "advanced_metrics": 9.73,
+        "pitcher_matchup": 6.55,
+        "season_avg": 11.74,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-15",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 822941,
+      "confidence": 95.7,
+      "factors": {
+        "recent_form": 25.01,
+        "advanced_metrics": 10.16,
+        "pitcher_matchup": 7.73,
+        "season_avg": 11.14,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-15",
+      "player_id": 677800,
+      "player_name": "Wilyer Abreu",
+      "team": "Boston Red Sox",
+      "game_id": 823347,
+      "confidence": 95.7,
+      "factors": {
+        "recent_form": 23.25,
+        "advanced_metrics": 9.97,
+        "pitcher_matchup": 9.69,
+        "season_avg": 10.89,
+        "platoon": 12,
+        "park_factor": 1.92,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-15",
+      "player_id": 808982,
+      "player_name": "Jung Hoo Lee",
+      "team": "San Francisco Giants",
+      "game_id": 823184,
+      "confidence": 95.7,
+      "factors": {
+        "recent_form": 16.13,
+        "advanced_metrics": 9.79,
+        "pitcher_matchup": 14.63,
+        "season_avg": 12.43,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
