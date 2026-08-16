@@ -7270,6 +7270,216 @@
       "got_hit": true,
       "hits": 2,
       "at_bats": 3
+    },
+    {
+      "date": "2026-08-16",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 823991,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 33.51,
+        "advanced_metrics": 10.09,
+        "pitcher_matchup": 12.98,
+        "season_avg": 11.74,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-16",
+      "player_id": 701807,
+      "player_name": "Carson Benge",
+      "team": "New York Mets",
+      "game_id": 823590,
+      "confidence": 90.0,
+      "factors": {
+        "recent_form": 26.18,
+        "advanced_metrics": 9.79,
+        "pitcher_matchup": 11.65,
+        "season_avg": 11.79,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-16",
+      "player_id": 681082,
+      "player_name": "Bryson Stott",
+      "team": "Philadelphia Phillies",
+      "game_id": 823670,
+      "confidence": 88.6,
+      "factors": {
+        "recent_form": 27.94,
+        "advanced_metrics": 9.81,
+        "pitcher_matchup": 9.35,
+        "season_avg": 11.4,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-16",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 822940,
+      "confidence": 86.0,
+      "factors": {
+        "recent_form": 29.33,
+        "advanced_metrics": 10.21,
+        "pitcher_matchup": 12.11,
+        "season_avg": 11.31,
+        "platoon": 6,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-16",
+      "player_id": 677800,
+      "player_name": "Wilyer Abreu",
+      "team": "Boston Red Sox",
+      "game_id": 823344,
+      "confidence": 85.6,
+      "factors": {
+        "recent_form": 28.6,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 6.6,
+        "season_avg": 11.1,
+        "platoon": 12,
+        "park_factor": 1.92,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-16",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824156,
+      "confidence": 85.4,
+      "factors": {
+        "recent_form": 21.63,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 6.9,
+        "season_avg": 13.76,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-16",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 824642,
+      "confidence": 84.8,
+      "factors": {
+        "recent_form": 21.49,
+        "advanced_metrics": 10.19,
+        "pitcher_matchup": 10.58,
+        "season_avg": 12.21,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-16",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824397,
+      "confidence": 84.8,
+      "factors": {
+        "recent_form": 26.4,
+        "advanced_metrics": 10.01,
+        "pitcher_matchup": 5.27,
+        "season_avg": 12.26,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-16",
+      "player_id": 650490,
+      "player_name": "Yandy D\u00edaz",
+      "team": "Tampa Bay Rays",
+      "game_id": 822940,
+      "confidence": 82.3,
+      "factors": {
+        "recent_form": 21.56,
+        "advanced_metrics": 10.17,
+        "pitcher_matchup": 7.61,
+        "season_avg": 12.99,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-16",
+      "player_id": 677649,
+      "player_name": "Ezequiel Duran",
+      "team": "Texas Rangers",
+      "game_id": 824965,
+      "confidence": 82.2,
+      "factors": {
+        "recent_form": 19.43,
+        "advanced_metrics": 9.78,
+        "pitcher_matchup": 12.4,
+        "season_avg": 11.4,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
