@@ -7480,6 +7480,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-17",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824077,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 32.56,
+        "advanced_metrics": 10.07,
+        "pitcher_matchup": 12.78,
+        "season_avg": 11.66,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-17",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 824478,
+      "confidence": 90.0,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.24,
+        "pitcher_matchup": 10.96,
+        "season_avg": 12.34,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-17",
+      "player_id": 664983,
+      "player_name": "Jake McCarthy",
+      "team": "Colorado Rockies",
+      "game_id": 824320,
+      "confidence": 89.4,
+      "factors": {
+        "recent_form": 24.93,
+        "advanced_metrics": 10.15,
+        "pitcher_matchup": 12.5,
+        "season_avg": 12.69,
+        "platoon": 6,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-17",
+      "player_id": 681082,
+      "player_name": "Bryson Stott",
+      "team": "Philadelphia Phillies",
+      "game_id": 823427,
+      "confidence": 88.1,
+      "factors": {
+        "recent_form": 27.13,
+        "advanced_metrics": 9.79,
+        "pitcher_matchup": 8.03,
+        "season_avg": 11.36,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-17",
+      "player_id": 701807,
+      "player_name": "Carson Benge",
+      "team": "New York Mets",
+      "game_id": 823589,
+      "confidence": 87.3,
+      "factors": {
+        "recent_form": 25.59,
+        "advanced_metrics": 9.75,
+        "pitcher_matchup": 10.32,
+        "season_avg": 11.66,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-17",
+      "player_id": 650489,
+      "player_name": "Willi Castro",
+      "team": "Colorado Rockies",
+      "game_id": 824320,
+      "confidence": 87.0,
+      "factors": {
+        "recent_form": 18.77,
+        "advanced_metrics": 9.75,
+        "pitcher_matchup": 12.5,
+        "season_avg": 11.23,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-17",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 822939,
+      "confidence": 85.2,
+      "factors": {
+        "recent_form": 29.99,
+        "advanced_metrics": 10.25,
+        "pitcher_matchup": 4.83,
+        "season_avg": 11.4,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-17",
+      "player_id": 672515,
+      "player_name": "Gabriel Moreno",
+      "team": "Arizona Diamondbacks",
+      "game_id": 824725,
+      "confidence": 84.9,
+      "factors": {
+        "recent_form": 27.72,
+        "advanced_metrics": 10.25,
+        "pitcher_matchup": 8.66,
+        "season_avg": 13.2,
+        "platoon": 6,
+        "park_factor": 4.08,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-17",
+      "player_id": 666018,
+      "player_name": "Jonathan Aranda",
+      "team": "Tampa Bay Rays",
+      "game_id": 822939,
+      "confidence": 81.9,
+      "factors": {
+        "recent_form": 23.54,
+        "advanced_metrics": 9.98,
+        "pitcher_matchup": 6.44,
+        "season_avg": 12.21,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-17",
+      "player_id": 805367,
+      "player_name": "Chase Meidroth",
+      "team": "Chicago White Sox",
+      "game_id": 824641,
+      "confidence": 81.8,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 9.85,
+        "pitcher_matchup": 5.96,
+        "season_avg": 11.91,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
