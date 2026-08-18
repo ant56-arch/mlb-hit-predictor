@@ -7690,6 +7690,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 5
+    },
+    {
+      "date": "2026-08-18",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824075,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 33.73,
+        "advanced_metrics": 10.09,
+        "pitcher_matchup": 14.18,
+        "season_avg": 11.83,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-18",
+      "player_id": 677800,
+      "player_name": "Wilyer Abreu",
+      "team": "Boston Red Sox",
+      "game_id": 824723,
+      "confidence": 88.7,
+      "factors": {
+        "recent_form": 26.69,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 10.23,
+        "season_avg": 11.1,
+        "platoon": 12,
+        "park_factor": 4.08,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-18",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 824803,
+      "confidence": 88.3,
+      "factors": {
+        "recent_form": 29.92,
+        "advanced_metrics": 10.29,
+        "pitcher_matchup": 7.08,
+        "season_avg": 11.44,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-18",
+      "player_id": 660271,
+      "player_name": "Shohei Ohtani",
+      "team": "Los Angeles Dodgers",
+      "game_id": 824319,
+      "confidence": 87.8,
+      "factors": {
+        "recent_form": 22.15,
+        "advanced_metrics": 10.74,
+        "pitcher_matchup": 11.36,
+        "season_avg": 12.64,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-18",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824154,
+      "confidence": 85.7,
+      "factors": {
+        "recent_form": 16.5,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 14.83,
+        "season_avg": 13.76,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-18",
+      "player_id": 607043,
+      "player_name": "Brandon Nimmo",
+      "team": "Texas Rangers",
+      "game_id": 822859,
+      "confidence": 85.3,
+      "factors": {
+        "recent_form": 22.29,
+        "advanced_metrics": 9.87,
+        "pitcher_matchup": 17.78,
+        "season_avg": 11.61,
+        "platoon": 6,
+        "park_factor": 3.6,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-18",
+      "player_id": 672515,
+      "player_name": "Gabriel Moreno",
+      "team": "Arizona Diamondbacks",
+      "game_id": 824723,
+      "confidence": 85.1,
+      "factors": {
+        "recent_form": 26.91,
+        "advanced_metrics": 10.23,
+        "pitcher_matchup": 6.07,
+        "season_avg": 13.16,
+        "platoon": 12,
+        "park_factor": 4.08,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-18",
+      "player_id": 691023,
+      "player_name": "Jordan Walker",
+      "team": "St. Louis Cardinals",
+      "game_id": 824475,
+      "confidence": 84.4,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.23,
+        "pitcher_matchup": 8.45,
+        "season_avg": 12.39,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-18",
+      "player_id": 670623,
+      "player_name": "Isaac Paredes",
+      "team": "Houston Astros",
+      "game_id": 824154,
+      "confidence": 84.3,
+      "factors": {
+        "recent_form": 25.01,
+        "advanced_metrics": 9.88,
+        "pitcher_matchup": 14.83,
+        "season_avg": 11.14,
+        "platoon": 6,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-18",
+      "player_id": 677951,
+      "player_name": "Bobby Witt Jr.",
+      "team": "Kansas City Royals",
+      "game_id": 824075,
+      "confidence": 83.9,
+      "factors": {
+        "recent_form": 24.93,
+        "advanced_metrics": 10.1,
+        "pitcher_matchup": 14.18,
+        "season_avg": 12.26,
+        "platoon": 6,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
