@@ -7900,6 +7900,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 3
+    },
+    {
+      "date": "2026-08-19",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824076,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 33.73,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 8.66,
+        "season_avg": 11.91,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-19",
+      "player_id": 681624,
+      "player_name": "Andy Pages",
+      "team": "Los Angeles Dodgers",
+      "game_id": 824318,
+      "confidence": 94.0,
+      "factors": {
+        "recent_form": 23.47,
+        "advanced_metrics": 10.01,
+        "pitcher_matchup": 12.17,
+        "season_avg": 11.7,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-19",
+      "player_id": 669065,
+      "player_name": "Kyle Stowers",
+      "team": "Miami Marlins",
+      "game_id": 823424,
+      "confidence": 92.7,
+      "factors": {
+        "recent_form": 26.99,
+        "advanced_metrics": 9.95,
+        "pitcher_matchup": 12.04,
+        "season_avg": 10.37,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-19",
+      "player_id": 664983,
+      "player_name": "Jake McCarthy",
+      "team": "Colorado Rockies",
+      "game_id": 824318,
+      "confidence": 91.9,
+      "factors": {
+        "recent_form": 22.44,
+        "advanced_metrics": 10.13,
+        "pitcher_matchup": 8.85,
+        "season_avg": 12.64,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-19",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 824801,
+      "confidence": 90.1,
+      "factors": {
+        "recent_form": 29.92,
+        "advanced_metrics": 10.27,
+        "pitcher_matchup": 9.8,
+        "season_avg": 11.44,
+        "platoon": 6,
+        "park_factor": 3.12,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-19",
+      "player_id": 701398,
+      "player_name": "Sal Stewart",
+      "team": "Cincinnati Reds",
+      "game_id": 824476,
+      "confidence": 89.3,
+      "factors": {
+        "recent_form": 20.97,
+        "advanced_metrics": 10.02,
+        "pitcher_matchup": 11.45,
+        "season_avg": 11.06,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-19",
+      "player_id": 672515,
+      "player_name": "Gabriel Moreno",
+      "team": "Arizona Diamondbacks",
+      "game_id": 824722,
+      "confidence": 89.2,
+      "factors": {
+        "recent_form": 26.77,
+        "advanced_metrics": 10.28,
+        "pitcher_matchup": 4.93,
+        "season_avg": 13.2,
+        "platoon": 12,
+        "park_factor": 4.08,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-19",
+      "player_id": 605137,
+      "player_name": "Josh Bell",
+      "team": "Minnesota Twins",
+      "game_id": 823664,
+      "confidence": 89.1,
+      "factors": {
+        "recent_form": 25.45,
+        "advanced_metrics": 9.76,
+        "pitcher_matchup": 9.01,
+        "season_avg": 11.06,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-19",
+      "player_id": 650490,
+      "player_name": "Yandy D\u00edaz",
+      "team": "Tampa Bay Rays",
+      "game_id": 822937,
+      "confidence": 88.9,
+      "factors": {
+        "recent_form": 26.4,
+        "advanced_metrics": 10.21,
+        "pitcher_matchup": 12.08,
+        "season_avg": 13.11,
+        "platoon": 6,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-19",
+      "player_id": 694384,
+      "player_name": "Nolan Schanuel",
+      "team": "Los Angeles Angels",
+      "game_id": 824155,
+      "confidence": 88.0,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 9.75,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.04,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
