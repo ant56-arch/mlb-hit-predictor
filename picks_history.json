@@ -8110,6 +8110,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-20",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824074,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 35.13,
+        "advanced_metrics": 10.13,
+        "pitcher_matchup": 10.66,
+        "season_avg": 11.96,
+        "platoon": 6,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-20",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824395,
+      "confidence": 94.7,
+      "factors": {
+        "recent_form": 26.84,
+        "advanced_metrics": 10.0,
+        "pitcher_matchup": 8.73,
+        "season_avg": 12.21,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-20",
+      "player_id": 670623,
+      "player_name": "Isaac Paredes",
+      "team": "Houston Astros",
+      "game_id": 824153,
+      "confidence": 93.6,
+      "factors": {
+        "recent_form": 26.84,
+        "advanced_metrics": 9.88,
+        "pitcher_matchup": 13.82,
+        "season_avg": 11.14,
+        "platoon": 6,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-20",
+      "player_id": 677951,
+      "player_name": "Bobby Witt Jr.",
+      "team": "Kansas City Royals",
+      "game_id": 824074,
+      "confidence": 92.0,
+      "factors": {
+        "recent_form": 22.44,
+        "advanced_metrics": 10.07,
+        "pitcher_matchup": 10.66,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-20",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 824474,
+      "confidence": 91.4,
+      "factors": {
+        "recent_form": 22.0,
+        "advanced_metrics": 10.22,
+        "pitcher_matchup": 9.82,
+        "season_avg": 12.39,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-20",
+      "player_id": 689414,
+      "player_name": "Liam Hicks",
+      "team": "Tampa Bay Rays",
+      "game_id": 822934,
+      "confidence": 91.3,
+      "factors": {
+        "recent_form": 22.22,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 11.1,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-20",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824153,
+      "confidence": 90.3,
+      "factors": {
+        "recent_form": 14.67,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 13.82,
+        "season_avg": 13.59,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-20",
+      "player_id": 650490,
+      "player_name": "Yandy D\u00edaz",
+      "team": "Tampa Bay Rays",
+      "game_id": 822934,
+      "confidence": 90.3,
+      "factors": {
+        "recent_form": 26.25,
+        "advanced_metrics": 10.24,
+        "pitcher_matchup": 11.1,
+        "season_avg": 13.11,
+        "platoon": 6,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-20",
+      "player_id": 641343,
+      "player_name": "Jake Bauers",
+      "team": "Milwaukee Brewers",
+      "game_id": 823747,
+      "confidence": 89.5,
+      "factors": {
+        "recent_form": 22.73,
+        "advanced_metrics": 10.44,
+        "pitcher_matchup": 7.43,
+        "season_avg": 11.79,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-20",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 824802,
+      "confidence": 89.4,
+      "factors": {
+        "recent_form": 31.46,
+        "advanced_metrics": 10.29,
+        "pitcher_matchup": 5.35,
+        "season_avg": 11.44,
+        "platoon": 6,
+        "park_factor": 3.12,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
