@@ -8320,6 +8320,216 @@
       "got_hit": true,
       "hits": 2,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-21",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824317,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 25.74,
+        "advanced_metrics": 10.0,
+        "pitcher_matchup": 11.59,
+        "season_avg": 12.21,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-21",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 824800,
+      "confidence": 98.7,
+      "factors": {
+        "recent_form": 32.27,
+        "advanced_metrics": 10.29,
+        "pitcher_matchup": 11.76,
+        "season_avg": 11.53,
+        "platoon": 6,
+        "park_factor": 3.12,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-21",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824072,
+      "confidence": 98.6,
+      "factors": {
+        "recent_form": 36.67,
+        "advanced_metrics": 10.13,
+        "pitcher_matchup": 1.71,
+        "season_avg": 11.96,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-21",
+      "player_id": 672515,
+      "player_name": "Gabriel Moreno",
+      "team": "Arizona Diamondbacks",
+      "game_id": 825045,
+      "confidence": 95.7,
+      "factors": {
+        "recent_form": 24.93,
+        "advanced_metrics": 10.28,
+        "pitcher_matchup": 9.29,
+        "season_avg": 13.16,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-21",
+      "player_id": 650490,
+      "player_name": "Yandy D\u00edaz",
+      "team": "Tampa Bay Rays",
+      "game_id": 824800,
+      "confidence": 94.5,
+      "factors": {
+        "recent_form": 26.99,
+        "advanced_metrics": 10.25,
+        "pitcher_matchup": 7.53,
+        "season_avg": 13.2,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-21",
+      "player_id": 605137,
+      "player_name": "Josh Bell",
+      "team": "Minnesota Twins",
+      "game_id": 823262,
+      "confidence": 90.8,
+      "factors": {
+        "recent_form": 27.13,
+        "advanced_metrics": 9.77,
+        "pitcher_matchup": 8.66,
+        "season_avg": 11.06,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-21",
+      "player_id": 650489,
+      "player_name": "Willi Castro",
+      "team": "Colorado Rockies",
+      "game_id": 824317,
+      "confidence": 90.3,
+      "factors": {
+        "recent_form": 19.65,
+        "advanced_metrics": 9.8,
+        "pitcher_matchup": 9.4,
+        "season_avg": 11.31,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-21",
+      "player_id": 665487,
+      "player_name": "Fernando Tatis Jr.",
+      "team": "San Diego Padres",
+      "game_id": 823262,
+      "confidence": 90.0,
+      "factors": {
+        "recent_form": 20.97,
+        "advanced_metrics": 9.94,
+        "pitcher_matchup": 11.57,
+        "season_avg": 12.0,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-21",
+      "player_id": 547180,
+      "player_name": "Bryce Harper",
+      "team": "Philadelphia Phillies",
+      "game_id": 823420,
+      "confidence": 89.6,
+      "factors": {
+        "recent_form": 22.59,
+        "advanced_metrics": 10.37,
+        "pitcher_matchup": 8.66,
+        "season_avg": 11.14,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-21",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "Philadelphia Phillies",
+      "game_id": 823420,
+      "confidence": 88.3,
+      "factors": {
+        "recent_form": 19.36,
+        "advanced_metrics": 9.96,
+        "pitcher_matchup": 8.66,
+        "season_avg": 13.67,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
