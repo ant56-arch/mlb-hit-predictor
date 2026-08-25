@@ -9160,6 +9160,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 5
+    },
+    {
+      "date": "2026-08-25",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 822773,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 28.53,
+        "advanced_metrics": 10.09,
+        "pitcher_matchup": 12.3,
+        "season_avg": 11.83,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-25",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823016,
+      "confidence": 98.2,
+      "factors": {
+        "recent_form": 25.96,
+        "advanced_metrics": 10.22,
+        "pitcher_matchup": 11.4,
+        "season_avg": 12.47,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-25",
+      "player_id": 807712,
+      "player_name": "Luke Keaschall",
+      "team": "Minnesota Twins",
+      "game_id": 824962,
+      "confidence": 96.9,
+      "factors": {
+        "recent_form": 27.13,
+        "advanced_metrics": 9.76,
+        "pitcher_matchup": 11.66,
+        "season_avg": 11.74,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-25",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "Philadelphia Phillies",
+      "game_id": 823098,
+      "confidence": 94.7,
+      "factors": {
+        "recent_form": 27.13,
+        "advanced_metrics": 9.98,
+        "pitcher_matchup": 8.34,
+        "season_avg": 13.76,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-25",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 823989,
+      "confidence": 94.2,
+      "factors": {
+        "recent_form": 30.21,
+        "advanced_metrics": 10.06,
+        "pitcher_matchup": 5.46,
+        "season_avg": 12.34,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-25",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 823016,
+      "confidence": 93.0,
+      "factors": {
+        "recent_form": 32.78,
+        "advanced_metrics": 10.3,
+        "pitcher_matchup": 8.66,
+        "season_avg": 11.57,
+        "platoon": 6,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-25",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "New York Yankees",
+      "game_id": 823505,
+      "confidence": 91.9,
+      "factors": {
+        "recent_form": 18.77,
+        "advanced_metrics": 10.27,
+        "pitcher_matchup": 13.54,
+        "season_avg": 11.87,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-25",
+      "player_id": 547180,
+      "player_name": "Bryce Harper",
+      "team": "Philadelphia Phillies",
+      "game_id": 823098,
+      "confidence": 91.1,
+      "factors": {
+        "recent_form": 26.33,
+        "advanced_metrics": 10.41,
+        "pitcher_matchup": 8.34,
+        "season_avg": 11.23,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-25",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 823505,
+      "confidence": 90.8,
+      "factors": {
+        "recent_form": 20.61,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 9.77,
+        "season_avg": 13.71,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-25",
+      "player_id": 677951,
+      "player_name": "Bobby Witt Jr.",
+      "team": "Kansas City Royals",
+      "game_id": 822773,
+      "confidence": 88.1,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.11,
+        "pitcher_matchup": 12.3,
+        "season_avg": 12.3,
+        "platoon": 6,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
