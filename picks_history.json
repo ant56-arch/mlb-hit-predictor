@@ -9370,6 +9370,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 3
+    },
+    {
+      "date": "2026-08-26",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 823988,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 26.91,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 13.32,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-26",
+      "player_id": 669003,
+      "player_name": "Garrett Mitchell",
+      "team": "Milwaukee Brewers",
+      "game_id": 823584,
+      "confidence": 98.6,
+      "factors": {
+        "recent_form": 27.13,
+        "advanced_metrics": 9.89,
+        "pitcher_matchup": 14.43,
+        "season_avg": 11.23,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-26",
+      "player_id": 701807,
+      "player_name": "Carson Benge",
+      "team": "New York Mets",
+      "game_id": 823584,
+      "confidence": 95.8,
+      "factors": {
+        "recent_form": 27.94,
+        "advanced_metrics": 9.87,
+        "pitcher_matchup": 9.04,
+        "season_avg": 12.09,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-26",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "Philadelphia Phillies",
+      "game_id": 823096,
+      "confidence": 94.7,
+      "factors": {
+        "recent_form": 28.67,
+        "advanced_metrics": 9.97,
+        "pitcher_matchup": 6.63,
+        "season_avg": 13.76,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-26",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 823506,
+      "confidence": 94.5,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 8.66,
+        "season_avg": 13.84,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-26",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823015,
+      "confidence": 94.2,
+      "factors": {
+        "recent_form": 25.96,
+        "advanced_metrics": 10.21,
+        "pitcher_matchup": 8.03,
+        "season_avg": 12.47,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-26",
+      "player_id": 571970,
+      "player_name": "Max Muncy",
+      "team": "Los Angeles Dodgers",
+      "game_id": 824878,
+      "confidence": 94.2,
+      "factors": {
+        "recent_form": 22.44,
+        "advanced_metrics": 10.28,
+        "pitcher_matchup": 13.74,
+        "season_avg": 10.97,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-26",
+      "player_id": 678246,
+      "player_name": "Miguel Vargas",
+      "team": "Chicago White Sox",
+      "game_id": 824555,
+      "confidence": 93.2,
+      "factors": {
+        "recent_form": 27.13,
+        "advanced_metrics": 10.28,
+        "pitcher_matchup": 8.57,
+        "season_avg": 10.63,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-26",
+      "player_id": 547180,
+      "player_name": "Bryce Harper",
+      "team": "Philadelphia Phillies",
+      "game_id": 823096,
+      "confidence": 92.2,
+      "factors": {
+        "recent_form": 28.6,
+        "advanced_metrics": 10.41,
+        "pitcher_matchup": 6.63,
+        "season_avg": 11.36,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-26",
+      "player_id": 660271,
+      "player_name": "Shohei Ohtani",
+      "team": "Los Angeles Dodgers",
+      "game_id": 824878,
+      "confidence": 91.7,
+      "factors": {
+        "recent_form": 18.7,
+        "advanced_metrics": 10.67,
+        "pitcher_matchup": 13.74,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
