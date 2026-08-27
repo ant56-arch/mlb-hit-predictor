@@ -9580,6 +9580,216 @@
       "got_hit": true,
       "hits": 2,
       "at_bats": 5
+    },
+    {
+      "date": "2026-08-27",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "New York Yankees",
+      "game_id": 823503,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 26.11,
+        "advanced_metrics": 10.41,
+        "pitcher_matchup": 7.3,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-27",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 822771,
+      "confidence": 98.8,
+      "factors": {
+        "recent_form": 25.23,
+        "advanced_metrics": 10.06,
+        "pitcher_matchup": 9.92,
+        "season_avg": 11.74,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-27",
+      "player_id": 691023,
+      "player_name": "Jordan Walker",
+      "team": "St. Louis Cardinals",
+      "game_id": 823014,
+      "confidence": 96.3,
+      "factors": {
+        "recent_form": 22.29,
+        "advanced_metrics": 10.23,
+        "pitcher_matchup": 8.03,
+        "season_avg": 12.26,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 3.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-27",
+      "player_id": 701807,
+      "player_name": "Carson Benge",
+      "team": "New York Mets",
+      "game_id": 823581,
+      "confidence": 95.7,
+      "factors": {
+        "recent_form": 26.18,
+        "advanced_metrics": 9.85,
+        "pitcher_matchup": 4.23,
+        "season_avg": 12.04,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 4.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-27",
+      "player_id": 669003,
+      "player_name": "Garrett Mitchell",
+      "team": "Milwaukee Brewers",
+      "game_id": 823581,
+      "confidence": 95.2,
+      "factors": {
+        "recent_form": 29.33,
+        "advanced_metrics": 9.89,
+        "pitcher_matchup": 8.85,
+        "season_avg": 11.31,
+        "platoon": 6,
+        "park_factor": 1.2,
+        "home_away": 1.5,
+        "weather": 4.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-27",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 823503,
+      "confidence": 94.8,
+      "factors": {
+        "recent_form": 23.76,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 5.14,
+        "season_avg": 13.8,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-27",
+      "player_id": 646240,
+      "player_name": "Rafael Devers",
+      "team": "San Francisco Giants",
+      "game_id": 823179,
+      "confidence": 94.5,
+      "factors": {
+        "recent_form": 19.14,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 11.68,
+        "season_avg": 10.54,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 4.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-27",
+      "player_id": 682998,
+      "player_name": "Corbin Carroll",
+      "team": "Arizona Diamondbacks",
+      "game_id": 823179,
+      "confidence": 94.4,
+      "factors": {
+        "recent_form": 23.25,
+        "advanced_metrics": 10.15,
+        "pitcher_matchup": 8.78,
+        "season_avg": 10.67,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 1.5,
+        "weather": 4.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-27",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 822694,
+      "confidence": 93.0,
+      "factors": {
+        "recent_form": 17.82,
+        "advanced_metrics": 10.11,
+        "pitcher_matchup": 11.96,
+        "season_avg": 12.39,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 3.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-27",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823014,
+      "confidence": 91.5,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.2,
+        "pitcher_matchup": 8.03,
+        "season_avg": 12.51,
+        "platoon": 6,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 3.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
