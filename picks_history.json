@@ -9790,6 +9790,216 @@
       "got_hit": true,
       "hits": 2,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-28",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 824960,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 29.63,
+        "advanced_metrics": 10.37,
+        "pitcher_matchup": 11.22,
+        "season_avg": 11.74,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 3.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-28",
+      "player_id": 669364,
+      "player_name": "Xavier Edwards",
+      "team": "Miami Marlins",
+      "game_id": 822691,
+      "confidence": 95.2,
+      "factors": {
+        "recent_form": 23.39,
+        "advanced_metrics": 9.73,
+        "pitcher_matchup": 16.38,
+        "season_avg": 12.26,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 1.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-28",
+      "player_id": 665019,
+      "player_name": "Kody Clemens",
+      "team": "Minnesota Twins",
+      "game_id": 823666,
+      "confidence": 92.8,
+      "factors": {
+        "recent_form": 25.74,
+        "advanced_metrics": 9.77,
+        "pitcher_matchup": 10.85,
+        "season_avg": 10.2,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-28",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824396,
+      "confidence": 92.6,
+      "factors": {
+        "recent_form": 30.87,
+        "advanced_metrics": 10.16,
+        "pitcher_matchup": 6.04,
+        "season_avg": 12.09,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 1.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-28",
+      "player_id": 676475,
+      "player_name": "Alec Burleson",
+      "team": "St. Louis Cardinals",
+      "game_id": 823013,
+      "confidence": 92.4,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.2,
+        "pitcher_matchup": 9.72,
+        "season_avg": 12.51,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 1.6
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-28",
+      "player_id": 672640,
+      "player_name": "Otto Lopez",
+      "team": "Miami Marlins",
+      "game_id": 822691,
+      "confidence": 91.4,
+      "factors": {
+        "recent_form": 19.14,
+        "advanced_metrics": 9.94,
+        "pitcher_matchup": 16.38,
+        "season_avg": 13.2,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 1.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-28",
+      "player_id": 693304,
+      "player_name": "Nick Gonzales",
+      "team": "Pittsburgh Pirates",
+      "game_id": 823013,
+      "confidence": 90.9,
+      "factors": {
+        "recent_form": 18.92,
+        "advanced_metrics": 9.79,
+        "pitcher_matchup": 15.38,
+        "season_avg": 13.07,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 1.6
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-28",
+      "player_id": 678246,
+      "player_name": "Miguel Vargas",
+      "team": "Chicago White Sox",
+      "game_id": 823666,
+      "confidence": 90.5,
+      "factors": {
+        "recent_form": 31.68,
+        "advanced_metrics": 10.3,
+        "pitcher_matchup": 9.45,
+        "season_avg": 10.76,
+        "platoon": 6,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-28",
+      "player_id": 694192,
+      "player_name": "Jackson Chourio",
+      "team": "Milwaukee Brewers",
+      "game_id": 823744,
+      "confidence": 90.3,
+      "factors": {
+        "recent_form": 25.52,
+        "advanced_metrics": 10.11,
+        "pitcher_matchup": 5.85,
+        "season_avg": 12.13,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-28",
+      "player_id": 669003,
+      "player_name": "Garrett Mitchell",
+      "team": "Milwaukee Brewers",
+      "game_id": 823744,
+      "confidence": 90.0,
+      "factors": {
+        "recent_form": 32.27,
+        "advanced_metrics": 9.89,
+        "pitcher_matchup": 5.85,
+        "season_avg": 11.31,
+        "platoon": 6,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
