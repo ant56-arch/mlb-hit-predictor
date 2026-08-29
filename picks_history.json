@@ -10000,6 +10000,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 3
+    },
+    {
+      "date": "2026-08-29",
+      "player_id": 543807,
+      "player_name": "George Springer",
+      "team": "Toronto Blue Jays",
+      "game_id": 822770,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 32.56,
+        "advanced_metrics": 9.71,
+        "pitcher_matchup": 8.95,
+        "season_avg": 10.76,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-29",
+      "player_id": 547180,
+      "player_name": "Bryce Harper",
+      "team": "Philadelphia Phillies",
+      "game_id": 823986,
+      "confidence": 97.6,
+      "factors": {
+        "recent_form": 28.31,
+        "advanced_metrics": 10.44,
+        "pitcher_matchup": 11.36,
+        "season_avg": 11.4,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-29",
+      "player_id": 671739,
+      "player_name": "Michael Harris II",
+      "team": "Atlanta Braves",
+      "game_id": 824874,
+      "confidence": 97.3,
+      "factors": {
+        "recent_form": 23.98,
+        "advanced_metrics": 10.08,
+        "pitcher_matchup": 12.65,
+        "season_avg": 12.6,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-29",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "Philadelphia Phillies",
+      "game_id": 823986,
+      "confidence": 97.1,
+      "factors": {
+        "recent_form": 26.11,
+        "advanced_metrics": 9.95,
+        "pitcher_matchup": 11.36,
+        "season_avg": 13.71,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-29",
+      "player_id": 669003,
+      "player_name": "Garrett Mitchell",
+      "team": "Milwaukee Brewers",
+      "game_id": 823741,
+      "confidence": 95.3,
+      "factors": {
+        "recent_form": 32.27,
+        "advanced_metrics": 9.87,
+        "pitcher_matchup": 3.84,
+        "season_avg": 11.23,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-29",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "New York Yankees",
+      "game_id": 823501,
+      "confidence": 93.2,
+      "factors": {
+        "recent_form": 25.01,
+        "advanced_metrics": 10.37,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-29",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 824874,
+      "confidence": 92.8,
+      "factors": {
+        "recent_form": 21.12,
+        "advanced_metrics": 10.06,
+        "pitcher_matchup": 12.65,
+        "season_avg": 11.83,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-29",
+      "player_id": 624413,
+      "player_name": "Pete Alonso",
+      "team": "Baltimore Orioles",
+      "game_id": 824961,
+      "confidence": 92.3,
+      "factors": {
+        "recent_form": 27.35,
+        "advanced_metrics": 10.35,
+        "pitcher_matchup": 13.86,
+        "season_avg": 11.66,
+        "platoon": 6,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-29",
+      "player_id": 665019,
+      "player_name": "Kody Clemens",
+      "team": "Minnesota Twins",
+      "game_id": 823665,
+      "confidence": 91.4,
+      "factors": {
+        "recent_form": 26.84,
+        "advanced_metrics": 9.81,
+        "pitcher_matchup": 8.08,
+        "season_avg": 10.29,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-29",
+      "player_id": 701807,
+      "player_name": "Carson Benge",
+      "team": "New York Mets",
+      "game_id": 823582,
+      "confidence": 91.2,
+      "factors": {
+        "recent_form": 23.91,
+        "advanced_metrics": 9.82,
+        "pitcher_matchup": 16.37,
+        "season_avg": 11.96,
+        "platoon": 6,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
