@@ -10018,9 +10018,9 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 1,
+      "at_bats": 3
     },
     {
       "date": "2026-08-29",
@@ -10039,9 +10039,9 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": false,
+      "hits": 0,
+      "at_bats": 2
     },
     {
       "date": "2026-08-29",
@@ -10060,9 +10060,9 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 2,
+      "at_bats": 4
     },
     {
       "date": "2026-08-29",
@@ -10081,9 +10081,9 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": false,
+      "hits": 0,
+      "at_bats": 5
     },
     {
       "date": "2026-08-29",
@@ -10102,9 +10102,9 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": false,
+      "hits": 0,
+      "at_bats": 4
     },
     {
       "date": "2026-08-29",
@@ -10123,9 +10123,9 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 3,
+      "at_bats": 4
     },
     {
       "date": "2026-08-29",
@@ -10144,9 +10144,9 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 1,
+      "at_bats": 4
     },
     {
       "date": "2026-08-29",
@@ -10165,9 +10165,9 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": false,
+      "hits": 0,
+      "at_bats": 5
     },
     {
       "date": "2026-08-29",
@@ -10186,9 +10186,9 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": false,
+      "hits": 0,
+      "at_bats": 3
     },
     {
       "date": "2026-08-29",
@@ -10207,9 +10207,9 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 1,
+      "at_bats": 3
     }
   ]
 }
