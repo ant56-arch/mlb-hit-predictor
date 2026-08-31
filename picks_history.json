@@ -10420,6 +10420,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 4
+    },
+    {
+      "date": "2026-08-31",
+      "player_id": 689414,
+      "player_name": "Liam Hicks",
+      "team": "Tampa Bay Rays",
+      "game_id": 822932,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.09,
+        "pitcher_matchup": 15.91,
+        "season_avg": 12.34,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-31",
+      "player_id": 677649,
+      "player_name": "Ezequiel Duran",
+      "team": "Texas Rangers",
+      "game_id": 822855,
+      "confidence": 98.3,
+      "factors": {
+        "recent_form": 26.69,
+        "advanced_metrics": 9.91,
+        "pitcher_matchup": 11.12,
+        "season_avg": 11.7,
+        "platoon": 12,
+        "park_factor": 3.6,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-31",
+      "player_id": 691406,
+      "player_name": "Junior Caminero",
+      "team": "Tampa Bay Rays",
+      "game_id": 822932,
+      "confidence": 95.3,
+      "factors": {
+        "recent_form": 26.4,
+        "advanced_metrics": 10.54,
+        "pitcher_matchup": 15.91,
+        "season_avg": 12.09,
+        "platoon": 6,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-31",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "New York Yankees",
+      "game_id": 823982,
+      "confidence": 90.8,
+      "factors": {
+        "recent_form": 27.28,
+        "advanced_metrics": 10.38,
+        "pitcher_matchup": 6.08,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-31",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 824314,
+      "confidence": 90.6,
+      "factors": {
+        "recent_form": 19.65,
+        "advanced_metrics": 10.08,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.39,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-31",
+      "player_id": 682829,
+      "player_name": "Elly De La Cruz",
+      "team": "Cincinnati Reds",
+      "game_id": 824473,
+      "confidence": 89.9,
+      "factors": {
+        "recent_form": 24.86,
+        "advanced_metrics": 10.14,
+        "pitcher_matchup": 5.26,
+        "season_avg": 11.61,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-31",
+      "player_id": 547180,
+      "player_name": "Bryce Harper",
+      "team": "Philadelphia Phillies",
+      "game_id": 825040,
+      "confidence": 88.8,
+      "factors": {
+        "recent_form": 27.28,
+        "advanced_metrics": 10.45,
+        "pitcher_matchup": 4.8,
+        "season_avg": 11.4,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-31",
+      "player_id": 664983,
+      "player_name": "Jake McCarthy",
+      "team": "Colorado Rockies",
+      "game_id": 824314,
+      "confidence": 88.5,
+      "factors": {
+        "recent_form": 17.97,
+        "advanced_metrics": 10.04,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.43,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-31",
+      "player_id": 687263,
+      "player_name": "Zach Neto",
+      "team": "Los Angeles Angels",
+      "game_id": 823982,
+      "confidence": 87.6,
+      "factors": {
+        "recent_form": 28.09,
+        "advanced_metrics": 9.75,
+        "pitcher_matchup": 9.97,
+        "season_avg": 10.11,
+        "platoon": 6,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-08-31",
+      "player_id": 650333,
+      "player_name": "Luis Arraez",
+      "team": "Philadelphia Phillies",
+      "game_id": 825040,
+      "confidence": 87.3,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 9.91,
+        "pitcher_matchup": 4.8,
+        "season_avg": 13.59,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
