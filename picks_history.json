@@ -10630,6 +10630,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 4
+    },
+    {
+      "date": "2026-09-01",
+      "player_id": 671739,
+      "player_name": "Michael Harris II",
+      "team": "Atlanta Braves",
+      "game_id": 822687,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 27.87,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 11.96,
+        "season_avg": 12.73,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-01",
+      "player_id": 695734,
+      "player_name": "Daylen Lile",
+      "team": "Washington Nationals",
+      "game_id": 822687,
+      "confidence": 98.7,
+      "factors": {
+        "recent_form": 26.25,
+        "advanced_metrics": 9.76,
+        "pitcher_matchup": 13.15,
+        "season_avg": 11.01,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-01",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "New York Yankees",
+      "game_id": 823984,
+      "confidence": 98.4,
+      "factors": {
+        "recent_form": 24.93,
+        "advanced_metrics": 10.34,
+        "pitcher_matchup": 13.19,
+        "season_avg": 12.21,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-01",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824070,
+      "confidence": 97.1,
+      "factors": {
+        "recent_form": 28.53,
+        "advanced_metrics": 10.16,
+        "pitcher_matchup": 7.29,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-01",
+      "player_id": 661388,
+      "player_name": "William Contreras",
+      "team": "Milwaukee Brewers",
+      "game_id": 824633,
+      "confidence": 96.9,
+      "factors": {
+        "recent_form": 30.73,
+        "advanced_metrics": 9.71,
+        "pitcher_matchup": 6.69,
+        "season_avg": 11.66,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-01",
+      "player_id": 677649,
+      "player_name": "Ezequiel Duran",
+      "team": "Texas Rangers",
+      "game_id": 822854,
+      "confidence": 96.6,
+      "factors": {
+        "recent_form": 25.96,
+        "advanced_metrics": 9.89,
+        "pitcher_matchup": 8.95,
+        "season_avg": 11.7,
+        "platoon": 12,
+        "park_factor": 3.6,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-01",
+      "player_id": 691406,
+      "player_name": "Junior Caminero",
+      "team": "Tampa Bay Rays",
+      "game_id": 822929,
+      "confidence": 96.4,
+      "factors": {
+        "recent_form": 26.4,
+        "advanced_metrics": 10.53,
+        "pitcher_matchup": 9.29,
+        "season_avg": 12.09,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-01",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824391,
+      "confidence": 96.1,
+      "factors": {
+        "recent_form": 30.58,
+        "advanced_metrics": 10.09,
+        "pitcher_matchup": 4.32,
+        "season_avg": 12.56,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-01",
+      "player_id": 543807,
+      "player_name": "George Springer",
+      "team": "Toronto Blue Jays",
+      "game_id": 824391,
+      "confidence": 95.2,
+      "factors": {
+        "recent_form": 35.71,
+        "advanced_metrics": 9.76,
+        "pitcher_matchup": 8.01,
+        "season_avg": 10.89,
+        "platoon": 6,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-01",
+      "player_id": 665487,
+      "player_name": "Fernando Tatis Jr.",
+      "team": "San Diego Padres",
+      "game_id": 824472,
+      "confidence": 94.6,
+      "factors": {
+        "recent_form": 22.15,
+        "advanced_metrics": 9.94,
+        "pitcher_matchup": 11.57,
+        "season_avg": 12.04,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
