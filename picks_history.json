@@ -11260,6 +11260,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 3
+    },
+    {
+      "date": "2026-09-04",
+      "player_id": 682829,
+      "player_name": "Elly De La Cruz",
+      "team": "Cincinnati Reds",
+      "game_id": 824471,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 28.45,
+        "advanced_metrics": 10.14,
+        "pitcher_matchup": 7.76,
+        "season_avg": 11.7,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-04",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824067,
+      "confidence": 97.0,
+      "factors": {
+        "recent_form": 23.91,
+        "advanced_metrics": 10.15,
+        "pitcher_matchup": 11.36,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-04",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 824146,
+      "confidence": 95.9,
+      "factors": {
+        "recent_form": 20.97,
+        "advanced_metrics": 11.0,
+        "pitcher_matchup": 10.25,
+        "season_avg": 13.54,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-04",
+      "player_id": 689414,
+      "player_name": "Liam Hicks",
+      "team": "Tampa Bay Rays",
+      "game_id": 822852,
+      "confidence": 95.8,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.06,
+        "pitcher_matchup": 10.13,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 3.6,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-04",
+      "player_id": 661388,
+      "player_name": "William Contreras",
+      "team": "Milwaukee Brewers",
+      "game_id": 824471,
+      "confidence": 95.5,
+      "factors": {
+        "recent_form": 29.92,
+        "advanced_metrics": 9.71,
+        "pitcher_matchup": 10.66,
+        "season_avg": 11.66,
+        "platoon": 6,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-04",
+      "player_id": 695600,
+      "player_name": "Carter Jensen",
+      "team": "Kansas City Royals",
+      "game_id": 824067,
+      "confidence": 93.7,
+      "factors": {
+        "recent_form": 23.91,
+        "advanced_metrics": 9.79,
+        "pitcher_matchup": 11.36,
+        "season_avg": 9.9,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-04",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824387,
+      "confidence": 93.6,
+      "factors": {
+        "recent_form": 27.72,
+        "advanced_metrics": 10.09,
+        "pitcher_matchup": 10.77,
+        "season_avg": 12.56,
+        "platoon": 6,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-04",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "New York Yankees",
+      "game_id": 823256,
+      "confidence": 92.9,
+      "factors": {
+        "recent_form": 25.01,
+        "advanced_metrics": 10.32,
+        "pitcher_matchup": 9.25,
+        "season_avg": 12.21,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-04",
+      "player_id": 691023,
+      "player_name": "Jordan Walker",
+      "team": "St. Louis Cardinals",
+      "game_id": 824311,
+      "confidence": 91.5,
+      "factors": {
+        "recent_form": 22.0,
+        "advanced_metrics": 10.25,
+        "pitcher_matchup": 12.49,
+        "season_avg": 12.39,
+        "platoon": 6,
+        "park_factor": 6.0,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-04",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823905,
+      "confidence": 91.2,
+      "factors": {
+        "recent_form": 22.15,
+        "advanced_metrics": 10.22,
+        "pitcher_matchup": 13.86,
+        "season_avg": 12.99,
+        "platoon": 6,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
