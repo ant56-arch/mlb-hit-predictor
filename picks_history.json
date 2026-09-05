@@ -11470,6 +11470,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 0
+    },
+    {
+      "date": "2026-09-05",
+      "player_id": 682829,
+      "player_name": "Elly De La Cruz",
+      "team": "Cincinnati Reds",
+      "game_id": 824468,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 32.27,
+        "advanced_metrics": 10.16,
+        "pitcher_matchup": 9.41,
+        "season_avg": 11.83,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-05",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824066,
+      "confidence": 90.8,
+      "factors": {
+        "recent_form": 23.91,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 11.74,
+        "season_avg": 12.04,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-05",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 824310,
+      "confidence": 90.8,
+      "factors": {
+        "recent_form": 25.01,
+        "advanced_metrics": 10.21,
+        "pitcher_matchup": 12.3,
+        "season_avg": 12.64,
+        "platoon": 6,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-05",
+      "player_id": 661388,
+      "player_name": "William Contreras",
+      "team": "Milwaukee Brewers",
+      "game_id": 824468,
+      "confidence": 89.4,
+      "factors": {
+        "recent_form": 25.45,
+        "advanced_metrics": 9.72,
+        "pitcher_matchup": 9.29,
+        "season_avg": 11.66,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-05",
+      "player_id": 695600,
+      "player_name": "Carter Jensen",
+      "team": "Kansas City Royals",
+      "game_id": 824066,
+      "confidence": 87.9,
+      "factors": {
+        "recent_form": 23.91,
+        "advanced_metrics": 9.79,
+        "pitcher_matchup": 11.74,
+        "season_avg": 9.9,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-05",
+      "player_id": 689414,
+      "player_name": "Liam Hicks",
+      "team": "Tampa Bay Rays",
+      "game_id": 822850,
+      "confidence": 87.6,
+      "factors": {
+        "recent_form": 25.23,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 7.76,
+        "season_avg": 12.3,
+        "platoon": 12,
+        "park_factor": 3.6,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-05",
+      "player_id": 693304,
+      "player_name": "Nick Gonzales",
+      "team": "Pittsburgh Pirates",
+      "game_id": 823335,
+      "confidence": 87.4,
+      "factors": {
+        "recent_form": 19.65,
+        "advanced_metrics": 9.83,
+        "pitcher_matchup": 12.68,
+        "season_avg": 13.2,
+        "platoon": 12,
+        "park_factor": 1.92,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-05",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823904,
+      "confidence": 87.0,
+      "factors": {
+        "recent_form": 25.08,
+        "advanced_metrics": 10.22,
+        "pitcher_matchup": 6.5,
+        "season_avg": 12.99,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-05",
+      "player_id": 696100,
+      "player_name": "Hunter Goodman",
+      "team": "Colorado Rockies",
+      "game_id": 824310,
+      "confidence": 86.6,
+      "factors": {
+        "recent_form": 17.38,
+        "advanced_metrics": 10.25,
+        "pitcher_matchup": 12.3,
+        "season_avg": 10.71,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-05",
+      "player_id": 668227,
+      "player_name": "Randy Arozarena",
+      "team": "Seattle Mariners",
+      "game_id": 823094,
+      "confidence": 85.8,
+      "factors": {
+        "recent_form": 19.87,
+        "advanced_metrics": 10.17,
+        "pitcher_matchup": 12.56,
+        "season_avg": 11.61,
+        "platoon": 12,
+        "park_factor": 1.68,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
