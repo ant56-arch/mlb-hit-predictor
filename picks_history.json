@@ -11680,6 +11680,216 @@
       "got_hit": true,
       "hits": 1,
       "at_bats": 3
+    },
+    {
+      "date": "2026-09-06",
+      "player_id": 547180,
+      "player_name": "Bryce Harper",
+      "team": "Philadelphia Phillies",
+      "game_id": 823417,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 33.37,
+        "advanced_metrics": 10.48,
+        "pitcher_matchup": 8.45,
+        "season_avg": 11.79,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 1.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-06",
+      "player_id": 682829,
+      "player_name": "Elly De La Cruz",
+      "team": "Cincinnati Reds",
+      "game_id": 824469,
+      "confidence": 98.0,
+      "factors": {
+        "recent_form": 30.58,
+        "advanced_metrics": 10.2,
+        "pitcher_matchup": 7.3,
+        "season_avg": 11.91,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-06",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824385,
+      "confidence": 96.8,
+      "factors": {
+        "recent_form": 30.58,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 9.89,
+        "season_avg": 12.6,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 0.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-06",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 824309,
+      "confidence": 95.3,
+      "factors": {
+        "recent_form": 26.84,
+        "advanced_metrics": 10.21,
+        "pitcher_matchup": 6.38,
+        "season_avg": 12.64,
+        "platoon": 12,
+        "park_factor": 6.0,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-06",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824065,
+      "confidence": 91.9,
+      "factors": {
+        "recent_form": 25.67,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 9.92,
+        "season_avg": 12.13,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 1.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-06",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 823417,
+      "confidence": 91.7,
+      "factors": {
+        "recent_form": 25.89,
+        "advanced_metrics": 10.03,
+        "pitcher_matchup": 10.92,
+        "season_avg": 11.87,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 1.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-06",
+      "player_id": 646240,
+      "player_name": "Rafael Devers",
+      "team": "San Francisco Giants",
+      "game_id": 823578,
+      "confidence": 90.2,
+      "factors": {
+        "recent_form": 29.04,
+        "advanced_metrics": 10.29,
+        "pitcher_matchup": 8.74,
+        "season_avg": 11.06,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 1.5,
+        "weather": 1.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-06",
+      "player_id": 691406,
+      "player_name": "Junior Caminero",
+      "team": "Tampa Bay Rays",
+      "game_id": 822848,
+      "confidence": 90.0,
+      "factors": {
+        "recent_form": 23.98,
+        "advanced_metrics": 10.48,
+        "pitcher_matchup": 9.08,
+        "season_avg": 12.04,
+        "platoon": 12,
+        "park_factor": 3.6,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-06",
+      "player_id": 701398,
+      "player_name": "Sal Stewart",
+      "team": "Cincinnati Reds",
+      "game_id": 824469,
+      "confidence": 90.0,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.11,
+        "pitcher_matchup": 7.3,
+        "season_avg": 11.49,
+        "platoon": 12,
+        "park_factor": 4.32,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-06",
+      "player_id": 677649,
+      "player_name": "Ezequiel Duran",
+      "team": "Texas Rangers",
+      "game_id": 822848,
+      "confidence": 88.5,
+      "factors": {
+        "recent_form": 22.95,
+        "advanced_metrics": 9.95,
+        "pitcher_matchup": 8.22,
+        "season_avg": 11.74,
+        "platoon": 12,
+        "park_factor": 3.6,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
