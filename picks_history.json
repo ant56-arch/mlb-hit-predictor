@@ -11890,6 +11890,216 @@
       "got_hit": true,
       "hits": 3,
       "at_bats": 5
+    },
+    {
+      "date": "2026-09-07",
+      "player_id": 682829,
+      "player_name": "Elly De La Cruz",
+      "team": "Cincinnati Reds",
+      "game_id": 823902,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 32.78,
+        "advanced_metrics": 10.26,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.0,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-07",
+      "player_id": 695734,
+      "player_name": "Daylen Lile",
+      "team": "Washington Nationals",
+      "game_id": 823254,
+      "confidence": 95.2,
+      "factors": {
+        "recent_form": 29.99,
+        "advanced_metrics": 9.76,
+        "pitcher_matchup": 9.8,
+        "season_avg": 10.97,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-07",
+      "player_id": 547180,
+      "player_name": "Bryce Harper",
+      "team": "Philadelphia Phillies",
+      "game_id": 823415,
+      "confidence": 94.8,
+      "factors": {
+        "recent_form": 29.33,
+        "advanced_metrics": 10.46,
+        "pitcher_matchup": 6.79,
+        "season_avg": 11.66,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 1.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-07",
+      "player_id": 646240,
+      "player_name": "Rafael Devers",
+      "team": "San Francisco Giants",
+      "game_id": 823175,
+      "confidence": 93.4,
+      "factors": {
+        "recent_form": 29.85,
+        "advanced_metrics": 10.28,
+        "pitcher_matchup": 6.6,
+        "season_avg": 11.06,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-07",
+      "player_id": 543807,
+      "player_name": "George Springer",
+      "team": "Toronto Blue Jays",
+      "game_id": 824958,
+      "confidence": 91.8,
+      "factors": {
+        "recent_form": 25.74,
+        "advanced_metrics": 9.7,
+        "pitcher_matchup": 10.67,
+        "season_avg": 10.71,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-07",
+      "player_id": 677800,
+      "player_name": "Wilyer Abreu",
+      "team": "Boston Red Sox",
+      "game_id": 824715,
+      "confidence": 91.0,
+      "factors": {
+        "recent_form": 18.7,
+        "advanced_metrics": 10.0,
+        "pitcher_matchup": 13.27,
+        "season_avg": 10.97,
+        "platoon": 12,
+        "park_factor": 4.08,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-07",
+      "player_id": 695578,
+      "player_name": "James Wood",
+      "team": "Washington Nationals",
+      "game_id": 823254,
+      "confidence": 90.1,
+      "factors": {
+        "recent_form": 24.42,
+        "advanced_metrics": 10.64,
+        "pitcher_matchup": 9.8,
+        "season_avg": 11.49,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-07",
+      "player_id": 661388,
+      "player_name": "William Contreras",
+      "team": "Milwaukee Brewers",
+      "game_id": 823742,
+      "confidence": 87.7,
+      "factors": {
+        "recent_form": 22.81,
+        "advanced_metrics": 9.73,
+        "pitcher_matchup": 6.83,
+        "season_avg": 11.61,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-07",
+      "player_id": 694192,
+      "player_name": "Jackson Chourio",
+      "team": "Milwaukee Brewers",
+      "game_id": 823742,
+      "confidence": 86.8,
+      "factors": {
+        "recent_form": 21.34,
+        "advanced_metrics": 10.06,
+        "pitcher_matchup": 6.83,
+        "season_avg": 12.04,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-07",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824793,
+      "confidence": 86.4,
+      "factors": {
+        "recent_form": 27.5,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 7.86,
+        "season_avg": 12.6,
+        "platoon": 6,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 1.6
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
