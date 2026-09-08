@@ -12100,6 +12100,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 0
+    },
+    {
+      "date": "2026-09-08",
+      "player_id": 689414,
+      "player_name": "Liam Hicks",
+      "team": "Tampa Bay Rays",
+      "game_id": 824875,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 25.23,
+        "advanced_metrics": 10.04,
+        "pitcher_matchup": 14.84,
+        "season_avg": 12.34,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-08",
+      "player_id": 682985,
+      "player_name": "Riley Greene",
+      "team": "Detroit Tigers",
+      "game_id": 824228,
+      "confidence": 99.4,
+      "factors": {
+        "recent_form": 28.23,
+        "advanced_metrics": 10.21,
+        "pitcher_matchup": 11.54,
+        "season_avg": 11.96,
+        "platoon": 12,
+        "park_factor": 1.44,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-08",
+      "player_id": 671277,
+      "player_name": "Luis Garc\u00eda Jr.",
+      "team": "New York Yankees",
+      "game_id": 823500,
+      "confidence": 99.4,
+      "factors": {
+        "recent_form": 26.18,
+        "advanced_metrics": 10.29,
+        "pitcher_matchup": 12.05,
+        "season_avg": 12.17,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-08",
+      "player_id": 700250,
+      "player_name": "Ben Rice",
+      "team": "New York Yankees",
+      "game_id": 823500,
+      "confidence": 97.9,
+      "factors": {
+        "recent_form": 25.96,
+        "advanced_metrics": 10.39,
+        "pitcher_matchup": 12.05,
+        "season_avg": 11.1,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-08",
+      "player_id": 682829,
+      "player_name": "Elly De La Cruz",
+      "team": "Cincinnati Reds",
+      "game_id": 823901,
+      "confidence": 97.7,
+      "factors": {
+        "recent_form": 34.32,
+        "advanced_metrics": 10.29,
+        "pitcher_matchup": 4.62,
+        "season_avg": 12.04,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-08",
+      "player_id": 686948,
+      "player_name": "Drake Baldwin",
+      "team": "Atlanta Braves",
+      "game_id": 824875,
+      "confidence": 95.1,
+      "factors": {
+        "recent_form": 24.86,
+        "advanced_metrics": 10.01,
+        "pitcher_matchup": 10.3,
+        "season_avg": 11.83,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-08",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824063,
+      "confidence": 94.0,
+      "factors": {
+        "recent_form": 25.67,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 8.66,
+        "season_avg": 12.13,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-08",
+      "player_id": 694192,
+      "player_name": "Jackson Chourio",
+      "team": "Milwaukee Brewers",
+      "game_id": 823738,
+      "confidence": 93.9,
+      "factors": {
+        "recent_form": 21.12,
+        "advanced_metrics": 10.05,
+        "pitcher_matchup": 12.32,
+        "season_avg": 12.04,
+        "platoon": 12,
+        "park_factor": 3.36,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-08",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824792,
+      "confidence": 93.1,
+      "factors": {
+        "recent_form": 27.5,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 6.45,
+        "season_avg": 12.6,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-08",
+      "player_id": 646240,
+      "player_name": "Rafael Devers",
+      "team": "San Francisco Giants",
+      "game_id": 823174,
+      "confidence": 93.0,
+      "factors": {
+        "recent_form": 30.43,
+        "advanced_metrics": 10.32,
+        "pitcher_matchup": 11.07,
+        "season_avg": 11.14,
+        "platoon": 6,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
