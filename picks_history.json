@@ -12310,6 +12310,216 @@
       "got_hit": false,
       "hits": 0,
       "at_bats": 4
+    },
+    {
+      "date": "2026-09-09",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 823497,
+      "confidence": 100.0,
+      "factors": {
+        "recent_form": 32.19,
+        "advanced_metrics": 10.24,
+        "pitcher_matchup": 9.04,
+        "season_avg": 12.81,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-09",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824064,
+      "confidence": 96.6,
+      "factors": {
+        "recent_form": 25.67,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 12.33,
+        "season_avg": 12.13,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-09",
+      "player_id": 682829,
+      "player_name": "Elly De La Cruz",
+      "team": "Cincinnati Reds",
+      "game_id": 823900,
+      "confidence": 96.3,
+      "factors": {
+        "recent_form": 35.86,
+        "advanced_metrics": 10.34,
+        "pitcher_matchup": 3.36,
+        "season_avg": 12.13,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-09",
+      "player_id": 800050,
+      "player_name": "Chase DeLauter",
+      "team": "Cleveland Guardians",
+      "game_id": 824791,
+      "confidence": 94.1,
+      "factors": {
+        "recent_form": 28.38,
+        "advanced_metrics": 10.12,
+        "pitcher_matchup": 7.84,
+        "season_avg": 12.6,
+        "platoon": 12,
+        "park_factor": 3.12,
+        "home_away": 1.5,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-09",
+      "player_id": 700250,
+      "player_name": "Ben Rice",
+      "team": "New York Yankees",
+      "game_id": 823497,
+      "confidence": 91.9,
+      "factors": {
+        "recent_form": 25.52,
+        "advanced_metrics": 10.38,
+        "pitcher_matchup": 9.14,
+        "season_avg": 11.06,
+        "platoon": 12,
+        "park_factor": 2.64,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-09",
+      "player_id": 695600,
+      "player_name": "Carter Jensen",
+      "team": "Kansas City Royals",
+      "game_id": 824064,
+      "confidence": 90.5,
+      "factors": {
+        "recent_form": 23.32,
+        "advanced_metrics": 9.78,
+        "pitcher_matchup": 12.33,
+        "season_avg": 9.77,
+        "platoon": 12,
+        "park_factor": 2.4,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-09",
+      "player_id": 669065,
+      "player_name": "Kyle Stowers",
+      "team": "Miami Marlins",
+      "game_id": 823818,
+      "confidence": 90.1,
+      "factors": {
+        "recent_form": 20.68,
+        "advanced_metrics": 10.02,
+        "pitcher_matchup": 14.84,
+        "season_avg": 10.5,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-09",
+      "player_id": 547180,
+      "player_name": "Bryce Harper",
+      "team": "Philadelphia Phillies",
+      "game_id": 823416,
+      "confidence": 90.0,
+      "factors": {
+        "recent_form": 25.01,
+        "advanced_metrics": 10.43,
+        "pitcher_matchup": 7.25,
+        "season_avg": 11.61,
+        "platoon": 12,
+        "park_factor": 2.88,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-09",
+      "player_id": 646240,
+      "player_name": "Rafael Devers",
+      "team": "San Francisco Giants",
+      "game_id": 823172,
+      "confidence": 89.4,
+      "factors": {
+        "recent_form": 28.53,
+        "advanced_metrics": 10.29,
+        "pitcher_matchup": 5.62,
+        "season_avg": 11.06,
+        "platoon": 12,
+        "park_factor": 1.2,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-09",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823900,
+      "confidence": 89.3,
+      "factors": {
+        "recent_form": 20.17,
+        "advanced_metrics": 10.14,
+        "pitcher_matchup": 11.37,
+        "season_avg": 12.73,
+        "platoon": 12,
+        "park_factor": 2.16,
+        "home_away": 3,
+        "weather": 2.0
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
