@@ -1,5 +1,6 @@
 import os
 import json
+import math
 import re
 import requests
 import resend
@@ -18,6 +19,37 @@ RUN_HOUR_ET = int(os.environ.get("RUN_HOUR_ET", "8"))
 IS_AFTERNOON = RUN_HOUR_ET == 16
 IS_RESULTS = RUN_HOUR_ET == 2
 HISTORY_FILE = "picks_history.json"
+MODEL_FILE = "model_weights.json"
+
+# ── Hit-probability model ────────────────────────────────────────────────────
+# Trained by research/train_model.py — a logistic regression fit on real
+# game-by-game outcomes (research_gamelogs.json + resolved picks), not a
+# hand-picked weighting. See MODEL["features"] for what it uses.
+with open(MODEL_FILE) as _f:
+    MODEL = json.load(_f)
+
+FACTOR_GROUPS = {
+    "recent_form": ["recent_form_avg"],
+    "season_stats": ["season_avg", "season_ops"],
+    "platoon": ["platoon"],
+    "park_factor": ["park_factor"],
+    "home_away": ["is_home"],
+    "pitcher_matchup": ["opp_pitcher_era", "opp_pitcher_whip", "opp_pitcher_k9"],
+}
+
+def sigmoid(z):
+    return 1.0 / (1.0 + math.exp(-z))
+
+def predict_hit_probability(raw_features):
+    """Returns (probability 0-1, per-raw-feature log-odds contributions)."""
+    z = MODEL["bias"]
+    contributions = {}
+    for i, feat in enumerate(MODEL["features"]):
+        x_std = (raw_features[feat] - MODEL["means"][i]) / MODEL["stds"][i]
+        contrib = MODEL["weights"][i] * x_std
+        contributions[feat] = contrib
+        z += contrib
+    return sigmoid(z), contributions
 
 # ── Park factors ──────────────────────────────────────────────────────────────
 PARK_FACTORS = {
@@ -222,9 +254,6 @@ def get_batter_stats():
             "ab": ab,
             "k_pct": k_pct,
             "hand": "R",
-            "exit_velo": None,
-            "barrel_pct": None,
-            "hard_hit_pct": None,
         })
     for p in players[:80]:
         try:
@@ -233,76 +262,6 @@ def get_batter_stats():
         except:
             pass
     return players
-
-# ── Step 4: Statcast metrics (kept for scoring, not shown in email) ──────────
-def get_statcast_metrics():
-    urls_to_try = [
-        (
-            f"https://baseballsavant.mlb.com/leaderboard/custom"
-            f"?year={YEAR}&type=batter&filter=&sort=4&sortDir=desc"
-            f"&min=100&selections=player_id,player_name,exit_velocity_avg,barrel_batted_rate,hard_hit_percent"
-            f"&chart=false&x=exit_velocity_avg&y=exit_velocity_avg&r=no&chartType=beeswarm&csv=true"
-        ),
-        (
-            f"https://baseballsavant.mlb.com/leaderboard/expected_statistics"
-            f"?type=batter&year={YEAR}&position=&team=&min=100&csv=true"
-        ),
-    ]
-    req_headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
-        "Accept": "text/csv,text/html,application/xhtml+xml,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.9",
-        "Referer": "https://baseballsavant.mlb.com/",
-    }
-    EV_COLS = ["exit_velocity_avg", "avg_hit_speed", "avg_exit_velocity", "launch_speed"]
-    BARREL_COLS = ["barrel_batted_rate", "brl_percent", "barrel_rate", "brl_pa", "barrel_pct"]
-    HH_COLS = ["hard_hit_percent", "hard_hit_rate", "hardhit_percent", "hard_hit_pct"]
-    PID_COLS = ["player_id", "batter", "pitcher_id"]
-
-    def find_col(row, candidates):
-        for c in candidates:
-            val = row.get(c, "")
-            if val and val not in ("", "null", "None"):
-                return val
-        return ""
-
-    for url in urls_to_try:
-        try:
-            r = requests.get(url, timeout=25, headers=req_headers)
-            if r.status_code != 200:
-                continue
-            lines = r.text.strip().split("\n")
-            if len(lines) < 2:
-                continue
-            cols = [h.strip().strip('"').lower() for h in lines[0].split(",")]
-            metrics = {}
-            for line in lines[1:]:
-                vals = [v.strip().strip('"') for v in line.split(",")]
-                if len(vals) < len(cols):
-                    continue
-                row = dict(zip(cols, vals))
-                pid_raw = find_col(row, PID_COLS)
-                ev_raw = find_col(row, EV_COLS)
-                barrel_raw = find_col(row, BARREL_COLS)
-                hh_raw = find_col(row, HH_COLS)
-                if not pid_raw:
-                    continue
-                try:
-                    metrics[int(float(pid_raw))] = {
-                        "exit_velo": float(ev_raw) if ev_raw else None,
-                        "barrel_pct": float(barrel_raw) if barrel_raw else None,
-                        "hard_hit_pct": float(hh_raw) if hh_raw else None,
-                    }
-                except:
-                    continue
-            if metrics:
-                print(f"Loaded Statcast metrics for {len(metrics)} players.")
-                return metrics
-        except Exception as e:
-            print(f"Statcast attempt failed: {e}")
-            continue
-    print("All Statcast sources failed.")
-    return {}
 
 # ── Step 5: Recent 14-day form ────────────────────────────────────────────────
 def get_recent_avg(player_id):
@@ -349,49 +308,29 @@ def get_hit_streak(player_id):
         return 0
 
 # ── Step 6: Score each player ─────────────────────────────────────────────────
-def score_player(p, pitcher, park_factor, is_home, wind_score):
+def score_player(p, pitcher, park_factor, is_home):
     recent = get_recent_avg(p["id"])
-    recent_score = (recent / 0.300) * 22 if recent else 11.0
-    ev = p.get("exit_velo")
-    ev_score = max(0, min(1, (ev - 84) / 10)) * 7 if ev else 3.5
-    barrel = p.get("barrel_pct")
-    barrel_score = max(0, min(1, barrel / 15)) * 7 if barrel else 3.5
-    hard_hit = p.get("hard_hit_pct")
-    hh_score = max(0, min(1, (hard_hit - 25) / 30)) * 4 if hard_hit else 2.0
-    ops_score = max(0, min(1, (p["ops"] - 0.600) / 0.400)) * 2
-    advanced_score = ev_score + barrel_score + hh_score + ops_score
-    era_norm = max(0, min(1, (6.00 - pitcher["era"]) / 4.00))
-    whip_norm = max(0, min(1, (1.80 - pitcher["whip"]) / 0.80))
-    k_norm = max(0, min(1, (14.0 - pitcher["k_per9"]) / 10.0))
-    pitcher_score = (1 - (era_norm * 0.4 + whip_norm * 0.35 + k_norm * 0.25)) * 18
-    season_score = max(0, min(1, p["avg"] / 0.350)) * 15
-    platoon_score = 12 if p["hand"] != pitcher["hand"] else 6
-    park_score = max(0, min(1, (park_factor - 0.90) / 0.25)) * 6
-    home_score = 3 if is_home else 1.5
-    weather_score = wind_score * 4
-    total = (recent_score + advanced_score + pitcher_score + season_score +
-             platoon_score + park_score + home_score + weather_score)
+    raw_features = {
+        "recent_form_avg": recent if recent is not None else p["avg"],
+        "season_avg": p["avg"],
+        "season_ops": p["ops"],
+        "is_home": 1.0 if is_home else 0.0,
+        "platoon": 1.0 if p["hand"] != pitcher["hand"] else 0.0,
+        "park_factor": park_factor,
+        "opp_pitcher_era": pitcher["era"],
+        "opp_pitcher_whip": pitcher["whip"],
+        "opp_pitcher_k9": pitcher["k_per9"],
+    }
+    probability, contributions = predict_hit_probability(raw_features)
 
     factors = {
-        "recent_form": round(recent_score, 2),
-        "advanced_metrics": round(advanced_score, 2),
-        "pitcher_matchup": round(pitcher_score, 2),
-        "season_avg": round(season_score, 2),
-        "platoon": round(platoon_score, 2),
-        "park_factor": round(park_score, 2),
-        "home_away": round(home_score, 2),
-        "weather": round(weather_score, 2),
+        group: round(sum(contributions[f] for f in feats), 4)
+        for group, feats in FACTOR_GROUPS.items()
     }
-    return round(total, 2), recent, factors
+    return round(probability * 100, 1), recent, factors, raw_features
 
 # ── Step 7: Build ranked picks ────────────────────────────────────────────────
-def get_top_picks(players, games, statcast):
-    for p in players:
-        sc = statcast.get(p["id"], {})
-        p["exit_velo"] = sc.get("exit_velo")
-        p["barrel_pct"] = sc.get("barrel_pct")
-        p["hard_hit_pct"] = sc.get("hard_hit_pct")
-
+def get_top_picks(players, games):
     team_game = {}
     for g in games:
         team_game[g["away_team_id"]] = {"game": g, "is_home": False, "opp_pitcher_id": g["home_pitcher_id"], "opp_pitcher_name": g["home_pitcher_name"]}
@@ -407,14 +346,15 @@ def get_top_picks(players, games, statcast):
         if pid not in pitcher_cache:
             pitcher_cache[pid] = get_pitcher_stats(pid)
         pitcher = pitcher_cache[pid]
-        total, recent, factors = score_player(
-            p, pitcher, info["game"]["park_factor"], info["is_home"], info["game"]["wind_score"]
+        probability, recent, factors, raw_features = score_player(
+            p, pitcher, info["game"]["park_factor"], info["is_home"]
         )
         scored.append({
             **p,
-            "score": total,
+            "confidence": probability,
             "recent_avg": recent,
             "factors": factors,
+            "raw_features": raw_features,
             "opp_pitcher": info["opp_pitcher_name"],
             "venue": info["game"]["venue"],
             "park_factor": info["game"]["park_factor"],
@@ -431,7 +371,7 @@ def get_top_picks(players, games, statcast):
             "temp": info["game"]["temp"],
         })
 
-    scored.sort(key=lambda x: x["score"], reverse=True)
+    scored.sort(key=lambda x: x["confidence"], reverse=True)
     park_counts = {}
     top = []
     for p in scored:
@@ -442,10 +382,6 @@ def get_top_picks(players, games, statcast):
             park_counts[venue] = count + 1
         if len(top) == 10:
             break
-
-    max_score = top[0]["score"] if top else 1
-    for p in top:
-        p["confidence"] = round((p["score"] / max_score) * 100, 1)
 
     for p in top:
         p["hit_streak"] = get_hit_streak(p["id"])
@@ -464,6 +400,7 @@ def save_picks(picks, history):
             "game_id": p["game_id"],
             "confidence": p["confidence"],
             "factors": p["factors"],
+            "raw_features": p["raw_features"],
             "got_hit": None,
             "hits": None,
             "at_bats": None,
@@ -542,7 +479,7 @@ def get_season_stats(history):
                 "rate": round((w_hits / len(week_picks)) * 100, 1),
             })
 
-    factor_names = ["recent_form", "advanced_metrics", "pitcher_matchup", "season_avg", "platoon", "park_factor", "home_away", "weather"]
+    factor_names = ["recent_form", "season_stats", "platoon", "park_factor", "home_away", "pitcher_matchup"]
     factor_hits = {f: {"hits": 0, "total": 0} for f in factor_names}
     for pick in all_picks:
         if not pick.get("factors"):
@@ -654,7 +591,7 @@ def build_reason(p):
 # ── Helper: build one player row (shared by both emails) ─────────────────────
 def build_player_row(p, i):
     conf = p["confidence"]
-    color = "#0F6E56" if conf >= 90 else "#BA7517" if conf >= 80 else "#555"
+    color = "#0F6E56" if conf >= 75 else "#BA7517" if conf >= 65 else "#555"
     medal = ["🥇", "🥈", "🥉"][i - 1] if i <= 3 else f"#{i}"
     home_away = "Home" if p["is_home"] else "Away"
     reason_str = build_reason(p)
@@ -726,7 +663,7 @@ def build_morning_email(picks, games, yesterday_results, season_stats):
               <td style="padding:8px;font-size:13px;color:#111;">{icon} {pick['player_name']}</td>
               <td style="padding:8px;font-size:11px;color:#888;">{pick['team']}</td>
               <td style="padding:8px;font-size:12px;font-weight:500;color:{color};">{result_str}</td>
-              <td style="padding:8px;font-size:11px;color:#888;">{pick['confidence']}% score</td>
+              <td style="padding:8px;font-size:11px;color:#888;">{pick['confidence']}% predicted</td>
             </tr>"""
 
         results_html = f"""
@@ -740,7 +677,7 @@ def build_morning_email(picks, games, yesterday_results, season_stats):
               <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PLAYER</th>
               <th style="padding:8px;text-align:left;font-size:11px;color:#888;">TEAM</th>
               <th style="padding:8px;text-align:left;font-size:11px;color:#888;">RESULT</th>
-              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">MODEL SCORE</th>
+              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">HIT PROBABILITY</th>
             </tr>
             {result_rows}
           </table>
@@ -787,8 +724,8 @@ def build_morning_email(picks, games, yesterday_results, season_stats):
         <p style="color:#888;margin:4px 0 0;font-size:12px;">8am Morning Edition · {TODAY}</p>
       </div>
       <div style="padding:12px 24px;background:#f8f8f8;font-size:11px;color:#888;text-align:center;line-height:1.8;">
-        <strong style="color:#555;">Scoring model:</strong>
-        Recent form 22% · Advanced metrics 20% · Pitcher matchup 18% · Season AVG 15% · Platoon 12% · Park factor 6% · Home/Away 3% · Weather 4%
+        <strong style="color:#555;">Hit probability model:</strong>
+        Logistic regression trained on real game outcomes — recent form, season AVG/OPS, opposing pitcher (ERA/WHIP/K9), platoon split, home/away, and park factor.
       </div>
       <div style="padding:24px;">
         <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">Today's Top {len(picks)} Picks</h2>
@@ -796,7 +733,7 @@ def build_morning_email(picks, games, yesterday_results, season_stats):
           <tr style="background:#f8f8f8;">
             <th style="padding:8px;text-align:left;font-size:11px;color:#888;width:32px;">#</th>
             <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PLAYER &amp; MATCHUP</th>
-            <th style="padding:8px;text-align:right;font-size:11px;color:#888;">MODEL SCORE</th>
+            <th style="padding:8px;text-align:right;font-size:11px;color:#888;">HIT PROBABILITY</th>
           </tr>
           {rows}
         </table>
@@ -874,7 +811,7 @@ def build_afternoon_email(picks, games, morning_statuses):
               </td>
               <td style="padding:8px;font-size:13px;color:#111;font-weight:500;">{s['player_name']}</td>
               <td style="padding:8px;font-size:11px;color:#888;">{s['team']}</td>
-              <td style="padding:8px;font-size:11px;color:#888;">{s['confidence']}% score</td>
+              <td style="padding:8px;font-size:11px;color:#888;">{s['confidence']}% predicted</td>
             </tr>"""
 
     status_html = ""
@@ -889,7 +826,7 @@ def build_afternoon_email(picks, games, morning_statuses):
               <th style="padding:8px;text-align:left;font-size:11px;color:#888;">RESULT</th>
               <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PLAYER</th>
               <th style="padding:8px;text-align:left;font-size:11px;color:#888;">TEAM</th>
-              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">MODEL SCORE</th>
+              <th style="padding:8px;text-align:left;font-size:11px;color:#888;">HIT PROBABILITY</th>
             </tr>
             {status_rows}
           </table>
@@ -902,8 +839,8 @@ def build_afternoon_email(picks, games, morning_statuses):
         <p style="color:#888;margin:4px 0 0;font-size:12px;">4pm Evening Edition · {TODAY}</p>
       </div>
       <div style="padding:12px 24px;background:#f8f8f8;font-size:11px;color:#888;text-align:center;line-height:1.8;">
-        <strong style="color:#555;">Scoring model:</strong>
-        Recent form 22% · Advanced metrics 20% · Pitcher matchup 18% · Season AVG 15% · Platoon 12% · Park factor 6% · Home/Away 3% · Weather 4%
+        <strong style="color:#555;">Hit probability model:</strong>
+        Logistic regression trained on real game outcomes — recent form, season AVG/OPS, opposing pitcher (ERA/WHIP/K9), platoon split, home/away, and park factor.
       </div>
       <div style="padding:24px;">
         <h2 style="font-size:15px;color:#111;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">Tonight's Top {len(picks)} Picks</h2>
@@ -911,7 +848,7 @@ def build_afternoon_email(picks, games, morning_statuses):
           <tr style="background:#f8f8f8;">
             <th style="padding:8px;text-align:left;font-size:11px;color:#888;width:32px;">#</th>
             <th style="padding:8px;text-align:left;font-size:11px;color:#888;">PLAYER &amp; MATCHUP</th>
-            <th style="padding:8px;text-align:right;font-size:11px;color:#888;">MODEL SCORE</th>
+            <th style="padding:8px;text-align:right;font-size:11px;color:#888;">HIT PROBABILITY</th>
           </tr>
           {rows}
         </table>
@@ -960,9 +897,7 @@ def main():
     players = get_batter_stats()
     print(f"Found {len(players)} qualified batters.")
 
-    statcast = get_statcast_metrics()
-
-    picks = get_top_picks(players, all_games, statcast)
+    picks = get_top_picks(players, all_games)
     if not picks:
         print("No picks found.")
         return
