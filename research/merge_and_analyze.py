@@ -11,8 +11,14 @@ Combines:
 
 Then answers the actual question: for every game, which factor scored
 highest, and how often did THAT factor's top game actually result in a hit?
-This tells us, across the whole season, which of our 8 weighted factors is
+This tells us, across the whole season, which of our weighted factors is
 the real driver of hits — not a guess, a tally.
+
+NOTE: superseded by research/train_model.py, which fits real logistic
+regression coefficients on this same underlying data instead of eyeballing
+hand-picked factor weights. This script still works for a rough sanity check,
+but its factor definitions predate the trained model and won't line up with
+predict.py's current factor groupings exactly.
 """
 
 import json
