@@ -1,17 +1,27 @@
 name: Research Data Pull + Retrain
 
-# Pulls a full season of game-by-game data and refits the hit-probability
-# model on it. Run by hand, ideally once after each regular season ends.
+# Weekly: pulls the last three MLB seasons of game-by-game data (finished
+# seasons come from the cache, the season in progress is pulled fresh) and
+# runs research/train_model.py, which refits the hit model on the newest games
+# and only switches how it's built when the switch wins on held-out recent
+# games. Does nothing in the offseason, when there are no new games. Every run
+# appends to model_history.json. Run it by hand to force a retrain.
 
 on:
+  schedule:
+    - cron: '0 8 * * 1'    # Mondays 4:00am ET, after the 2am results run
   workflow_dispatch:
     inputs:
-      season:
-        description: "Season to pull (blank = current year)"
+      seasons:
+        description: "Seasons to pull, comma-separated (blank = the last three)"
         required: false
       cutoff_date:
-        description: "Last date to include, YYYY-MM-DD (blank = whole season)"
+        description: "Last date to include, YYYY-MM-DD (blank = yesterday)"
         required: false
+
+concurrency:
+  group: mlb-research
+  cancel-in-progress: false
 
 jobs:
   pull_and_train:
@@ -30,21 +40,30 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt -r research/requirements.txt
 
+      - name: Restore pulled seasons
+        uses: actions/cache@v4
+        with:
+          path: research/data
+          key: mlb-research-data-${{ github.run_id }}
+          restore-keys: mlb-research-data-
+
       - name: Pull season data
         env:
-          SEASON: ${{ inputs.season }}
+          SEASONS: ${{ inputs.seasons }}
           CUTOFF_DATE: ${{ inputs.cutoff_date }}
         run: python research/pull_season_data.py
 
       - name: Retrain model
+        env:
+          FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
         run: python research/train_model.py
 
-      - name: Commit data and model
+      - name: Commit model and history
         run: |
           git config user.name "MLB Edge Bot"
           git config user.email "actions@github.com"
-          git add research_gamelogs.json model_weights.json
+          git add model_weights.json model_history.json 2>/dev/null || git add model_weights.json
           git diff --staged --quiet && exit 0
-          git commit -m "Refresh research data and retrain model"
+          git commit -m "Retrain MLB hit model $(TZ=America/New_York date '+%Y-%m-%d')"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push

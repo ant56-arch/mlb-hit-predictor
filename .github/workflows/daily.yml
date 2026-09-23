@@ -3,7 +3,8 @@ name: MLB Edge Daily
 # Picks runs refresh today's picks; later runs see posted lineups, and picks
 # lock once their game starts. The 2am run grades yesterday's picks. Every run
 # also runs NBA Edge (nba/predict.py), which stores finished games, grades and
-# refreshes its picks on every run whatever the mode. Every run rebuilds both
+# refreshes its picks on every run whatever the mode, and retrains the NBA
+# model about once a week in season (nba/research/train.py). Every run rebuilds both
 # sites and (on main) publishes them to GitHub Pages.
 # Times are ET converted to UTC assuming EDT (UTC-4); they run an hour early
 # in EST, which only affects the offseason.
@@ -43,7 +44,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt -r research/requirements.txt  # numpy, for the NBA retrain
 
       - name: Run pipeline
         env:
@@ -55,11 +56,19 @@ jobs:
         continue-on-error: true
         run: python nba/predict.py
 
+      # Weekly at most, and only once enough new games have been played: refit
+      # the NBA model, switching how it's built only if that wins on held-out
+      # recent games. Logs every retrain to nba/model_history.json.
+      - name: Retrain NBA model
+        continue-on-error: true
+        run: python nba/research/train.py
+
       - name: Commit picks history
         run: |
           git config user.name "MLB Edge Bot"
           git config user.email "actions@github.com"
-          git add picks_history.json nba/picks_history.json nba/data/
+          git add picks_history.json nba/picks_history.json nba/data/ nba/model_weights.json
+          [ -f nba/model_history.json ] && git add nba/model_history.json
           git diff --staged --quiet && exit 0
           git commit -m "Update picks history $(TZ=America/New_York date '+%Y-%m-%d %H:%M')"
           git pull --rebase origin "${GITHUB_REF_NAME}"

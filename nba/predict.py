@@ -142,6 +142,7 @@ def make_picks(history, league, weights):
             "margin": round(abs(margin), 1),
             "home_out": [n for n, _ in out["home"][1]], "away_out": [n for n, _ in out["away"][1]],
             "rest": {"home": league.rest_days(g["home"], TODAY), "away": league.rest_days(g["away"], TODAY)},
+            "model": weights.get("trained_at"),
             "correct": None,
         }
         if old:
@@ -160,7 +161,9 @@ def main():
     games, box = store.load_all()
     grade(history, {g["id"]: g for g in games})
 
-    league = M.League()
+    if not in_season(TODAY):
+        store.roll_up_days()  # the season is over: its day files become one season file
+    league = M.League((weights or {}).get("league"))
     for g in games:
         if g["date"] < TODAY:
             league.update(g, box.get(g["id"]))

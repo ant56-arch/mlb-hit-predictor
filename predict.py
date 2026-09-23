@@ -246,7 +246,7 @@ def score_slate(games):
 
         raw = F.batter_features(hits, ab, n_games, int(rec.get("hits", 0)), int(rec.get("atBats", 0)), prior)
         raw.update(F.pitcher_features(era, whip, k9, ip))
-        raw.update(F.matchup_features(side == "home", bats, opp_hand, g["venue"]))
+        raw.update(F.matchup_features(side == "home", bats, opp_hand, g["venue"], MODEL.get("park_factors")))
         prob, factors = predict(raw)
 
         rec_ab = int(rec.get("atBats", 0))
@@ -330,7 +330,7 @@ def choose_picks(scored, games, history):
             p["hit_streak"] = None
 
     fresh = [{"date": today, **{k: p[k] for k in PICK_FIELDS}, "hit_streak": p["hit_streak"],
-              "got_hit": None, "hits": None, "at_bats": None, "void": False} for p in new]
+              "model": MODEL.get("trained_at"), "got_hit": None, "hits": None, "at_bats": None, "void": False} for p in new]
     history["picks"] = [p for p in history["picks"] if p["date"] != today] + locked + fresh
     return locked + fresh
 

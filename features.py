@@ -87,11 +87,13 @@ def innings_to_float(ip_str):
     return int(whole or 0) + int(outs or 0) / 3
 
 
-def matchup_features(is_home, batter_hand, pitcher_hand, venue):
+def matchup_features(is_home, batter_hand, pitcher_hand, venue, park_factors=None):
+    """park_factors: the trained model's venue table (learned from results, so
+    new or renamed ballparks are covered); PARK_FACTORS when it has none."""
     # Switch hitters always bat opposite-handed.
     platoon = batter_hand == "S" or (batter_hand and pitcher_hand and batter_hand != pitcher_hand)
     return {
         "is_home": 1.0 if is_home else 0.0,
         "platoon": 1.0 if platoon else 0.0,
-        "park_factor": PARK_FACTORS.get(venue, 1.0),
+        "park_factor": (park_factors or PARK_FACTORS).get(venue, 1.0),
     }
