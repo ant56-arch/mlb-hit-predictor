@@ -1,21 +1,39 @@
-name: Daily MLB Hit Predictions
+name: MLB Edge Daily
+
+# Picks runs refresh today's picks; later runs see posted lineups, and picks
+# lock once their game starts. The 2am run grades yesterday's picks. Every run
+# rebuilds the site and (on main) publishes it to GitHub Pages.
+# Times are ET converted to UTC assuming EDT (UTC-4); they run an hour early
+# in EST, which only affects the offseason.
 
 on:
   schedule:
-    - cron: '0 12 * * *'   # 8am ET
-    - cron: '0 20 * * *'   # 4pm ET
-    - cron: '0 6 * * *'    # 2am ET (results check)
+    - cron: '0 15 * * *'    # 11:00am ET - picks (day-game lineups are up)
+    - cron: '0 20 * * *'    # 4:00pm ET  - picks (most night lineups are up)
+    - cron: '30 22 * * *'   # 6:30pm ET  - picks (West Coast lineups)
+    - cron: '0 6 * * *'     # 2:00am ET  - grade results
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "picks or results"
+        type: choice
+        options: [picks, results]
+        default: picks
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: mlb-edge
+  cancel-in-progress: false
 
 jobs:
-  predict:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -25,17 +43,37 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run prediction model
+      - name: Run pipeline
         env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          TO_EMAIL: anthonytrotta56@gmail.com
-          RUN_HOUR_ET: ${{ github.event.schedule == '0 20 * * *' && '16' || github.event.schedule == '0 6 * * *' && '2' || '8' }}
+          MODE: ${{ github.event.schedule == '0 6 * * *' && 'results' || inputs.mode || 'picks' }}
         run: python predict.py
 
       - name: Commit picks history
         run: |
-          git config user.name "BTS Edge Bot"
-          git config user.email "bot@btsedge.com"
-          git add picks_history.json || true
-          git diff --staged --quiet || git commit -m "Update picks history $(date -u '+%Y-%m-%d')"
-          git push || true
+          git config user.name "MLB Edge Bot"
+          git config user.email "actions@github.com"
+          git add picks_history.json
+          git diff --staged --quiet && exit 0
+          git commit -m "Update picks history $(TZ=America/New_York date '+%Y-%m-%d %H:%M')"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push
+
+      - name: Build site
+        run: python build_site.py
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

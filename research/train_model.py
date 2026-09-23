@@ -1,98 +1,79 @@
 """
-train_model.py — trains the hit-probability model used by predict.py.
+train_model.py - fits the hit-probability model used by predict.py.
 
-Fits a logistic regression on real historical game rows (research_gamelogs.json,
-one row per player per game actually played, hit or not — no survivorship bias)
-to answer one question directly: given a player's recent form, season numbers,
-the opposing pitcher, park, platoon split, and home/away, what is the
-probability he gets at least one hit today?
+Logistic regression on research_gamelogs.json (one row per hitter per game he
+batted in). Every feature is computed as of the morning of that game - the
+batter's season and 14-day numbers from his earlier rows, the pitcher's from
+the pull - so the model never learns from stats it couldn't have known.
 
-This replaces the old approach of hand-picking factor weights (22%, 20%, 18%, ...)
-and calling the result a "confidence score." That score was never a probability —
-it was just each player's total divided by the top pick's total. This script fits
-real coefficients against actual outcomes and calibrates them with a sigmoid, so
-the number predict.py shows is an honest P(hit).
+It is scored on the last 20% of the season (fit only on the first 80%), then
+refit on everything for the saved model. The headline check is the one the
+site lives by: on each held-out day, how often did the model's top 10 get a hit?
 
-Run this manually whenever there's meaningfully more data to train on (e.g. once
-picks_history.json has a full season of resolved raw_features rows). It writes
-model_weights.json, which predict.py loads at runtime — predict.py itself has no
-numpy/sklearn dependency, it just applies the saved coefficients.
-
-Requires: pip install -r research/requirements.txt (numpy)
+Run from the repo root:
+  pip install -r research/requirements.txt
+  python research/train_model.py
 """
 
 import json
-import math
-from datetime import datetime
+import os
+import sys
+from collections import defaultdict, deque
+from datetime import date, datetime, timedelta, timezone
 
 import numpy as np
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+import features as F  # noqa: E402
+
 RESEARCH_FILE = "research_gamelogs.json"
-PICKS_FILE = "picks_history.json"
 OUTPUT_FILE = "model_weights.json"
 
-FEATURES = [
-    "recent_form_avg",
-    "season_avg",
-    "season_ops",
-    "is_home",
-    "platoon",
-    "park_factor",
-    "opp_pitcher_era",
-    "opp_pitcher_whip",
-    "opp_pitcher_k9",
-]
-
 LEARNING_RATE = 0.1
-ITERATIONS = 3000
-L2_LAMBDA = 0.01
+ITERATIONS = 4000
+L2_LAMBDA = 0.001
+TOP_N = 10
 
 
-def load_research_rows():
-    with open(RESEARCH_FILE) as f:
-        data = json.load(f)
+def build_rows(raw_rows):
+    by_player = defaultdict(list)
+    for r in raw_rows:
+        by_player[r["player_id"]].append(r)
+
     rows = []
-    for r in data.get("rows", []):
-        if r.get("season_avg") is None or r.get("opp_pitcher_era") is None:
-            continue
-        recent = r.get("recent_form_avg")
-        if recent is None:
-            recent = r["season_avg"]
-        rows.append({
-            "date": r["date"],
-            "got_hit": 1.0 if r["got_hit"] else 0.0,
-            "recent_form_avg": recent,
-            "season_avg": r["season_avg"],
-            "season_ops": r.get("season_ops") or (r["season_avg"] * 2.6),
-            "is_home": 1.0 if r.get("is_home") else 0.0,
-            "platoon": 1.0 if (r.get("batter_hand") and r.get("opp_pitcher_hand")
-                                and r["batter_hand"] != r["opp_pitcher_hand"]) else 0.0,
-            "park_factor": r.get("park_factor") or 1.0,
-            "opp_pitcher_era": r["opp_pitcher_era"],
-            "opp_pitcher_whip": r["opp_pitcher_whip"],
-            "opp_pitcher_k9": r["opp_pitcher_k9"],
-        })
-    return rows
+    for games in by_player.values():
+        games.sort(key=lambda r: (r["date"], r.get("game_pk", 0)))
+        hits = ab = n_games = 0
+        window = deque()
+        recent_hits = recent_ab = 0
+        for r in games:
+            day = date.fromisoformat(r["date"])
+            while window and window[0][0] < day - timedelta(days=F.RECENT_WINDOW_DAYS):
+                _, h, a = window.popleft()
+                recent_hits -= h
+                recent_ab -= a
 
+            feats = F.batter_features(hits, ab, n_games, recent_hits, recent_ab)
+            feats.update(F.matchup_features(r.get("is_home"), r.get("batter_hand"),
+                                            r.get("opp_pitcher_hand"), r.get("venue")))
+            if "opp_pitcher_ip" in r:
+                feats.update(F.pitcher_features(r.get("opp_pitcher_era"), r.get("opp_pitcher_whip"),
+                                                r.get("opp_pitcher_k9"), r.get("opp_pitcher_ip")))
+            else:
+                # Older pulls only have one season-level line per pitcher.
+                feats.update({"opp_pitcher_era": r["opp_pitcher_era"], "opp_pitcher_whip": r["opp_pitcher_whip"],
+                              "opp_pitcher_k9": r["opp_pitcher_k9"]})
 
-def load_picks_rows():
-    """Pull in resolved picks that were saved with raw_features (added going
-    forward in predict.py) so retrains after this season don't need another
-    expensive research backfill."""
-    try:
-        with open(PICKS_FILE) as f:
-            picks = json.load(f)
-    except FileNotFoundError:
-        return []
-    rows = []
-    for p in picks.get("picks", []):
-        if p.get("got_hit") is None or not p.get("raw_features"):
-            continue
-        row = {"date": p["date"], "got_hit": 1.0 if p["got_hit"] else 0.0}
-        row.update(p["raw_features"])
-        if any(row.get(f) is None for f in FEATURES):
-            continue
-        rows.append(row)
+            if all(feats.get(f) is not None for f in F.CANDIDATE_FEATURES):
+                rows.append({"date": r["date"], "got_hit": 1.0 if r["got_hit"] else 0.0, **feats})
+
+            hits += r["hits"]
+            ab += r["at_bats"]
+            n_games += 1
+            window.append((day, r["hits"], r["at_bats"]))
+            recent_hits += r["hits"]
+            recent_ab += r["at_bats"]
+    rows.sort(key=lambda r: r["date"])
     return rows
 
 
@@ -100,108 +81,129 @@ def sigmoid(z):
     return 1.0 / (1.0 + np.exp(-z))
 
 
-def train_logistic_regression(X, y):
-    n, d = X.shape
-    weights = np.zeros(d)
-    bias = 0.0
+def fit(X, y):
+    w = np.zeros(X.shape[1])
+    b = float(np.log(y.mean() / (1 - y.mean())))
     for _ in range(ITERATIONS):
-        z = X @ weights + bias
-        pred = sigmoid(z)
-        error = pred - y
-        grad_w = (X.T @ error) / n + (L2_LAMBDA * weights)
-        grad_b = np.mean(error)
-        weights -= LEARNING_RATE * grad_w
-        bias -= LEARNING_RATE * grad_b
-    return weights, bias
+        err = sigmoid(X @ w + b) - y
+        w -= LEARNING_RATE * ((X.T @ err) / len(y) + L2_LAMBDA * w)
+        b -= LEARNING_RATE * err.mean()
+    return w, b
 
 
-def log_loss(y, pred):
-    eps = 1e-9
-    pred = np.clip(pred, eps, 1 - eps)
-    return float(-np.mean(y * np.log(pred) + (1 - y) * np.log(1 - pred)))
+def log_loss(y, p):
+    p = np.clip(p, 1e-9, 1 - 1e-9)
+    return float(-np.mean(y * np.log(p) + (1 - y) * np.log(1 - p)))
 
 
-def auc(y, pred):
-    pairs = sorted(zip(pred, y))
-    ranks = {}
-    i = 0
-    n = len(pairs)
-    sorted_scores = [p for p, _ in pairs]
-    while i < n:
-        j = i
-        while j < n and sorted_scores[j] == sorted_scores[i]:
-            j += 1
-        avg_rank = (i + j + 1) / 2.0
-        for k in range(i, j):
-            ranks[k] = avg_rank
-        i = j
-    rank_sum_pos = sum(ranks[k] for k in range(n) if pairs[k][1] == 1)
-    n_pos = sum(1 for _, label in pairs if label == 1)
-    n_neg = n - n_pos
-    if n_pos == 0 or n_neg == 0:
-        return None
-    return (rank_sum_pos - n_pos * (n_pos + 1) / 2.0) / (n_pos * n_neg)
+def auc(y, p):
+    order = np.argsort(p)
+    ranks = np.empty(len(p))
+    ranks[order] = np.arange(1, len(p) + 1)
+    n_pos = y.sum()
+    n_neg = len(y) - n_pos
+    return float((ranks[y == 1].sum() - n_pos * (n_pos + 1) / 2) / (n_pos * n_neg))
+
+
+def top_n_backtest(dates, y, p):
+    """Hit rate of the model's top N per day vs. every hitter that day."""
+    by_day = defaultdict(list)
+    for d, yi, pi in zip(dates, y, p):
+        by_day[d].append((pi, yi))
+    picked, predicted = [], []
+    for day_rows in by_day.values():
+        if len(day_rows) < TOP_N * 3:
+            continue
+        top = sorted(day_rows, reverse=True)[:TOP_N]
+        picked += [yi for _, yi in top]
+        predicted += [pi for pi, _ in top]
+    return {
+        "days": len(picked) // TOP_N,
+        "top_n": TOP_N,
+        "top_n_hit_rate": float(np.mean(picked)) if picked else None,
+        "top_n_predicted": float(np.mean(predicted)) if predicted else None,
+        "all_hitters_hit_rate": float(np.mean(y)),
+    }
+
+
+def calibration(y, p, edges=(0, 0.55, 0.60, 0.65, 0.70, 0.75, 1.0)):
+    out = []
+    for lo, hi in zip(edges[:-1], edges[1:]):
+        mask = (p >= lo) & (p < hi)
+        if mask.sum() >= 30:
+            out.append({"range": [lo, hi], "n": int(mask.sum()),
+                        "predicted": float(p[mask].mean()), "actual": float(y[mask].mean())})
+    return out
 
 
 def main():
-    rows = load_research_rows() + load_picks_rows()
-    if len(rows) < 200:
-        print(f"Only {len(rows)} usable rows — need more data before training.")
+    with open(RESEARCH_FILE) as f:
+        raw = json.load(f)
+    rows = build_rows(raw["rows"])
+    if len(rows) < 1000:
+        print(f"Only {len(rows)} usable rows - not enough to train on.")
         return
+    print(f"{len(rows)} rows, {rows[0]['date']} to {rows[-1]['date']}")
 
-    rows.sort(key=lambda r: r["date"])
-    print(f"Loaded {len(rows)} training rows "
-          f"({rows[0]['date']} to {rows[-1]['date']}).")
+    X_all = np.array([[r[f] for f in F.CANDIDATE_FEATURES] for r in rows])
+    keep = X_all.std(axis=0) > 1e-9
+    feats = [f for f, k in zip(F.CANDIDATE_FEATURES, keep) if k]
+    dropped = [f for f, k in zip(F.CANDIDATE_FEATURES, keep) if not k]
+    if dropped:
+        print(f"Dropped (never varies in this data): {', '.join(dropped)}")
+    X_all = X_all[:, keep]
+    y_all = np.array([r["got_hit"] for r in rows])
+    dates = np.array([r["date"] for r in rows])
 
-    split = int(len(rows) * 0.8)
-    train_rows, test_rows = rows[:split], rows[split:]
+    split_date = dates[int(len(rows) * 0.8)]
+    train, test = dates < split_date, dates >= split_date
+    means, stds = X_all[train].mean(axis=0), X_all[train].std(axis=0)
+    w, b = fit((X_all[train] - means) / stds, y_all[train])
+    p_test = sigmoid(((X_all[test] - means) / stds) @ w + b)
+    y_test = y_all[test]
+    base = y_all[train].mean()
 
-    X_train = np.array([[r[f] for f in FEATURES] for r in train_rows])
-    y_train = np.array([r["got_hit"] for r in train_rows])
-    X_test = np.array([[r[f] for f in FEATURES] for r in test_rows])
-    y_test = np.array([r["got_hit"] for r in test_rows])
+    backtest = top_n_backtest(dates[test], y_test, p_test)
+    metrics = {
+        "test_from": str(split_date),
+        "test_rows": int(test.sum()),
+        "test_log_loss": log_loss(y_test, p_test),
+        "baseline_log_loss": log_loss(y_test, np.full_like(y_test, base)),
+        "test_auc": auc(y_test, p_test),
+        "calibration": calibration(y_test, p_test),
+        "backtest": backtest,
+    }
 
-    means = X_train.mean(axis=0)
-    stds = X_train.std(axis=0)
-    stds[stds == 0] = 1.0
+    print(f"\nHeld-out games from {split_date} ({metrics['test_rows']} rows):")
+    print(f"  log loss {metrics['test_log_loss']:.4f} (always guessing the average: {metrics['baseline_log_loss']:.4f})")
+    print(f"  AUC {metrics['test_auc']:.3f}")
+    if backtest["top_n_hit_rate"] is not None:
+        print(f"  top {TOP_N}/day over {backtest['days']} days: {backtest['top_n_hit_rate']:.1%} got a hit "
+              f"(model said {backtest['top_n_predicted']:.1%}; every hitter: {backtest['all_hitters_hit_rate']:.1%})")
+    for c in metrics["calibration"]:
+        print(f"  predicted {c['range'][0]:.0%}-{c['range'][1]:.0%}: {c['n']:>5} rows, "
+              f"said {c['predicted']:.1%}, actual {c['actual']:.1%}")
 
-    X_train_std = (X_train - means) / stds
-    X_test_std = (X_test - means) / stds
-
-    weights, bias = train_logistic_regression(X_train_std, y_train)
-
-    train_pred = sigmoid(X_train_std @ weights + bias)
-    test_pred = sigmoid(X_test_std @ weights + bias)
-
-    baseline_rate = float(y_train.mean())
-    print(f"\nBaseline hit rate (train): {baseline_rate*100:.1f}%")
-    print(f"Train log loss: {log_loss(y_train, train_pred):.4f}")
-    print(f"Test  log loss: {log_loss(y_test, test_pred):.4f}  "
-          f"(baseline: {log_loss(y_test, np.full_like(y_test, baseline_rate)):.4f})")
-    test_auc = auc(y_test, test_pred)
-    print(f"Test  AUC: {test_auc:.3f}" if test_auc else "Test AUC: n/a")
-
-    print("\nLearned coefficients (standardized units, log-odds per +1 std dev):")
-    for f, w in sorted(zip(FEATURES, weights), key=lambda x: -abs(x[1])):
-        print(f"  {f:<18} {w:+.3f}")
+    means, stds = X_all.mean(axis=0), X_all.std(axis=0)
+    w, b = fit((X_all - means) / stds, y_all)
+    print("\nFinal coefficients (log-odds per +1 std dev, fit on all rows):")
+    for f, wi in sorted(zip(feats, w), key=lambda x: -abs(x[1])):
+        print(f"  {f:<18} {wi:+.3f}")
 
     model = {
-        "features": FEATURES,
+        "features": feats,
         "means": means.tolist(),
         "stds": stds.tolist(),
-        "weights": weights.tolist(),
-        "bias": float(bias),
-        "trained_at": datetime.utcnow().isoformat() + "Z",
-        "n_train_rows": len(train_rows),
-        "n_test_rows": len(test_rows),
-        "train_date_range": [rows[0]["date"], rows[-1]["date"]],
-        "test_auc": test_auc,
-        "test_log_loss": log_loss(y_test, test_pred),
-        "baseline_hit_rate": baseline_rate,
+        "weights": w.tolist(),
+        "bias": float(b),
+        "trained_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "training_rows": len(rows),
+        "training_dates": [rows[0]["date"], rows[-1]["date"]],
+        "metrics": metrics,
     }
     with open(OUTPUT_FILE, "w") as f:
         json.dump(model, f, indent=2)
-    print(f"\nSaved model to {OUTPUT_FILE}.")
+    print(f"\nSaved {OUTPUT_FILE}")
 
 
 if __name__ == "__main__":
