@@ -9,6 +9,7 @@ and writes:
   history.html  - any past day's picks and how they did
   accuracy.html - predicted vs. actual hit rate over the season
   terms.html, privacy.html, 404.html
+  summary.json  - today's top picks and the record, read by the home page
 
 Same look and page structure as NFL Edge (github.com/ant56-arch/nfl-edge),
 with an NFL / CFB / MLB switcher linking the sites together. Published to
@@ -30,8 +31,9 @@ DIST_DIR = os.path.join(ROOT, "dist")
 ET = ZoneInfo("America/New_York")
 NOW = datetime.now(ET)
 
+HOME_URL = "https://ant56-arch.github.io/"
 NFL_EDGE = "https://ant56-arch.github.io/nfl-edge"
-SPORT_LINKS = [("NFL", f"{NFL_EDGE}/nfl/index.html"), ("CFB", f"{NFL_EDGE}/cfb/index.html"), ("MLB", None)]
+SPORT_LINKS = [("All", HOME_URL), ("NFL", f"{NFL_EDGE}/nfl/index.html"), ("CFB", f"{NFL_EDGE}/cfb/index.html"), ("MLB", None)]
 TAGLINE = "The chance each hitter gets at least one hit today, from a model graded against every box score."
 DASH = "-"
 
@@ -167,6 +169,7 @@ def footer():
     <nav class="footer-links" aria-label="Site">
       <a href="terms.html">Terms of Use</a>
       <a href="privacy.html">Privacy Policy</a>
+      <a href="{HOME_URL}">All sites</a>
       <a href="{NFL_EDGE}/nfl/index.html">NFL Edge</a>
       <span>&copy; {NOW.year} MLB Edge. Updated from box scores every night.</span>
     </nav>
@@ -430,6 +433,33 @@ def build_accuracy(history, model):
     return page_shell("Accuracy", "accuracy.html", "".join(parts), charts=bool(picks))
 
 
+# ── Home page summary ────────────────────────────────────────────────────────
+def build_summary(history):
+    """summary.json - the latest day's top three picks and the season record, for
+    the card on the home page (ant56-arch.github.io, github.com/ant56-arch/ant56-arch.github.io)."""
+    picks = history["picks"]
+    summary = {"updated": NOW.isoformat(), "heading": None, "picks": [], "record": None,
+               "empty": "No picks yet."}
+    if not picks:
+        return summary
+    latest = max(p["date"] for p in picks)
+    prefix = "Today" if latest == NOW.date().isoformat() else "Latest"
+    summary["heading"] = f"{prefix}: {day_label(latest)}"
+    top = sorted((p for p in picks if p["date"] == latest), key=lambda p: -p["confidence"])[:3]
+    summary["picks"] = [{
+        "label": p["player_name"], "sub": matchup(p),
+        "value": f"{p['confidence']:.0f}%" if is_model_pick(p) else DASH,
+        "result": None if p.get("void") or p.get("got_hit") is None else bool(p["got_hit"]),
+    } for p in top]
+    season = latest[:4]
+    g = graded([p for p in picks if p["date"].startswith(season)])
+    if g:
+        hits = sum(p["got_hit"] for p in g)
+        summary["record"] = {"value": f"{hits}-{len(g) - hits}", "label": f"{season} record",
+                             "sub": f"{pct(hits / len(g), 1)} got a hit"}
+    return summary
+
+
 # ── Root pages ───────────────────────────────────────────────────────────────
 LEGAL_EFFECTIVE_DATE = "September 23, 2026"
 
@@ -528,6 +558,8 @@ def main():
     for name, html in pages.items():
         with open(os.path.join(DIST_DIR, name), "w") as f:
             f.write(html)
+    with open(os.path.join(DIST_DIR, "summary.json"), "w") as f:
+        json.dump(build_summary(history), f, indent=1)
     for asset in ("style.css", "site.js"):
         shutil.copy(os.path.join(WEB_DIR, asset), os.path.join(DIST_DIR, asset))
     print(f"Built {len(pages)} pages in {DIST_DIR}")
