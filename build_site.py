@@ -25,6 +25,7 @@ from datetime import date, datetime, timedelta
 from html import escape
 from zoneinfo import ZoneInfo
 
+import games as games_mod
 import model_page
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -116,8 +117,8 @@ BRAND_MARK = ('<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><p
 
 # ── Page chrome ──────────────────────────────────────────────────────────────
 def page_shell(title, active, body_html, charts=False):
-    tabs = [("index.html", "Home"), ("players.html", "Players"), ("history.html", "History"), ("accuracy.html", "Accuracy"),
-            ("model.html", "Model")]
+    tabs = [("index.html", "Home"), ("players.html", "Players"), ("schedule.html", "Schedule"), ("history.html", "History"),
+            ("accuracy.html", "Accuracy"), ("model.html", "Model")]
     nav = "".join(
         f'<a href="{href}" class="active" aria-current="page">{label}</a>' if href == active
         else f'<a href="{href}">{label}</a>' for href, label in tabs)
@@ -444,6 +445,34 @@ def build_accuracy(history, model):
     return page_shell("Accuracy", "accuracy.html", "".join(parts), charts=bool(picks))
 
 
+# ── Schedule tab and scoreboard strip ────────────────────────────────────────
+def attach_picks(slate, history):
+    """Each game gets the model's most likely hitter in it, if one was picked."""
+    by_day = defaultdict(list)
+    for p in history["picks"]:
+        by_day[p["date"]].append(p)
+    for g in slate["games"]:
+        day = games_mod.start_et(g).date().isoformat()
+        teams = {g["away"]["name"], g["home"]["name"]}
+        cands = [p for p in by_day.get(day, []) if p.get("team") in teams and is_model_pick(p)]
+        if not cands:
+            continue
+        p = max(cands, key=lambda p: p["confidence"])
+        name = p["player_name"].split(" ", 1)
+        short = f"{name[0][0]}. {name[1]}" if len(name) == 2 else p["player_name"]
+        g["pick"] = {"text": f"{short} {p['confidence']:.0f}%",
+                     "result": None if p.get("void") or p.get("got_hit") is None else bool(p["got_hit"])}
+    return slate
+
+
+def build_schedule(slate):
+    body = games_mod.render(slate, card, "Top hitter",
+                            "No MLB games on today's schedule. The next slate shows up here the morning of.",
+                            "Times and TV from ESPN. Top hitter is the model's most likely hitter in that game "
+                            "to get a hit; see the Home tab for all of today's picks.")
+    return page_shell("Schedule", "schedule.html", body)
+
+
 # ── Model tab ────────────────────────────────────────────────────────────────
 FACTOR_LABELS = {
     "season_avg": ("Season batting average", ""),
@@ -642,6 +671,7 @@ def main():
     history = load_json("picks_history.json", {"picks": []})
     slate = load_json(os.path.join("data", "slate.json"), None)
     model = load_json("model_weights.json", {})
+    games_slate = attach_picks(games_mod.load("mlb"), history)
 
     if os.path.exists(DIST_DIR):
         shutil.rmtree(DIST_DIR)
@@ -649,6 +679,7 @@ def main():
     pages = {
         "index.html": build_index(history, slate, model),
         "players.html": build_players(slate),
+        "schedule.html": build_schedule(games_slate),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
         "model.html": build_model(model, load_json("model_history.json", {"runs": []})["runs"]),
@@ -661,6 +692,7 @@ def main():
             f.write(html)
     with open(os.path.join(DIST_DIR, "summary.json"), "w") as f:
         json.dump(build_summary(history, model), f, indent=1)
+    games_mod.write_json(os.path.join(DIST_DIR, "games.json"), "mlb", games_slate, NOW.isoformat())
     for asset in ("style.css", "site.js"):
         shutil.copy(os.path.join(WEB_DIR, asset), os.path.join(DIST_DIR, asset))
     print(f"Built {len(pages)} pages in {DIST_DIR}")
