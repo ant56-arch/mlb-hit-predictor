@@ -674,6 +674,7 @@ def main():
         "players.html": build_players(slate),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
+        "schedule.html": games_mod.schedule_redirect("mlb"),
         "model.html": build_model(model, load_json("model_history.json", {"runs": []})["runs"]),
         "terms.html": build_terms(),
         "privacy.html": build_privacy(),

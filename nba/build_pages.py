@@ -623,6 +623,7 @@ def main():
         "index.html": build_index(history, model),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
+        "schedule.html": games_mod.schedule_redirect("nba"),
         "model.html": build_model(model, load_json(os.path.join(HERE, "model_history.json"), {"runs": []})["runs"]),
         "terms.html": build_terms(),
         "privacy.html": build_privacy(),
