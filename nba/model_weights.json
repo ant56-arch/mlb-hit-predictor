@@ -1,0 +1,204 @@
+{
+ "features": [
+  "home_court",
+  "elo",
+  "net",
+  "recent",
+  "rest",
+  "b2b_home",
+  "b2b_away",
+  "missing_home",
+  "missing_away"
+ ],
+ "coef": {
+  "home_court": 3.37,
+  "elo": 1.9779,
+  "net": 0.4191,
+  "recent": 0.0877,
+  "rest": 0.2033,
+  "b2b_home": -2.1566,
+  "b2b_away": 1.4939,
+  "missing_home": -1.4249,
+  "missing_away": 0.9127
+ },
+ "sigma": 14.104,
+ "trained_on": "2023-24 to 2025-26",
+ "backtest_season": "2025-26",
+ "backtest": {
+  "games": 1231,
+  "correct": 850,
+  "accuracy": 0.6905,
+  "predicted_accuracy": 0.6691,
+  "log_loss": 0.5846,
+  "brier": 0.2004,
+  "margin_mae": 11.04,
+  "home_win_rate": 0.5548,
+  "top3": {
+   "days": 165,
+   "picks": 485,
+   "correct": 381,
+   "accuracy": 0.7856
+  },
+  "bands": [
+   {
+    "range": [
+     0.5,
+     0.6
+    ],
+    "n": 413,
+    "predicted": 0.5493,
+    "actual": 0.5593
+   },
+   {
+    "range": [
+     0.6,
+     0.7
+    ],
+    "n": 359,
+    "predicted": 0.649,
+    "actual": 0.6936
+   },
+   {
+    "range": [
+     0.7,
+     0.8
+    ],
+    "n": 275,
+    "predicted": 0.749,
+    "actual": 0.7564
+   },
+   {
+    "range": [
+     0.8,
+     1.0
+    ],
+    "n": 184,
+    "predicted": 0.8577,
+    "actual": 0.8804
+   }
+  ],
+  "months": [
+   {
+    "month": "2025-10",
+    "n": 80,
+    "correct": 52,
+    "predicted": 0.6188
+   },
+   {
+    "month": "2025-11",
+    "n": 219,
+    "correct": 150,
+    "predicted": 0.6704
+   },
+   {
+    "month": "2025-12",
+    "n": 198,
+    "correct": 121,
+    "predicted": 0.6661
+   },
+   {
+    "month": "2026-01",
+    "n": 233,
+    "correct": 145,
+    "predicted": 0.6564
+   },
+   {
+    "month": "2026-02",
+    "n": 166,
+    "correct": 120,
+    "predicted": 0.6585
+   },
+   {
+    "month": "2026-03",
+    "n": 239,
+    "correct": 183,
+    "predicted": 0.6931
+   },
+   {
+    "month": "2026-04",
+    "n": 96,
+    "correct": 79,
+    "predicted": 0.7036
+   }
+  ]
+ },
+ "backtest_postseason": {
+  "games": 91,
+  "correct": 57,
+  "accuracy": 0.6264,
+  "predicted_accuracy": 0.6432,
+  "log_loss": 0.67,
+  "brier": 0.2372,
+  "margin_mae": 12.93,
+  "home_win_rate": 0.5604,
+  "top3": {
+   "days": 47,
+   "picks": 87,
+   "correct": 54,
+   "accuracy": 0.6207
+  },
+  "bands": [
+   {
+    "range": [
+     0.5,
+     0.6
+    ],
+    "n": 35,
+    "predicted": 0.5607,
+    "actual": 0.6286
+   },
+   {
+    "range": [
+     0.6,
+     0.7
+    ],
+    "n": 35,
+    "predicted": 0.6475,
+    "actual": 0.6
+   },
+   {
+    "range": [
+     0.7,
+     0.8
+    ],
+    "n": 15,
+    "predicted": 0.7563,
+    "actual": 0.7333
+   },
+   {
+    "range": [
+     0.8,
+     1.0
+    ],
+    "n": 6,
+    "predicted": 0.8164,
+    "actual": 0.5
+   }
+  ],
+  "months": [
+   {
+    "month": "2026-04",
+    "n": 48,
+    "correct": 29,
+    "predicted": 0.6524
+   },
+   {
+    "month": "2026-05",
+    "n": 38,
+    "correct": 27,
+    "predicted": 0.639
+   },
+   {
+    "month": "2026-06",
+    "n": 5,
+    "correct": 1,
+    "predicted": 0.5862
+   }
+  ]
+ },
+ "baselines": {
+  "elo_only_accuracy": 0.6921,
+  "elo_only_log_loss": 0.5988,
+  "home_team_accuracy": 0.5548
+ }
+}

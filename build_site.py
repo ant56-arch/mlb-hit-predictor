@@ -33,7 +33,8 @@ NOW = datetime.now(ET)
 
 HOME_URL = "https://ant56-arch.github.io/"
 NFL_EDGE = "https://ant56-arch.github.io/nfl-edge"
-SPORT_LINKS = [("All", HOME_URL), ("NFL", f"{NFL_EDGE}/nfl/index.html"), ("CFB", f"{NFL_EDGE}/cfb/index.html"), ("MLB", None)]
+SPORT_LINKS = [("All", HOME_URL), ("NFL", f"{NFL_EDGE}/nfl/index.html"), ("CFB", f"{NFL_EDGE}/cfb/index.html"), ("MLB", None),
+               ("NBA", "https://ant56-arch.github.io/mlb-hit-predictor/nba/index.html")]
 TAGLINE = "The chance each hitter gets at least one hit today, from a model graded against every box score."
 DASH = "-"
 

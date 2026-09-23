@@ -4,6 +4,7 @@ public site API. Shared by the season pull (research/pull_seasons.py) and the
 daily pipeline (predict.py).
 """
 
+import re
 import time
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -144,21 +145,17 @@ def boxscore(game_id):
 
 
 def injuries():
-    """Current injury report: {team_abbr: {athlete_id: status}} where status is
+    """Current injury report: {team_id: {athlete_id: status}}, where status is
     ESPN's label (Out, Doubtful, Questionable, Day-To-Day)."""
     data = get("injuries")
     out = {}
     for team in data.get("injuries", []):
-        entries = team.get("injuries", [])
-        abbr = None
         report = {}
-        for inj in entries:
-            ath = inj.get("athlete", {})
-            abbr = abbr or ath.get("team", {}).get("abbreviation")
-            aid = ath.get("id") or str(ath.get("links", [{}])[0].get("href", "")).rstrip("/").split("/")[-1]
-            if aid:
-                report[str(aid)] = inj.get("status", "")
-        abbr = abbr or team.get("abbreviation") or team.get("displayName")
-        if abbr:
-            out[abbr] = report
+        for inj in team.get("injuries", []):
+            for link in inj.get("athlete", {}).get("links", []):
+                m = re.search(r"/id/(\d+)", link.get("href", ""))
+                if m:
+                    report[m.group(1)] = inj.get("status", "")
+                    break
+        out[str(team.get("id"))] = report
     return out

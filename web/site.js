@@ -135,11 +135,13 @@ function initCharts() {
     });
   }
 
-  lineChart("chart-weekly", "Hit Rate by Week: Picks vs. What the Model Predicted", [
-    { label: "Actual hit rate", data: ACCURACY_DATA.actual, color: "#e5793b" },
-    { label: "Model's predicted hit rate", data: ACCURACY_DATA.predicted, color: "#a8a7a1", dash: [4, 4] },
+  // NBA Edge passes its own chart titles in ACCURACY_DATA.titles.
+  const t = ACCURACY_DATA.titles || {};
+  lineChart("chart-weekly", t.weekly || "Hit Rate by Week: Picks vs. What the Model Predicted", [
+    { label: t.weekly_actual || "Actual hit rate", data: ACCURACY_DATA.actual, color: "#e5793b" },
+    { label: t.weekly_predicted || "Model's predicted hit rate", data: ACCURACY_DATA.predicted, color: "#a8a7a1", dash: [4, 4] },
   ]);
-  lineChart("chart-cumulative", "Season-to-Date Hit Rate", [
+  lineChart("chart-cumulative", t.cumulative || "Season-to-Date Hit Rate", [
     { label: "Actual, season to date", data: ACCURACY_DATA.cumulative_actual, color: "#e5793b" },
     { label: "Predicted, season to date", data: ACCURACY_DATA.cumulative_predicted, color: "#a8a7a1", dash: [4, 4] },
   ]);
