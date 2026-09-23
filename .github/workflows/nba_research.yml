@@ -1,0 +1,46 @@
+name: NBA Research Data Pull
+
+# Pulls full NBA seasons (scores and box scores) from ESPN for training and
+# backtesting the NBA model. Run by hand once each season ends.
+
+on:
+  workflow_dispatch:
+    inputs:
+      seasons:
+        description: "Season end years, comma-separated (2026 = 2025-26). Blank = last three."
+        required: false
+  push:
+    branches: [claude/nba-site-ztxqk4]
+    paths: [nba/research/pull_seasons.py, .github/workflows/nba_research.yml]
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Pull seasons
+        env:
+          SEASONS: ${{ inputs.seasons }}
+        run: python nba/research/pull_seasons.py
+
+      - name: Commit data
+        run: |
+          git config user.name "NBA Edge Bot"
+          git config user.email "actions@github.com"
+          git add nba/research/
+          git diff --staged --quiet && exit 0
+          git commit -m "Refresh NBA research data"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push
