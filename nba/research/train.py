@@ -341,6 +341,8 @@ def main():
         "reason": why or ("new recipe beat the current one on held-out games" if switched
                           else "kept the recipe, refit with the newest games"),
         "live_picks_last_14_days": live_record(),
+        "weights_before": live.get("coef"),
+        "weights_after": (final if ok else live).get("coef"),
     })
     with open(HISTORY, "w") as f:
         json.dump(history, f, indent=1)

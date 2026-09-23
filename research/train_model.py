@@ -304,6 +304,14 @@ def deploy_ok(final, final_ev, live_ev, baseline_ll, chosen_ev):
     return True, ""
 
 
+def weights_snapshot(model):
+    """Each factor's weight (per standard deviation of that factor), for the
+    site's Model tab to show how the last retrain moved them."""
+    if not model.get("features"):
+        return None
+    return {f: round(w, 4) for f, w in zip(model["features"], model["weights"])}
+
+
 def append_history(entry):
     try:
         with open(HISTORY_FILE) as f:
@@ -419,6 +427,8 @@ def main():
         "reason": why or ("new recipe beat the current one on held-out games" if switched
                           else "kept the recipe, refit with the newest games"),
         "live_picks_last_7_days": live_record(),
+        "weights_before": weights_snapshot(live),
+        "weights_after": weights_snapshot(final if ok else live),
     })
 
     lines = [f"### MLB hit model retrain ({latest})",

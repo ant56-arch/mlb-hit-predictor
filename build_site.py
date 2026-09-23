@@ -25,6 +25,8 @@ from datetime import date, datetime, timedelta
 from html import escape
 from zoneinfo import ZoneInfo
 
+import model_page
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 WEB_DIR = os.path.join(ROOT, "web")
 DIST_DIR = os.path.join(ROOT, "dist")
@@ -114,7 +116,8 @@ BRAND_MARK = ('<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><p
 
 # ── Page chrome ──────────────────────────────────────────────────────────────
 def page_shell(title, active, body_html, charts=False):
-    tabs = [("index.html", "Home"), ("players.html", "Players"), ("history.html", "History"), ("accuracy.html", "Accuracy")]
+    tabs = [("index.html", "Home"), ("players.html", "Players"), ("history.html", "History"), ("accuracy.html", "Accuracy"),
+            ("model.html", "Model")]
     nav = "".join(
         f'<a href="{href}" class="active" aria-current="page">{label}</a>' if href == active
         else f'<a href="{href}">{label}</a>' for href, label in tabs)
@@ -441,13 +444,102 @@ def build_accuracy(history, model):
     return page_shell("Accuracy", "accuracy.html", "".join(parts), charts=bool(picks))
 
 
+# ── Model tab ────────────────────────────────────────────────────────────────
+FACTOR_LABELS = {
+    "season_avg": ("Season batting average", ""),
+    "recent_form_avg": ("Recent form", "batting average over his last games"),
+    "ab_per_game": ("At-bats per game", "more trips to the plate, more chances"),
+    "is_home": ("Home vs. away", ""),
+    "platoon": ("Platoon edge", "batting against the opposite hand"),
+    "park_factor": ("Ballpark", "how hitter-friendly the park is"),
+    "opp_pitcher_era": ("Opposing starter's ERA", ""),
+    "opp_pitcher_whip": ("Opposing starter's WHIP", "walks + hits per inning"),
+    "opp_pitcher_k9": ("Opposing starter's strikeouts", "per nine innings"),
+}
+
+
+def next_weekday(weekday, hour_utc):
+    """The next time a weekly UTC cron (weekday: Monday=0) fires, in ET."""
+    now = datetime.now(ZoneInfo("UTC"))
+    d = now.replace(hour=hour_utc, minute=0, second=0, microsecond=0)
+    d += timedelta(days=(weekday - d.weekday()) % 7)
+    if d <= now:
+        d += timedelta(days=7)
+    return d.astimezone(ET)
+
+
+def recipe_setup(recipe):
+    seasons = recipe.get("seasons", 1)
+    l2 = recipe.get("l2", 0.001)
+    return [
+        ("Learns from:", "the last season of games" if seasons == 1 else f"the last {seasons} seasons of games"),
+        ("Ballparks:", "learns each park's effect from the games" if recipe.get("park") == "learned"
+         else "uses a fixed park-factor table"),
+        ("Smoothing:", "light, so strong patterns can show" if l2 <= 0.001 else "medium, to avoid chasing noise"),
+    ]
+
+
+def shares(weights):
+    total = sum(abs(w) for w in weights.values()) or 1
+    return {k: abs(w) / total for k, w in weights.items()}
+
+
+def build_model(model, runs):
+    runs = list(reversed(runs))
+    nxt = next_weekday(0, 8)
+    rows = []
+    for r in runs:
+        label, tone = model_page.decision(r)
+        chosen = r["best_recipe"] if r.get("switched_recipe") else (r.get("current_recipe") or r["best_recipe"])
+        rows.append({
+            "date": model_page.short_date(r["run_at"]), "data_through": model_page.short_date(r.get("data_through")),
+            "tested": len(r.get("candidates", [])), "decision": label, "tone": tone, "reason": r["reason"].capitalize() + ".",
+            "before": (r.get("live_model", {}).get("holdout") or {}).get("top10_hit_rate"),
+            "after": chosen.get("top10_hit_rate") if r.get("deployed") else None,
+        })
+    last = runs[0] if runs else {}
+    now_w = dict(zip(model.get("features", []), model.get("weights", [])))
+    before_w = last.get("weights_before")
+    now_s, before_s = shares(now_w), (shares(before_w) if before_w else {})
+    factors = [{"label": FACTOR_LABELS.get(f, (f, ""))[0], "note": FACTOR_LABELS.get(f, (f, ""))[1],
+                "now": now_s[f], "before": before_s.get(f), "fmt": lambda v: pct(v, 1)}
+               for f in sorted(now_s, key=lambda f: -now_s[f])]
+    trained = model.get("trained_at")
+    spec = {
+        "intro": "Every Monday it checks itself against the newest games and only changes when a new version "
+                 "clearly predicts better.",
+        "tiles": [
+            (model_page.short_date(trained)[:-6] if trained else "-", "Last retrained",
+             f"games through {model_page.short_date(model.get('trained_through'))}" if model.get("trained_through") else ""),
+            (f"{model.get('training_rows', 0):,}", "Hitter-games learned from",
+             " to ".join(model_page.short_date(d) for d in model.get("training_dates", []))),
+            (nxt.strftime("%b %-d"), "Next check", nxt.strftime("Monday, %-I %p ET")),
+            (rows[0]["decision"].split(" ")[0] if rows else "-", "Last decision",
+             f"{rows[0]['tested']} versions tested" if rows else "no retrains yet"),
+        ],
+        "setup": recipe_setup(model.get("recipe", {})) + [
+            ("Looks at:", f"{len(now_w)} factors for every hitter, listed below"),
+            ("Retrains:", "Mondays, only when new games have been played; in the offseason it waits"),
+        ],
+        "runs": rows,
+        "score_name": "Top 10 hit rate",
+        "score_fmt": lambda v: pct(v, 1),
+        "higher_better": True,
+        "factors": factors,
+        "factors_note": "Share of influence: how much each factor moves a hit chance, relative to the others, "
+                        "for a typical swing in that factor. Before is the model that was live until the last retrain.",
+        "empty": "No retrains logged yet. The first one runs on the next Monday after new games.",
+    }
+    return page_shell("Model", "model.html", model_page.render(spec))
+
+
 # ── Home page summary ────────────────────────────────────────────────────────
-def build_summary(history):
+def build_summary(history, model):
     """summary.json - the latest day's top three picks and the season record, for
     the card on the home page (ant56-arch.github.io, github.com/ant56-arch/ant56-arch.github.io)."""
     picks = history["picks"]
     summary = {"updated": NOW.isoformat(), "heading": None, "picks": [], "record": None,
-               "empty": "No picks yet."}
+               "empty": "No picks yet.", "retrained": model.get("trained_at"), "model_url": "model.html"}
     if not picks:
         return summary
     latest = max(p["date"] for p in picks)
@@ -559,6 +651,7 @@ def main():
         "players.html": build_players(slate),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
+        "model.html": build_model(model, load_json("model_history.json", {"runs": []})["runs"]),
         "terms.html": build_terms(),
         "privacy.html": build_privacy(),
         "404.html": build_404(),
@@ -567,7 +660,7 @@ def main():
         with open(os.path.join(DIST_DIR, name), "w") as f:
             f.write(html)
     with open(os.path.join(DIST_DIR, "summary.json"), "w") as f:
-        json.dump(build_summary(history), f, indent=1)
+        json.dump(build_summary(history, model), f, indent=1)
     for asset in ("style.css", "site.js"):
         shutil.copy(os.path.join(WEB_DIR, asset), os.path.join(DIST_DIR, asset))
     print(f"Built {len(pages)} pages in {DIST_DIR}")
