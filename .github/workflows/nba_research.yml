@@ -1,0 +1,47 @@
+name: NBA Research Data Pull + Retrain
+
+# Pulls full NBA seasons (scores and box scores) from ESPN, then refits the NBA
+# model and re-runs its backtest on the latest season. Run by hand once each
+# season ends (after the Finals, in late June).
+
+on:
+  workflow_dispatch:
+    inputs:
+      seasons:
+        description: "Season end years, comma-separated (2026 = 2025-26). Blank = last three."
+        required: false
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Pull seasons
+        env:
+          SEASONS: ${{ inputs.seasons }}
+        run: python nba/research/pull_seasons.py
+
+      - name: Retrain model
+        run: pip install -r research/requirements.txt && python nba/research/train.py
+
+      - name: Commit data and model
+        run: |
+          git config user.name "NBA Edge Bot"
+          git config user.email "actions@github.com"
+          git add nba/data/seasons/ nba/model_weights.json
+          git diff --staged --quiet && exit 0
+          git commit -m "Refresh NBA research data and retrain model"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push

@@ -2,7 +2,9 @@ name: MLB Edge Daily
 
 # Picks runs refresh today's picks; later runs see posted lineups, and picks
 # lock once their game starts. The 2am run grades yesterday's picks. Every run
-# rebuilds the site and (on main) publishes it to GitHub Pages.
+# also runs NBA Edge (nba/predict.py), which stores finished games, grades and
+# refreshes its picks on every run whatever the mode. Every run rebuilds both
+# sites and (on main) publishes them to GitHub Pages.
 # Times are ET converted to UTC assuming EDT (UTC-4); they run an hour early
 # in EST, which only affects the offseason.
 
@@ -48,11 +50,16 @@ jobs:
           MODE: ${{ github.event.schedule == '0 6 * * *' && 'results' || inputs.mode || 'picks' }}
         run: python predict.py
 
+      # NBA Edge (nba/) rides the same schedule. Its steps can't block MLB Edge.
+      - name: Run NBA pipeline
+        continue-on-error: true
+        run: python nba/predict.py
+
       - name: Commit picks history
         run: |
           git config user.name "MLB Edge Bot"
           git config user.email "actions@github.com"
-          git add picks_history.json
+          git add picks_history.json nba/picks_history.json nba/data/
           git diff --staged --quiet && exit 0
           git commit -m "Update picks history $(TZ=America/New_York date '+%Y-%m-%d %H:%M')"
           git pull --rebase origin "${GITHUB_REF_NAME}"
@@ -60,6 +67,10 @@ jobs:
 
       - name: Build site
         run: python build_site.py
+
+      - name: Build NBA site
+        continue-on-error: true
+        run: python nba/build_pages.py
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
