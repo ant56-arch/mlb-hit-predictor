@@ -25,6 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 from build_site import (DASH, ET, NOW, card, pct, pill, script_json, statline)  # noqa: E402
+import games as games_mod  # noqa: E402
 import model_page  # noqa: E402
 
 WEB_DIR = os.path.join(ROOT, "web")
@@ -106,7 +107,8 @@ BRAND_MARK = ('<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><p
 
 # ── Page chrome ──────────────────────────────────────────────────────────────
 def page_shell(title, active, body_html, charts=False):
-    tabs = [("index.html", "Home"), ("history.html", "History"), ("accuracy.html", "Accuracy"), ("model.html", "Model")]
+    tabs = [("index.html", "Home"), ("schedule.html", "Schedule"), ("history.html", "History"), ("accuracy.html", "Accuracy"),
+            ("model.html", "Model")]
     nav = "".join(
         f'<a href="{href}" class="active" aria-current="page">{label}</a>' if href == active
         else f'<a href="{href}">{label}</a>' for href, label in tabs)
@@ -427,6 +429,27 @@ def build_accuracy(history, model):
     return page_shell("Accuracy", "accuracy.html", "".join(parts), charts=charts)
 
 
+# ── Schedule tab and scoreboard strip ────────────────────────────────────────
+def attach_picks(slate, history):
+    """Each game gets the model's pick and win chance, if it made one."""
+    picks = {(p["date"], p["away"], p["home"]): p for p in history["picks"]}
+    for g in slate["games"]:
+        day = games_mod.start_et(g).date().isoformat()
+        p = picks.get((day, g["away"]["abbr"], g["home"]["abbr"]))
+        if p:
+            g["pick"] = {"text": f"{p['pick']} {p['prob']:.0f}%",
+                         "result": None if p.get("void") or p.get("correct") is None else bool(p["correct"])}
+    return slate
+
+
+def build_schedule(slate):
+    body = games_mod.render(slate, card, "Our pick",
+                            "No NBA games today. The 2026-27 season tips off in late October, and every game "
+                            "shows up here with our pick.",
+                            "Times and TV from ESPN.")
+    return page_shell("Schedule", "schedule.html", body)
+
+
 # ── Model tab ────────────────────────────────────────────────────────────────
 FACTOR_LABELS = {
     "home_court": ("Home court", "points for the home team"),
@@ -600,11 +623,13 @@ def build_privacy():
 def main():
     history = load_json(os.path.join(HERE, "picks_history.json"), {"picks": []})
     model = load_json(os.path.join(HERE, "model_weights.json"), {})
+    games_slate = attach_picks(games_mod.load("nba"), history)
     if os.path.exists(OUT_DIR):
         shutil.rmtree(OUT_DIR)
     os.makedirs(OUT_DIR)
     pages = {
         "index.html": build_index(history, model),
+        "schedule.html": build_schedule(games_slate),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
         "model.html": build_model(model, load_json(os.path.join(HERE, "model_history.json"), {"runs": []})["runs"]),
@@ -616,6 +641,7 @@ def main():
             f.write(html)
     with open(os.path.join(OUT_DIR, "summary.json"), "w") as f:
         json.dump(build_summary(history, model), f, indent=1)
+    games_mod.write_json(os.path.join(OUT_DIR, "games.json"), "nba", games_slate, NOW.isoformat())
     for asset in ASSETS:
         shutil.copy(os.path.join(WEB_DIR, asset), os.path.join(OUT_DIR, asset))
     print(f"Built {len(pages)} NBA pages in {OUT_DIR}")
