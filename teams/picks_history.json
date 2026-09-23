@@ -250,18 +250,18 @@
     "ip": 121.3
    },
    "away_sp": {
-    "id": 693855,
-    "name": "Ian Seymour",
-    "era": 4.75,
-    "ip": 72.0
+    "id": 669438,
+    "name": "Mason Englert",
+    "era": 6.28,
+    "ip": 14.3
    },
    "pick": "NYY",
-   "prob": 57.7,
-   "home_prob": 57.7,
+   "prob": 59.7,
+   "home_prob": 59.7,
    "factors": {
     "home_field": 0.141,
     "elo": 0.037,
-    "starters": 0.132
+    "starters": 0.213
    },
    "model": "2026-09-23T16:14:07+00:00",
    "correct": null
