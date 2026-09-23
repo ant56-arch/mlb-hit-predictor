@@ -672,6 +672,7 @@ def main():
     pages = {
         "index.html": build_index(history, slate, model),
         "players.html": build_players(slate),
+        "schedule.html": build_schedule(games_slate),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
         "model.html": build_model(model, load_json("model_history.json", {"runs": []})["runs"]),
