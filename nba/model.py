@@ -31,6 +31,10 @@ RECENT_SHRINK = 3
 ROTATION_GAMES = 10  # a player counts as a regular if he played in any of the team's last 10 games
 PLAYER_PRIOR_GAMES = 8  # last season's average fades out over this many games this season
 
+# Tunable settings of the walk itself. Retraining (research/train.py) tries
+# other values and saves the winners with the model as "league".
+DEFAULT_PARAMS = {"elo_k": ELO_K, "elo_carry": ELO_CARRY, "net_shrink": NET_SHRINK, "recent_shrink": RECENT_SHRINK}
+
 FEATURES = ["home_court", "elo", "net", "recent", "rest", "b2b_home", "b2b_away", "missing_home", "missing_away"]
 
 
@@ -45,7 +49,8 @@ def norm_cdf(x):
 
 
 class League:
-    def __init__(self):
+    def __init__(self, params=None):
+        self.p = {**DEFAULT_PARAMS, **(params or {})}
         self.elo = defaultdict(lambda: ELO_START)
         self.season = None
         self.margins = defaultdict(list)  # team -> this season's margins
@@ -61,7 +66,7 @@ class League:
         if self.season is not None:
             mean = sum(self.elo.values()) / max(len(self.elo), 1)
             for t in list(self.elo):
-                self.elo[t] = mean + ELO_CARRY * (self.elo[t] - mean)
+                self.elo[t] = mean + self.p["elo_carry"] * (self.elo[t] - mean)
             self.p_prior = {pid: s / g for pid, (g, s) in self.p_season.items() if g >= 10}
             self.p_season.clear()
             self.margins.clear()
@@ -99,9 +104,9 @@ class League:
     # ── features ──
     def team_form(self, team):
         m = self.margins[team]
-        net = sum(m) / (len(m) + NET_SHRINK)
+        net = sum(m) / (len(m) + self.p["net_shrink"])
         last = m[-RECENT_GAMES:]
-        recent = sum(last) / (len(last) + RECENT_SHRINK)
+        recent = sum(last) / (len(last) + self.p["recent_shrink"])
         return net, recent
 
     def rest_days(self, team, day):
@@ -151,7 +156,7 @@ class League:
         won = 1.0 if margin > 0 else 0.0
         winner_diff = diff if margin > 0 else -diff
         mult = ((abs(margin) + 3) ** 0.8) / (7.5 + 0.006 * winner_diff)
-        shift = ELO_K * mult * (won - expected)
+        shift = self.p["elo_k"] * mult * (won - expected)
         self.elo[h] += shift
         self.elo[a] -= shift
 
