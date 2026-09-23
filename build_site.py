@@ -190,7 +190,7 @@ def footer():
       home/away. Stats, lineups and box scores via the MLB Stats API. A pick with no at-bats counts as no
       decision, not a miss.</p>
     <p class="footer-text">Game picks come from a second model fit on past seasons: each team's Elo rating, both
-      probable starting pitchers' ERA and FIP to date, each bullpen's ERA and home field. No betting odds are
+      probable starting pitchers' ERA and FIP to date, and home field. No betting odds are
       used. A postponed game counts as no decision.</p>
     <p class="footer-text">For entertainment and research only. This is not betting advice, and past results
       don't predict future ones. If gambling is a problem for you or someone you know, call 1-800-GAMBLER.</p>
@@ -651,8 +651,8 @@ def build_games(team_history):
         head = card("Today's Games", "", '<div class="empty-state">No MLB games today, or the slate isn\'t up '
                     'yet. Picks go up on the next game day; past days are under Results below.</div>')
     else:
-        head = card("Today's Games", "", '<div class="empty-state">Game picks start with the next day\'s slate: '
-                    'a winner and a win chance for every game.</div>')
+        head = card("Today's Games", "", '<div class="empty-state">Game picks go up with the next daily '
+                    'update: a winner and a win chance for every game.</div>')
     record, charts = game_record(picks)
     return page_shell("Games", "games.html", head + record + game_history(picks), charts=charts)
 
