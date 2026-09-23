@@ -621,7 +621,6 @@ def main():
     os.makedirs(OUT_DIR)
     pages = {
         "index.html": build_index(history, model),
-        "schedule.html": build_schedule(games_slate),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
         "model.html": build_model(model, load_json(os.path.join(HERE, "model_history.json"), {"runs": []})["runs"]),
