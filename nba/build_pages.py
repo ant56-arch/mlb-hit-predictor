@@ -36,7 +36,7 @@ HOME_URL = "https://ant56-arch.github.io/"
 NFL_EDGE = "https://ant56-arch.github.io/nfl-edge"
 MLB_EDGE = "https://ant56-arch.github.io/mlb-hit-predictor"
 SPORT_LINKS = [("All", HOME_URL), ("NFL", f"{NFL_EDGE}/nfl/index.html"), ("CFB", f"{NFL_EDGE}/cfb/index.html"),
-               ("MLB", f"{MLB_EDGE}/"), ("NBA", None)]
+               ("MLB", f"{MLB_EDGE}/"), ("NBA", None), ("Schedule", "https://ant56-arch.github.io/schedule.html")]
 TAGLINE = "Who wins every NBA game tonight and how likely it is, from a model graded against every final score."
 TOP_N = 3
 STRONG = 70  # win chance, in percent, that counts as a strong pick
@@ -107,7 +107,7 @@ BRAND_MARK = ('<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><p
 
 # ── Page chrome ──────────────────────────────────────────────────────────────
 def page_shell(title, active, body_html, charts=False):
-    tabs = [("index.html", "Home"), ("schedule.html", "Schedule"), ("history.html", "History"), ("accuracy.html", "Accuracy"),
+    tabs = [("index.html", "Home"), ("history.html", "History"), ("accuracy.html", "Accuracy"),
             ("model.html", "Model")]
     nav = "".join(
         f'<a href="{href}" class="active" aria-current="page">{label}</a>' if href == active
@@ -442,14 +442,6 @@ def attach_picks(slate, history):
     return slate
 
 
-def build_schedule(slate):
-    body = games_mod.render(slate, card, "Our pick",
-                            "No NBA games today. The 2026-27 season tips off in late October, and every game "
-                            "shows up here with our pick.",
-                            "Times and TV from ESPN.")
-    return page_shell("Schedule", "schedule.html", body)
-
-
 # ── Model tab ────────────────────────────────────────────────────────────────
 FACTOR_LABELS = {
     "home_court": ("Home court", "points for the home team"),
@@ -629,7 +621,6 @@ def main():
     os.makedirs(OUT_DIR)
     pages = {
         "index.html": build_index(history, model),
-        "schedule.html": build_schedule(games_slate),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
         "model.html": build_model(model, load_json(os.path.join(HERE, "model_history.json"), {"runs": []})["runs"]),

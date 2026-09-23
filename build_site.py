@@ -37,7 +37,8 @@ NOW = datetime.now(ET)
 HOME_URL = "https://ant56-arch.github.io/"
 NFL_EDGE = "https://ant56-arch.github.io/nfl-edge"
 SPORT_LINKS = [("All", HOME_URL), ("NFL", f"{NFL_EDGE}/nfl/index.html"), ("CFB", f"{NFL_EDGE}/cfb/index.html"), ("MLB", None),
-               ("NBA", "https://ant56-arch.github.io/mlb-hit-predictor/nba/index.html")]
+               ("NBA", "https://ant56-arch.github.io/mlb-hit-predictor/nba/index.html"),
+               ("Schedule", "https://ant56-arch.github.io/schedule.html")]
 TAGLINE = "The chance each hitter gets at least one hit today, from a model graded against every box score."
 DASH = "-"
 
@@ -117,7 +118,7 @@ BRAND_MARK = ('<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><p
 
 # ── Page chrome ──────────────────────────────────────────────────────────────
 def page_shell(title, active, body_html, charts=False):
-    tabs = [("index.html", "Home"), ("players.html", "Players"), ("schedule.html", "Schedule"), ("history.html", "History"),
+    tabs = [("index.html", "Home"), ("players.html", "Players"), ("history.html", "History"),
             ("accuracy.html", "Accuracy"), ("model.html", "Model")]
     nav = "".join(
         f'<a href="{href}" class="active" aria-current="page">{label}</a>' if href == active
@@ -465,14 +466,6 @@ def attach_picks(slate, history):
     return slate
 
 
-def build_schedule(slate):
-    body = games_mod.render(slate, card, "Top hitter",
-                            "No MLB games on today's schedule. The next slate shows up here the morning of.",
-                            "Times and TV from ESPN. Top hitter is the model's most likely hitter in that game "
-                            "to get a hit; see the Home tab for all of today's picks.")
-    return page_shell("Schedule", "schedule.html", body)
-
-
 # ── Model tab ────────────────────────────────────────────────────────────────
 FACTOR_LABELS = {
     "season_avg": ("Season batting average", ""),
@@ -679,7 +672,6 @@ def main():
     pages = {
         "index.html": build_index(history, slate, model),
         "players.html": build_players(slate),
-        "schedule.html": build_schedule(games_slate),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
         "model.html": build_model(model, load_json("model_history.json", {"runs": []})["runs"]),
