@@ -1,1 +1,612 @@
-{"picks": []}
+{
+ "picks": [
+  {
+   "date": "2026-09-23",
+   "game_id": "824223",
+   "start": "2026-09-23T13:10:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "DET",
+   "away": "WSH",
+   "home_name": "Detroit Tigers",
+   "away_name": "Washington Nationals",
+   "home_id": 116,
+   "away_id": 120,
+   "home_record": "74-84",
+   "away_record": "74-84",
+   "home_sp": {
+    "id": 664285,
+    "name": "Framber Valdez",
+    "era": 4.06,
+    "ip": 168.7
+   },
+   "away_sp": {
+    "id": 663992,
+    "name": "Richard Lovelady",
+    "era": 2.45,
+    "ip": 7.3
+   },
+   "pick": "DET",
+   "prob": 60.4,
+   "home_prob": 60.4,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.156,
+    "starters": 0.126
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "824785",
+   "start": "2026-09-23T13:35:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 1,
+   "home": "BAL",
+   "away": "TOR",
+   "home_name": "Baltimore Orioles",
+   "away_name": "Toronto Blue Jays",
+   "home_id": 110,
+   "away_id": 141,
+   "home_record": "76-81",
+   "away_record": "77-80",
+   "home_sp": {
+    "id": 605135,
+    "name": "Chris Bassitt",
+    "era": 4.78,
+    "ip": 86.7
+   },
+   "away_sp": {
+    "id": 453286,
+    "name": "Max Scherzer",
+    "era": 6.07,
+    "ip": 72.7
+   },
+   "pick": "BAL",
+   "prob": 55.9,
+   "home_prob": 55.9,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.057,
+    "starters": 0.152
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "823168",
+   "start": "2026-09-23T15:45:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "SF",
+   "away": "MIN",
+   "home_name": "San Francisco Giants",
+   "away_name": "Minnesota Twins",
+   "home_id": 137,
+   "away_id": 142,
+   "home_record": "65-93",
+   "away_record": "74-84",
+   "home_sp": {
+    "id": 702885,
+    "name": "Cesar Perdomo",
+    "era": 4.11,
+    "ip": 15.3
+   },
+   "away_sp": {
+    "id": 687570,
+    "name": "Connor Prielipp",
+    "era": 5.17,
+    "ip": 111.3
+   },
+   "pick": "SF",
+   "prob": 53.4,
+   "home_prob": 53.4,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.007,
+    "starters": -0.012
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "824784",
+   "start": "2026-09-23T18:35:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 2,
+   "home": "BAL",
+   "away": "TOR",
+   "home_name": "Baltimore Orioles",
+   "away_name": "Toronto Blue Jays",
+   "home_id": 110,
+   "away_id": 141,
+   "home_record": "76-81",
+   "away_record": "77-80",
+   "home_sp": {
+    "id": null,
+    "name": "TBD",
+    "era": null,
+    "ip": 0
+   },
+   "away_sp": {
+    "id": null,
+    "name": "TBD",
+    "era": null,
+    "ip": 0
+   },
+   "pick": "BAL",
+   "prob": 52.1,
+   "home_prob": 52.1,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.057,
+    "starters": 0.0
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "823327",
+   "start": "2026-09-23T18:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "PIT",
+   "away": "STL",
+   "home_name": "Pittsburgh Pirates",
+   "away_name": "St. Louis Cardinals",
+   "home_id": 134,
+   "away_id": 138,
+   "home_record": "80-77",
+   "away_record": "76-81",
+   "home_sp": {
+    "id": 669199,
+    "name": "Lake Bachar",
+    "era": 2.31,
+    "ip": 23.3
+   },
+   "away_sp": {
+    "id": 669461,
+    "name": "Matthew Liberatore",
+    "era": 5.36,
+    "ip": 149.3
+   },
+   "pick": "PIT",
+   "prob": 59.1,
+   "home_prob": 59.1,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.103,
+    "starters": 0.124
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "823410",
+   "start": "2026-09-23T18:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "PHI",
+   "away": "MIL",
+   "home_name": "Philadelphia Phillies",
+   "away_name": "Milwaukee Brewers",
+   "home_id": 143,
+   "away_id": 158,
+   "home_record": "87-70",
+   "away_record": "98-59",
+   "home_sp": {
+    "id": 605400,
+    "name": "Aaron Nola",
+    "era": 4.49,
+    "ip": 168.3
+   },
+   "away_sp": {
+    "id": 701656,
+    "name": "Logan Henderson",
+    "era": 2.51,
+    "ip": 93.3
+   },
+   "pick": "MIL",
+   "prob": 56.1,
+   "home_prob": 43.9,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.172,
+    "starters": -0.214
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "823492",
+   "start": "2026-09-23T19:05:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "NYY",
+   "away": "TB",
+   "home_name": "New York Yankees",
+   "away_name": "Tampa Bay Rays",
+   "home_id": 147,
+   "away_id": 139,
+   "home_record": "90-67",
+   "away_record": "96-61",
+   "home_sp": {
+    "id": 543037,
+    "name": "Gerrit Cole",
+    "era": 3.63,
+    "ip": 121.3
+   },
+   "away_sp": {
+    "id": 693855,
+    "name": "Ian Seymour",
+    "era": 4.75,
+    "ip": 72.0
+   },
+   "pick": "NYY",
+   "prob": 57.7,
+   "home_prob": 57.7,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.037,
+    "starters": 0.132
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "824710",
+   "start": "2026-09-23T19:10:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "BOS",
+   "away": "CLE",
+   "home_name": "Boston Red Sox",
+   "away_name": "Cleveland Guardians",
+   "home_id": 111,
+   "away_id": 114,
+   "home_record": "84-73",
+   "away_record": "82-75",
+   "home_sp": {
+    "id": 543243,
+    "name": "Sonny Gray",
+    "era": 2.82,
+    "ip": 163.0
+   },
+   "away_sp": {
+    "id": 656492,
+    "name": "Foster Griffin",
+    "era": 3.67,
+    "ip": 166.7
+   },
+   "pick": "BOS",
+   "prob": 59.1,
+   "home_prob": 59.1,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.135,
+    "starters": 0.093
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "824868",
+   "start": "2026-09-23T19:15:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "ATL",
+   "away": "CIN",
+   "home_name": "Atlanta Braves",
+   "away_name": "Cincinnati Reds",
+   "home_id": 144,
+   "away_id": 113,
+   "home_record": "92-65",
+   "away_record": "73-84",
+   "home_sp": {
+    "id": 519242,
+    "name": "Chris Sale",
+    "era": 2.18,
+    "ip": 157.0
+   },
+   "away_sp": {
+    "id": 671096,
+    "name": "Andrew Abbott",
+    "era": 4.7,
+    "ip": 159.0
+   },
+   "pick": "ATL",
+   "prob": 68.3,
+   "home_prob": 68.3,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.311,
+    "starters": 0.315
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "824060",
+   "start": "2026-09-23T19:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "KC",
+   "away": "CWS",
+   "home_name": "Kansas City Royals",
+   "away_name": "Chicago White Sox",
+   "home_id": 118,
+   "away_id": 145,
+   "home_record": "67-90",
+   "away_record": "81-76",
+   "home_sp": {
+    "id": 607625,
+    "name": "Seth Lugo",
+    "era": 5.06,
+    "ip": 169.0
+   },
+   "away_sp": {
+    "id": 663542,
+    "name": "Bryan Hudson",
+    "era": 2.79,
+    "ip": 9.7
+   },
+   "pick": "KC",
+   "prob": 51.4,
+   "home_prob": 51.4,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.121,
+    "starters": 0.035
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "824625",
+   "start": "2026-09-23T19:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "CHC",
+   "away": "MIA",
+   "home_name": "Chicago Cubs",
+   "away_name": "Miami Marlins",
+   "home_id": 112,
+   "away_id": 146,
+   "home_record": "87-70",
+   "away_record": "77-80",
+   "home_sp": {
+    "id": 592332,
+    "name": "Kevin Gausman",
+    "era": 4.55,
+    "ip": 172.0
+   },
+   "away_sp": {
+    "id": 687473,
+    "name": "Ryan Gusto",
+    "era": 4.17,
+    "ip": 73.3
+   },
+   "pick": "CHC",
+   "prob": 63.0,
+   "home_prob": 63.0,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.232,
+    "starters": 0.158
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "822841",
+   "start": "2026-09-23T20:05:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "TEX",
+   "away": "NYM",
+   "home_name": "Texas Rangers",
+   "away_name": "New York Mets",
+   "home_id": 140,
+   "away_id": 121,
+   "home_record": "78-79",
+   "away_record": "72-85",
+   "home_sp": {
+    "id": 674003,
+    "name": "Cody Bradford",
+    "era": 4.72,
+    "ip": 34.3
+   },
+   "away_sp": {
+    "id": 690997,
+    "name": "Nolan McLean",
+    "era": 3.18,
+    "ip": 172.7
+   },
+   "pick": "NYM",
+   "prob": 51.5,
+   "home_prob": 48.5,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.028,
+    "starters": -0.172
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "824301",
+   "start": "2026-09-23T20:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "COL",
+   "away": "AZ",
+   "home_name": "Colorado Rockies",
+   "away_name": "Arizona Diamondbacks",
+   "home_id": 115,
+   "away_id": 109,
+   "home_record": "57-100",
+   "away_record": "83-74",
+   "home_sp": {
+    "id": 690279,
+    "name": "Mason Adams",
+    "era": 5.09,
+    "ip": 23.0
+   },
+   "away_sp": {
+    "id": 518876,
+    "name": "Merrill Kelly",
+    "era": 5.0,
+    "ip": 156.7
+   },
+   "pick": "AZ",
+   "prob": 60.5,
+   "home_prob": 39.5,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.487,
+    "starters": -0.079
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "824951",
+   "start": "2026-09-23T21:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "ATH",
+   "away": "LAA",
+   "home_name": "Athletics",
+   "away_name": "Los Angeles Angels",
+   "home_id": 133,
+   "away_id": 108,
+   "home_record": "62-95",
+   "away_record": "60-97",
+   "home_sp": {
+    "id": 605488,
+    "name": "Jeffrey Springs",
+    "era": 6.18,
+    "ip": 138.3
+   },
+   "away_sp": {
+    "id": 700712,
+    "name": "Walbert Ure\u00f1a",
+    "era": 2.78,
+    "ip": 142.7
+   },
+   "pick": "LAA",
+   "prob": 55.9,
+   "home_prob": 44.1,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.057,
+    "starters": -0.322
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "823086",
+   "start": "2026-09-23T22:10:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "SEA",
+   "away": "HOU",
+   "home_name": "Seattle Mariners",
+   "away_name": "Houston Astros",
+   "home_id": 136,
+   "away_id": 117,
+   "home_record": "73-84",
+   "away_record": "78-79",
+   "home_sp": {
+    "id": 669923,
+    "name": "George Kirby",
+    "era": 4.24,
+    "ip": 169.7
+   },
+   "away_sp": {
+    "id": 814490,
+    "name": "Ethan Pecko",
+    "era": 5.19,
+    "ip": 17.3
+   },
+   "pick": "SEA",
+   "prob": 56.7,
+   "home_prob": 56.7,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.054,
+    "starters": 0.181
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-23",
+   "game_id": "823894",
+   "start": "2026-09-23T22:10:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "LAD",
+   "away": "SD",
+   "home_name": "Los Angeles Dodgers",
+   "away_name": "San Diego Padres",
+   "home_id": 119,
+   "away_id": 135,
+   "home_record": "97-60",
+   "away_record": "87-70",
+   "home_sp": {
+    "id": 808967,
+    "name": "Yoshinobu Yamamoto",
+    "era": 2.51,
+    "ip": 179.0
+   },
+   "away_sp": {
+    "id": 592662,
+    "name": "Robbie Ray",
+    "era": 3.75,
+    "ip": 156.0
+   },
+   "pick": "LAD",
+   "prob": 63.2,
+   "home_prob": 63.2,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.172,
+    "starters": 0.228
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  }
+ ]
+}
