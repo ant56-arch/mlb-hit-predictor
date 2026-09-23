@@ -424,7 +424,7 @@ def build_summary(history, model):
     """summary.json for the NBA card on the home page (github.com/ant56-arch/ant56-arch.github.io)."""
     picks = history["picks"]
     summary = {"updated": NOW.isoformat(), "heading": None, "picks": [], "record": None,
-               "empty": "Picks start on opening night in late October."}
+               "empty": "Picks start on opening night in late October.", "result_labels": ["WIN", "LOSS"]}
     if picks:
         latest = max(p["date"] for p in picks)
         prefix = "Today" if latest == NOW.date().isoformat() else "Latest"
