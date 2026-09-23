@@ -12520,6 +12520,306 @@
       "got_hit": null,
       "hits": null,
       "at_bats": null
+    },
+    {
+      "date": "2026-09-23",
+      "player_id": 693304,
+      "player_name": "Nick Gonzales",
+      "team": "Pittsburgh Pirates",
+      "game_id": 823327,
+      "confidence": 76.1,
+      "factors": {
+        "recent_form": 0.0287,
+        "season_stats": 0.2855,
+        "platoon": 0.025,
+        "park_factor": 0.0,
+        "home_away": 0.0268,
+        "pitcher_matchup": 0.1156
+      },
+      "raw_features": {
+        "recent_form_avg": 0.242,
+        "season_avg": 0.302,
+        "season_ops": 0.754,
+        "is_home": 1.0,
+        "platoon": 1.0,
+        "park_factor": 0.98,
+        "opp_pitcher_era": 5.36,
+        "opp_pitcher_whip": 1.49,
+        "opp_pitcher_k9": 8.93
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-23",
+      "player_id": 681198,
+      "player_name": "TJ Rumfield",
+      "team": "Colorado Rockies",
+      "game_id": 824301,
+      "confidence": 74.1,
+      "factors": {
+        "recent_form": -0.0467,
+        "season_stats": 0.2595,
+        "platoon": 0.025,
+        "park_factor": 0.0,
+        "home_away": 0.0268,
+        "pitcher_matchup": 0.1098
+      },
+      "raw_features": {
+        "recent_form_avg": 0.308,
+        "season_avg": 0.299,
+        "season_ops": 0.841,
+        "is_home": 1.0,
+        "platoon": 1.0,
+        "park_factor": 1.15,
+        "opp_pitcher_era": 5.0,
+        "opp_pitcher_whip": 1.47,
+        "opp_pitcher_k9": 6.4
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-23",
+      "player_id": 664983,
+      "player_name": "Jake McCarthy",
+      "team": "Colorado Rockies",
+      "game_id": 824301,
+      "confidence": 73.2,
+      "factors": {
+        "recent_form": -0.0753,
+        "season_stats": 0.2436,
+        "platoon": 0.025,
+        "park_factor": 0.0,
+        "home_away": 0.0268,
+        "pitcher_matchup": 0.1098
+      },
+      "raw_features": {
+        "recent_form_avg": 0.333,
+        "season_avg": 0.297,
+        "season_ops": 0.829,
+        "is_home": 1.0,
+        "platoon": 1.0,
+        "park_factor": 1.15,
+        "opp_pitcher_era": 5.0,
+        "opp_pitcher_whip": 1.47,
+        "opp_pitcher_k9": 6.4
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-23",
+      "player_id": 670541,
+      "player_name": "Yordan Alvarez",
+      "team": "Houston Astros",
+      "game_id": 823086,
+      "confidence": 72.7,
+      "factors": {
+        "recent_form": -0.089,
+        "season_stats": 0.3687,
+        "platoon": 0.025,
+        "park_factor": 0.0,
+        "home_away": -0.0266,
+        "pitcher_matchup": 0.0255
+      },
+      "raw_features": {
+        "recent_form_avg": 0.345,
+        "season_avg": 0.313,
+        "season_ops": 1.027,
+        "is_home": 0.0,
+        "platoon": 1.0,
+        "park_factor": 0.97,
+        "opp_pitcher_era": 4.24,
+        "opp_pitcher_whip": 1.39,
+        "opp_pitcher_k9": 7.61
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-23",
+      "player_id": 518692,
+      "player_name": "Freddie Freeman",
+      "team": "Los Angeles Dodgers",
+      "game_id": 823894,
+      "confidence": 71.3,
+      "factors": {
+        "recent_form": 0.0698,
+        "season_stats": 0.2037,
+        "platoon": -0.035,
+        "park_factor": 0.0,
+        "home_away": 0.0268,
+        "pitcher_matchup": -0.0344
+      },
+      "raw_features": {
+        "recent_form_avg": 0.206,
+        "season_avg": 0.292,
+        "season_ops": 0.805,
+        "is_home": 1.0,
+        "platoon": 0.0,
+        "park_factor": 0.99,
+        "opp_pitcher_era": 3.6,
+        "opp_pitcher_whip": 1.33,
+        "opp_pitcher_k9": 7.66
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-23",
+      "player_id": 671739,
+      "player_name": "Michael Harris II",
+      "team": "Atlanta Braves",
+      "game_id": 824868,
+      "confidence": 71.2,
+      "factors": {
+        "recent_form": -0.0353,
+        "season_stats": 0.1876,
+        "platoon": -0.035,
+        "park_factor": 0.0,
+        "home_away": 0.0268,
+        "pitcher_matchup": 0.0838
+      },
+      "raw_features": {
+        "recent_form_avg": 0.298,
+        "season_avg": 0.29,
+        "season_ops": 0.803,
+        "is_home": 1.0,
+        "platoon": 0.0,
+        "park_factor": 1.02,
+        "opp_pitcher_era": 4.7,
+        "opp_pitcher_whip": 1.47,
+        "opp_pitcher_k9": 7.08
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-23",
+      "player_id": 695506,
+      "player_name": "Jac Caglianone",
+      "team": "Kansas City Royals",
+      "game_id": 824060,
+      "confidence": 71.1,
+      "factors": {
+        "recent_form": 0.0641,
+        "season_stats": 0.1065,
+        "platoon": 0.025,
+        "park_factor": 0.0,
+        "home_away": 0.0268,
+        "pitcher_matchup": 0.0007
+      },
+      "raw_features": {
+        "recent_form_avg": 0.211,
+        "season_avg": 0.28,
+        "season_ops": 0.816,
+        "is_home": 1.0,
+        "platoon": 1.0,
+        "park_factor": 1.0,
+        "opp_pitcher_era": 3.9,
+        "opp_pitcher_whip": 1.34,
+        "opp_pitcher_k9": 6.32
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-23",
+      "player_id": 668804,
+      "player_name": "Bryan Reynolds",
+      "team": "Pittsburgh Pirates",
+      "game_id": 823327,
+      "confidence": 71.0,
+      "factors": {
+        "recent_form": 0.087,
+        "season_stats": -0.0384,
+        "platoon": 0.025,
+        "park_factor": 0.0,
+        "home_away": 0.0268,
+        "pitcher_matchup": 0.1156
+      },
+      "raw_features": {
+        "recent_form_avg": 0.191,
+        "season_avg": 0.262,
+        "season_ops": 0.79,
+        "is_home": 1.0,
+        "platoon": 1.0,
+        "park_factor": 0.98,
+        "opp_pitcher_era": 5.36,
+        "opp_pitcher_whip": 1.49,
+        "opp_pitcher_k9": 8.93
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-23",
+      "player_id": 691718,
+      "player_name": "Pete Crow-Armstrong",
+      "team": "Chicago Cubs",
+      "game_id": 824625,
+      "confidence": 70.6,
+      "factors": {
+        "recent_form": 0.0001,
+        "season_stats": 0.1118,
+        "platoon": 0.025,
+        "park_factor": 0.0,
+        "home_away": 0.0268,
+        "pitcher_matchup": 0.034
+      },
+      "raw_features": {
+        "recent_form_avg": 0.267,
+        "season_avg": 0.281,
+        "season_ops": 0.95,
+        "is_home": 1.0,
+        "platoon": 1.0,
+        "park_factor": 1.03,
+        "opp_pitcher_era": 4.14,
+        "opp_pitcher_whip": 1.44,
+        "opp_pitcher_k9": 7.55
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
+    },
+    {
+      "date": "2026-09-23",
+      "player_id": 650490,
+      "player_name": "Yandy D\u00edaz",
+      "team": "Tampa Bay Rays",
+      "game_id": 823492,
+      "confidence": 70.6,
+      "factors": {
+        "recent_form": 0.1864,
+        "season_stats": 0.1876,
+        "platoon": -0.035,
+        "park_factor": 0.0,
+        "home_away": -0.0266,
+        "pitcher_matchup": -0.1129
+      },
+      "raw_features": {
+        "recent_form_avg": 0.104,
+        "season_avg": 0.29,
+        "season_ops": 0.8,
+        "is_home": 0.0,
+        "platoon": 0.0,
+        "park_factor": 1.01,
+        "opp_pitcher_era": 3.63,
+        "opp_pitcher_whip": 1.1,
+        "opp_pitcher_k9": 9.14
+      },
+      "got_hit": null,
+      "hits": null,
+      "at_bats": null
     }
   ]
 }
