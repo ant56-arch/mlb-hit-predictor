@@ -497,9 +497,10 @@
         "park_factor": 2.56,
         "home_away": 5
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-10",
@@ -557,9 +558,10 @@
         "park_factor": 2.56,
         "home_away": 5
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-10",
@@ -759,7 +761,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-07-11",
@@ -1177,9 +1180,10 @@
         "park_factor": 2.88,
         "home_away": 5
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-17",
@@ -1277,9 +1281,10 @@
         "park_factor": 3.52,
         "home_away": 5
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-18",
@@ -1617,9 +1622,10 @@
         "park_factor": 4.48,
         "home_away": 2.5
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-19",
@@ -1877,9 +1883,10 @@
         "park_factor": 3.52,
         "home_away": 5
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-21",
@@ -2037,9 +2044,10 @@
         "park_factor": 3.2,
         "home_away": 2.5
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-22",
@@ -2479,9 +2487,10 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-24",
@@ -2985,7 +2994,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-07-26",
@@ -3130,9 +3140,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-27",
@@ -3193,9 +3204,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-27",
@@ -3361,9 +3373,10 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-28",
@@ -3615,7 +3628,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-07-29",
@@ -3865,9 +3879,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-07-30",
@@ -3909,7 +3924,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-07-31",
@@ -4266,7 +4282,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-08-01",
@@ -4285,9 +4302,10 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-01",
@@ -4413,7 +4431,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-08-02",
@@ -4474,9 +4493,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-02",
@@ -4686,7 +4706,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-08-03",
@@ -4728,7 +4749,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-08-03",
@@ -4749,7 +4771,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-08-04",
@@ -4852,9 +4875,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-04",
@@ -5083,9 +5107,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-05",
@@ -5188,9 +5213,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-06",
@@ -5797,9 +5823,10 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-09",
@@ -6744,7 +6771,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-08-13",
@@ -7185,7 +7213,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-08-15",
@@ -7962,7 +7991,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-08-19",
@@ -8128,9 +8158,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-20",
@@ -8149,9 +8180,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-20",
@@ -8233,9 +8265,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-20",
@@ -8676,7 +8709,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-08-22",
@@ -8758,9 +8792,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-23",
@@ -8865,7 +8900,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-08-23",
@@ -8968,9 +9004,10 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-24",
@@ -9012,7 +9049,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-08-24",
@@ -9178,9 +9216,10 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-25",
@@ -9682,9 +9721,10 @@
         "home_away": 1.5,
         "weather": 4.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-27",
@@ -10270,9 +10310,10 @@
         "home_away": 1.5,
         "weather": 4.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-30",
@@ -10396,9 +10437,10 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-08-30",
@@ -11194,9 +11236,10 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-09-03",
@@ -11467,9 +11510,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-09-05",
@@ -11740,9 +11784,10 @@
         "home_away": 3,
         "weather": 0.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-09-06",
@@ -11782,9 +11827,10 @@
         "home_away": 3,
         "weather": 1.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-09-06",
@@ -12097,9 +12143,10 @@
         "home_away": 1.5,
         "weather": 1.6
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-09-08",
@@ -12244,9 +12291,10 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-09-08",
@@ -12286,9 +12334,10 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": false,
+      "got_hit": null,
       "hits": 0,
-      "at_bats": 0
+      "at_bats": 0,
+      "void": true
     },
     {
       "date": "2026-09-08",
@@ -12328,9 +12377,9 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": false,
+      "hits": 0,
+      "at_bats": 3
     },
     {
       "date": "2026-09-09",
@@ -12351,7 +12400,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-09-09",
@@ -12370,9 +12420,9 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 1,
+      "at_bats": 3
     },
     {
       "date": "2026-09-09",
@@ -12391,9 +12441,9 @@
         "home_away": 1.5,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 2,
+      "at_bats": 5
     },
     {
       "date": "2026-09-09",
@@ -12412,9 +12462,9 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": false,
+      "hits": 0,
+      "at_bats": 4
     },
     {
       "date": "2026-09-09",
@@ -12433,9 +12483,9 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 1,
+      "at_bats": 3
     },
     {
       "date": "2026-09-09",
@@ -12454,9 +12504,9 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 1,
+      "at_bats": 6
     },
     {
       "date": "2026-09-09",
@@ -12475,9 +12525,9 @@
         "home_away": 3,
         "weather": 2.0
       },
-      "got_hit": null,
-      "hits": null,
-      "at_bats": null
+      "got_hit": true,
+      "hits": 1,
+      "at_bats": 4
     },
     {
       "date": "2026-09-09",
@@ -12498,7 +12548,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-09-09",
@@ -12519,7 +12570,8 @@
       },
       "got_hit": null,
       "hits": null,
-      "at_bats": null
+      "at_bats": null,
+      "void": true
     },
     {
       "date": "2026-09-23",
