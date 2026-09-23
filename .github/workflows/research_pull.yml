@@ -1,18 +1,26 @@
-name: One-Time Research Data Pull
+name: Research Data Pull + Retrain
+
+# Pulls a full season of game-by-game data and refits the hit-probability
+# model on it. Run by hand, ideally once after each regular season ends.
 
 on:
   workflow_dispatch:
+    inputs:
+      season:
+        description: "Season to pull (blank = current year)"
+        required: false
+      cutoff_date:
+        description: "Last date to include, YYYY-MM-DD (blank = whole season)"
+        required: false
 
 jobs:
-  pull_research_data:
+  pull_and_train:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -20,18 +28,23 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install -r requirements.txt -r research/requirements.txt
 
-      - name: Run research data pull
+      - name: Pull season data
+        env:
+          SEASON: ${{ inputs.season }}
+          CUTOFF_DATE: ${{ inputs.cutoff_date }}
         run: python research/pull_season_data.py
 
-      - name: Run merge and analysis
-        run: python research/merge_and_analyze.py
+      - name: Retrain model
+        run: python research/train_model.py
 
-      - name: Commit research data
+      - name: Commit data and model
         run: |
-          git config user.name "BTS Edge Bot"
-          git config user.email "bot@btsedge.com"
-          git add research_gamelogs.json combined_gamelogs.json || true
-          git diff --staged --quiet || git commit -m "Update research data and analysis"
-          git push || true
+          git config user.name "MLB Edge Bot"
+          git config user.email "actions@github.com"
+          git add research_gamelogs.json model_weights.json
+          git diff --staged --quiet && exit 0
+          git commit -m "Refresh research data and retrain model"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push

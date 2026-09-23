@@ -1,55 +1,50 @@
-# ⚾ BTS Edge — MLB Daily Hit Predictor
+# ⚾ MLB Edge
 
-Automated daily MLB hit prediction system built in Python, delivered via email through GitHub Actions.
+The chance each MLB hitter gets at least one hit today, published as a static
+site on GitHub Pages. It's the baseball sibling of
+[NFL Edge](https://ant56-arch.github.io/nfl-edge/nfl/index.html), with the same
+look and cross-linked NFL / CFB / MLB tabs. No betting odds are used anywhere.
 
 ## How it works
-- **8am ET** — Morning email with top 10 daily picks across all games
-- **4pm ET** — Evening email with picks for games starting 4pm or later, plus morning pick status
-- **2am ET** — Silent results check, records whether each pick got a hit
+`.github/workflows/daily.yml` runs `predict.py`, commits `picks_history.json`,
+then builds and publishes the site:
 
-## Scoring model
-Picks are ranked by an actual **predicted probability of getting a hit**, not
-a hand-weighted score. `research/train_model.py` fits a logistic regression on
-real game-by-game outcomes (every game the top 100 OPS hitters played,
-whether they got a hit or not — no survivorship bias) and saves the learned
-coefficients to `model_weights.json`. `predict.py` loads those coefficients
-and, for each player in today's games, plugs in:
+| Time (ET) | Mode | What happens |
+|---|---|---|
+| 11:00am, 4:00pm, 6:30pm | `picks` | Scores every hitter in today's games and picks the top 10 (max 2 per game). Once a team posts its lineup, only its starters can be picked. A pick locks when its game starts; later runs only refill picks from games that haven't. |
+| 2:00am | `results` | Grades pending picks from box scores. A pick with no at-bats (sat, walked every time, postponed) is **no decision**, not a miss. |
 
-- Recent form (trailing 14-day AVG)
-- Season AVG and OPS
-- Opposing starting pitcher (ERA, WHIP, K/9)
-- Platoon split (batter hand vs. pitcher hand)
-- Park factor
-- Home vs. away
+## The model
+A logistic regression (`research/train_model.py`) fit on every game of the past
+season for every regular hitter. Each feature is computed as of the morning of
+that game, so the model never learns from stats it couldn't have known:
 
-...and outputs a calibrated `P(hit)` for that specific matchup. No sportsbook
-odds are used anywhere — this is purely a statistical estimate of hit
-probability, not a betting line.
+- season and last-14-day batting average (shrunk toward a prior when the sample is small, so it works from Opening Day)
+- at-bats per game (a proxy for lineup spot and playing time)
+- opposing starter's ERA, WHIP and K/9
+- platoon split, park factor, home/away
 
-Note on model strength: whether a player gets a hit in a single game is
-inherently high-variance (batting average is a game of small samples), so
-don't expect huge swings in probability — the model's job is to be honestly
-calibrated, not to promise certainty.
+Features that never vary in the training data are dropped automatically.
+`features.py` holds the feature definitions shared by training and the daily
+run. Training scores the model on the last 20% of the season before refitting
+on everything. The key check is how often the model's top 10 per day got a hit.
 
-### Retraining
-Run `pip install -r research/requirements.txt && python research/train_model.py`
-from the repo root to refit the model. It trains on `research_gamelogs.json`
-(historical backfill) plus any resolved picks in `picks_history.json` that
-have `raw_features` attached (every pick saved by `predict.py` going forward
-includes them), so retraining gets better as the season accumulates more
-results. Commit the resulting `model_weights.json`.
+### Retraining (do this each offseason)
+Run the **Research Data Pull + Retrain** workflow by hand after the regular
+season ends. It pulls the full season (`research/pull_season_data.py`),
+retrains, and commits `research_gamelogs.json` and `model_weights.json`.
 
-## Data sources
-- MLB Stats API (games, lineups, pitcher stats, box scores)
+## Site
+`build_site.py` writes `dist/` from `picks_history.json`, `data/slate.json`
+(today's full slate, not committed) and `model_weights.json`. The pages are
+Home, Players, History and Accuracy. Styles and scripts live in `web/`.
+
+To build it locally, run `python predict.py && python build_site.py`, then open `dist/index.html`.
 
 ## Files
-- `predict.py` — main prediction script
-- `model_weights.json` — trained logistic regression coefficients used by `predict.py`
-- `research/train_model.py` — (re)trains the hit-probability model
-- `picks_history.json` — running log of all picks and results
-- `requirements.txt` — Python dependencies for the daily automation
-- `research/requirements.txt` — extra dependencies (numpy) needed only for training
-- `.github/workflows/daily.yml` — automation schedule
-
-## Future goals
-See Issues tab for planned improvements.
+- `predict.py`: daily picks and results
+- `features.py`: feature definitions shared by training and prediction
+- `build_site.py`, `web/`: the static site
+- `model_weights.json`: trained model
+- `picks_history.json`: every pick and its result
+- `research/`: season data pull and model training

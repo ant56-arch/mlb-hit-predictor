@@ -1,0 +1,544 @@
+/*
+MLB Edge stylesheet - shared look with NFL Edge / CFB Edge
+(github.com/ant56-arch/nfl-edge, web/style.css), so the three read as one site.
+
+A flat stat-sheet look: one dark neutral surface, hairline rules instead of
+boxes, square corners. Barlow for body text (tabular figures in every number
+column), Barlow Condensed for headings and headline numbers.
+
+Color is information: orange marks the model's numbers, green/red only ever
+mean hit/miss, grey means no decision. There are no Vegas numbers here, so the
+steel blue is only used for focus outlines.
+*/
+
+:root {
+  --bg: #121314;
+  --surface: #1a1b1d;
+  --rule: #2b2d31;
+  --rule-strong: #45484e;
+  --text: #ecebe7;
+  --text-muted: #a8a7a1;
+  --text-faint: #8f8e88;
+
+  --ours: #e5793b;
+  --vegas: #8db4d8;
+  --hit: #6cbf84;
+  --miss: #e2665f;
+
+  --font: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+  --font-head: 'Barlow Condensed', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+a { color: inherit; }
+::selection { background: var(--ours); color: var(--bg); }
+
+a:focus-visible, button:focus-visible, select:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--vegas);
+  outline-offset: 2px;
+}
+table.data th[tabindex]:focus-visible { outline-offset: -2px; }
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+
+.wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 16px 64px 16px;
+}
+
+/* ---------- Masthead + navigation ---------- */
+
+header.masthead {
+  padding-bottom: 16px;
+  border-bottom: 4px solid var(--text);
+}
+
+.masthead-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+
+header.masthead .wordmark {
+  margin: 0;
+  font-family: var(--font-head);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+header.masthead .wordmark span { color: var(--ours); }
+
+header.masthead .tagline {
+  margin-top: 8px;
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 48ch;
+}
+
+.masthead-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.sport-switcher { display: flex; gap: 4px; }
+
+.sport-tab {
+  font-family: var(--font-head);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border: 1px solid var(--rule-strong);
+}
+.sport-tab:hover { color: var(--text); border-color: var(--text-muted); }
+.sport-tab.active { color: var(--bg); background: var(--text); border-color: var(--text); }
+
+.updated-chip { font-size: 13px; color: var(--text-faint); }
+
+nav.tabs {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--rule);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+nav.tabs::-webkit-scrollbar { display: none; }
+
+nav.tabs a {
+  flex-shrink: 0;
+  padding: 12px 0 10px 0;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text-muted);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+}
+nav.tabs a:hover { color: var(--text); }
+nav.tabs a.active { color: var(--text); border-bottom-color: var(--ours); }
+
+/* ---------- Sections ---------- */
+
+.card { margin-bottom: 48px; }
+
+.card-header {
+  padding-top: 8px;
+  border-top: 2px solid var(--text);
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  margin: 0;
+  font-family: var(--font-head);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.card-header .subtitle {
+  margin-top: 4px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.card-body { overflow-x: auto; }
+
+.section-label {
+  margin: 32px 0 8px 0;
+  font-family: var(--font-head);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+/* ---------- Tables ---------- */
+
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+table.data th, table.data td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+table.data th:first-child, table.data td:first-child { padding-left: 0; }
+table.data th:last-child, table.data td:last-child { padding-right: 0; }
+
+table.data th {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+table.data th[data-sort-key] { cursor: pointer; user-select: none; }
+table.data th[data-sort-key]:hover { color: var(--text); }
+table.data th.sorted-asc::after { content: " \25B2"; font-size: 9px; }
+table.data th.sorted-desc::after { content: " \25BC"; font-size: 9px; }
+
+table.data td.num, table.data th.num { text-align: right; }
+table.data tbody tr:hover { background: var(--surface); }
+
+.matchup-team {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+.matchup-content { display: flex; align-items: center; gap: 8px; }
+.matchup-at { color: var(--text-faint); font-size: 13px; }
+.matchup-right {
+  margin-left: auto;
+  padding-left: 16px;
+  font-size: 13px;
+  color: var(--text-faint);
+}
+.team-logo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: #ecebe7;
+  padding: 2px;
+}
+
+.day-header td {
+  padding: 20px 0 6px 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  border-bottom: none;
+}
+
+.table-footnote {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  max-width: 72ch;
+}
+
+/* Track Record's season-vs-history comparison */
+table.record-table td.row-label { font-weight: 700; }
+
+/* ---------- Headline stat line (box-score style, no tiles) ---------- */
+
+.statline {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 24px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.stat {
+  flex: 1 1 160px;
+  padding: 4px 24px 16px 0;
+}
+.stat + .stat { border-left: 1px solid var(--rule); padding-left: 24px; }
+.stat-value {
+  font-family: var(--font-head);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.stat-label {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.stat-sub { font-size: 14px; color: var(--text-muted); margin-top: 2px; }
+
+/* ---------- Tags (HIT / MISS / DIFFERENT PICK ...) ---------- */
+
+.pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  padding: 3px 5px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+.pill-primary { color: var(--ours); }
+.pill-market { color: var(--vegas); }
+.pill-danger { color: var(--miss); }
+.pill-positive { color: var(--hit); }
+
+.muted { color: var(--text-muted); }
+.faint { color: var(--text-faint); }
+.accent { color: var(--ours); font-weight: 700; }
+.market-color { color: var(--vegas); }
+.mono { font-variant-numeric: tabular-nums; }
+
+/* ---------- Controls ---------- */
+
+.subtabs { display: flex; gap: 24px; margin-bottom: 16px; border-bottom: 1px solid var(--rule); }
+.subtab {
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 0;
+  margin-bottom: -1px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.subtab:hover { color: var(--text); }
+.subtab.active { color: var(--text); border-bottom-color: var(--ours); }
+.cat-panel[hidden] { display: none; }
+
+.week-picker {
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+.week-picker:hover { border-color: var(--text-muted); }
+
+.btn-primary {
+  display: inline-block;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 24px;
+  text-decoration: none;
+}
+.btn-primary:hover { background: var(--ours); }
+
+/* ---------- Empty + loading states ---------- */
+
+.empty-state {
+  padding: 24px 0;
+  font-size: 15px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Charts render client-side from a CDN script; until one is drawn its box
+   shows a static skeleton (ruled lines where the gridlines will be), and if
+   the script never arrives the box says so instead of sitting blank. */
+.chart-card {
+  position: relative;
+  min-height: 220px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.chart-card canvas { max-width: 100%; }
+.chart-card[data-state="loading"],
+.chart-card[data-state="failed"] {
+  background-image: repeating-linear-gradient(to bottom, transparent 0 43px, var(--rule) 43px 44px);
+}
+.chart-card[data-state="loading"]::after,
+.chart-card[data-state="failed"]::after {
+  position: absolute;
+  left: 0;
+  top: 16px;
+  font-size: 13px;
+  color: var(--text-faint);
+  background: var(--bg);
+  padding-right: 8px;
+}
+.chart-card[data-state="loading"]::after { content: "Loading chart"; }
+.chart-card[data-state="failed"]::after { content: "Chart couldn't load - the charting script was blocked or offline."; }
+
+/* ---------- Footer ---------- */
+
+footer.site-footer {
+  margin-top: 64px;
+  padding-top: 16px;
+  border-top: 4px solid var(--text);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.footer-brand {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.footer-brand span { color: var(--ours); }
+.footer-text { margin: 8px 0 0 0; max-width: 72ch; line-height: 1.6; }
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+.footer-links a { color: var(--text); text-underline-offset: 3px; }
+.footer-links a:hover { color: var(--ours); }
+
+/* ---------- Legal pages + 404 ---------- */
+
+.prose { max-width: 68ch; font-size: 16px; line-height: 1.65; }
+.prose h2 {
+  margin: 32px 0 8px 0;
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.prose p, .prose li { color: var(--text-muted); }
+.prose strong { color: var(--text); }
+.prose a { color: var(--text); text-underline-offset: 3px; }
+.prose ul { padding-left: 20px; }
+.prose li + li { margin-top: 6px; }
+
+.error-body { padding: 48px 0; }
+.error-code {
+  font-family: var(--font-head);
+  font-size: 96px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ours);
+}
+.error-body h2 { font-family: var(--font-head); font-size: 28px; text-transform: uppercase; margin: 16px 0 8px 0; }
+.error-body p { max-width: 44ch; margin: 0 0 24px 0; color: var(--text-muted); }
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 560px) {
+  .wrap { padding: 24px 16px 48px 16px; }
+  header.masthead .wordmark { font-size: 40px; }
+  .masthead-right { width: 100%; flex-direction: row; justify-content: space-between; align-items: center; }
+  nav.tabs { gap: 20px; }
+  .card-header h2 { font-size: 24px; }
+  .stat { flex-basis: 50%; }
+  .stat:nth-child(odd) { border-left: none; padding-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--rule); padding-top: 12px; }
+  .stat-value { font-size: 36px; }
+}
+
+/* Below this width a 5-6 column game table can't fit, so each row becomes
+   its own block: header row hidden, every cell after the first rendered as a
+   label/value pair from its data-label - every column still visible with no
+   sideways scrolling. Only tables marked .responsive-stack do this. */
+@media (max-width: 700px) {
+  table.responsive-stack thead { display: none; }
+  table.responsive-stack, table.responsive-stack tbody, table.responsive-stack tr { display: block; width: 100%; }
+  table.responsive-stack tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  table.responsive-stack tbody tr:hover { background: none; }
+  table.responsive-stack tbody tr td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 4px 0;
+    border-bottom: none;
+    white-space: normal;
+  }
+  table.responsive-stack tbody tr td[data-label]::before {
+    content: attr(data-label);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+  table.responsive-stack tbody tr td:first-child { display: block; grid-column: 1 / -1; padding: 0 0 8px 0; }
+  table.responsive-stack tbody tr td > span { white-space: nowrap; }
+}
+
+/* Touch devices: 44px tap targets via padding, layout unchanged. */
+@media (pointer: coarse) {
+  nav.tabs a, .subtab, .sport-tab, .week-picker, .footer-links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+.page-title, .error-title {
+  margin: 0 0 16px 0;
+  font-family: var(--font-head);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* ---------- MLB additions ---------- */
+
+.pill-void { color: var(--text-faint); }
+
+.player-name { font-weight: 700; }
+.player-meta { font-size: 13px; color: var(--text-muted); margin-top: 2px; white-space: normal; }
+.why { font-size: 13px; color: var(--text-muted); white-space: normal; max-width: 44ch; }
+
+td.prob { font-family: var(--font-head); font-size: 22px; font-weight: 700; color: var(--ours); }
+
+.player-cell { display: flex; align-items: center; gap: 10px; }
+
+@media (max-width: 700px) {
+  .why { max-width: none; }
+  td.prob { font-size: 20px; }
+}
