@@ -962,3 +962,27 @@ td.prob { font-family: var(--font-head); font-size: 24px; font-weight: 800; font
   .why { max-width: none; }
   td.prob { font-size: 20px; }
 }
+
+/* Model tab: the hit model and the team model, one after the other. */
+.model-jump { margin-bottom: 8px; }
+.model-jump .subtab { text-decoration: none; }
+.model-group {
+  font-family: var(--font-head);
+  font-size: 30px;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 28px 0 14px;
+  scroll-margin-top: 16px;
+}
+.model-group span {
+  display: block;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}

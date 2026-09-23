@@ -53,9 +53,23 @@ workflow by hand to force a retrain. Every pick records which model made it
 ## Site
 `build_site.py` writes `dist/` from `picks_history.json`, `data/slate.json`
 (today's full slate, not committed) and `model_weights.json`. The pages are
-Home, Players, History and Accuracy. Styles and scripts live in `web/`.
+Home, Games, Players, History, Accuracy and Model. Games (the team model below)
+reads `teams/picks_history.json`. Styles and scripts live in `web/`.
 
 To build it locally, run `python predict.py && python build_site.py`, then open `dist/index.html`.
+
+## Game picks (MLB team model)
+`teams/` picks the winner of every MLB game with a win chance, the way NBA Edge
+does. Every daily run (any mode) runs `teams/predict.py`, which stores each
+finished day's final scores and starting-pitcher lines from the MLB Stats API
+(`teams/data/days/`), grades pending picks (a postponed game is no decision),
+and picks every game today from the probable starters, refreshing until first
+pitch and then locking. `teams/model.py` is a logistic regression on home
+field, the Elo gap (carried across seasons) and the starters' gap (ERA and FIP
+to date plus past seasons, shrunk toward average). `teams/research/train.py`
+retrains at most weekly with the same promote-only-if-better guard as NBA and
+logs to `teams/model_history.json`. **MLB Team Model Data Pull + Retrain**
+rebuilds `teams/data/seasons/` from scratch if ever needed.
 
 ## NBA Edge
 The NBA site lives in `nba/` and publishes to
@@ -104,4 +118,5 @@ stored seasons from ESPN if ever needed.
 - `model_history.json`: every retrain, what it tried and what it chose
 - `picks_history.json`: every pick and its result
 - `research/`: season data pull and model training (pulled data goes to `research/data/`, not committed)
+- `teams/`: the MLB team game-winner model (pipeline, model, data) behind the Games tab
 - `nba/`: NBA Edge (pipeline, model, pages, data)

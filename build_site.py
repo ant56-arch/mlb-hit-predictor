@@ -5,11 +5,17 @@ Reads picks_history.json (every pick and its result), data/slate.json (today's
 full slate, written by predict.py) and model_weights.json (backtest numbers),
 and writes:
   index.html    - the day's picks and the season track record
+  games.html    - the team model's pick and win chance for every game today,
+                  this season's live record and every past day's results
+                  (teams/picks_history.json, written by teams/predict.py)
   players.html  - every hitter in today's games, sortable
   history.html  - any past day's picks and how they did
   accuracy.html - predicted vs. actual hit rate over the season
+  model.html    - how the hit model and the team model retrain themselves
   terms.html, privacy.html, 404.html
   summary.json  - today's top picks and the record, read by the home page
+  games.json    - today's slate for the scoreboard strip, each game carrying
+                  the team model's pick (or the top hitter when there's none)
 
 Same look and page structure as NFL Edge (github.com/ant56-arch/nfl-edge),
 with an NFL / CFB / MLB switcher linking the sites together. Published to
@@ -30,6 +36,7 @@ import model_page
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 WEB_DIR = os.path.join(ROOT, "web")
+ASSETS = ("style.css", "site.js", "nba.js")  # nba.js also renders the Games tab's day picker
 DIST_DIR = os.path.join(ROOT, "dist")
 ET = ZoneInfo("America/New_York")
 NOW = datetime.now(ET)
@@ -39,7 +46,11 @@ NFL_EDGE = "https://ant56-arch.github.io/nfl-edge"
 SPORT_LINKS = [("All", HOME_URL), ("NFL", f"{NFL_EDGE}/nfl/index.html"), ("CFB", f"{NFL_EDGE}/cfb/index.html"), ("MLB", None),
                ("NBA", "https://ant56-arch.github.io/mlb-hit-predictor/nba/index.html"),
                ("Schedule", "https://ant56-arch.github.io/schedule.html")]
-TAGLINE = "The chance each hitter gets at least one hit today, from a model graded against every box score."
+TAGLINE = ("Who wins every MLB game and which hitters get a hit today, from models graded against every "
+           "box score.")
+TEAMS_DIR = os.path.join(ROOT, "teams")
+TOP_GAMES = 3  # the team model's most confident picks each day
+STRONG_GAME = 60  # win chance, in percent, that counts as a strong game pick
 DASH = "-"
 
 FAVICON = ('data:image/svg+xml,'
@@ -59,7 +70,7 @@ def load_json(name, default):
 
 def asset_version():
     h = hashlib.md5()
-    for name in ("style.css", "site.js"):
+    for name in ASSETS:
         with open(os.path.join(WEB_DIR, name), "rb") as f:
             h.update(f.read())
     return h.hexdigest()[:10]
@@ -118,8 +129,8 @@ BRAND_MARK = ('<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><p
 
 # ── Page chrome ──────────────────────────────────────────────────────────────
 def page_shell(title, active, body_html, charts=False):
-    tabs = [("index.html", "Home"), ("players.html", "Players"), ("history.html", "History"),
-            ("accuracy.html", "Accuracy"), ("model.html", "Model")]
+    tabs = [("index.html", "Home"), ("games.html", "Games"), ("players.html", "Players"),
+            ("history.html", "History"), ("accuracy.html", "Accuracy"), ("model.html", "Model")]
     nav = "".join(
         f'<a href="{href}" class="active" aria-current="page">{label}</a>' if href == active
         else f'<a href="{href}">{label}</a>' for href, label in tabs)
@@ -166,6 +177,7 @@ def page_shell(title, active, body_html, charts=False):
   {footer()}
 </div>
 <script src="site.js?v={ver}"></script>
+{'<script src="nba.js?v=' + ver + '"></script>' if active == "games.html" else ""}
 </body>
 </html>"""
 
@@ -177,6 +189,9 @@ def footer():
       hitter's season and recent average, at-bats per game, the opposing starter, platoon split, park and
       home/away. Stats, lineups and box scores via the MLB Stats API. A pick with no at-bats counts as no
       decision, not a miss.</p>
+    <p class="footer-text">Game picks come from a second model fit on past seasons: each team's Elo rating, both
+      probable starting pitchers' ERA and FIP to date, and home field. No betting odds are
+      used. A postponed game counts as no decision.</p>
     <p class="footer-text">For entertainment and research only. This is not betting advice, and past results
       don't predict future ones. If gambling is a problem for you or someone you know, call 1-800-GAMBLER.</p>
     <nav class="footer-links" aria-label="Site">
@@ -446,14 +461,242 @@ def build_accuracy(history, model):
     return page_shell("Accuracy", "accuracy.html", "".join(parts), charts=bool(picks))
 
 
-# ── Schedule tab and scoreboard strip ────────────────────────────────────────
-def attach_picks(slate, history):
-    """Each game gets the model's most likely hitter in it, if one was picked."""
+# ── Games (the team model) ───────────────────────────────────────────────────
+def game_graded(picks):
+    return [p for p in picks if p.get("correct") is not None and not p.get("void")]
+
+
+def game_wl(picks):
+    w = sum(p["correct"] for p in picks)
+    return w, len(picks) - w
+
+
+def game_top_per_day(picks, n=TOP_GAMES):
     by_day = defaultdict(list)
+    for p in picks:
+        by_day[p["date"]].append(p)
+    return [p for day in by_day.values() for p in sorted(day, key=lambda p: -p["prob"])[:n]]
+
+
+def first_pitch(p):
+    return datetime.fromisoformat(p["start"]).astimezone(ET).strftime("%-I:%M %p")
+
+
+def starter_text(sp):
+    if not sp or not sp.get("id"):
+        return "TBD"
+    parts = sp["name"].split(" ", 1)
+    name = f"{parts[0][0]}. {parts[1]}" if len(parts) == 2 else sp["name"]
+    return f"{name} ({sp['era']:.2f})" if sp.get("era") is not None else f"{name} (1st start)"
+
+
+def game_meta(p):
+    parts = []
+    if p.get("round"):
+        parts.append(p["round"])
+    if p.get("doubleheader"):
+        parts.append(f"Game {p['doubleheader']}")
+    parts.append(f"{first_pitch(p)} ET")
+    if p.get("type") == "regular":
+        parts.append(f"{p['away']} {p.get('away_record', '')}, {p['home']} {p.get('home_record', '')}")
+    return " · ".join(parts)
+
+
+def game_result_html(p):
+    if p.get("void"):
+        return pill("NO DECISION", "void")
+    if p.get("correct") is None:
+        return f'<span class="faint">{DASH}</span>'
+    score = f"{p['away']} {p['away_runs']}, {p['home']} {p['home_runs']} "
+    return escape(score) + (pill("WIN", "positive") if p["correct"] else pill("LOSS", "danger"))
+
+
+def games_table(picks):
+    rows = ""
+    for p in sorted(picks, key=lambda p: (p["start"], p["game_id"])):
+        pick_id = p["home_id"] if p["pick"] == p["home"] else p["away_id"]
+        starters = f"{starter_text(p.get('away_sp'))} vs. {starter_text(p.get('home_sp'))}"
+        rows += f"""<tr>
+          <td><div class="player-name">{escape(p['away'])} @ {escape(p['home'])}</div>
+            <div class="player-meta">{escape(game_meta(p))}</div>
+            <div class="player-meta">{escape(starters)}</div></td>
+          <td data-label="Pick"><span class="matchup-team">{logo(pick_id)}{escape(p['pick'])}</span></td>
+          <td data-label="Win chance" class="num prob">{p['prob']:.0f}%</td>
+          <td data-label="Result" class="num"><span>{game_result_html(p)}</span></td>
+        </tr>"""
+    return f"""<table class="data responsive-stack">
+      <thead><tr><th>Game and starters (ERA)</th><th>Pick</th><th class="num">Win chance</th><th class="num">Result</th></tr></thead>
+      <tbody>{rows}</tbody>
+    </table>
+    <div class="table-footnote">Win chance is the model's estimate that its pick wins the game. Starters are the
+      announced probables, away team first, with their ERA this season. Picks refresh until first pitch as starters
+      are named, then lock.</div>"""
+
+
+def game_bands(picks):
+    out = []
+    for lo, hi in ((50, 55), (55, 60), (60, 65), (65, 101)):
+        b = [p for p in picks if lo <= p["prob"] < hi]
+        if b:
+            label = f"{lo}% and up" if hi > 100 else f"{lo}-{hi}%"
+            out.append((label, len(b), sum(p["prob"] for p in b) / len(b) / 100, sum(p["correct"] for p in b) / len(b)))
+    rows = "".join(f"""<tr><td class="row-label">{label}</td>
+      <td data-label="Picks" class="num">{n}</td>
+      <td data-label="Model said" class="num">{pct(said, 1)}</td>
+      <td data-label="Actually won" class="num accent">{pct(won, 1)}</td></tr>""" for label, n, said, won in out)
+    return f"""<table class="data record-table responsive-stack">
+      <thead><tr><th>Win chance</th><th class="num">Picks</th><th class="num">Model said</th><th class="num">Actually won</th></tr></thead>
+      <tbody>{rows}</tbody></table>
+    <div class="table-footnote">If the model is honest, each row's two percentages should be close. In baseball
+      even strong favorites lose often, and small rows swing a lot.</div>"""
+
+
+def game_record(picks):
+    """This season's live record. Only picks actually made count, never a backtest."""
+    if not picks:
+        return card("This Season", "Every pick graded against the final score",
+                    '<div class="empty-state">No game picks graded yet. The record starts after the first night '
+                    'of results.</div>'), False
+    season = max(p["date"] for p in picks)[:4]
+    g = sorted(game_graded([p for p in picks if p["date"].startswith(season)]), key=lambda p: p["date"])
+    voided = sum(1 for p in picks if p["date"].startswith(season) and p.get("void"))
+    if not g:
+        return card(f"{season} Record", "Every pick graded against the final score",
+                    '<div class="empty-state">No game picks graded yet. The record starts after the first night '
+                    'of results.</div>'), False
+    w, l = game_wl(g)
+    tw, tl = game_wl(game_top_per_day(g))
+    strong = [p for p in g if p["prob"] >= STRONG_GAME]
+    sw, sl = game_wl(strong)
+    said = sum(p["prob"] for p in g) / len(g) / 100
+    body = statline([
+        (f"{w}-{l}", f"{season} record", f"{pct(w / len(g), 1)} right; model said {pct(said, 1)}"),
+        (f"{tw}-{tl}", f"Top {TOP_GAMES} picks each day", pct(tw / (tw + tl), 1) if tw + tl else ""),
+        (f"{sw}-{sl}", f"Picks at {STRONG_GAME}%+", pct(sw / len(strong), 1) if strong else DASH),
+    ])
+    note = (f"Live picks only, made before first pitch this season. {voided} postponed "
+            f"{'game counts' if voided == 1 else 'games count'} as no decision.") if voided else \
+        "Live picks only, made before first pitch this season."
+    body += f'<div class="table-footnote">{note}</div>'
+    charts = False
+    weeks = defaultdict(list)
+    for p in g:
+        d = date.fromisoformat(p["date"])
+        weeks[d - timedelta(days=d.weekday())].append(p)
+    if len(weeks) >= 2:
+        labels, actual, predicted, cum_a, cum_p = [], [], [], [], []
+        seen = right = conf = 0
+        for wk in sorted(weeks):
+            ps = weeks[wk]
+            labels.append("Wk of " + wk.strftime("%b %-d"))
+            actual.append(round(sum(p["correct"] for p in ps) / len(ps), 3))
+            predicted.append(round(sum(p["prob"] for p in ps) / len(ps) / 100, 3))
+            seen += len(ps)
+            right += sum(p["correct"] for p in ps)
+            conf += sum(p["prob"] for p in ps) / 100
+            cum_a.append(round(right / seen, 3))
+            cum_p.append(round(conf / seen, 3))
+        data = {"labels": labels, "actual": actual, "predicted": predicted, "cumulative_actual": cum_a,
+                "cumulative_predicted": cum_p,
+                "titles": {"weekly": "Picks Won by Week: Actual vs. What the Model Predicted",
+                           "weekly_actual": "Actual win rate", "weekly_predicted": "Model's predicted win rate",
+                           "cumulative": "Season-to-Date Win Rate"}}
+        body += '<div class="section-label">Accuracy</div>' + "".join(
+            f'<div class="chart-card" data-state="loading"><canvas id="{c}" height="90"></canvas></div>'
+            for c in ("chart-weekly", "chart-cumulative")) + f'<script>const ACCURACY_DATA = {script_json(data)};</script>'
+        charts = True
+    body += '<div class="section-label">Calibration</div>' + game_bands(g)
+    return card(f"{season} Record", "Every pick graded against the final score", body), charts
+
+
+def game_history(picks):
+    by_day = defaultdict(list)
+    for p in picks:
+        if p["date"] < NOW.date().isoformat() or p.get("correct") is not None or p.get("void"):
+            by_day[p["date"]].append(p)
+    if not by_day:
+        return ""
+    days = {}
+    for d, ps in by_day.items():
+        w, l = game_wl(game_graded(ps))
+        days[d] = {
+            "label": day_label(d) + f", {d[:4]}",
+            "summary": {"wins": w, "losses": l, "voided": sum(1 for p in ps if p.get("void"))},
+            "games": [{
+                "matchup": f"{p['away']} @ {p['home']}",
+                "meta": f"{starter_text(p.get('away_sp'))} vs. {starter_text(p.get('home_sp'))}",
+                "pick": p["pick"], "prob": p["prob"], "correct": p.get("correct"), "void": bool(p.get("void")),
+                "score": (f"{p['away']} {p['away_runs']}, {p['home']} {p['home_runs']}"
+                          if p.get("home_runs") is not None else ""),
+            } for p in sorted(ps, key=lambda p: -p["prob"])],
+        }
+    data = {"order": sorted(days, reverse=True), "days": days}
+    return card("Results", "Every past day's game picks and how they did. Choose a day.",
+                '<select id="day-select" class="week-picker" aria-label="Day"></select>'
+                '<div id="day-content" style="margin-top:16px;"></div>'
+                f'<script>const GAME_HISTORY = {script_json(data)};</script>')
+
+
+def build_games(team_history):
+    picks = team_history["picks"]
+    today = NOW.date().isoformat()
+    todays = [p for p in picks if p["date"] == today]
+    if todays:
+        top = sorted(todays, key=lambda p: -p["prob"])[:TOP_GAMES]
+        head = card(f"Today's Games: {day_label(today)}",
+                    f"A pick for every game. The {len(top)} most confident: "
+                    + ", ".join(f"{p['pick']} ({p['prob']:.0f}%)" for p in top) + ".",
+                    games_table(todays))
+    elif picks:
+        head = card("Today's Games", "", '<div class="empty-state">No MLB games today, or the slate isn\'t up '
+                    'yet. Picks go up on the next game day; past days are under Results below.</div>')
+    else:
+        head = card("Today's Games", "", '<div class="empty-state">Game picks go up with the next daily '
+                    'update: a winner and a win chance for every game.</div>')
+    record, charts = game_record(picks)
+    return page_shell("Games", "games.html", head + record + game_history(picks), charts=charts)
+
+
+# ── Schedule tab and scoreboard strip ────────────────────────────────────────
+# ESPN and the MLB Stats API abbreviate a few teams differently.
+ABBR_ALIASES = {"ARI": "AZ", "CHW": "CWS", "WAS": "WSH", "OAK": "ATH", "KCR": "KC", "SDP": "SD",
+                "SFG": "SF", "TBR": "TB"}
+
+
+def _team_key(team):
+    """(name, abbreviation) forms of an ESPN scoreboard team for matching a pick."""
+    abbr = team.get("abbr", "")
+    return team.get("name", ""), ABBR_ALIASES.get(abbr, abbr)
+
+
+def team_pick_for(g, day_picks):
+    """The team model's pick for an ESPN scoreboard game, matched by team names
+    (or abbreviations), taking the closest first pitch for a doubleheader."""
+    (an, aa), (hn, ha) = _team_key(g["away"]), _team_key(g["home"])
+    cands = [p for p in day_picks
+             if (p["away_name"], p["home_name"]) == (an, hn) or (p["away"], p["home"]) == (aa, ha)]
+    if not cands:
+        return None
+    start = games_mod.start_et(g)
+    return min(cands, key=lambda p: abs((datetime.fromisoformat(p["start"]) - start).total_seconds()))
+
+
+def attach_picks(slate, history, team_history):
+    """Each game gets the team model's pick and win chance ("NYY 58%"). A game
+    without one falls back to the model's most likely hitter in it."""
+    by_day, team_by_day = defaultdict(list), defaultdict(list)
     for p in history["picks"]:
         by_day[p["date"]].append(p)
+    for p in team_history["picks"]:
+        team_by_day[p["date"]].append(p)
     for g in slate["games"]:
         day = games_mod.start_et(g).date().isoformat()
+        tp = team_pick_for(g, team_by_day.get(day, []))
+        if tp:
+            side = "home" if tp["pick"] == tp["home"] else "away"
+            g["pick"] = {"text": f"{g[side]['abbr'] or tp['pick']} {tp['prob']:.0f}%",
+                         "result": None if tp.get("void") or tp.get("correct") is None else bool(tp["correct"])}
+            continue
         teams = {g["away"]["name"], g["home"]["name"]}
         cands = [p for p in by_day.get(day, []) if p.get("team") in teams and is_model_pick(p)]
         if not cands:
@@ -506,7 +749,7 @@ def shares(weights):
     return {k: abs(w) / total for k, w in weights.items()}
 
 
-def build_model(model, runs):
+def hit_model_html(model, runs):
     runs = list(reversed(runs))
     nxt = next_weekday(0, 8)
     rows = []
@@ -552,7 +795,125 @@ def build_model(model, runs):
                         "for a typical swing in that factor. Before is the model that was live until the last retrain.",
         "empty": "No retrains logged yet. The first one runs on the next Monday after new games.",
     }
-    return page_shell("Model", "model.html", model_page.render(spec))
+    return model_page.render(spec)
+
+
+TEAM_FACTOR_LABELS = {
+    "home_field": ("Home field", "for the home team, before anything else"),
+    "elo": ("Team rating (Elo) gap", "per 100 rating points"),
+    "starters": ("Starting pitcher gap", "per run per 9 innings better than the other starter"),
+    "bullpen": ("Bullpen ERA gap", "per run of bullpen ERA"),
+}
+
+
+def team_recipe_setup(recipe):
+    k, carry = recipe.get("elo_k", 4), recipe.get("elo_carry", 0.67)
+    years, shrink = recipe.get("years", 2), recipe.get("sp_shrink", 40)
+    speed = "steady" if k <= 3 else "medium" if k <= 4 else "fast"
+    return [
+        ("Learns from:", f"the last {years} seasons of games"),
+        ("Team ratings:", f"{speed} - one game moves a team's Elo rating only a few points, a bit more for "
+                          f"a blowout"),
+        ("Over the winter:", f"keeps {carry:.0%} of each team's rating; the rest resets toward average"),
+        ("Starters:", f"ERA and FIP this season and past seasons, blended with {shrink} innings of a "
+                      f"league-average starter so a few starts don't swing it"),
+    ]
+
+
+def team_model_html(model, runs):
+    """The team model's section of the Model tab, from teams/model_weights.json
+    and teams/model_history.json."""
+    runs = list(reversed(runs))
+
+    def skill(ll, baseline):
+        return None if ll is None or not baseline else 1 - ll / baseline
+
+    rows = []
+    for r in runs:
+        label, tone = model_page.decision(r)
+        base = r["holdout"].get("home_rate_log_loss")
+        chosen_ll = r["best_recipe"]["log_loss"] if r.get("switched_recipe") else r.get("current_recipe_log_loss")
+        rows.append({
+            "date": model_page.short_date(r["run_at"]), "data_through": model_page.short_date(r.get("data_through")),
+            "tested": len(r.get("candidates", [])), "decision": label, "tone": tone,
+            "reason": r["reason"].capitalize() + ".",
+            "before": skill(r["live_model"].get("holdout_log_loss"), base),
+            "after": skill(chosen_ll, base) if r.get("deployed") else None,
+        })
+    last = runs[0] if runs else {}
+    now_w, before_w = model.get("coef", {}), last.get("weights_before") or {}
+    factors = [{"label": TEAM_FACTOR_LABELS.get(f, (f, ""))[0], "note": TEAM_FACTOR_LABELS.get(f, (f, ""))[1],
+                "now": now_w[f], "before": before_w.get(f), "fmt": lambda v: f"{v:+.3f}"}
+               for f in model.get("features", []) if f in now_w]
+    trained = model.get("trained_at")
+    spec = {
+        "intro": "Once a week during the season it checks itself against the newest games and only changes when a "
+                 "new version clearly predicts better.",
+        "tiles": [
+            (model_page.short_date(trained)[:-6] if trained else "-", "Last retrained",
+             f"games through {model_page.short_date(model.get('trained_through'))}" if model.get("trained_through") else ""),
+            (f"{model.get('training_games', 0):,}", "Games learned from",
+             " to ".join(model_page.short_date(d) for d in model.get("training_dates", []))),
+            ("Weekly", "Next check", "once 60+ new games are in; waits in the offseason"),
+            (rows[0]["decision"].split(" ")[0] if rows else "-", "Last decision",
+             f"{rows[0]['tested']} versions tested" if rows else "no retrains yet"),
+        ],
+        "setup": team_recipe_setup(model.get("recipe", {})) + [
+            ("Looks at:", f"{len(now_w)} factors for every game, listed below, with the day's probable starters"),
+        ],
+        "runs": rows,
+        "score_name": "Better than guessing",
+        "score_fmt": lambda v: pct(v, 1),
+        "higher_better": True,
+        "factors": factors,
+        "factors_note": "Each number is how much that factor moves the home team's log-odds of winning (negative "
+                        "helps the away team); 0.1 is about 2.5 points of win chance near a coin flip. Better than "
+                        "guessing is how much less wrong (log loss) the model is than always giving the home team "
+                        "its usual win rate. Before is the model that was live until the last retrain.",
+        "empty": "No retrains logged yet. The first one runs about a week into the season.",
+    }
+    # model_page is shared across sites; point its live-results line at this model's tab.
+    html = model_page.render(spec).replace("Live results are on the Accuracy tab.", "Live results are on the Games tab.")
+    bt = model.get("backtest")
+    if bt:
+        b = model.get("baselines", {})
+        post = model.get("backtest_postseason")
+        tw = bt["top3"]
+        body = statline([
+            (f"{bt['correct']}-{bt['games'] - bt['correct']}", f"{model['backtest_season']} backtest",
+             f"{pct(bt['accuracy'], 1)} of games; model said {pct(bt['predicted_accuracy'], 1)}"),
+            (pct(tw["accuracy"], 1), f"Top {TOP_GAMES} picks each day", f"{tw['correct']}-{tw['picks'] - tw['correct']}"),
+            (f"{bt['log_loss']:.3f}", "Log loss", f"{b.get('home_rate_log_loss', 0):.3f} for home-team rate"),
+        ])
+        note = (f"Fit only on {model['trained_on'].replace(' to ', '-')} and never shown {model['backtest_season']}, "
+                f"then used to pick all {bt['games']} regular-season games of {model['backtest_season']} with only "
+                f"what was known that morning. The home team won {pct(b.get('home_team_accuracy'), 1)} of those "
+                f"games, and team ratings alone picked {pct(b.get('elo_only_accuracy'), 1)}. Lower log loss is "
+                f"better.")
+        if post:
+            note += f" In the postseason it went {post['correct']}-{post['games'] - post['correct']}."
+        note += " This is a test on an old season; the Games tab counts only live picks."
+        rows_html = "".join(f"""<tr><td class="row-label">{f"{b_['range'][0]:.0%} and up" if b_['range'][1] >= 1 else f"{b_['range'][0]:.0%}-{b_['range'][1]:.0%}"}</td>
+          <td data-label="Games" class="num">{b_['n']}</td>
+          <td data-label="Model said" class="num">{pct(b_['predicted'], 1)}</td>
+          <td data-label="Actually won" class="num accent">{pct(b_['actual'], 1)}</td></tr>""" for b_ in bt["bands"])
+        html += card("Backtest", "How the team model did on a season it was never trained on", body + f"""
+          <table class="data record-table responsive-stack">
+          <thead><tr><th>Win chance</th><th class="num">Games</th><th class="num">Model said</th><th class="num">Actually won</th></tr></thead>
+          <tbody>{rows_html}</tbody></table><div class="table-footnote">{note}</div>""")
+    return html
+
+
+def build_model(model, runs, team_model, team_runs):
+    jump = ('<nav class="subtabs model-jump" aria-label="Models">'
+            '<a class="subtab" href="#hit-model">Hit model</a><a class="subtab" href="#team-model">Team model</a></nav>')
+    body = (jump
+            + '<h2 class="model-group" id="hit-model">Hit model <span>who gets a hit</span></h2>'
+            + hit_model_html(model, runs)
+            + '<h2 class="model-group" id="team-model">Team model <span>who wins each game</span></h2>'
+            + (team_model_html(team_model, team_runs) if team_model.get("coef") else
+               card("Team Model", "", '<div class="empty-state">The team model hasn\'t been trained yet.</div>')))
+    return page_shell("Model", "model.html", body)
 
 
 # ── Home page summary ────────────────────────────────────────────────────────
@@ -664,18 +1025,22 @@ def main():
     history = load_json("picks_history.json", {"picks": []})
     slate = load_json(os.path.join("data", "slate.json"), None)
     model = load_json("model_weights.json", {})
-    games_slate = attach_picks(games_mod.load("mlb"), history)
+    team_history = load_json(os.path.join("teams", "picks_history.json"), {"picks": []})
+    team_model = load_json(os.path.join("teams", "model_weights.json"), {})
+    games_slate = attach_picks(games_mod.load("mlb"), history, team_history)
 
     if os.path.exists(DIST_DIR):
         shutil.rmtree(DIST_DIR)
     os.makedirs(DIST_DIR)
     pages = {
         "index.html": build_index(history, slate, model),
+        "games.html": build_games(team_history),
         "players.html": build_players(slate),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
         "schedule.html": games_mod.schedule_redirect("mlb"),
-        "model.html": build_model(model, load_json("model_history.json", {"runs": []})["runs"]),
+        "model.html": build_model(model, load_json("model_history.json", {"runs": []})["runs"], team_model,
+                                  load_json(os.path.join("teams", "model_history.json"), {"runs": []})["runs"]),
         "terms.html": build_terms(),
         "privacy.html": build_privacy(),
         "404.html": build_404(),
@@ -686,7 +1051,7 @@ def main():
     with open(os.path.join(DIST_DIR, "summary.json"), "w") as f:
         json.dump(build_summary(history, model), f, indent=1)
     games_mod.write_json(os.path.join(DIST_DIR, "games.json"), "mlb", games_slate, NOW.isoformat())
-    for asset in ("style.css", "site.js"):
+    for asset in ASSETS:
         shutil.copy(os.path.join(WEB_DIR, asset), os.path.join(DIST_DIR, asset))
     print(f"Built {len(pages)} pages in {DIST_DIR}")
 
