@@ -1,0 +1,59 @@
+name: MLB Team Model Data Pull + Retrain
+
+# Pulls full MLB seasons (scores and each team's starting pitcher) from the
+# MLB Stats API into teams/data/, then refits the team game-winner model and
+# re-runs its backtest on the latest finished season. Optional: the daily run
+# already stores every game, rolls each finished season into one file and
+# retrains weekly. Use this to rebuild the stored seasons from scratch.
+
+on:
+  workflow_dispatch:
+    inputs:
+      seasons:
+        description: "Seasons, comma-separated. Blank = the last three plus this one."
+        required: false
+
+concurrency:
+  group: mlb-edge
+  cancel-in-progress: false
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r research/requirements.txt
+
+      - name: Pull seasons
+        env:
+          SEASONS: ${{ inputs.seasons }}
+        run: python teams/research/pull_seasons.py
+
+      - name: Retrain model
+        if: hashFiles('teams/research/train.py') != ''
+        continue-on-error: true
+        env:
+          FORCE: '1'
+        run: python teams/research/train.py
+
+      - name: Commit data and model
+        run: |
+          git config user.name "MLB Edge Bot"
+          git config user.email "actions@github.com"
+          git add teams/data/
+          [ -f teams/model_weights.json ] && git add teams/model_weights.json
+          [ -f teams/model_history.json ] && git add teams/model_history.json
+          git diff --staged --quiet && exit 0
+          git commit -m "Refresh MLB team model data and retrain"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push
