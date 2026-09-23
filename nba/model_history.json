@@ -175,7 +175,29 @@
    "switched_recipe": true,
    "deployed": true,
    "reason": "new recipe beat the current one on held-out games",
-   "live_picks_last_14_days": null
+   "live_picks_last_14_days": null,
+   "weights_before": {
+    "home_court": 3.37,
+    "elo": 1.9779,
+    "net": 0.4191,
+    "recent": 0.0877,
+    "rest": 0.2033,
+    "b2b_home": -2.1566,
+    "b2b_away": 1.4939,
+    "missing_home": -1.4249,
+    "missing_away": 0.9127
+   },
+   "weights_after": {
+    "home_court": 2.9488,
+    "elo": 2.7022,
+    "net": 0.2974,
+    "recent": 0.1352,
+    "rest": 0.059,
+    "b2b_home": -2.3512,
+    "b2b_away": 1.5051,
+    "missing_home": -1.3915,
+    "missing_away": 1.0081
+   }
   }
  ]
 }

@@ -161,7 +161,29 @@
    "switched_recipe": false,
    "deployed": true,
    "reason": "kept the recipe, refit with the newest games",
-   "live_picks_last_7_days": null
+   "live_picks_last_7_days": null,
+   "weights_before": {
+    "season_avg": 0.0344,
+    "recent_form_avg": 0.0425,
+    "ab_per_game": 0.2125,
+    "is_home": -0.0029,
+    "platoon": 0.0933,
+    "park_factor": 0.0233,
+    "opp_pitcher_era": 0.0383,
+    "opp_pitcher_whip": 0.0029,
+    "opp_pitcher_k9": -0.0497
+   },
+   "weights_after": {
+    "season_avg": 0.0584,
+    "recent_form_avg": 0.0315,
+    "ab_per_game": 0.2042,
+    "is_home": -0.0056,
+    "platoon": 0.093,
+    "park_factor": 0.0227,
+    "opp_pitcher_era": 0.0371,
+    "opp_pitcher_whip": 0.0029,
+    "opp_pitcher_k9": -0.0482
+   }
   }
  ]
 }

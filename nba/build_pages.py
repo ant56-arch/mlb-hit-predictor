@@ -25,6 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 from build_site import (DASH, ET, NOW, card, pct, pill, script_json, statline)  # noqa: E402
+import model_page  # noqa: E402
 
 WEB_DIR = os.path.join(ROOT, "web")
 OUT_DIR = os.path.join(ROOT, "dist", "nba")
@@ -105,7 +106,7 @@ BRAND_MARK = ('<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><p
 
 # ── Page chrome ──────────────────────────────────────────────────────────────
 def page_shell(title, active, body_html, charts=False):
-    tabs = [("index.html", "Home"), ("history.html", "History"), ("accuracy.html", "Accuracy")]
+    tabs = [("index.html", "Home"), ("history.html", "History"), ("accuracy.html", "Accuracy"), ("model.html", "Model")]
     nav = "".join(
         f'<a href="{href}" class="active" aria-current="page">{label}</a>' if href == active
         else f'<a href="{href}">{label}</a>' for href, label in tabs)
@@ -426,12 +427,87 @@ def build_accuracy(history, model):
     return page_shell("Accuracy", "accuracy.html", "".join(parts), charts=charts)
 
 
+# ── Model tab ────────────────────────────────────────────────────────────────
+FACTOR_LABELS = {
+    "home_court": ("Home court", "points for the home team"),
+    "elo": ("Team rating (Elo) gap", "points per 100 rating points"),
+    "net": ("Season point differential gap", "points per point of differential"),
+    "recent": ("Last 10 games form gap", "points per point of differential"),
+    "rest": ("Extra rest", "points per extra day off vs. the opponent"),
+    "b2b_home": ("Home team on a back-to-back", ""),
+    "b2b_away": ("Away team on a back-to-back", ""),
+    "missing_home": ("Home team's missing players", "per 10 points of missing player value"),
+    "missing_away": ("Away team's missing players", "per 10 points of missing player value"),
+}
+
+
+def recipe_setup(recipe):
+    k, carry, years = recipe.get("elo_k", 20), recipe.get("elo_carry", 0.75), recipe.get("years", 3)
+    speed = "steady" if k <= 15 else "medium" if k <= 20 else "fast"
+    return [
+        ("Learns from:", f"the last {years} seasons of games"),
+        ("Team ratings:", f"{speed} - each result moves a team's Elo rating by up to {k} points"),
+        ("Over the summer:", f"keeps {carry:.0%} of each team's rating; the rest resets toward average"),
+    ]
+
+
+def build_model(model, runs):
+    runs = list(reversed(runs))
+
+    def skill(ll, baseline):
+        return None if ll is None or not baseline else 1 - ll / baseline
+
+    rows = []
+    for r in runs:
+        label, tone = model_page.decision(r)
+        base = r["holdout"].get("home_rate_log_loss")
+        chosen_ll = r["best_recipe"]["log_loss"] if r.get("switched_recipe") else r.get("current_recipe_log_loss")
+        rows.append({
+            "date": model_page.short_date(r["run_at"]), "data_through": model_page.short_date(r.get("data_through")),
+            "tested": len(r.get("candidates", [])), "decision": label, "tone": tone, "reason": r["reason"].capitalize() + ".",
+            "before": skill(r["live_model"].get("holdout_log_loss"), base),
+            "after": skill(chosen_ll, base) if r.get("deployed") else None,
+        })
+    last = runs[0] if runs else {}
+    now_w, before_w = model.get("coef", {}), last.get("weights_before") or {}
+    factors = [{"label": FACTOR_LABELS.get(f, (f, ""))[0], "note": FACTOR_LABELS.get(f, (f, ""))[1],
+                "now": now_w[f], "before": before_w.get(f), "fmt": lambda v: f"{v:+.2f} pts"}
+               for f in model.get("features", []) if f in now_w]
+    trained = model.get("trained_at")
+    spec = {
+        "intro": "Once a week during the season it checks itself against the newest games and only changes when a "
+                 "new version clearly predicts better.",
+        "tiles": [
+            (model_page.short_date(trained)[:-6] if trained else "-", "Last retrained",
+             f"games through {model_page.short_date(model.get('trained_through'))}" if model.get("trained_through") else ""),
+            (f"{model.get('training_games', 0):,}", "Games learned from",
+             " to ".join(model_page.short_date(d) for d in model.get("training_dates", []))),
+            ("Weekly", "Next check", "once 50+ new games are in; waits in the offseason"),
+            (rows[0]["decision"].split(" ")[0] if rows else "-", "Last decision",
+             f"{rows[0]['tested']} versions tested" if rows else "no retrains yet"),
+        ],
+        "setup": recipe_setup(model.get("recipe", {})) + [
+            ("Looks at:", f"{len(now_w)} factors for every game, listed below, including injuries on the day"),
+        ],
+        "runs": rows,
+        "score_name": "Better than guessing",
+        "score_fmt": lambda v: pct(v, 1),
+        "higher_better": True,
+        "factors": factors,
+        "factors_note": "Each number is how many points of margin that factor adds for the home team (negative "
+                        "helps the away team). Before is the model that was live until the last retrain.",
+        "empty": "No retrains logged yet. The first one runs about a week into the season.",
+    }
+    return page_shell("Model", "model.html", model_page.render(spec))
+
+
 # ── Home page summary ────────────────────────────────────────────────────────
-def build_summary(history):
+def build_summary(history, model):
     """summary.json for the NBA card on the home page (github.com/ant56-arch/ant56-arch.github.io)."""
     picks = history["picks"]
     summary = {"updated": NOW.isoformat(), "heading": None, "picks": [], "record": None,
-               "empty": "No NBA picks yet. They start on opening night in late October.", "result_labels": ["WIN", "LOSS"]}
+               "empty": "No NBA picks yet. They start on opening night in late October.", "result_labels": ["WIN", "LOSS"],
+               "retrained": model.get("trained_at"), "model_url": "model.html"}
     if picks:
         latest = max(p["date"] for p in picks)
         prefix = "Today" if latest == NOW.date().isoformat() else "Latest"
@@ -531,6 +607,7 @@ def main():
         "index.html": build_index(history, model),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
+        "model.html": build_model(model, load_json(os.path.join(HERE, "model_history.json"), {"runs": []})["runs"]),
         "terms.html": build_terms(),
         "privacy.html": build_privacy(),
     }
@@ -538,7 +615,7 @@ def main():
         with open(os.path.join(OUT_DIR, name), "w") as f:
             f.write(html)
     with open(os.path.join(OUT_DIR, "summary.json"), "w") as f:
-        json.dump(build_summary(history), f, indent=1)
+        json.dump(build_summary(history, model), f, indent=1)
     for asset in ASSETS:
         shutil.copy(os.path.join(WEB_DIR, asset), os.path.join(OUT_DIR, asset))
     print(f"Built {len(pages)} NBA pages in {OUT_DIR}")
