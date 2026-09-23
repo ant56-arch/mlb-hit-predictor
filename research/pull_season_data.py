@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from features import innings_to_float  # noqa: E402
 
 API = "https://statsapi.mlb.com/api/v1"
-SEASON = int(os.environ.get("SEASON", date.today().year))
+SEASON = int(os.environ.get("SEASON") or date.today().year)
 CUTOFF_DATE = os.environ.get("CUTOFF_DATE") or f"{SEASON}-12-31"
 MIN_SEASON_AB = 150
 OUTPUT_FILE = "research_gamelogs.json"
