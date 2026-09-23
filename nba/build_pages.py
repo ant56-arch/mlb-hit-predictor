@@ -427,11 +427,11 @@ def build_accuracy(history, model):
 
 
 # ── Home page summary ────────────────────────────────────────────────────────
-def build_summary(history, model):
+def build_summary(history):
     """summary.json for the NBA card on the home page (github.com/ant56-arch/ant56-arch.github.io)."""
     picks = history["picks"]
     summary = {"updated": NOW.isoformat(), "heading": None, "picks": [], "record": None,
-               "empty": "Picks start on opening night in late October.", "result_labels": ["WIN", "LOSS"]}
+               "empty": "No NBA picks yet. They start on opening night in late October.", "result_labels": ["WIN", "LOSS"]}
     if picks:
         latest = max(p["date"] for p in picks)
         prefix = "Today" if latest == NOW.date().isoformat() else "Latest"
@@ -449,12 +449,7 @@ def build_summary(history, model):
             w, l = wl(g)
             summary["record"] = {"value": f"{w}-{l}", "label": f"{season} record",
                                  "sub": f"{pct(w / len(g), 1)} of games picked right"}
-    bt = model.get("backtest")
-    if summary["record"] is None and bt:
-        summary["heading"] = summary["heading"] or "Season starts in late October"
-        summary["record"] = {"value": f"{bt['correct']}-{bt['games'] - bt['correct']}",
-                             "label": f"{model['backtest_season']} backtest",
-                             "sub": f"{pct(bt['accuracy'], 1)} of games picked right"}
+    # Only picks actually made count here, never last season's backtest.
     return summary
 
 
@@ -543,7 +538,7 @@ def main():
         with open(os.path.join(OUT_DIR, name), "w") as f:
             f.write(html)
     with open(os.path.join(OUT_DIR, "summary.json"), "w") as f:
-        json.dump(build_summary(history, model), f, indent=1)
+        json.dump(build_summary(history), f, indent=1)
     for asset in ASSETS:
         shutil.copy(os.path.join(WEB_DIR, asset), os.path.join(OUT_DIR, asset))
     print(f"Built {len(pages)} NBA pages in {OUT_DIR}")
