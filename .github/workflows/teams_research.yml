@@ -7,7 +7,7 @@ name: MLB Team Model Data Pull + Retrain
 # retrains weekly. Use this to rebuild the stored seasons from scratch.
 
 on:
-  # TEMPORARY: first pull from this branch (dispatch needs the file on main). Remove before merging.
+  # TEMPORARY: first pull + retrain from this branch (dispatch needs the file on main). Remove before merging.
   push:
     branches: [claude/site-bug-fixes-24fvni]
     paths: [.github/workflows/teams_research.yml]

@@ -4,8 +4,11 @@ name: MLB Edge Daily
 # lock once their game starts. The 2am run grades yesterday's picks. Every run
 # also runs NBA Edge (nba/predict.py), which stores finished games, grades and
 # refreshes its picks on every run whatever the mode, and retrains the NBA
-# model about once a week in season (nba/research/train.py). Every run rebuilds both
-# sites and (on main) publishes them to GitHub Pages.
+# model about once a week in season (nba/research/train.py). The MLB team model
+# (teams/predict.py) works the same way: every run stores final scores and
+# starting pitchers, grades and refreshes the game picks (locked at first
+# pitch), and teams/research/train.py retrains it about once a week. Every run
+# rebuilds both sites and (on main) publishes them to GitHub Pages.
 # Times are ET converted to UTC assuming EDT (UTC-4); they run an hour early
 # in EST, which only affects the offseason.
 
@@ -63,12 +66,26 @@ jobs:
         continue-on-error: true
         run: python nba/research/train.py
 
+      # MLB Edge's game picks (the Games tab). Like NBA, its steps can't block the hit picks.
+      - name: Run MLB team pipeline
+        continue-on-error: true
+        run: python teams/predict.py
+
+      # Weekly at most, and only once enough new games have been played: refit
+      # the team model, switching how it's built only if that wins on held-out
+      # recent games. Logs every retrain to teams/model_history.json.
+      - name: Retrain MLB team model
+        continue-on-error: true
+        run: python teams/research/train.py
+
       - name: Commit picks history
         run: |
           git config user.name "MLB Edge Bot"
           git config user.email "actions@github.com"
           git add picks_history.json nba/picks_history.json nba/data/ nba/model_weights.json
           [ -f nba/model_history.json ] && git add nba/model_history.json
+          git add teams/picks_history.json teams/data/ teams/model_weights.json
+          [ -f teams/model_history.json ] && git add teams/model_history.json
           git diff --staged --quiet && exit 0
           git commit -m "Update picks history $(TZ=America/New_York date '+%Y-%m-%d %H:%M')"
           git pull --rebase origin "${GITHUB_REF_NAME}"
