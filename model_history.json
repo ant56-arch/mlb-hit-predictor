@@ -1,0 +1,167 @@
+{
+ "runs": [
+  {
+   "run_at": "2026-09-23T03:26:43+00:00",
+   "data_through": "2026-09-22",
+   "holdout": {
+    "from": "2026-08-18",
+    "rows": 8159,
+    "baseline_log_loss": 0.67832
+   },
+   "live_model": {
+    "trained_at": "2026-09-23T01:55:05+00:00",
+    "recipe": {
+     "seasons": 1,
+     "l2": 0.001,
+     "park": "table"
+    },
+    "holdout": {
+     "log_loss": 0.66712,
+     "auc": 0.5854,
+     "top10_hit_rate": 0.7028
+    }
+   },
+   "current_recipe": {
+    "log_loss": 0.66716,
+    "auc": 0.5851,
+    "top10_hit_rate": 0.7167
+   },
+   "best_recipe": {
+    "recipe": {
+     "seasons": 3,
+     "l2": 0.01,
+     "park": "learned"
+    },
+    "log_loss": 0.66672,
+    "auc": 0.5866,
+    "top10_hit_rate": 0.7333
+   },
+   "candidates": [
+    {
+     "recipe": {
+      "seasons": 1,
+      "l2": 0.001,
+      "park": "table"
+     },
+     "log_loss": 0.66716,
+     "auc": 0.5851,
+     "top10_hit_rate": 0.7167
+    },
+    {
+     "recipe": {
+      "seasons": 1,
+      "l2": 0.001,
+      "park": "learned"
+     },
+     "log_loss": 0.66688,
+     "auc": 0.5858,
+     "top10_hit_rate": 0.7389
+    },
+    {
+     "recipe": {
+      "seasons": 1,
+      "l2": 0.01,
+      "park": "table"
+     },
+     "log_loss": 0.66717,
+     "auc": 0.5853,
+     "top10_hit_rate": 0.7139
+    },
+    {
+     "recipe": {
+      "seasons": 1,
+      "l2": 0.01,
+      "park": "learned"
+     },
+     "log_loss": 0.6669,
+     "auc": 0.586,
+     "top10_hit_rate": 0.7389
+    },
+    {
+     "recipe": {
+      "seasons": 2,
+      "l2": 0.001,
+      "park": "table"
+     },
+     "log_loss": 0.6671,
+     "auc": 0.5853,
+     "top10_hit_rate": 0.7028
+    },
+    {
+     "recipe": {
+      "seasons": 2,
+      "l2": 0.001,
+      "park": "learned"
+     },
+     "log_loss": 0.66679,
+     "auc": 0.5862,
+     "top10_hit_rate": 0.725
+    },
+    {
+     "recipe": {
+      "seasons": 2,
+      "l2": 0.01,
+      "park": "table"
+     },
+     "log_loss": 0.66708,
+     "auc": 0.5855,
+     "top10_hit_rate": 0.7028
+    },
+    {
+     "recipe": {
+      "seasons": 2,
+      "l2": 0.01,
+      "park": "learned"
+     },
+     "log_loss": 0.66677,
+     "auc": 0.5863,
+     "top10_hit_rate": 0.725
+    },
+    {
+     "recipe": {
+      "seasons": 3,
+      "l2": 0.001,
+      "park": "table"
+     },
+     "log_loss": 0.66701,
+     "auc": 0.5856,
+     "top10_hit_rate": 0.7083
+    },
+    {
+     "recipe": {
+      "seasons": 3,
+      "l2": 0.001,
+      "park": "learned"
+     },
+     "log_loss": 0.66673,
+     "auc": 0.5865,
+     "top10_hit_rate": 0.7306
+    },
+    {
+     "recipe": {
+      "seasons": 3,
+      "l2": 0.01,
+      "park": "table"
+     },
+     "log_loss": 0.66701,
+     "auc": 0.5857,
+     "top10_hit_rate": 0.7139
+    },
+    {
+     "recipe": {
+      "seasons": 3,
+      "l2": 0.01,
+      "park": "learned"
+     },
+     "log_loss": 0.66672,
+     "auc": 0.5866,
+     "top10_hit_rate": 0.7333
+    }
+   ],
+   "switched_recipe": false,
+   "deployed": true,
+   "reason": "kept the recipe, refit with the newest games",
+   "live_picks_last_7_days": null
+  }
+ ]
+}
