@@ -6,7 +6,9 @@ full slate, written by predict.py) and model_weights.json (backtest numbers),
 and writes:
   index.html    - the day's picks and the season track record
   games.html    - the team model's pick and win chance for every game today,
-                  this season's live record and every past day's results
+                  with a moneyline pick against the book price, this season's
+                  live record (game picks and moneyline) and every past day's
+                  results
                   (teams/picks_history.json, written by teams/predict.py)
   players.html  - every hitter in today's games, sortable
   history.html  - any past day's picks and how they did
@@ -33,6 +35,7 @@ from zoneinfo import ZoneInfo
 
 import games as games_mod
 import model_page
+import moneyline
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 WEB_DIR = os.path.join(ROOT, "web")
@@ -190,8 +193,9 @@ def footer():
       home/away. Stats, lineups and box scores via the MLB Stats API. A pick with no at-bats counts as no
       decision, not a miss.</p>
     <p class="footer-text">Game picks come from a second model fit on past seasons: each team's Elo rating, both
-      probable starting pitchers' ERA and FIP to date, and home field. No betting odds are
-      used. A postponed game counts as no decision.</p>
+      probable starting pitchers' ERA and FIP to date, and home field. The model uses no
+      betting odds; each game's moneyline pick compares its win chance with the book price on ESPN's scoreboard,
+      vig removed. A postponed game counts as no decision.</p>
     <p class="footer-text">For entertainment and research only. This is not betting advice, and past results
       don't predict future ones. If gambling is a problem for you or someone you know, call 1-800-GAMBLER.</p>
     <nav class="footer-links" aria-label="Site">
@@ -522,15 +526,65 @@ def games_table(picks):
             <div class="player-meta">{escape(starters)}</div></td>
           <td data-label="Pick"><span class="matchup-team">{logo(pick_id)}{escape(p['pick'])}</span></td>
           <td data-label="Win chance" class="num prob">{p['prob']:.0f}%</td>
+          {ml_cell(p)}
           <td data-label="Result" class="num"><span>{game_result_html(p)}</span></td>
         </tr>"""
     return f"""<table class="data responsive-stack">
-      <thead><tr><th>Game and starters (ERA)</th><th>Pick</th><th class="num">Win chance</th><th class="num">Result</th></tr></thead>
+      <thead><tr><th>Game and starters (ERA)</th><th>Pick</th><th class="num">Win chance</th><th>Moneyline</th><th class="num">Result</th></tr></thead>
       <tbody>{rows}</tbody>
     </table>
     <div class="table-footnote">Win chance is the model's estimate that its pick wins the game. Starters are the
       announced probables, away team first, with their ERA this season. Picks refresh until first pitch as starters
-      are named, then lock.</div>"""
+      are named, then lock. {ML_NOTE}</div>"""
+
+
+# ── Moneyline picks (moneyline.py), shared with NBA Edge ─────────────────────
+ML_NOTE = ("Moneyline is the side where the model's win chance beats the book's no-vig price by the most, at the "
+           "book price on ESPN's scoreboard; Value means an edge of 3 points or more. Graded at 1 unit a pick.")
+
+
+def ml_result_html(ml, void=False):
+    if void or ml.get("void"):
+        return pill("NO DECISION", "void")
+    if ml.get("won") is None:
+        return ""
+    return pill(moneyline.units_text(ml["units"]), "positive" if ml["won"] else "danger")
+
+
+def ml_cell(p):
+    """The Moneyline column: "BUF +135" (Value when the edge is 3+ points), our
+    chance vs. the book's, and once graded the units won or lost."""
+    ml = p.get("ml")
+    if not ml:
+        return '<td data-label="Moneyline" class="ml-cell"><div class="ml"><span class="faint">No odds</span></div></td>'
+    value = " " + pill("VALUE", "primary") if ml.get("value") else ""
+    res = ml_result_html(ml, p.get("void"))
+    return f"""<td data-label="Moneyline" class="ml-cell"><div class="ml">
+            <div class="ml-pick">{escape(moneyline.text(ml))}{value}{' ' + res if res else ''}</div>
+            <div class="ml-detail">{escape(moneyline.detail(ml))}</div></div></td>"""
+
+
+def ml_record_html(picks, empty="No moneyline picks graded yet this season."):
+    """The Moneyline section of a record card. picks: this season's live picks only."""
+    rec = moneyline.record(picks)
+    body = '<div class="section-label">Moneyline</div>'
+    if not rec:
+        return body + f'<div class="empty-state">{empty}</div>'
+    value = moneyline.record([p for p in picks if p.get("ml", {}).get("value")])
+    body += statline([
+        (f"{rec['wins']}-{rec['losses']}", "Moneyline record",
+         f"Value picks {value['wins']}-{value['losses']}" if value else "No value picks graded yet"),
+        (moneyline.units_text(rec["units"]), "Units", "1 unit a pick at the book price"),
+        (f"{rec['roi']:+.1%}", "ROI", f"on {rec['picks']} {'pick' if rec['picks'] == 1 else 'picks'}"),
+    ])
+    return body + ('<div class="table-footnote">Live moneyline picks only, at the price when the game started. '
+                   'A postponed game is no decision.</div>')
+
+
+def ml_day(picks):
+    """A History day's moneyline summary and per-game fields for nba.js."""
+    rec = moneyline.record(picks)
+    return {"wins": rec["wins"], "losses": rec["losses"], "units": moneyline.units_text(rec["units"])} if rec else None
 
 
 def game_bands(picks):
@@ -556,14 +610,15 @@ def game_record(picks):
     if not picks:
         return card("This Season", "Every pick graded against the final score",
                     '<div class="empty-state">No game picks graded yet. The record starts after the first night '
-                    'of results.</div>'), False
+                    'of results.</div>' + ml_record_html([])), False
     season = max(p["date"] for p in picks)[:4]
-    g = sorted(game_graded([p for p in picks if p["date"].startswith(season)]), key=lambda p: p["date"])
-    voided = sum(1 for p in picks if p["date"].startswith(season) and p.get("void"))
+    season_picks = [p for p in picks if p["date"].startswith(season)]
+    g = sorted(game_graded(season_picks), key=lambda p: p["date"])
+    voided = sum(1 for p in season_picks if p.get("void"))
     if not g:
         return card(f"{season} Record", "Every pick graded against the final score",
                     '<div class="empty-state">No game picks graded yet. The record starts after the first night '
-                    'of results.</div>'), False
+                    'of results.</div>' + ml_record_html(season_picks)), False
     w, l = game_wl(g)
     tw, tl = game_wl(game_top_per_day(g))
     strong = [p for p in g if p["prob"] >= STRONG_GAME]
@@ -577,7 +632,7 @@ def game_record(picks):
     note = (f"Live picks only, made before first pitch this season. {voided} postponed "
             f"{'game counts' if voided == 1 else 'games count'} as no decision.") if voided else \
         "Live picks only, made before first pitch this season."
-    body += f'<div class="table-footnote">{note}</div>'
+    body += f'<div class="table-footnote">{note}</div>' + ml_record_html(season_picks)
     charts = False
     weeks = defaultdict(list)
     for p in g:
@@ -621,11 +676,12 @@ def game_history(picks):
         w, l = game_wl(game_graded(ps))
         days[d] = {
             "label": day_label(d) + f", {d[:4]}",
-            "summary": {"wins": w, "losses": l, "voided": sum(1 for p in ps if p.get("void"))},
+            "summary": {"wins": w, "losses": l, "voided": sum(1 for p in ps if p.get("void")), "ml": ml_day(ps)},
             "games": [{
                 "matchup": f"{p['away']} @ {p['home']}",
                 "meta": f"{starter_text(p.get('away_sp'))} vs. {starter_text(p.get('home_sp'))}",
                 "pick": p["pick"], "prob": p["prob"], "correct": p.get("correct"), "void": bool(p.get("void")),
+                "ml": moneyline.result(p.get("ml"), p.get("void")),
                 "score": (f"{p['away']} {p['away_runs']}, {p['home']} {p['home_runs']}"
                           if p.get("home_runs") is not None else ""),
             } for p in sorted(ps, key=lambda p: -p["prob"])],
@@ -659,8 +715,7 @@ def build_games(team_history):
 
 # ── Schedule tab and scoreboard strip ────────────────────────────────────────
 # ESPN and the MLB Stats API abbreviate a few teams differently.
-ABBR_ALIASES = {"ARI": "AZ", "CHW": "CWS", "WAS": "WSH", "OAK": "ATH", "KCR": "KC", "SDP": "SD",
-                "SFG": "SF", "TBR": "TB"}
+ABBR_ALIASES = moneyline.MLB_ALIASES
 
 
 def _team_key(team):

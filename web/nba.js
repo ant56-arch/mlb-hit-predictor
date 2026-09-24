@@ -11,6 +11,21 @@ function nbaResult(g) {
   return `${esc(g.score)} ${pillHtml}`;
 }
 
+// The moneyline pick: "BUF +135", VALUE at a 3+ point edge, and once graded
+// the units won or lost at the book price.
+function nbaMoneyline(m) {
+  if (!m) return "<span class='faint'>No odds</span>";
+  let res = "";
+  if (m.void) res = " <span class='pill pill-void'>NO DECISION</span>";
+  else if (m.won !== null && m.won !== undefined) {
+    const u = `${m.units >= 0 ? "+" : ""}${m.units.toFixed(2)}u`;
+    res = ` <span class='pill ${m.won ? "pill-positive" : "pill-danger"}'>${u}</span>`;
+  }
+  const value = m.value ? " <span class='pill pill-primary'>VALUE</span>" : "";
+  return `<div class="ml"><div class="ml-pick">${esc(m.text)}${value}${res}</div>
+    <div class="ml-detail">${esc(m.detail)}</div></div>`;
+}
+
 function initNbaHistory() {
   const H = typeof NBA_HISTORY !== "undefined" ? NBA_HISTORY
     : typeof GAME_HISTORY !== "undefined" ? GAME_HISTORY : null;
@@ -21,16 +36,19 @@ function initNbaHistory() {
 
   function render(day) {
     const d = H.days[day];
+    const hasMl = d.games.some(g => g.ml);  // days before moneyline picks have none
     const rows = d.games.map(g => `<tr>
         <td><div class="player-name">${esc(g.matchup)}</div>${g.meta ? `<div class="player-meta">${esc(g.meta)}</div>` : ""}</td>
         <td data-label="Pick"><span class="matchup-team">${esc(g.pick)}</span></td>
         <td class="num prob" data-label="Win chance">${g.prob.toFixed(0)}%</td>
+        ${hasMl ? `<td data-label="Moneyline" class="ml-cell">${nbaMoneyline(g.ml)}</td>` : ""}
         <td class="num" data-label="Result"><span>${nbaResult(g)}</span></td>
       </tr>`).join("");
     const s = d.summary;
-    container.innerHTML = `<div class="section-label">${esc(d.label)}: ${s.wins}-${s.losses}${s.voided ? `, ${s.voided} no decision` : ""}</div>
+    const ml = s.ml ? ` · Moneyline ${s.ml.wins}-${s.ml.losses}, ${esc(s.ml.units)}` : "";
+    container.innerHTML = `<div class="section-label">${esc(d.label)}: ${s.wins}-${s.losses}${s.voided ? `, ${s.voided} no decision` : ""}${ml}</div>
       <table class="data responsive-stack">
-        <thead><tr><th>Game</th><th>Pick</th><th class="num">Win chance</th><th class="num">Result</th></tr></thead>
+        <thead><tr><th>Game</th><th>Pick</th><th class="num">Win chance</th>${hasMl ? "<th>Moneyline</th>" : ""}<th class="num">Result</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>`;
   }

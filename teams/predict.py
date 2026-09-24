@@ -7,8 +7,10 @@ does three things, so any run catches up on whatever an earlier one missed:
   2. grade    - settles pending picks from those final scores; a postponed or
                 suspended game is voided rather than counted
   3. picks    - gives every game today a win chance and a pick, using the
-                announced probable starters. Picks are refreshed each run (a
-                starter may be named or changed) and lock at first pitch.
+                announced probable starters, plus a moneyline pick against
+                the book price on ESPN's scoreboard (see moneyline.py). Picks
+                are refreshed each run (a starter may be named or changed, a
+                price may move) and lock at first pitch.
 
 Writes teams/picks_history.json for build_site.py. MLB_TODAY=YYYY-MM-DD
 overrides today's date for testing.
@@ -20,7 +22,9 @@ import sys
 from datetime import date, datetime, timedelta
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import model as M  # noqa: E402
+import moneyline  # noqa: E402
 import statsapi  # noqa: E402
 import store  # noqa: E402
 
@@ -103,6 +107,12 @@ def grade(history, games_by_id):
     print(f"Graded {graded} picks")
 
 
+def grade_moneylines(history):
+    n = sum(moneyline.grade(p) for p in history["picks"])
+    if n:
+        print(f"Graded {n} moneyline picks")
+
+
 # ── 3. picks ─────────────────────────────────────────────────────────────────
 def starter(league, probable):
     if not probable:
@@ -111,9 +121,25 @@ def starter(league, probable):
     return {"id": probable[0], "name": probable[1], "era": era, "ip": ip}
 
 
+def odds_for(g, slate, events, old):
+    """Today's moneyline odds for a game from ESPN, or the last ones stored for
+    it when ESPN has none right now."""
+    ev = moneyline.match(events, g["away"], g["home"], g["away_name"], g["home_name"],
+                         datetime.fromisoformat(g["start"]), moneyline.MLB_ALIASES)
+    if ev:  # doubleheader: the event belongs to whichever of the two games starts closest to it
+        same = [s for s in slate if (s["away"], s["home"]) == (g["away"], g["home"])]
+        if min(same, key=lambda s: abs((datetime.fromisoformat(s["start"]) - ev["start"]).total_seconds())) is not g:
+            ev = None
+    if ev and ev["odds"]:
+        return ev["odds"]
+    ml = (old or {}).get("ml")
+    return {"home": ml["home_ml"], "away": ml["away_ml"], "book": ml.get("book")} if ml else None
+
+
 def make_picks(history, league, weights):
     slate = [g for g in statsapi.schedule(TODAY) if g["date"] == TODAY]
     print(f"{len(slate)} games today")
+    events = moneyline.fetch("baseball/mlb", TODAY) if any(g["state"] == "pre" for g in slate) else []
     existing = {p["game_id"]: p for p in history["picks"] if p["date"] == TODAY}
     for g in slate:
         league.check_season(g["season"])  # new season: ratings regress, pitcher lines roll into history
@@ -142,13 +168,21 @@ def make_picks(history, league, weights):
             "model": weights.get("trained_at"),
             "correct": None,
         }
+        try:  # the moneyline pick is extra: without odds, the game pick still goes out
+            ml = moneyline.pick(g["home"], g["away"], pick["home_prob"], odds_for(g, slate, events, old), pick["pick"])
+        except Exception as e:
+            print(f"  moneyline for {g['away']} @ {g['home']} failed: {e}")
+            ml = None
+        if ml:
+            pick["ml"] = ml
         if old:
             old.clear()
             old.update(pick)
         else:
             history["picks"].append(pick)
         print(f"  {g['away']} @ {g['home']} ({sp['away']['name']} vs {sp['home']['name']}): "
-              f"{pick['pick']} {pick['prob']}%")
+              f"{pick['pick']} {pick['prob']}%"
+              + (f"; ML {moneyline.text(ml)} ({moneyline.detail(ml)})" if ml else ""))
 
 
 def main():
@@ -168,6 +202,7 @@ def main():
             league.update(g)
     if weights and in_season(TODAY):
         make_picks(history, league, weights)
+    grade_moneylines(history)
 
     history["picks"].sort(key=lambda p: (p["date"], p["start"], p["game_id"]))
     save(HISTORY_FILE, history, indent=1)
