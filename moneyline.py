@@ -7,7 +7,7 @@ The same definition runs on every Edge site (NFL, CFB, MLB, NBA):
     removed by normalizing the two to sum to 1.
   - The pick is the side where our model's win probability beats that no-vig
     book probability by the most (the edge). It's flagged Value when the edge
-    is at least 3 percentage points; otherwise it's still the pick.
+    is at least 6 percentage points; otherwise it's still the pick.
   - Graded at 1 unit risked at the book price: a win at +135 is +1.35u, a win
     at -150 is +0.667u, a loss is -1u. A postponed or cancelled game is no
     decision.
@@ -23,7 +23,7 @@ from datetime import datetime
 import requests
 
 ESPN = "https://site.api.espn.com/apis/site/v2/sports"
-VALUE_EDGE = 3.0  # percentage points of edge that make a pick Value
+VALUE_EDGE = 6.0  # percentage points of edge that make a pick Value
 
 # ESPN and the MLB Stats API abbreviate a few MLB teams differently.
 MLB_ALIASES = {"ARI": "AZ", "CHW": "CWS", "WAS": "WSH", "OAK": "ATH", "KCR": "KC", "SDP": "SD",

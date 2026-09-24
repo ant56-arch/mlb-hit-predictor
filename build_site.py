@@ -540,7 +540,7 @@ def games_table(picks):
 
 # ── Moneyline picks (moneyline.py), shared with NBA Edge ─────────────────────
 ML_NOTE = ("Moneyline is the side where the model's win chance beats the book's no-vig price by the most, at the "
-           "book price on ESPN's scoreboard; Value means an edge of 3 points or more. Graded at 1 unit a pick.")
+           "book price on ESPN's scoreboard; Value means an edge of 6 points or more. Graded at 1 unit a pick.")
 
 
 def ml_result_html(ml, void=False):
