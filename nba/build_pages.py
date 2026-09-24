@@ -3,7 +3,8 @@ build_pages.py - generates the NBA Edge pages into dist/nba/.
 
 Run after the MLB build (build_site.py wipes dist/). Reads
 nba/picks_history.json and nba/model_weights.json and writes:
-  index.html    - today's games with a pick and win chance for each, and the record
+  index.html    - today's games with a pick, win chance and moneyline pick for
+                  each, and the record (game picks and moneyline)
   history.html  - any past day's picks and how they did
   accuracy.html - predicted vs. actual over the season, and last season's backtest
   terms.html, privacy.html
@@ -24,9 +25,11 @@ from html import escape
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
-from build_site import (DASH, ET, NOW, card, pct, pill, script_json, statline)  # noqa: E402
+from build_site import (DASH, ET, ML_NOTE, NOW, card, ml_cell, ml_day, ml_record_html, pct, pill,  # noqa: E402
+                        script_json, statline)
 import games as games_mod  # noqa: E402
 import model_page  # noqa: E402
+import moneyline  # noqa: E402
 
 WEB_DIR = os.path.join(ROOT, "web")
 OUT_DIR = os.path.join(ROOT, "dist", "nba")
@@ -165,8 +168,9 @@ def footer():
     <div class="footer-brand">NBA <span>Edge</span></div>
     <p class="footer-text">Win chances come from a model fit on past NBA seasons: each team's Elo rating, point
       differential this season and over its last 10 games, rest and back-to-backs, home court, and how much of its
-      regular rotation is listed out on the injury report. Scores, box scores and injury reports via ESPN. No
-      betting odds are used.</p>
+      regular rotation is listed out on the injury report. Scores, box scores, injury reports and moneyline
+      prices via ESPN. The model uses no betting odds; each game's moneyline pick compares its win chance with
+      the book price, vig removed.</p>
     <p class="footer-text">For entertainment and research only. This is not betting advice, and past results
       don't predict future ones. If gambling is a problem for you or someone you know, call 1-800-GAMBLER.</p>
     <nav class="footer-links" aria-label="Site">
@@ -212,15 +216,17 @@ def games_table(picks):
           <td data-label="Pick"><span class="matchup-team">{logo(p['pick'])}{escape(p['pick'])}</span></td>
           <td data-label="Win chance" class="num prob">{p['prob']:.0f}%</td>
           <td data-label="Projected" class="num">by {p['margin']:.1f}</td>
+          {ml_cell(p)}
           <td{' data-label="Notes"' if notes else ''} class="why">{escape(notes)}</td>
           <td data-label="Result" class="num"><span>{result_html(p)}</span></td>
         </tr>"""
     return f"""<table class="data responsive-stack">
-      <thead><tr><th>Game</th><th>Pick</th><th class="num">Win chance</th><th class="num">Projected</th><th>Notes</th><th class="num">Result</th></tr></thead>
+      <thead><tr><th>Game</th><th>Pick</th><th class="num">Win chance</th><th class="num">Projected</th><th>Moneyline</th><th>Notes</th><th class="num">Result</th></tr></thead>
       <tbody>{rows}</tbody>
     </table>
     <div class="table-footnote">Win chance is the model's estimate that its pick wins the game. Picks are refreshed
-      with each injury report until tip-off, then locked. Players listed are regulars ruled out or doubtful.</div>"""
+      with each injury report until tip-off, then locked. Players listed are regulars ruled out or doubtful.
+      {ML_NOTE}</div>"""
 
 
 def backtest_stats(model):
@@ -253,9 +259,11 @@ def backtest_note(model):
 def track_record(history, model):
     picks = history["picks"]
     body = ""
+    season_picks = []
     if picks:
         season = season_of(max(p["date"] for p in picks))
-        g = graded([p for p in picks if season_of(p["date"]) == season])
+        season_picks = [p for p in picks if season_of(p["date"]) == season]
+        g = graded(season_picks)
         if g:
             w, l = wl(g)
             tw, tl = wl(top_per_day(g))
@@ -268,6 +276,7 @@ def track_record(history, model):
             ])
     if not body:
         body = '<div class="empty-state">No picks graded yet this season.</div>'
+    body += ml_record_html(season_picks)  # live picks this season only, never the backtest
     bt = backtest_stats(model)
     if bt:
         body += '<div class="section-label">Backtest</div>' + statline(bt) + backtest_note(model)
@@ -310,10 +319,11 @@ def build_history(history):
         w, l = wl(g)
         days[d] = {
             "label": day_label(d) + f", {d[:4]}",
-            "summary": {"wins": w, "losses": l, "voided": sum(1 for p in picks if p.get("void"))},
+            "summary": {"wins": w, "losses": l, "voided": sum(1 for p in picks if p.get("void")), "ml": ml_day(picks)},
             "games": [{
                 "matchup": f"{p['away']} {'vs' if p.get('neutral') else '@'} {p['home']}", "pick": p["pick"],
                 "prob": p["prob"], "correct": p.get("correct"), "void": bool(p.get("void")),
+                "ml": moneyline.result(p.get("ml"), p.get("void")),
                 "score": (f"{p['away']} {p['away_pts']}, {p['home']} {p['home_pts']}"
                           if p.get("home_pts") is not None else ""),
             } for p in sorted(picks, key=lambda p: -p["prob"])],
@@ -540,6 +550,10 @@ def build_summary(history, model):
             w, l = wl(g)
             summary["record"] = {"value": f"{w}-{l}", "label": f"{season} record",
                                  "sub": f"{pct(w / len(g), 1)} of games picked right"}
+        ml = moneyline.record([p for p in picks if season_of(p["date"]) == season])
+        if ml:  # optional: the home page can show it next to the record
+            summary["ml_record"] = {"value": f"{ml['wins']}-{ml['losses']}", "label": f"{season} moneyline",
+                                    "sub": f"{moneyline.units_text(ml['units'])}, {ml['roi']:+.1%} ROI"}
     # Only picks actually made count here, never last season's backtest.
     return summary
 

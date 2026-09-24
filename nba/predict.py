@@ -6,9 +6,11 @@ catches up on whatever an earlier one missed:
                 (nba/data/days/, see store.py) that isn't stored yet
   2. grade    - settles pending picks from those final scores; a postponed
                 game is voided rather than counted
-  3. picks    - gives every game today a win chance and a pick. Picks are
-                refreshed each run with the latest injury report, and lock
-                once their game tips off.
+  3. picks    - gives every game today a win chance and a pick, plus a
+                moneyline pick against the book price on ESPN's scoreboard
+                (see moneyline.py). Picks are refreshed each run with the
+                latest injury report and prices, and lock once their game
+                tips off.
 
 Writes nba/picks_history.json for build_site.py. NBA_TODAY=YYYY-MM-DD
 overrides today's date for testing.
@@ -20,8 +22,10 @@ import sys
 from datetime import date, datetime, timedelta
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import espn  # noqa: E402
 import model as M  # noqa: E402
+import moneyline  # noqa: E402
 import store  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -98,6 +102,12 @@ def grade(history, games_by_id):
     print(f"Graded {graded} picks")
 
 
+def grade_moneylines(history):
+    n = sum(moneyline.grade(p) for p in history["picks"])
+    if n:
+        print(f"Graded {n} moneyline picks")
+
+
 # ── 3. picks ─────────────────────────────────────────────────────────────────
 def record(league, team):
     m = league.margins[team]
@@ -115,6 +125,8 @@ def make_picks(history, league, weights):
     except Exception as e:  # picks still go out, just without injury news
         print(f"  injury report failed: {e}")
         report = {}
+    # The same scoreboard, read for its odds; ESPN event ids are our game ids.
+    events = {e["id"]: e for e in moneyline.fetch("basketball/nba", TODAY)}
 
     existing = {p["game_id"]: p for p in history["picks"] if p["date"] == TODAY}
     for g in slate:
@@ -145,12 +157,23 @@ def make_picks(history, league, weights):
             "model": weights.get("trained_at"),
             "correct": None,
         }
+        try:  # the moneyline pick is extra: without odds, the game pick still goes out
+            odds = (events.get(g["id"]) or {}).get("odds")
+            if not odds and old and old.get("ml"):  # ESPN has no price right now: keep the last one
+                odds = {"home": old["ml"]["home_ml"], "away": old["ml"]["away_ml"], "book": old["ml"].get("book")}
+            ml = moneyline.pick(g["home"], g["away"], pick["home_prob"], odds, pick["pick"])
+        except Exception as e:
+            print(f"  moneyline for {g['away']} @ {g['home']} failed: {e}")
+            ml = None
+        if ml:
+            pick["ml"] = ml
         if old:
             old.clear()
             old.update(pick)
         else:
             history["picks"].append(pick)
-        print(f"  {g['away']} @ {g['home']}: {pick['pick']} {pick['prob']}% by {pick['margin']}")
+        print(f"  {g['away']} @ {g['home']}: {pick['pick']} {pick['prob']}% by {pick['margin']}"
+              + (f"; ML {moneyline.text(ml)} ({moneyline.detail(ml)})" if ml else ""))
 
 
 def main():
@@ -169,6 +192,7 @@ def main():
             league.update(g, box.get(g["id"]))
     if weights and in_season(TODAY):
         make_picks(history, league, weights)
+    grade_moneylines(history)
 
     history["picks"].sort(key=lambda p: (p["date"], p["start"], p["game_id"]))
     save(HISTORY_FILE, history, indent=1)
