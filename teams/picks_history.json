@@ -36,7 +36,10 @@
     "starters": 0.126
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": false,
+   "home_runs": 2,
+   "away_runs": 4,
+   "winner": "WSH"
   },
   {
    "date": "2026-09-23",
@@ -74,7 +77,10 @@
     "starters": 0.152
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": true,
+   "home_runs": 4,
+   "away_runs": 2,
+   "winner": "BAL"
   },
   {
    "date": "2026-09-23",
@@ -112,7 +118,10 @@
     "starters": -0.012
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": false,
+   "home_runs": 2,
+   "away_runs": 4,
+   "winner": "MIN"
   },
   {
    "date": "2026-09-23",
@@ -150,7 +159,10 @@
     "starters": 0.0
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": true,
+   "home_runs": 4,
+   "away_runs": 2,
+   "winner": "BAL"
   },
   {
    "date": "2026-09-23",
@@ -188,7 +200,10 @@
     "starters": 0.124
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": false,
+   "home_runs": 1,
+   "away_runs": 5,
+   "winner": "STL"
   },
   {
    "date": "2026-09-23",
@@ -226,7 +241,10 @@
     "starters": -0.214
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": true,
+   "home_runs": 1,
+   "away_runs": 4,
+   "winner": "MIL"
   },
   {
    "date": "2026-09-23",
@@ -264,7 +282,10 @@
     "starters": 0.213
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": true,
+   "home_runs": 9,
+   "away_runs": 2,
+   "winner": "NYY"
   },
   {
    "date": "2026-09-23",
@@ -302,7 +323,10 @@
     "starters": 0.093
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": true,
+   "home_runs": 1,
+   "away_runs": 0,
+   "winner": "BOS"
   },
   {
    "date": "2026-09-23",
@@ -340,7 +364,10 @@
     "starters": 0.315
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": true,
+   "home_runs": 3,
+   "away_runs": 2,
+   "winner": "ATL"
   },
   {
    "date": "2026-09-23",
@@ -378,7 +405,10 @@
     "starters": 0.035
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": true,
+   "home_runs": 5,
+   "away_runs": 4,
+   "winner": "KC"
   },
   {
    "date": "2026-09-23",
@@ -416,7 +446,10 @@
     "starters": 0.158
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": false,
+   "home_runs": 2,
+   "away_runs": 3,
+   "winner": "MIA"
   },
   {
    "date": "2026-09-23",
@@ -454,7 +487,10 @@
     "starters": -0.172
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": true,
+   "home_runs": 2,
+   "away_runs": 7,
+   "winner": "NYM"
   },
   {
    "date": "2026-09-23",
@@ -492,7 +528,10 @@
     "starters": -0.079
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": true,
+   "home_runs": 3,
+   "away_runs": 5,
+   "winner": "AZ"
   },
   {
    "date": "2026-09-23",
@@ -530,7 +569,7 @@
     "starters": -0.322
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": false,
    "ml": {
     "team": "LAA",
     "side": "away",
@@ -542,9 +581,12 @@
     "home_ml": 112,
     "away_ml": -135,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": false,
+    "units": -1.0
+   },
+   "home_runs": 7,
+   "away_runs": 3,
+   "winner": "ATH"
   },
   {
    "date": "2026-09-23",
@@ -582,7 +624,7 @@
     "starters": 0.181
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": true,
    "ml": {
     "team": "SEA",
     "side": "home",
@@ -594,9 +636,12 @@
     "home_ml": -126,
     "away_ml": 105,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": true,
+    "units": 0.794
+   },
+   "home_runs": 6,
+   "away_runs": 5,
+   "winner": "SEA"
   },
   {
    "date": "2026-09-23",
@@ -634,7 +679,7 @@
     "starters": 0.228
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": false,
    "ml": {
     "team": "SD",
     "side": "away",
@@ -646,9 +691,12 @@
     "home_ml": -226,
     "away_ml": 184,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": true,
+    "units": 1.84
+   },
+   "home_runs": 1,
+   "away_runs": 5,
+   "winner": "SD"
   },
   {
    "date": "2026-09-24",
@@ -663,8 +711,8 @@
    "away_name": "St. Louis Cardinals",
    "home_id": 134,
    "away_id": 138,
-   "home_record": "80-77",
-   "away_record": "76-81",
+   "home_record": "80-78",
+   "away_record": "77-81",
    "home_sp": {
     "id": 694973,
     "name": "Paul Skenes",
@@ -678,22 +726,22 @@
     "ip": 138.0
    },
    "pick": "PIT",
-   "prob": 59.7,
-   "home_prob": 59.7,
+   "prob": 59.0,
+   "home_prob": 59.0,
    "factors": {
     "home_field": 0.141,
-    "elo": 0.103,
+    "elo": 0.076,
     "starters": 0.148
    },
    "model": "2026-09-23T16:14:07+00:00",
    "correct": null,
    "ml": {
-    "team": "PIT",
-    "side": "home",
-    "price": -163,
-    "prob": 59.7,
-    "book_prob": 59.2,
-    "edge": 0.5,
+    "team": "STL",
+    "side": "away",
+    "price": 134,
+    "prob": 41.0,
+    "book_prob": 40.8,
+    "edge": 0.2,
     "value": false,
     "home_ml": -163,
     "away_ml": 134,
@@ -715,8 +763,8 @@
    "away_name": "Chicago White Sox",
    "home_id": 118,
    "away_id": 145,
-   "home_record": "67-90",
-   "away_record": "81-76",
+   "home_record": "68-90",
+   "away_record": "81-77",
    "home_sp": {
     "id": 677976,
     "name": "Randy Dobnak",
@@ -730,11 +778,11 @@
     "ip": 25.7
    },
    "pick": "KC",
-   "prob": 52.4,
-   "home_prob": 52.4,
+   "prob": 52.7,
+   "home_prob": 52.7,
    "factors": {
     "home_field": 0.141,
-    "elo": -0.121,
+    "elo": -0.111,
     "starters": 0.078
    },
    "model": "2026-09-23T16:14:07+00:00",
@@ -742,13 +790,13 @@
    "ml": {
     "team": "KC",
     "side": "home",
-    "price": 102,
-    "prob": 52.4,
-    "book_prob": 47.4,
-    "edge": 5.0,
+    "price": 104,
+    "prob": 52.7,
+    "book_prob": 46.9,
+    "edge": 5.8,
     "value": false,
-    "home_ml": 102,
-    "away_ml": -122,
+    "home_ml": 104,
+    "away_ml": -125,
     "book": "DraftKings",
     "won": null,
     "units": null
@@ -767,8 +815,8 @@
    "away_name": "Miami Marlins",
    "home_id": 112,
    "away_id": 146,
-   "home_record": "87-70",
-   "away_record": "77-80",
+   "home_record": "87-71",
+   "away_record": "78-80",
    "home_sp": {
     "id": 571510,
     "name": "Matthew Boyd",
@@ -782,11 +830,11 @@
     "ip": 86.0
    },
    "pick": "CHC",
-   "prob": 62.9,
-   "home_prob": 62.9,
+   "prob": 62.6,
+   "home_prob": 62.6,
    "factors": {
     "home_field": 0.141,
-    "elo": 0.232,
+    "elo": 0.219,
     "starters": 0.154
    },
    "model": "2026-09-23T16:14:07+00:00",
@@ -794,13 +842,13 @@
    "ml": {
     "team": "MIA",
     "side": "away",
-    "price": 168,
-    "prob": 37.1,
-    "book_prob": 35.7,
-    "edge": 1.4,
+    "price": 169,
+    "prob": 37.4,
+    "book_prob": 35.6,
+    "edge": 1.8,
     "value": false,
-    "home_ml": -205,
-    "away_ml": 168,
+    "home_ml": -206,
+    "away_ml": 169,
     "book": "DraftKings",
     "won": null,
     "units": null
@@ -819,8 +867,8 @@
    "away_name": "New York Mets",
    "home_id": 140,
    "away_id": 121,
-   "home_record": "78-79",
-   "away_record": "72-85",
+   "home_record": "78-80",
+   "away_record": "73-85",
    "home_sp": {
     "id": 677958,
     "name": "Kumar Rocker",
@@ -833,12 +881,12 @@
     "era": 3.4,
     "ip": 79.3
    },
-   "pick": "TEX",
-   "prob": 50.5,
-   "home_prob": 50.5,
+   "pick": "NYM",
+   "prob": 50.2,
+   "home_prob": 49.8,
    "factors": {
     "home_field": 0.141,
-    "elo": -0.028,
+    "elo": -0.055,
     "starters": -0.094
    },
    "model": "2026-09-23T16:14:07+00:00",
@@ -847,9 +895,9 @@
     "team": "NYM",
     "side": "away",
     "price": 109,
-    "prob": 49.5,
+    "prob": 50.2,
     "book_prob": 45.8,
-    "edge": 3.7,
+    "edge": 4.4,
     "value": false,
     "home_ml": -131,
     "away_ml": 109,
@@ -871,8 +919,8 @@
    "away_name": "Arizona Diamondbacks",
    "home_id": 115,
    "away_id": 109,
-   "home_record": "57-100",
-   "away_record": "83-74",
+   "home_record": "57-101",
+   "away_record": "84-74",
    "home_sp": {
     "id": 685299,
     "name": "Tanner Gordon",
@@ -886,11 +934,11 @@
     "ip": 183.7
    },
    "pick": "AZ",
-   "prob": 65.2,
-   "home_prob": 34.8,
+   "prob": 65.5,
+   "home_prob": 34.5,
    "factors": {
     "home_field": 0.141,
-    "elo": -0.487,
+    "elo": -0.499,
     "starters": -0.282
    },
    "model": "2026-09-23T16:14:07+00:00",
@@ -899,9 +947,9 @@
     "team": "AZ",
     "side": "away",
     "price": -192,
-    "prob": 65.2,
+    "prob": 65.5,
     "book_prob": 62.9,
-    "edge": 2.3,
+    "edge": 2.6,
     "value": false,
     "home_ml": 158,
     "away_ml": -192,
@@ -923,8 +971,8 @@
    "away_name": "Milwaukee Brewers",
    "home_id": 143,
    "away_id": 158,
-   "home_record": "87-70",
-   "away_record": "98-59",
+   "home_record": "87-71",
+   "away_record": "99-59",
    "home_sp": {
     "id": 691725,
     "name": "Andrew Painter",
@@ -938,11 +986,11 @@
     "ip": 0
    },
    "pick": "MIL",
-   "prob": 51.6,
-   "home_prob": 48.4,
+   "prob": 52.0,
+   "home_prob": 48.0,
    "factors": {
     "home_field": 0.141,
-    "elo": -0.172,
+    "elo": -0.191,
     "starters": -0.032
    },
    "model": "2026-09-23T16:14:07+00:00",
@@ -950,13 +998,13 @@
    "ml": {
     "team": "MIL",
     "side": "away",
-    "price": -101,
-    "prob": 51.6,
-    "book_prob": 48.0,
-    "edge": 3.6,
+    "price": 100,
+    "prob": 52.0,
+    "book_prob": 47.8,
+    "edge": 4.2,
     "value": false,
-    "home_ml": -119,
-    "away_ml": -101,
+    "home_ml": -120,
+    "away_ml": 100,
     "book": "DraftKings",
     "won": null,
     "units": null
@@ -975,8 +1023,8 @@
    "away_name": "Cleveland Guardians",
    "home_id": 111,
    "away_id": 114,
-   "home_record": "84-73",
-   "away_record": "82-75",
+   "home_record": "85-73",
+   "away_record": "82-76",
    "home_sp": {
     "id": 624133,
     "name": "Ranger Suarez",
@@ -990,11 +1038,11 @@
     "ip": 3.0
    },
    "pick": "BOS",
-   "prob": 63.1,
-   "home_prob": 63.1,
+   "prob": 63.3,
+   "home_prob": 63.3,
    "factors": {
     "home_field": 0.141,
-    "elo": 0.135,
+    "elo": 0.143,
     "starters": 0.26
    },
    "model": "2026-09-23T16:14:07+00:00",
@@ -1003,9 +1051,9 @@
     "team": "BOS",
     "side": "home",
     "price": -143,
-    "prob": 63.1,
+    "prob": 63.3,
     "book_prob": 56.3,
-    "edge": 6.8,
+    "edge": 7.0,
     "value": true,
     "home_ml": -143,
     "away_ml": 119,
@@ -1027,8 +1075,8 @@
    "away_name": "Tampa Bay Rays",
    "home_id": 147,
    "away_id": 139,
-   "home_record": "90-67",
-   "away_record": "96-61",
+   "home_record": "91-67",
+   "away_record": "96-62",
    "home_sp": {
     "id": 693645,
     "name": "Cam Schlittler",
@@ -1042,11 +1090,11 @@
     "ip": 72.0
    },
    "pick": "NYY",
-   "prob": 62.3,
-   "home_prob": 62.3,
+   "prob": 62.9,
+   "home_prob": 62.9,
    "factors": {
     "home_field": 0.141,
-    "elo": 0.037,
+    "elo": 0.064,
     "starters": 0.322
    },
    "model": "2026-09-23T16:14:07+00:00",
@@ -1054,12 +1102,12 @@
    "ml": {
     "team": "NYY",
     "side": "home",
-    "price": -155,
-    "prob": 62.3,
-    "book_prob": 58.2,
-    "edge": 4.1,
+    "price": -156,
+    "prob": 62.9,
+    "book_prob": 58.3,
+    "edge": 4.6,
     "value": false,
-    "home_ml": -155,
+    "home_ml": -156,
     "away_ml": 129,
     "book": "DraftKings",
     "won": null,
@@ -1079,8 +1127,8 @@
    "away_name": "Cincinnati Reds",
    "home_id": 144,
    "away_id": 113,
-   "home_record": "92-65",
-   "away_record": "73-84",
+   "home_record": "93-65",
+   "away_record": "73-85",
    "home_sp": {
     "id": 641816,
     "name": "Tyler Mahle",
@@ -1094,11 +1142,11 @@
     "ip": 154.0
    },
    "pick": "ATL",
-   "prob": 65.1,
-   "home_prob": 65.1,
+   "prob": 65.3,
+   "home_prob": 65.3,
    "factors": {
     "home_field": 0.141,
-    "elo": 0.311,
+    "elo": 0.318,
     "starters": 0.172
    },
    "model": "2026-09-23T16:14:07+00:00",
@@ -1106,13 +1154,13 @@
    "ml": {
     "team": "CIN",
     "side": "away",
-    "price": 182,
-    "prob": 34.9,
-    "book_prob": 33.9,
-    "edge": 1.0,
+    "price": 183,
+    "prob": 34.7,
+    "book_prob": 33.8,
+    "edge": 0.9,
     "value": false,
-    "home_ml": -224,
-    "away_ml": 182,
+    "home_ml": -225,
+    "away_ml": 183,
     "book": "DraftKings",
     "won": null,
     "units": null
@@ -1131,8 +1179,8 @@
    "away_name": "Los Angeles Angels",
    "home_id": 136,
    "away_id": 108,
-   "home_record": "73-84",
-   "away_record": "60-97",
+   "home_record": "74-84",
+   "away_record": "60-98",
    "home_sp": {
     "id": 693433,
     "name": "Bryan Woo",
@@ -1146,11 +1194,11 @@
     "ip": 93.7
    },
    "pick": "SEA",
-   "prob": 63.4,
-   "home_prob": 63.4,
+   "prob": 63.8,
+   "home_prob": 63.8,
    "factors": {
     "home_field": 0.141,
-    "elo": 0.18,
+    "elo": 0.196,
     "starters": 0.229
    },
    "model": "2026-09-23T16:14:07+00:00",
@@ -1159,11 +1207,11 @@
     "team": "LAA",
     "side": "away",
     "price": 169,
-    "prob": 36.6,
-    "book_prob": 35.5,
-    "edge": 1.1,
+    "prob": 36.2,
+    "book_prob": 35.6,
+    "edge": 0.6,
     "value": false,
-    "home_ml": -207,
+    "home_ml": -206,
     "away_ml": 169,
     "book": "DraftKings",
     "won": null,
@@ -1183,13 +1231,13 @@
    "away_name": "Houston Astros",
    "home_id": 133,
    "away_id": 117,
-   "home_record": "62-95",
-   "away_record": "78-79",
+   "home_record": "63-95",
+   "away_record": "78-80",
    "home_sp": {
-    "id": null,
-    "name": "TBD",
-    "era": null,
-    "ip": 0
+    "id": 686930,
+    "name": "Mason Barnett",
+    "era": 10.24,
+    "ip": 19.3
    },
    "away_sp": {
     "id": 663567,
@@ -1198,15 +1246,29 @@
     "ip": 151.0
    },
    "pick": "HOU",
-   "prob": 56.3,
-   "home_prob": 43.7,
+   "prob": 61.5,
+   "home_prob": 38.5,
    "factors": {
     "home_field": 0.141,
-    "elo": -0.291,
-    "starters": -0.102
+    "elo": -0.276,
+    "starters": -0.335
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null
+   "correct": null,
+   "ml": {
+    "team": "HOU",
+    "side": "away",
+    "price": -163,
+    "prob": 61.5,
+    "book_prob": 59.2,
+    "edge": 2.3,
+    "value": false,
+    "home_ml": 134,
+    "away_ml": -163,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
   },
   {
    "date": "2026-09-24",
@@ -1221,8 +1283,8 @@
    "away_name": "San Diego Padres",
    "home_id": 119,
    "away_id": 135,
-   "home_record": "97-60",
-   "away_record": "87-70",
+   "home_record": "97-61",
+   "away_record": "88-70",
    "home_sp": {
     "id": 607192,
     "name": "Tyler Glasnow",
@@ -1236,11 +1298,11 @@
     "ip": 30.0
    },
    "pick": "LAD",
-   "prob": 58.5,
-   "home_prob": 58.5,
+   "prob": 57.8,
+   "home_prob": 57.8,
    "factors": {
     "home_field": 0.141,
-    "elo": 0.172,
+    "elo": 0.144,
     "starters": 0.03
    },
    "model": "2026-09-23T16:14:07+00:00",
@@ -1248,13 +1310,13 @@
    "ml": {
     "team": "SD",
     "side": "away",
-    "price": 142,
-    "prob": 41.5,
-    "book_prob": 39.5,
-    "edge": 2.0,
+    "price": 145,
+    "prob": 42.2,
+    "book_prob": 39.1,
+    "edge": 3.1,
     "value": false,
-    "home_ml": -172,
-    "away_ml": 142,
+    "home_ml": -175,
+    "away_ml": 145,
     "book": "DraftKings",
     "won": null,
     "units": null
