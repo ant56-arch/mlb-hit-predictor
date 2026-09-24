@@ -23,7 +23,7 @@ function nbaMoneyline(m) {
   }
   const value = m.value ? " <span class='pill pill-primary'>VALUE</span>" : "";
   return `<div class="ml"><div class="ml-pick">${esc(m.text)}${value}${res}</div>
-    <div class="ml-detail">${esc(m.detail)}</div></div>`;
+    <div class="ml-sub">${esc(m.detail)}</div></div>`;
 }
 
 function initNbaHistory() {

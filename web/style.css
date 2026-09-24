@@ -991,7 +991,7 @@ td.prob { font-family: var(--font-head); font-size: 24px; font-weight: 800; font
    VALUE tag, our chance vs. the book's, and the graded units. */
 .ml-pick { font-weight: 700; white-space: nowrap; }
 .ml-pick .pill { margin-left: 4px; }
-.ml-detail { font-size: 13px; color: var(--text-muted); margin-top: 2px; white-space: nowrap; }
+.ml-sub { font-size: 13px; color: var(--text-muted); margin-top: 2px; white-space: nowrap; }
 
 @media (max-width: 700px) {
   table.responsive-stack tbody tr td.ml-cell { grid-column: 1 / -1; align-items: flex-start; }
@@ -1000,5 +1000,5 @@ td.prob { font-family: var(--font-head); font-size: 24px; font-weight: 800; font
      that follows the moneyline gets its own line. */
   table.responsive-stack tbody tr:has(td.ml-cell) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   table.responsive-stack tbody tr td.ml-cell + td[data-label="Result"] { grid-column: 1 / -1; }
-  .ml-pick, .ml-detail { white-space: normal; }
+  .ml-pick, .ml-sub { white-space: normal; }
 }

@@ -561,7 +561,7 @@ def ml_cell(p):
     res = ml_result_html(ml, p.get("void"))
     return f"""<td data-label="Moneyline" class="ml-cell"><div class="ml">
             <div class="ml-pick">{escape(moneyline.text(ml))}{value}{' ' + res if res else ''}</div>
-            <div class="ml-detail">{escape(moneyline.detail(ml))}</div></div></td>"""
+            <div class="ml-sub">{escape(moneyline.detail(ml))}</div></div></td>"""
 
 
 def ml_record_html(picks, empty="No moneyline picks graded yet this season."):
