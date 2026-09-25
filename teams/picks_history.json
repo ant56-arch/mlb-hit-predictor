@@ -734,7 +734,7 @@
     "starters": 0.148
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": true,
    "ml": {
     "team": "STL",
     "side": "away",
@@ -746,9 +746,12 @@
     "home_ml": -163,
     "away_ml": 134,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": false,
+    "units": -1.0
+   },
+   "home_runs": 2,
+   "away_runs": 1,
+   "winner": "PIT"
   },
   {
    "date": "2026-09-24",
@@ -786,7 +789,7 @@
     "starters": 0.078
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": false,
    "ml": {
     "team": "KC",
     "side": "home",
@@ -798,9 +801,12 @@
     "home_ml": 104,
     "away_ml": -125,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": false,
+    "units": -1.0
+   },
+   "home_runs": 1,
+   "away_runs": 9,
+   "winner": "CWS"
   },
   {
    "date": "2026-09-24",
@@ -838,7 +844,7 @@
     "starters": 0.154
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": true,
    "ml": {
     "team": "MIA",
     "side": "away",
@@ -850,9 +856,12 @@
     "home_ml": -206,
     "away_ml": 169,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": false,
+    "units": -1.0
+   },
+   "home_runs": 2,
+   "away_runs": 1,
+   "winner": "CHC"
   },
   {
    "date": "2026-09-24",
@@ -890,7 +899,7 @@
     "starters": -0.094
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": false,
    "ml": {
     "team": "NYM",
     "side": "away",
@@ -902,9 +911,12 @@
     "home_ml": -131,
     "away_ml": 109,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": false,
+    "units": -1.0
+   },
+   "home_runs": 3,
+   "away_runs": 1,
+   "winner": "TEX"
   },
   {
    "date": "2026-09-24",
@@ -942,7 +954,7 @@
     "starters": -0.282
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": true,
    "ml": {
     "team": "AZ",
     "side": "away",
@@ -954,9 +966,12 @@
     "home_ml": 158,
     "away_ml": -192,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": true,
+    "units": 0.521
+   },
+   "home_runs": 8,
+   "away_runs": 12,
+   "winner": "AZ"
   },
   {
    "date": "2026-09-24",
@@ -994,7 +1009,7 @@
     "starters": -0.078
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": true,
    "ml": {
     "team": "MIL",
     "side": "away",
@@ -1006,9 +1021,12 @@
     "home_ml": -136,
     "away_ml": 113,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": true,
+    "units": 1.13
+   },
+   "home_runs": 1,
+   "away_runs": 5,
+   "winner": "MIL"
   },
   {
    "date": "2026-09-24",
@@ -1046,7 +1064,7 @@
     "starters": 0.26
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": false,
    "ml": {
     "team": "BOS",
     "side": "home",
@@ -1058,9 +1076,12 @@
     "home_ml": -132,
     "away_ml": 109,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": false,
+    "units": -1.0
+   },
+   "home_runs": 0,
+   "away_runs": 1,
+   "winner": "CLE"
   },
   {
    "date": "2026-09-24",
@@ -1098,7 +1119,7 @@
     "starters": 0.322
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": true,
    "ml": {
     "team": "NYY",
     "side": "home",
@@ -1110,9 +1131,12 @@
     "home_ml": -156,
     "away_ml": 129,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": true,
+    "units": 0.641
+   },
+   "home_runs": 6,
+   "away_runs": 4,
+   "winner": "NYY"
   },
   {
    "date": "2026-09-24",
@@ -1150,7 +1174,7 @@
     "starters": 0.172
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": false,
    "ml": {
     "team": "CIN",
     "side": "away",
@@ -1162,9 +1186,12 @@
     "home_ml": -231,
     "away_ml": 188,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": true,
+    "units": 1.88
+   },
+   "home_runs": 6,
+   "away_runs": 7,
+   "winner": "CIN"
   },
   {
    "date": "2026-09-24",
@@ -1202,7 +1229,7 @@
     "starters": 0.229
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": false,
    "ml": {
     "team": "SEA",
     "side": "home",
@@ -1214,9 +1241,12 @@
     "home_ml": -199,
     "away_ml": 163,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": false,
+    "units": -1.0
+   },
+   "home_runs": 4,
+   "away_runs": 6,
+   "winner": "LAA"
   },
   {
    "date": "2026-09-24",
@@ -1254,7 +1284,7 @@
     "starters": -0.335
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": true,
    "ml": {
     "team": "HOU",
     "side": "away",
@@ -1266,9 +1296,12 @@
     "home_ml": 147,
     "away_ml": -179,
     "book": "DraftKings",
-    "won": null,
-    "units": null
-   }
+    "won": true,
+    "units": 0.559
+   },
+   "home_runs": 5,
+   "away_runs": 7,
+   "winner": "HOU"
   },
   {
    "date": "2026-09-24",
@@ -1306,7 +1339,7 @@
     "starters": 0.03
    },
    "model": "2026-09-23T16:14:07+00:00",
-   "correct": null,
+   "correct": false,
    "ml": {
     "team": "SD",
     "side": "away",
@@ -1317,6 +1350,879 @@
     "value": false,
     "home_ml": -172,
     "away_ml": 142,
+    "book": "DraftKings",
+    "won": true,
+    "units": 1.42
+   },
+   "home_runs": 2,
+   "away_runs": 4,
+   "winner": "SD"
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "824703",
+   "start": "2026-09-25T13:05:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 1,
+   "home": "BOS",
+   "away": "CHC",
+   "home_name": "Boston Red Sox",
+   "away_name": "Chicago Cubs",
+   "home_id": 111,
+   "away_id": 112,
+   "home_record": "85-74",
+   "away_record": "88-71",
+   "home_sp": {
+    "id": 687941,
+    "name": "Alec Gamboa",
+    "era": 0.0,
+    "ip": 2.7
+   },
+   "away_sp": {
+    "id": 605280,
+    "name": "Clay Holmes",
+    "era": 3.25,
+    "ip": 97.0
+   },
+   "pick": "CHC",
+   "prob": 50.2,
+   "home_prob": 49.8,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.04,
+    "starters": -0.108
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "BOS",
+    "side": "home",
+    "price": -101,
+    "prob": 49.8,
+    "book_prob": 47.9,
+    "edge": 1.9,
+    "value": false,
+    "home_ml": -101,
+    "away_ml": -120,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "823491",
+   "start": "2026-09-25T16:05:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 1,
+   "home": "NYY",
+   "away": "BAL",
+   "home_name": "New York Yankees",
+   "away_name": "Baltimore Orioles",
+   "home_id": 147,
+   "away_id": 110,
+   "home_record": "92-67",
+   "away_record": "78-81",
+   "home_sp": {
+    "id": null,
+    "name": "TBD",
+    "era": null,
+    "ip": 0
+   },
+   "away_sp": {
+    "id": 687064,
+    "name": "Brandon Young",
+    "era": 3.62,
+    "ip": 151.7
+   },
+   "pick": "NYY",
+   "prob": 59.2,
+   "home_prob": 59.2,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.251,
+    "starters": -0.021
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "NYY",
+    "side": "home",
+    "price": -143,
+    "prob": 59.2,
+    "book_prob": 56.3,
+    "edge": 2.9,
+    "value": false,
+    "home_ml": -143,
+    "away_ml": 119,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "823489",
+   "start": "2026-09-25T16:10:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 2,
+   "home": "NYY",
+   "away": "BAL",
+   "home_name": "New York Yankees",
+   "away_name": "Baltimore Orioles",
+   "home_id": 147,
+   "away_id": 110,
+   "home_record": "92-67",
+   "away_record": "78-81",
+   "home_sp": {
+    "id": 694341,
+    "name": "Brendan Beck",
+    "era": 12.27,
+    "ip": 3.7
+   },
+   "away_sp": {
+    "id": 669432,
+    "name": "Trevor Rogers",
+    "era": 4.07,
+    "ip": 165.7
+   },
+   "pick": "NYY",
+   "prob": 53.3,
+   "home_prob": 53.3,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.251,
+    "starters": -0.259
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "824706",
+   "start": "2026-09-25T18:05:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 2,
+   "home": "BOS",
+   "away": "CHC",
+   "home_name": "Boston Red Sox",
+   "away_name": "Chicago Cubs",
+   "home_id": 111,
+   "away_id": 112,
+   "home_record": "85-74",
+   "away_record": "88-71",
+   "home_sp": {
+    "id": 678394,
+    "name": "Brayan Bello",
+    "era": 7.77,
+    "ip": 48.7
+   },
+   "away_sp": {
+    "id": 656849,
+    "name": "David Peterson",
+    "era": 5.25,
+    "ip": 111.3
+   },
+   "pick": "BOS",
+   "prob": 50.7,
+   "home_prob": 50.7,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.04,
+    "starters": -0.074
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "BOS",
+    "side": "home",
+    "price": -102,
+    "prob": 50.7,
+    "book_prob": 48.4,
+    "edge": 2.3,
+    "value": false,
+    "home_ml": -102,
+    "away_ml": -117,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "823409",
+   "start": "2026-09-25T18:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "PHI",
+   "away": "TB",
+   "home_name": "Philadelphia Phillies",
+   "away_name": "Tampa Bay Rays",
+   "home_id": 143,
+   "away_id": 139,
+   "home_record": "87-72",
+   "away_record": "96-63",
+   "home_sp": {
+    "id": 650911,
+    "name": "Cristopher S\u00e1nchez",
+    "era": 2.92,
+    "ip": 200.0
+   },
+   "away_sp": {
+    "id": 642547,
+    "name": "Freddy Peralta",
+    "era": 4.56,
+    "ip": 163.7
+   },
+   "pick": "PHI",
+   "prob": 58.0,
+   "home_prob": 58.0,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.015,
+    "starters": 0.195
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "TB",
+    "side": "away",
+    "price": 141,
+    "prob": 42.0,
+    "book_prob": 39.7,
+    "edge": 2.3,
+    "value": false,
+    "home_ml": -171,
+    "away_ml": 141,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "824220",
+   "start": "2026-09-25T18:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "DET",
+   "away": "PIT",
+   "home_name": "Detroit Tigers",
+   "away_name": "Pittsburgh Pirates",
+   "home_id": 116,
+   "away_id": 134,
+   "home_record": "74-85",
+   "away_record": "81-78",
+   "home_sp": {
+    "id": 695549,
+    "name": "Jackson Jobe",
+    "era": 3.98,
+    "ip": 40.7
+   },
+   "away_sp": {
+    "id": 696149,
+    "name": "Bubba Chandler",
+    "era": 4.38,
+    "ip": 146.0
+   },
+   "pick": "DET",
+   "prob": 53.3,
+   "home_prob": 53.3,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.016,
+    "starters": -0.027
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "DET",
+    "side": "home",
+    "price": -110,
+    "prob": 53.3,
+    "book_prob": 50.1,
+    "edge": 3.2,
+    "value": false,
+    "home_ml": -110,
+    "away_ml": -109,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "822681",
+   "start": "2026-09-25T18:45:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "WSH",
+   "away": "NYM",
+   "home_name": "Washington Nationals",
+   "away_name": "New York Mets",
+   "home_id": 120,
+   "away_id": 121,
+   "home_record": "75-84",
+   "away_record": "73-86",
+   "home_sp": {
+    "id": 674841,
+    "name": "Andrew Alvarez",
+    "era": 2.99,
+    "ip": 81.3
+   },
+   "away_sp": {
+    "id": null,
+    "name": "TBD",
+    "era": null,
+    "ip": 0
+   },
+   "pick": "WSH",
+   "prob": 55.5,
+   "home_prob": 55.5,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.1,
+    "starters": 0.179
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "WSH",
+    "side": "home",
+    "price": 113,
+    "prob": 55.5,
+    "book_prob": 44.9,
+    "edge": 10.6,
+    "value": true,
+    "home_ml": 113,
+    "away_ml": -136,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "822760",
+   "start": "2026-09-25T19:07:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "TOR",
+   "away": "CIN",
+   "home_name": "Toronto Blue Jays",
+   "away_name": "Cincinnati Reds",
+   "home_id": 141,
+   "away_id": 113,
+   "home_record": "77-82",
+   "away_record": "74-85",
+   "home_sp": {
+    "id": null,
+    "name": "TBD",
+    "era": null,
+    "ip": 0
+   },
+   "away_sp": {
+    "id": 666157,
+    "name": "Nick Lodolo",
+    "era": 5.04,
+    "ip": 103.7
+   },
+   "pick": "TOR",
+   "prob": 57.2,
+   "home_prob": 57.2,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.176,
+    "starters": -0.027
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "TOR",
+    "side": "home",
+    "price": -136,
+    "prob": 57.2,
+    "book_prob": 55.1,
+    "edge": 2.1,
+    "value": false,
+    "home_ml": -136,
+    "away_ml": 113,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "823816",
+   "start": "2026-09-25T19:10:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "MIA",
+   "away": "ATL",
+   "home_name": "Miami Marlins",
+   "away_name": "Atlanta Braves",
+   "home_id": 146,
+   "away_id": 144,
+   "home_record": "78-81",
+   "away_record": "93-66",
+   "home_sp": {
+    "id": 691587,
+    "name": "Eury P\u00e9rez",
+    "era": 4.17,
+    "ip": 149.0
+   },
+   "away_sp": {
+    "id": null,
+    "name": "TBD",
+    "era": null,
+    "ip": 0
+   },
+   "pick": "MIA",
+   "prob": 51.2,
+   "home_prob": 51.2,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.169,
+    "starters": 0.076
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "MIA",
+    "side": "home",
+    "price": 104,
+    "prob": 51.2,
+    "book_prob": 46.9,
+    "edge": 4.3,
+    "value": false,
+    "home_ml": 104,
+    "away_ml": -125,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "823735",
+   "start": "2026-09-25T19:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "MIL",
+   "away": "STL",
+   "home_name": "Milwaukee Brewers",
+   "away_name": "St. Louis Cardinals",
+   "home_id": 158,
+   "away_id": 138,
+   "home_record": "100-59",
+   "away_record": "77-82",
+   "home_sp": {
+    "id": 688107,
+    "name": "Robert Gasser",
+    "era": 4.13,
+    "ip": 98.0
+   },
+   "away_sp": {
+    "id": 700241,
+    "name": "Michael McGreevy",
+    "era": 3.84,
+    "ip": 164.0
+   },
+   "pick": "MIL",
+   "prob": 63.8,
+   "home_prob": 63.8,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.428,
+    "starters": -0.004
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "MIL",
+    "side": "home",
+    "price": -184,
+    "prob": 63.8,
+    "book_prob": 61.9,
+    "edge": 1.9,
+    "value": false,
+    "home_ml": -184,
+    "away_ml": 151,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "824058",
+   "start": "2026-09-25T19:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "KC",
+   "away": "CLE",
+   "home_name": "Kansas City Royals",
+   "away_name": "Cleveland Guardians",
+   "home_id": 118,
+   "away_id": 114,
+   "home_record": "68-91",
+   "away_record": "83-76",
+   "home_sp": {
+    "id": 702070,
+    "name": "Noah Cameron",
+    "era": 4.08,
+    "ip": 165.3
+   },
+   "away_sp": {
+    "id": 668909,
+    "name": "Gavin Williams",
+    "era": 3.63,
+    "ip": 181.0
+   },
+   "pick": "CLE",
+   "prob": 51.9,
+   "home_prob": 48.1,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.173,
+    "starters": -0.043
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "KC",
+    "side": "home",
+    "price": 118,
+    "prob": 48.1,
+    "book_prob": 43.9,
+    "edge": 4.2,
+    "value": false,
+    "home_ml": 118,
+    "away_ml": -142,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "824544",
+   "start": "2026-09-25T19:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "CWS",
+   "away": "COL",
+   "home_name": "Chicago White Sox",
+   "away_name": "Colorado Rockies",
+   "home_id": 145,
+   "away_id": 115,
+   "home_record": "82-77",
+   "away_record": "57-102",
+   "home_sp": {
+    "id": 680732,
+    "name": "Sean Burke",
+    "era": 3.81,
+    "ip": 137.0
+   },
+   "away_sp": {
+    "id": 608372,
+    "name": "Tomoyuki Sugano",
+    "era": 5.36,
+    "ip": 147.7
+   },
+   "pick": "CWS",
+   "prob": 68.6,
+   "home_prob": 68.6,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.459,
+    "starters": 0.181
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "CWS",
+    "side": "home",
+    "price": -230,
+    "prob": 68.6,
+    "book_prob": 66.7,
+    "edge": 1.9,
+    "value": false,
+    "home_ml": -230,
+    "away_ml": 187,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "823652",
+   "start": "2026-09-25T20:10:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "MIN",
+   "away": "TEX",
+   "home_name": "Minnesota Twins",
+   "away_name": "Texas Rangers",
+   "home_id": 142,
+   "away_id": 140,
+   "home_record": "75-84",
+   "away_record": "79-80",
+   "home_sp": {
+    "id": 657746,
+    "name": "Joe Ryan",
+    "era": 3.83,
+    "ip": 138.7
+   },
+   "away_sp": {
+    "id": 594798,
+    "name": "Jacob deGrom",
+    "era": 3.86,
+    "ip": 158.7
+   },
+   "pick": "MIN",
+   "prob": 50.3,
+   "home_prob": 50.3,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.093,
+    "starters": -0.038
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "MIN",
+    "side": "home",
+    "price": -108,
+    "prob": 50.3,
+    "book_prob": 49.6,
+    "edge": 0.7,
+    "value": false,
+    "home_ml": -108,
+    "away_ml": -112,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "823248",
+   "start": "2026-09-25T21:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "SD",
+   "away": "AZ",
+   "home_name": "San Diego Padres",
+   "away_name": "Arizona Diamondbacks",
+   "home_id": 135,
+   "away_id": 109,
+   "home_record": "89-70",
+   "away_record": "85-74",
+   "home_sp": {
+    "id": null,
+    "name": "TBD",
+    "era": null,
+    "ip": 0
+   },
+   "away_sp": {
+    "id": 694297,
+    "name": "Brandon Pfaadt",
+    "era": 3.28,
+    "ip": 107.0
+   },
+   "pick": "SD",
+   "prob": 54.8,
+   "home_prob": 54.8,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.12,
+    "starters": -0.069
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "AZ",
+    "side": "away",
+    "price": 114,
+    "prob": 45.2,
+    "book_prob": 44.6,
+    "edge": 0.6,
+    "value": false,
+    "home_ml": -138,
+    "away_ml": 114,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "824947",
+   "start": "2026-09-25T21:40:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "ATH",
+   "away": "HOU",
+   "home_name": "Athletics",
+   "away_name": "Houston Astros",
+   "home_id": 133,
+   "away_id": 117,
+   "home_record": "63-96",
+   "away_record": "79-80",
+   "home_sp": {
+    "id": 682052,
+    "name": "Jacob Lopez",
+    "era": 5.63,
+    "ip": 108.7
+   },
+   "away_sp": {
+    "id": 686613,
+    "name": "Hunter Brown",
+    "era": 3.26,
+    "ip": 102.0
+   },
+   "pick": "HOU",
+   "prob": 60.4,
+   "home_prob": 39.6,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.29,
+    "starters": -0.272
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "ATH",
+    "side": "home",
+    "price": 148,
+    "prob": 39.6,
+    "book_prob": 38.5,
+    "edge": 1.1,
+    "value": false,
+    "home_ml": 148,
+    "away_ml": -180,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "823085",
+   "start": "2026-09-25T22:10:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "SEA",
+   "away": "LAA",
+   "home_name": "Seattle Mariners",
+   "away_name": "Los Angeles Angels",
+   "home_id": 136,
+   "away_id": 108,
+   "home_record": "74-85",
+   "away_record": "61-98",
+   "home_sp": {
+    "id": 682243,
+    "name": "Bryce Miller",
+    "era": 4.01,
+    "ip": 107.7
+   },
+   "away_sp": {
+    "id": 672282,
+    "name": "Reid Detmers",
+    "era": 3.47,
+    "ip": 179.0
+   },
+   "pick": "SEA",
+   "prob": 55.6,
+   "home_prob": 55.6,
+   "factors": {
+    "home_field": 0.141,
+    "elo": 0.177,
+    "starters": -0.094
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "SEA",
+    "side": "home",
+    "price": -135,
+    "prob": 55.6,
+    "book_prob": 54.9,
+    "edge": 0.7,
+    "value": false,
+    "home_ml": -135,
+    "away_ml": 112,
+    "book": "DraftKings",
+    "won": null,
+    "units": null
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "game_id": "823167",
+   "start": "2026-09-25T22:15:00-04:00",
+   "type": "regular",
+   "round": null,
+   "doubleheader": 0,
+   "home": "SF",
+   "away": "LAD",
+   "home_name": "San Francisco Giants",
+   "away_name": "Los Angeles Dodgers",
+   "home_id": 137,
+   "away_id": 119,
+   "home_record": "65-94",
+   "away_record": "97-62",
+   "home_sp": {
+    "id": 805074,
+    "name": "Yunior Marte",
+    "era": 6.75,
+    "ip": 9.3
+   },
+   "away_sp": {
+    "id": 669373,
+    "name": "Tarik Skubal",
+    "era": 2.85,
+    "ip": 151.7
+   },
+   "pick": "LAD",
+   "prob": 66.8,
+   "home_prob": 33.2,
+   "factors": {
+    "home_field": 0.141,
+    "elo": -0.451,
+    "starters": -0.392
+   },
+   "model": "2026-09-23T16:14:07+00:00",
+   "correct": null,
+   "ml": {
+    "team": "SF",
+    "side": "home",
+    "price": 299,
+    "prob": 33.2,
+    "book_prob": 24.0,
+    "edge": 9.2,
+    "value": true,
+    "home_ml": 299,
+    "away_ml": -387,
     "book": "DraftKings",
     "won": null,
     "units": null
