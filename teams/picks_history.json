@@ -1426,10 +1426,10 @@
    "home_record": "92-67",
    "away_record": "78-81",
    "home_sp": {
-    "id": null,
-    "name": "TBD",
-    "era": null,
-    "ip": 0
+    "id": 694341,
+    "name": "Brendan Beck",
+    "era": 12.27,
+    "ip": 3.7
    },
    "away_sp": {
     "id": 669432,
@@ -1438,25 +1438,25 @@
     "ip": 165.7
    },
    "pick": "NYY",
-   "prob": 55.8,
-   "home_prob": 55.8,
+   "prob": 53.3,
+   "home_prob": 53.3,
    "factors": {
     "home_field": 0.141,
     "elo": 0.251,
-    "starters": -0.161
+    "starters": -0.259
    },
    "model": "2026-09-23T16:14:07+00:00",
    "correct": null,
    "ml": {
     "team": "NYY",
     "side": "home",
-    "price": -125,
-    "prob": 55.8,
-    "book_prob": 53.1,
-    "edge": 2.7,
+    "price": -113,
+    "prob": 53.3,
+    "book_prob": 50.8,
+    "edge": 2.5,
     "value": false,
-    "home_ml": -125,
-    "away_ml": 104,
+    "home_ml": -113,
+    "away_ml": -106,
     "book": "DraftKings",
     "won": null,
     "units": null
@@ -1478,10 +1478,10 @@
    "home_record": "92-67",
    "away_record": "78-81",
    "home_sp": {
-    "id": 694341,
-    "name": "Brendan Beck",
-    "era": 12.27,
-    "ip": 3.7
+    "id": null,
+    "name": "TBD",
+    "era": null,
+    "ip": 0
    },
    "away_sp": {
     "id": 687064,
@@ -1490,12 +1490,12 @@
     "ip": 151.7
    },
    "pick": "NYY",
-   "prob": 56.8,
-   "home_prob": 56.8,
+   "prob": 59.2,
+   "home_prob": 59.2,
    "factors": {
     "home_field": 0.141,
     "elo": 0.251,
-    "starters": -0.119
+    "starters": -0.021
    },
    "model": "2026-09-23T16:14:07+00:00",
    "correct": null
@@ -1540,13 +1540,13 @@
    "ml": {
     "team": "BOS",
     "side": "home",
-    "price": -105,
+    "price": -102,
     "prob": 50.7,
-    "book_prob": 48.9,
-    "edge": 1.8,
+    "book_prob": 48.2,
+    "edge": 2.5,
     "value": false,
-    "home_ml": -105,
-    "away_ml": -115,
+    "home_ml": -102,
+    "away_ml": -119,
     "book": "DraftKings",
     "won": null,
     "units": null
@@ -1592,13 +1592,13 @@
    "ml": {
     "team": "TB",
     "side": "away",
-    "price": 144,
+    "price": 148,
     "prob": 42.0,
-    "book_prob": 39.2,
-    "edge": 2.8,
+    "book_prob": 38.6,
+    "edge": 3.4,
     "value": false,
-    "home_ml": -174,
-    "away_ml": 144,
+    "home_ml": -179,
+    "away_ml": 148,
     "book": "DraftKings",
     "won": null,
     "units": null
@@ -1644,12 +1644,12 @@
    "ml": {
     "team": "DET",
     "side": "home",
-    "price": -109,
+    "price": -110,
     "prob": 53.3,
-    "book_prob": 49.9,
-    "edge": 3.4,
+    "book_prob": 50.0,
+    "edge": 3.3,
     "value": false,
-    "home_ml": -109,
+    "home_ml": -110,
     "away_ml": -110,
     "book": "DraftKings",
     "won": null,
@@ -1696,13 +1696,13 @@
    "ml": {
     "team": "WSH",
     "side": "home",
-    "price": -110,
+    "price": -108,
     "prob": 55.5,
-    "book_prob": 50.1,
-    "edge": 5.4,
+    "book_prob": 49.6,
+    "edge": 5.9,
     "value": false,
-    "home_ml": -110,
-    "away_ml": -109,
+    "home_ml": -108,
+    "away_ml": -112,
     "book": "DraftKings",
     "won": null,
     "units": null
@@ -1748,13 +1748,13 @@
    "ml": {
     "team": "TOR",
     "side": "home",
-    "price": -136,
+    "price": -143,
     "prob": 57.2,
-    "book_prob": 55.1,
-    "edge": 2.1,
+    "book_prob": 56.2,
+    "edge": 1.0,
     "value": false,
-    "home_ml": -136,
-    "away_ml": 113,
+    "home_ml": -143,
+    "away_ml": 118,
     "book": "DraftKings",
     "won": null,
     "units": null
@@ -1782,18 +1782,18 @@
     "ip": 149.0
    },
    "away_sp": {
-    "id": null,
-    "name": "TBD",
+    "id": 678061,
+    "name": "Ray Kerr",
     "era": null,
     "ip": 0
    },
    "pick": "MIA",
-   "prob": 51.2,
-   "home_prob": 51.2,
+   "prob": 51.3,
+   "home_prob": 51.3,
    "factors": {
     "home_field": 0.141,
     "elo": -0.169,
-    "starters": 0.076
+    "starters": 0.08
    },
    "model": "2026-09-23T16:14:07+00:00",
    "correct": null,
@@ -1801,9 +1801,9 @@
     "team": "MIA",
     "side": "home",
     "price": -102,
-    "prob": 51.2,
+    "prob": 51.3,
     "book_prob": 48.3,
-    "edge": 2.9,
+    "edge": 3.0,
     "value": false,
     "home_ml": -102,
     "away_ml": -118,
@@ -1956,13 +1956,13 @@
    "ml": {
     "team": "CWS",
     "side": "home",
-    "price": -240,
+    "price": -245,
     "prob": 68.6,
-    "book_prob": 67.5,
-    "edge": 1.1,
+    "book_prob": 67.9,
+    "edge": 0.7,
     "value": false,
-    "home_ml": -240,
-    "away_ml": 194,
+    "home_ml": -245,
+    "away_ml": 198,
     "book": "DraftKings",
     "won": null,
     "units": null
@@ -2112,13 +2112,13 @@
    "ml": {
     "team": "ATH",
     "side": "home",
-    "price": 149,
+    "price": 152,
     "prob": 39.6,
-    "book_prob": 38.4,
-    "edge": 1.2,
+    "book_prob": 37.9,
+    "edge": 1.7,
     "value": false,
-    "home_ml": 149,
-    "away_ml": -182,
+    "home_ml": 152,
+    "away_ml": -185,
     "book": "DraftKings",
     "won": null,
     "units": null
@@ -2216,13 +2216,13 @@
    "ml": {
     "team": "SF",
     "side": "home",
-    "price": 265,
+    "price": 264,
     "prob": 33.2,
-    "book_prob": 26.2,
-    "edge": 7.0,
+    "book_prob": 26.3,
+    "edge": 6.9,
     "value": true,
-    "home_ml": 265,
-    "away_ml": -337,
+    "home_ml": 264,
+    "away_ml": -336,
     "book": "DraftKings",
     "won": null,
     "units": null
