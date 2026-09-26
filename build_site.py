@@ -298,7 +298,20 @@ def track_record(history, model):
     return card("Track Record", "Every pick graded against the box score", body)
 
 
-def build_index(history, slate, model):
+def home_games_card(team_history):
+    """Today's game picks on Home, under the hitters; the Games tab keeps the
+    full record and past results."""
+    today = NOW.date().isoformat()
+    todays = [p for p in (team_history or {}).get("picks", []) if p["date"] == today]
+    if not todays:
+        return ""
+    return card(f"Today's Games: {day_label(today)}",
+                'A winner and win chance for every game. Record and past results are on the '
+                '<a href="games.html">Games tab</a>.',
+                games_table(todays))
+
+
+def build_index(history, slate, model, team_history=None):
     picks = history["picks"]
     if picks:
         latest = max(p["date"] for p in picks)
@@ -312,7 +325,7 @@ def build_index(history, slate, model):
     if slate and not slate.get("games") and slate.get("date") == NOW.date().isoformat():
         picks_html = card("Today's Picks", "", '<div class="empty-state">No MLB games today. Picks resume on the '
                           'next game day.</div>') + picks_html.replace("Today's Picks", "Latest Picks", 1)
-    return page_shell("Home", "index.html", picks_html + track_record(history, model))
+    return page_shell("Home", "index.html", picks_html + home_games_card(team_history) + track_record(history, model))
 
 
 # ── Players ──────────────────────────────────────────────────────────────────
@@ -1021,7 +1034,7 @@ def main():
         shutil.rmtree(DIST_DIR)
     os.makedirs(DIST_DIR)
     pages = {
-        "index.html": build_index(history, slate, model),
+        "index.html": build_index(history, slate, model, team_history),
         "games.html": build_games(team_history),
         "players.html": build_players(slate),
         "history.html": build_history(history),
