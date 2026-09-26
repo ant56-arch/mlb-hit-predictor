@@ -5,9 +5,9 @@ moneyline.py - moneyline picks for the MLB team model (teams/) and NBA Edge
 The same definition runs on every Edge site (NFL, CFB, MLB, NBA):
   - Both sides' American odds become implied probabilities, and the vig is
     removed by normalizing the two to sum to 1.
-  - The pick is the side where our model's win probability beats that no-vig
-    book probability by the most (the edge). It's flagged Value when the edge
-    is at least 6 percentage points; otherwise it's still the pick.
+  - The pick is the team our model picks to win, at its price. The edge is
+    our win probability minus that no-vig book probability; the pick is
+    flagged Value when the edge is at least 6 percentage points.
   - Graded at 1 unit risked at the book price: a win at +135 is +1.35u, a win
     at -150 is +0.667u, a loss is -1u. A postponed or cancelled game is no
     decision.
@@ -161,10 +161,12 @@ def pick(home, away, home_prob, odds, model_pick=None):
     ours = {"home": home_prob / 100, "away": 1 - home_prob / 100}
     book = {"home": book_home, "away": book_away}
     edge = {s: ours[s] - book[s] for s in ("home", "away")}
-    if abs(edge["home"] - edge["away"]) < 1e-9:  # dead even: go with the model's pick
+    # The bet is always on the team the model picks to win; the edge only
+    # says whether its price is worth it (Value).
+    if model_pick in (home, away):
         side = "home" if model_pick == home else "away"
     else:
-        side = max(edge, key=edge.get)
+        side = "home" if ours["home"] >= 0.5 else "away"
     team = home if side == "home" else away
     price = odds[side]
     e = round(100 * edge[side], 1)
@@ -197,13 +199,8 @@ def detail(ml):
 
 
 def detail_lines(ml, other=None):
-    """Every line under the pick: the payout, our chance vs the price's, and
-    when the bet is on the team we expect to lose, that we still pick the
-    other side to win."""
-    lines = [payout_text(ml["price"]), detail(ml)]
-    if other and ml["prob"] < 50:
-        lines.append(f"Long shot worth the price. We still pick {other} to win")
-    return lines
+    """Every line under the pick: the payout and our chance vs the price's."""
+    return [payout_text(ml["price"]), detail(ml)]
 
 
 # ── Grading and record ───────────────────────────────────────────────────────

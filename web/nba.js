@@ -11,7 +11,7 @@ function nbaResult(g) {
   return `${esc(g.score)} ${pillHtml}`;
 }
 
-// The moneyline bet: "BUF to win +135", VALUE at a 6+ point edge (else LEAN), and once graded
+// The moneyline bet: "BUF to win +135", the model's pick, VALUE at a 6+ point edge, and once graded
 // the units won or lost at the book price.
 function nbaMoneyline(m) {
   if (!m) return "<span class='faint'>No odds</span>";
@@ -21,7 +21,7 @@ function nbaMoneyline(m) {
     const u = `${m.units >= 0 ? "+" : ""}${m.units.toFixed(2)}u`;
     res = ` <span class='pill ${m.won ? "pill-positive" : "pill-danger"}'>${u}</span>`;
   }
-  const value = m.value ? " <span class='pill pill-primary'>VALUE</span>" : " <span class='pill pill-market'>LEAN</span>";
+  const value = m.value ? " <span class='pill pill-primary'>VALUE</span>" : "";
   return `<div class="ml"><div class="ml-pick">${esc(m.text)}${value}${res}</div>
     <div class="ml-sub">${esc(m.detail)}</div></div>`;
 }
