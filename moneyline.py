@@ -182,13 +182,28 @@ def price_text(price):
 
 
 def text(ml):
-    """ "BUF +135" """
-    return f"{ml['team']} {price_text(ml['price'])}"
+    """ "BUF to win +135" """
+    return f"{ml['team']} to win {price_text(ml['price'])}"
+
+
+def payout_text(price):
+    """What the price pays: "$100 wins $135" / "Bet $150 to win $100"."""
+    return f"$100 wins ${price:,.0f}" if price >= 100 else f"Bet ${-price:,.0f} to win $100"
 
 
 def detail(ml):
-    """ "our 48% vs book 42%, +6.2" """
-    return f"our {ml['prob']:.0f}% vs book {ml['book_prob']:.0f}%, {ml['edge']:+.1f}"
+    """ "We give BUF 48%, the price implies 42%" """
+    return f"We give {ml['team']} {ml['prob']:.0f}%, the price implies {ml['book_prob']:.0f}%"
+
+
+def detail_lines(ml, other=None):
+    """Every line under the pick: the payout, our chance vs the price's, and
+    when the bet is on the team we expect to lose, that we still pick the
+    other side to win."""
+    lines = [payout_text(ml["price"]), detail(ml)]
+    if other and ml["prob"] < 50:
+        lines.append(f"Long shot worth the price. We still pick {other} to win")
+    return lines
 
 
 # ── Grading and record ───────────────────────────────────────────────────────
@@ -238,5 +253,5 @@ def result(ml, void=False):
     """For the History day picker: {"text", "value", "detail", "won", "void", "units"}."""
     if not ml:
         return None
-    return {"text": text(ml), "value": bool(ml.get("value")), "detail": detail(ml),
+    return {"text": text(ml), "value": bool(ml.get("value")), "detail": " · ".join(detail_lines(ml)),
             "won": ml.get("won"), "void": bool(void or ml.get("void")), "units": ml.get("units")}

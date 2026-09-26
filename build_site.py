@@ -543,7 +543,7 @@ def games_table(picks):
           <td data-label="Result" class="num"><span>{game_result_html(p)}</span></td>
         </tr>"""
     return f"""<table class="data responsive-stack">
-      <thead><tr><th>Game and starters (ERA)</th><th>Pick</th><th class="num">Win chance</th><th>Moneyline</th><th class="num">Result</th></tr></thead>
+      <thead><tr><th>Game and starters (ERA)</th><th>Pick</th><th class="num">Win chance</th><th>Moneyline bet</th><th class="num">Result</th></tr></thead>
       <tbody>{rows}</tbody>
     </table>
     <div class="table-footnote">Win chance is the model's estimate that its pick wins the game. Starters are the
@@ -552,8 +552,10 @@ def games_table(picks):
 
 
 # ── Moneyline picks (moneyline.py), shared with NBA Edge ─────────────────────
-ML_NOTE = ("Moneyline is the side where the model's win chance beats the book's no-vig price by the most, at the "
-           "book price on ESPN's scoreboard; Value means an edge of 6 points or more. Graded at 1 unit a pick.")
+ML_NOTE = ("Moneyline bet is the team to take on the moneyline and its price (from ESPN's scoreboard): the side "
+           "where the model's win chance beats the chance the price implies (vig removed) by the most. It can be an "
+           "underdog the model still expects to lose, when the payout is worth the risk. Value means an edge of 6 "
+           "points or more; Lean is a smaller edge. Graded at 1 unit a pick.")
 
 
 def ml_result_html(ml, void=False):
@@ -565,16 +567,20 @@ def ml_result_html(ml, void=False):
 
 
 def ml_cell(p):
-    """The Moneyline column: "BUF +135" (Value when the edge is 3+ points), our
-    chance vs. the book's, and once graded the units won or lost."""
+    """The Moneyline bet column, spelled out: "BUF to win +135" (VALUE at a 6+
+    point edge, otherwise LEAN), what the price pays, our chance vs. the
+    price's, a note when it's a long shot on the team we expect to lose, and
+    once graded the units won or lost."""
     ml = p.get("ml")
     if not ml:
-        return '<td data-label="Moneyline" class="ml-cell"><div class="ml"><span class="faint">No odds</span></div></td>'
-    value = " " + pill("VALUE", "primary") if ml.get("value") else ""
+        return '<td data-label="Moneyline bet" class="ml-cell"><div class="ml"><span class="faint">No odds</span></div></td>'
+    value = " " + (pill("VALUE", "primary") if ml.get("value") else pill("LEAN", "market"))
     res = ml_result_html(ml, p.get("void"))
-    return f"""<td data-label="Moneyline" class="ml-cell"><div class="ml">
+    other = p.get("home") if ml["team"] == p.get("away") else p.get("away")
+    subs = "".join(f'<div class="ml-sub">{escape(line)}</div>' for line in moneyline.detail_lines(ml, other))
+    return f"""<td data-label="Moneyline bet" class="ml-cell"><div class="ml">
             <div class="ml-pick">{escape(moneyline.text(ml))}{value}{' ' + res if res else ''}</div>
-            <div class="ml-sub">{escape(moneyline.detail(ml))}</div></div></td>"""
+            {subs}</div></td>"""
 
 
 def ml_record_html(picks, empty="No moneyline picks graded yet this season."):
