@@ -2735,13 +2735,13 @@
    "ml": {
     "team": "COL",
     "side": "away",
-    "price": 200,
+    "price": 203,
     "prob": 33.3,
-    "book_prob": 31.9,
-    "edge": 1.4,
+    "book_prob": 31.6,
+    "edge": 1.7,
     "value": false,
-    "home_ml": -247,
-    "away_ml": 200,
+    "home_ml": -251,
+    "away_ml": 203,
     "book": "DraftKings",
     "won": null,
     "units": null
