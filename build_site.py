@@ -552,10 +552,9 @@ def games_table(picks):
 
 
 # ── Moneyline picks (moneyline.py), shared with NBA Edge ─────────────────────
-ML_NOTE = ("Moneyline bet is the team to take on the moneyline and its price (from ESPN's scoreboard): the side "
-           "where the model's win chance beats the chance the price implies (vig removed) by the most. It can be an "
-           "underdog the model still expects to lose, when the payout is worth the risk. Value means an edge of 6 "
-           "points or more; Lean is a smaller edge. Graded at 1 unit a pick.")
+ML_NOTE = ("Moneyline bet is the model's pick to win at its moneyline price (from ESPN's scoreboard). Value "
+           "means the model gives that team at least 6 points more win chance than the price implies (vig "
+           "removed). Graded at 1 unit a pick.")
 
 
 def ml_result_html(ml, void=False):
@@ -567,14 +566,13 @@ def ml_result_html(ml, void=False):
 
 
 def ml_cell(p):
-    """The Moneyline bet column, spelled out: "BUF to win +135" (VALUE at a 6+
-    point edge, otherwise LEAN), what the price pays, our chance vs. the
-    price's, a note when it's a long shot on the team we expect to lose, and
-    once graded the units won or lost."""
+    """The Moneyline bet column, spelled out: "BUF to win +135" (the model's
+    pick, VALUE at a 6+ point edge), what the price pays, our chance vs. the
+    price's, and once graded the units won or lost."""
     ml = p.get("ml")
     if not ml:
         return '<td data-label="Moneyline bet" class="ml-cell"><div class="ml"><span class="faint">No odds</span></div></td>'
-    value = " " + (pill("VALUE", "primary") if ml.get("value") else pill("LEAN", "market"))
+    value = " " + pill("VALUE", "primary") if ml.get("value") else ""
     res = ml_result_html(ml, p.get("void"))
     other = p.get("home") if ml["team"] == p.get("away") else p.get("away")
     subs = "".join(f'<div class="ml-sub">{escape(line)}</div>' for line in moneyline.detail_lines(ml, other))
