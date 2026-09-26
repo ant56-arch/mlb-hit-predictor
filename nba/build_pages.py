@@ -221,7 +221,7 @@ def games_table(picks):
           <td data-label="Result" class="num"><span>{result_html(p)}</span></td>
         </tr>"""
     return f"""<table class="data responsive-stack">
-      <thead><tr><th>Game</th><th>Pick</th><th class="num">Win chance</th><th class="num">Projected</th><th>Moneyline</th><th>Notes</th><th class="num">Result</th></tr></thead>
+      <thead><tr><th>Game</th><th>Pick</th><th class="num">Win chance</th><th class="num">Projected</th><th>Moneyline bet</th><th>Notes</th><th class="num">Result</th></tr></thead>
       <tbody>{rows}</tbody>
     </table>
     <div class="table-footnote">Win chance is the model's estimate that its pick wins the game. Picks are refreshed
