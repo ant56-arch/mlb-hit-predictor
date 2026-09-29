@@ -19,7 +19,7 @@ overrides today's date for testing.
 import json
 import os
 import sys
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -167,6 +167,9 @@ def make_picks(history, league, weights):
             "factors": {k: round(weights["coef"][k] * feats[k], 3) for k in weights["features"]},
             "model": weights.get("trained_at"),
             "correct": None,
+            # Refreshed every run until the game starts, so afterwards this is
+            # when the pick and price were locked in (shown on the site).
+            "set_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         }
         try:  # the moneyline pick is extra: without odds, the game pick still goes out
             ml = moneyline.pick(g["home"], g["away"], pick["home_prob"], odds_for(g, slate, events, old), pick["pick"])

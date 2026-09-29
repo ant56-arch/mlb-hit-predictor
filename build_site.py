@@ -565,6 +565,39 @@ def ml_result_html(ml, void=False):
     return pill(moneyline.units_text(ml["units"]), "positive" if ml["won"] else "danger")
 
 
+def locked_text(p):
+    """'Sep 27, 12:05 PM ET' - when the pick was last refreshed - or None."""
+    try:
+        t = datetime.fromisoformat(p["set_at"].replace("Z", "+00:00")).astimezone(ET)
+    except (KeyError, TypeError, ValueError, AttributeError):
+        return None
+    return f"{t:%b} {t.day}, {t.hour % 12 or 12}:{t:%M} {'AM' if t.hour < 12 else 'PM'} ET"
+
+
+def ml_history(p):
+    """moneyline.result for the History day picker, plus when it was locked."""
+    r = moneyline.result(p.get("ml"), p.get("void"))
+    if r is not None:
+        r["locked"] = locked_text(p)
+    return r
+
+
+def lock_note(p):
+    """When a pick and its price were taken: 'Locked Sep 27, 12:05 PM ET'
+    once the game has started (the last refresh before first pitch or tip),
+    else 'Set ... - locks at first pitch'."""
+    when = locked_text(p)
+    try:
+        start = datetime.fromisoformat(p["start"])
+    except (KeyError, TypeError, ValueError):
+        return ""
+    if not when:
+        return ""
+    if start <= NOW or p.get("correct") is not None or p.get("void"):
+        return f'<div class="lock-note locked">Locked {when}</div>'
+    return f'<div class="lock-note">Set {when} &middot; locks at the start</div>'
+
+
 def ml_cell(p):
     """The Moneyline bet column, spelled out: "BUF to win +135" (the model's
     pick, VALUE at a 6+ point edge), what the price pays, our chance vs. the
@@ -578,7 +611,7 @@ def ml_cell(p):
     subs = "".join(f'<div class="ml-sub">{escape(line)}</div>' for line in moneyline.detail_lines(ml, other))
     return f"""<td data-label="Moneyline bet" class="ml-cell"><div class="ml">
             <div class="ml-pick">{escape(moneyline.text(ml))}{value}{' ' + res if res else ''}</div>
-            {subs}</div></td>"""
+            {subs}{lock_note(p)}</div></td>"""
 
 
 def ml_record_html(picks, empty="No moneyline picks graded yet this season."):
@@ -698,7 +731,7 @@ def game_history(picks):
                 "matchup": f"{p['away']} @ {p['home']}",
                 "meta": f"{starter_text(p.get('away_sp'))} vs. {starter_text(p.get('home_sp'))}",
                 "pick": p["pick"], "prob": p["prob"], "correct": p.get("correct"), "void": bool(p.get("void")),
-                "ml": moneyline.result(p.get("ml"), p.get("void")),
+                "ml": ml_history(p),
                 "score": (f"{p['away']} {p['away_runs']}, {p['home']} {p['home_runs']}"
                           if p.get("home_runs") is not None else ""),
             } for p in sorted(ps, key=lambda p: -p["prob"])],

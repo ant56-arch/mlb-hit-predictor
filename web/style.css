@@ -992,6 +992,8 @@ td.prob { font-family: var(--font-head); font-size: 24px; font-weight: 800; font
 .ml-pick { font-weight: 700; white-space: nowrap; }
 .ml-pick .pill { margin-left: 4px; }
 .ml-sub { font-size: 13px; color: var(--text-muted); margin-top: 2px; white-space: nowrap; }
+.lock-note { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.lock-note.locked::before { content: "\1F512\FE0E  "; }
 
 @media (max-width: 700px) {
   table.responsive-stack tbody tr td.ml-cell { grid-column: 1 / -1; align-items: flex-start; }

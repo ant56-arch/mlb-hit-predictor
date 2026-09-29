@@ -25,7 +25,7 @@ from html import escape
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
-from build_site import (DASH, ET, ML_NOTE, NOW, card, ml_cell, ml_day, ml_record_html, pct, pill,  # noqa: E402
+from build_site import (DASH, ET, ML_NOTE, NOW, card, ml_cell, ml_day, ml_history, ml_record_html, pct, pill,  # noqa: E402
                         script_json, statline)
 import games as games_mod  # noqa: E402
 import model_page  # noqa: E402
@@ -323,7 +323,7 @@ def build_history(history):
             "games": [{
                 "matchup": f"{p['away']} {'vs' if p.get('neutral') else '@'} {p['home']}", "pick": p["pick"],
                 "prob": p["prob"], "correct": p.get("correct"), "void": bool(p.get("void")),
-                "ml": moneyline.result(p.get("ml"), p.get("void")),
+                "ml": ml_history(p),
                 "score": (f"{p['away']} {p['away_pts']}, {p['home']} {p['home_pts']}"
                           if p.get("home_pts") is not None else ""),
             } for p in sorted(picks, key=lambda p: -p["prob"])],
