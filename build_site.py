@@ -48,6 +48,7 @@ HOME_URL = "https://ant56-arch.github.io/"
 NFL_EDGE = "https://ant56-arch.github.io/nfl-edge"
 SPORT_LINKS = [("All", HOME_URL), ("NFL", f"{NFL_EDGE}/nfl/index.html"), ("CFB", f"{NFL_EDGE}/cfb/index.html"), ("MLB", None),
                ("NBA", "https://ant56-arch.github.io/mlb-hit-predictor/nba/index.html"),
+               ("CBB", "https://ant56-arch.github.io/mlb-hit-predictor/cbb/index.html"),
                ("Schedule", "https://ant56-arch.github.io/schedule.html")]
 TAGLINE = ("Who wins every MLB game and which hitters get a hit today, from models graded against every "
            "box score.")

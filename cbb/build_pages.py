@@ -1,14 +1,19 @@
 """
-build_pages.py - generates the NBA Edge pages into dist/nba/.
+build_pages.py - generates the CBB Edge (men's college basketball) pages into
+dist/cbb/.
 
 Run after the MLB build (build_site.py wipes dist/). Reads
-nba/picks_history.json and nba/model_weights.json and writes:
-  index.html    - today's games with a pick, win chance and moneyline pick for
-                  each, and the record (game picks and moneyline)
+cbb/picks_history.json, cbb/ratings.json and cbb/model_weights.json and writes:
+  index.html    - today's games between Division I teams with a pick, win
+                  chance, projected score and moneyline pick for each, and the
+                  record (game picks and moneyline)
+  ratings.html  - every Division I team's KenPom-style ratings, four factors,
+                  strength of schedule and T-Rank, sortable
   history.html  - any past day's picks and how they did
   accuracy.html - predicted vs. actual over the season, and last season's backtest
+  model.html    - how the model retrains itself
   terms.html, privacy.html
-  summary.json  - today's three most confident picks, read by the home page
+  summary.json  - today's five most confident picks, for the home page
 
 Shares MLB Edge's stylesheet, scripts and page helpers; nba.js adds the
 History day picker for games.
@@ -32,17 +37,18 @@ import model_page  # noqa: E402
 import moneyline  # noqa: E402
 
 WEB_DIR = os.path.join(ROOT, "web")
-OUT_DIR = os.path.join(ROOT, "dist", "nba")
+OUT_DIR = os.path.join(ROOT, "dist", "cbb")
 ASSETS = ("style.css", "site.js", "nba.js")
 
 HOME_URL = "https://ant56-arch.github.io/"
 NFL_EDGE = "https://ant56-arch.github.io/nfl-edge"
 MLB_EDGE = "https://ant56-arch.github.io/mlb-hit-predictor"
 SPORT_LINKS = [("All", HOME_URL), ("NFL", f"{NFL_EDGE}/nfl/index.html"), ("CFB", f"{NFL_EDGE}/cfb/index.html"),
-               ("MLB", f"{MLB_EDGE}/"), ("NBA", None), ("CBB", f"{MLB_EDGE}/cbb/index.html"),
+               ("MLB", f"{MLB_EDGE}/"), ("NBA", f"{MLB_EDGE}/nba/index.html"), ("CBB", None),
                ("Schedule", "https://ant56-arch.github.io/schedule.html")]
-TAGLINE = "Who wins every NBA game tonight and how likely it is, from a model graded against every final score."
-TOP_N = 3
+TAGLINE = ("Who wins every Division I men's basketball game and by how much, from KenPom-style team ratings "
+           "graded against every final score.")
+TOP_N = 5
 STRONG = 70  # win chance, in percent, that counts as a strong pick
 
 FAVICON = ('data:image/svg+xml,'
@@ -76,8 +82,8 @@ def tip_time(p):
     return datetime.fromisoformat(p["start"]).astimezone(ET).strftime("%-I:%M %p")
 
 
-def logo(abbr):
-    return (f'<img class="team-logo" src="https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/{abbr.lower()}.png" '
+def logo(team_id):
+    return (f'<img class="team-logo" src="https://a.espncdn.com/i/teamlogos/ncaa/500/{escape(str(team_id))}.png" '
             f'alt="" loading="lazy" onerror="this.style.display=\'none\'">')
 
 
@@ -86,7 +92,7 @@ def graded(picks):
 
 
 def season_of(iso):
-    """NBA seasons run October to June; 2026-10-21 and 2027-04-01 are both in 2026-27."""
+    """Seasons run November to April; 2026-11-03 and 2027-04-05 are both in 2026-27."""
     d = date.fromisoformat(iso)
     start = d.year if d.month >= 7 else d.year - 1
     return f"{start}-{str(start + 1)[2:]}"
@@ -111,8 +117,8 @@ BRAND_MARK = ('<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><p
 
 # ── Page chrome ──────────────────────────────────────────────────────────────
 def page_shell(title, active, body_html, charts=False):
-    tabs = [("index.html", "Home"), ("history.html", "History"), ("accuracy.html", "Accuracy"),
-            ("model.html", "Model")]
+    tabs = [("index.html", "Home"), ("ratings.html", "Ratings"), ("history.html", "History"),
+            ("accuracy.html", "Accuracy"), ("model.html", "Model")]
     nav = "".join(
         f'<a href="{href}" class="active" aria-current="page">{label}</a>' if href == active
         else f'<a href="{href}">{label}</a>' for href, label in tabs)
@@ -126,7 +132,7 @@ def page_shell(title, active, body_html, charts=False):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{title} | NBA Edge</title>
+<title>{title} | CBB Edge</title>
 <meta name="description" content="{TAGLINE}">
 <link rel="icon" href="{FAVICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -144,9 +150,9 @@ def page_shell(title, active, body_html, charts=False):
   </div>
 </header>
 <aside class="scoreboard" aria-label="Latest top picks" hidden></aside>
-<header class="masthead" data-sport="NBA">
+<header class="masthead" data-sport="CBB">
   <div class="masthead-inner">
-    <h1 class="wordmark">NBA <span>EDGE</span></h1>
+    <h1 class="wordmark">CBB <span>EDGE</span></h1>
     <div class="tagline">{TAGLINE}</div>
     <div class="updated-chip">Updated {NOW.strftime("%b %-d, %Y %-I:%M %p")} ET</div>
   </div>
@@ -166,12 +172,13 @@ def page_shell(title, active, body_html, charts=False):
 
 def footer():
     return f"""<footer class="site-footer">
-    <div class="footer-brand">NBA <span>Edge</span></div>
-    <p class="footer-text">Win chances come from a model fit on past NBA seasons: each team's Elo rating, point
-      differential this season and over its last 10 games, rest and back-to-backs, home court, and how much of its
-      regular rotation is listed out on the injury report. Scores, box scores, injury reports and moneyline
-      prices via ESPN. The model uses no betting odds; each game's moneyline pick compares its win chance with
-      the book price, vig removed.</p>
+    <div class="footer-brand">CBB <span>Edge</span></div>
+    <p class="footer-text">Win chances come from a model fit on past college basketball seasons: KenPom-style
+      adjusted offense, defense and tempo computed from every Division I box score, the four factors (shooting,
+      turnovers, offensive rebounding, free throws), Elo, recent form, rest, home court, and Bart Torvik's T-Rank.
+      Scores, box scores and moneyline prices via ESPN; T-Rank via barttorvik.com. The model uses no betting odds;
+      each game's moneyline pick compares its win chance with the book price, vig removed. Not affiliated with
+      KenPom.</p>
     <p class="footer-text">For entertainment and research only. This is not betting advice, and past results
       don't predict future ones. If gambling is a problem for you or someone you know, call 1-800-GAMBLER.</p>
     <nav class="footer-links" aria-label="Site">
@@ -179,7 +186,7 @@ def footer():
       <a href="https://ant56-arch.github.io/privacy.html">Privacy Policy</a>
       <a href="{HOME_URL}">All sites</a>
       <a href="{MLB_EDGE}/">MLB Edge</a>
-      <span>&copy; {NOW.year} NBA Edge. Updated from final scores every night.</span>
+      <span>&copy; {NOW.year} CBB Edge. Updated from final scores every night.</span>
     </nav>
   </footer>"""
 
@@ -194,15 +201,19 @@ def result_html(p):
     return score + (pill("WIN", "positive") if p["correct"] else pill("LOSS", "danger"))
 
 
+def team_label(p, side):
+    """'#4 Duke' style: AP rank when ranked."""
+    rank = p.get(f"{side}_rank")
+    return (f"#{rank} " if rank else "") + p.get(f"{side}_name", p[side])
+
+
 def game_notes(p):
     notes = []
-    for side in ("away", "home"):
-        if p.get(f"{side}_out"):
-            notes.append(f"{p[side]} without {', '.join(p[f'{side}_out'])}")
-    rest = p.get("rest", {})
-    b2b = [p[s] for s in ("away", "home") if rest.get(s) == 0]
-    if b2b:
-        notes.append(f"{' and '.join(b2b)} on a back-to-back")
+    if p.get("note"):
+        notes.append(p["note"])
+    ranks = [f"{p[s]} No. {p[f'{s}_em_rank']}" for s in ("away", "home") if p.get(f"{s}_em_rank")]
+    if ranks:
+        notes.append("AdjEM rank: " + ", ".join(ranks))
     return "; ".join(notes)
 
 
@@ -211,12 +222,17 @@ def games_table(picks):
     for p in sorted(picks, key=lambda p: (p["start"], p["game_id"])):
         at = "vs" if p.get("neutral") else "@"
         notes = game_notes(p)
+        pick_id = p["home_id"] if p["pick"] == p["home"] else p["away_id"]
+        proj = p.get("proj") or {}
+        projected = (f"{escape(p['away'])} {proj['away']}, {escape(p['home'])} {proj['home']}"
+                     if proj else f"by {p['margin']:.1f}")
+        tempo = f", {proj['tempo']} possessions" if proj.get("tempo") else ""
         rows += f"""<tr>
-          <td><div class="player-name">{escape(p['away'])} {at} {escape(p['home'])}</div>
+          <td><div class="player-name">{escape(team_label(p, 'away'))} {at} {escape(team_label(p, 'home'))}</div>
             <div class="player-meta">{tip_time(p)} ET · {escape(p['away'])} {p.get('away_record', '')}, {escape(p['home'])} {p.get('home_record', '')}</div></td>
-          <td data-label="Pick"><span class="matchup-team">{logo(p['pick'])}{escape(p['pick'])}</span></td>
+          <td data-label="Pick"><span class="matchup-team">{logo(pick_id)}{escape(p['pick'])}</span></td>
           <td data-label="Win chance" class="num prob">{p['prob']:.0f}%</td>
-          <td data-label="Projected" class="num">by {p['margin']:.1f}</td>
+          <td data-label="Projected" class="num">{projected}<div class="player-meta">by {p['margin']:.1f}{tempo}</div></td>
           {ml_cell(p)}
           <td{' data-label="Notes"' if notes else ''} class="why">{escape(notes)}</td>
           <td data-label="Result" class="num"><span>{result_html(p)}</span></td>
@@ -225,9 +241,9 @@ def games_table(picks):
       <thead><tr><th>Game</th><th>Pick</th><th class="num">Win chance</th><th class="num">Projected</th><th>Moneyline bet</th><th>Notes</th><th class="num">Result</th></tr></thead>
       <tbody>{rows}</tbody>
     </table>
-    <div class="table-footnote">Win chance is the model's estimate that its pick wins the game. Picks are refreshed
-      with each injury report until tip-off, then locked. Players listed are regulars ruled out or doubtful.
-      {ML_NOTE}</div>"""
+    <div class="table-footnote">Win chance is the model's estimate that its pick wins the game. The projected
+      score comes from each team's adjusted offense, defense and tempo, set to the model's margin. Picks are made
+      only for games between two Division I teams, refreshed until tip-off, then locked. {ML_NOTE}</div>"""
 
 
 def backtest_stats(model):
@@ -235,10 +251,10 @@ def backtest_stats(model):
     if not bt:
         return []
     strong = [b for b in bt["bands"] if b["range"][0] >= STRONG / 100]
+    top = bt["top"]
     stats = [(f"{bt['correct']}-{bt['games'] - bt['correct']}", f"{model['backtest_season']} backtest",
               f"{pct(bt['accuracy'], 1)} of every game"),
-             (pct(bt["top3"]["accuracy"], 1), f"Top {TOP_N} picks each day",
-              f"{bt['top3']['correct']}-{bt['top3']['picks'] - bt['top3']['correct']}")]
+             (pct(top["accuracy"], 1), f"Top {top['n']} picks each day", f"{top['correct']}-{top['picks'] - top['correct']}")]
     if strong:
         n = sum(b["n"] for b in strong)
         right = sum(round(b["actual"] * b["n"]) for b in strong)
@@ -252,9 +268,10 @@ def backtest_note(model):
     if not bt:
         return ""
     return (f'<div class="table-footnote">Backtest: fit only on seasons before {model["backtest_season"]}, then used '
-            f'to pick all {bt["games"]} regular-season games of {model["backtest_season"]}, each with only what was '
-            f'known that morning. The home team won {pct(b.get("home_team_accuracy"), 1)} of those games, and team '
-            f'ratings alone picked {pct(b.get("elo_only_accuracy"), 1)}. See the Accuracy tab for more.</div>')
+            f'to pick all {bt["games"]} regular-season Division I games of {model["backtest_season"]}, each with only '
+            f'what was known that morning. The home team won {pct(b.get("home_team_accuracy"), 1)} of those games, '
+            f'and the adjusted efficiency ratings alone picked {pct(b.get("ratings_only_accuracy"), 1)}. See the '
+            f'Accuracy tab for more.</div>')
 
 
 def track_record(history, model):
@@ -284,7 +301,16 @@ def track_record(history, model):
     return card("Track Record", "Every pick graded against the final score", body)
 
 
-def build_index(history, model):
+def ratings_preview(ratings, n=25):
+    teams = (ratings or {}).get("teams", [])[:n]
+    if not teams:
+        return ""
+    return card(f"Top {len(teams)} by Adjusted Efficiency",
+                f"As of {day_label(ratings['date'])}. Every team, the four factors and T-Rank are on the Ratings tab.",
+                ratings_table(teams, compact=True))
+
+
+def build_index(history, model, ratings):
     picks = history["picks"]
     today = NOW.date().isoformat()
     if picks:
@@ -292,17 +318,91 @@ def build_index(history, model):
         heading = "Today's Games" if latest == today else "Latest Games"
         top = sorted((p for p in picks if p["date"] == latest), key=lambda p: -p["prob"])
         picks_html = card(f"{heading}: {day_label(latest)}",
-                          f"A pick for every game. The {TOP_N} most confident today: "
+                          f"A pick for every game. The {TOP_N} most confident: "
                           + ", ".join(f"{p['pick']} ({p['prob']:.0f}%)" for p in top[:TOP_N]) + ".",
                           games_table([p for p in picks if p["date"] == latest]))
         if latest != today:
-            picks_html = card("Today's Games", "", '<div class="empty-state">No NBA games today. Picks resume on '
-                              'the next game day.</div>') + picks_html
+            picks_html = card("Today's Games", "", '<div class="empty-state">No Division I games today. Picks '
+                              'resume on the next game day.</div>') + picks_html
     else:
-        picks_html = card("Today's Games", "", '<div class="empty-state">The season tips off in late October, '
+        picks_html = card("Today's Games", "", '<div class="empty-state">The season tips off in early November, '
                           'and picks start on opening night. Until then, the Track Record below shows how the model '
                           'did on every game of last season.</div>')
-    return page_shell("Home", "index.html", picks_html + track_record(history, model))
+    return page_shell("Home", "index.html", picks_html + track_record(history, model) + ratings_preview(ratings))
+
+
+# ── Ratings ──────────────────────────────────────────────────────────────────
+def ff(v):
+    return f"{100 * v:.1f}"
+
+
+def ratings_table(teams, compact=False):
+    def cell(key, value, text):
+        return f'<td class="num" data-key="{key}" data-value="{value}">{text}</td>'
+
+    rows = ""
+    for t in teams:
+        tr = t.get("trank") or {}
+        o, d = t["off"], t["def"]
+        row = (cell("rank", t["rank"], t["rank"])
+               + f'<td data-key="team" data-value="{escape(t["name"])}"><span class="matchup-team">{logo(t["id"])}'
+                 f'{escape(t["name"])}</span> <span class="faint">{t["record"]}</span></td>'
+               + cell("em", t["adj_em"], f"{t['adj_em']:+.1f}")
+               + cell("o", t["adj_o"], f"{t['adj_o']:.1f}") + cell("d", t["adj_d"], f"{t['adj_d']:.1f}")
+               + cell("t", t["adj_t"], f"{t['adj_t']:.1f}"))
+        if not compact:
+            row += (cell("sos", t["sos"], f"{t['sos']:+.1f}")
+                    + cell("efg_o", o["efg"], ff(o["efg"])) + cell("efg_d", d["efg"], ff(d["efg"]))
+                    + cell("tov_o", o["tov"], ff(o["tov"])) + cell("tov_d", d["tov"], ff(d["tov"]))
+                    + cell("orb_o", o["orb"], ff(o["orb"])) + cell("orb_d", d["orb"], ff(d["orb"]))
+                    + cell("ftr_o", o["ftr"], ff(o["ftr"])) + cell("ftr_d", d["ftr"], ff(d["ftr"])))
+        row += cell("trank", tr.get("rank") or "", tr.get("rank") or DASH)
+        if not compact:
+            row += cell("barthag", tr.get("barthag") or "", f"{tr['barthag']:.3f}" if tr.get("barthag") else DASH)
+        rows += f"<tr>{row}</tr>"
+
+    def th(key, label, title="", cls="num"):
+        t = f' title="{title}"' if title else ""
+        return f'<th data-sort-key="{key}" class="{cls}"{t}>{label}</th>'
+
+    head = (th("rank", "Rk") + th("team", "Team", cls="")
+            + th("em", "AdjEM", "Points per 100 possessions better than an average team")
+            + th("o", "AdjO", "Points scored per 100 possessions, adjusted for opponents and venue")
+            + th("d", "AdjD", "Points allowed per 100 possessions, adjusted (lower is better)")
+            + th("t", "AdjT", "Possessions per game against an average opponent"))
+    if not compact:
+        head += (th("sos", "SOS", "Average AdjEM of opponents played")
+                 + th("efg_o", "eFG% O") + th("efg_d", "eFG% D") + th("tov_o", "TO% O") + th("tov_d", "TO% D")
+                 + th("orb_o", "OR% O") + th("orb_d", "OR% D") + th("ftr_o", "FTR O") + th("ftr_d", "FTR D"))
+    head += th("trank", "T-Rank", "Bart Torvik's T-Rank ranking")
+    if not compact:
+        head += th("barthag", "Barthag", "T-Rank's chance of beating an average team on a neutral court")
+    return f"""<table class="data ratings-table" data-sortable>
+      <thead><tr>{head}</tr></thead>
+      <tbody>{rows}</tbody>
+    </table>"""
+
+
+def build_ratings(ratings):
+    teams = (ratings or {}).get("teams", [])
+    if not teams:
+        body = card("Ratings", "", '<div class="empty-state">Ratings appear once the season has games. Every team '
+                    'starts from part of last season\'s rating.</div>')
+        return page_shell("Ratings", "ratings.html", body)
+    avg = ratings.get("average", {})
+    note = f"""<div class="table-footnote">Computed from every Division I box score this season, the way KenPom
+      does it. Possessions = FGA - offensive rebounds + turnovers + 0.475 x FTA. AdjO and AdjD are points scored and
+      allowed per 100 possessions, adjusted for each opponent's strength and for home court. AdjEM is the gap
+      between them: how many points per 100 possessions a team would beat an average team by. AdjT is possessions
+      against an average opponent. An average offense scores {avg.get('eff', DASH)} per 100 possessions at a tempo
+      of {avg.get('tempo', DASH)}, and home court is worth about {avg.get('home_court', DASH)} points. The four
+      factors are effective FG%, turnover rate, offensive rebound rate and free throw rate (FTA per FGA), for the
+      team's offense (O) and what its defense allows (D), not adjusted for opponents. SOS is the average AdjEM of
+      the opponents played. T-Rank and Barthag are Bart Torvik's (barttorvik.com). Early in the season every team
+      starts from part of last season's rating. Select a column header to sort.</div>"""
+    body = card("Ratings", f"All {len(teams)} Division I teams as of {day_label(ratings['date'])}, best first.",
+                ratings_table(teams) + note)
+    return page_shell("Ratings", "ratings.html", body)
 
 
 # ── History ──────────────────────────────────────────────────────────────────
@@ -432,7 +532,7 @@ def build_accuracy(history, model):
                 f"projected margins were off by {bt['margin_mae']:.1f} points on average.")
         post = model.get("backtest_postseason")
         if post:
-            note += f" In the play-in and playoffs it went {post['correct']}-{post['games'] - post['correct']}."
+            note += f" In the postseason it went {post['correct']}-{post['games'] - post['correct']}."
         parts.append(card("Backtest", "How the model did on a season it was never trained on",
                           statline(backtest_stats(model)) + band_table(bt["bands"], note)))
     if not parts:
@@ -440,40 +540,29 @@ def build_accuracy(history, model):
     return page_shell("Accuracy", "accuracy.html", "".join(parts), charts=charts)
 
 
-# ── Schedule tab and scoreboard strip ────────────────────────────────────────
-def attach_picks(slate, history):
-    """Each game gets the model's pick and win chance, if it made one."""
-    picks = {(p["date"], p["away"], p["home"]): p for p in history["picks"]}
-    for g in slate["games"]:
-        day = games_mod.start_et(g).date().isoformat()
-        p = picks.get((day, g["away"]["abbr"], g["home"]["abbr"]))
-        if p:
-            g["pick"] = {"text": f"{p['pick']} {p['prob']:.0f}%",
-                         "result": None if p.get("void") or p.get("correct") is None else bool(p["correct"])}
-    return slate
-
 
 # ── Model tab ────────────────────────────────────────────────────────────────
 FACTOR_LABELS = {
     "home_court": ("Home court", "points for the home team"),
+    "em": ("Adjusted efficiency margin", "per point of margin projected from AdjEM and tempo"),
     "elo": ("Team rating (Elo) gap", "points per 100 rating points"),
-    "net": ("Season point differential gap", "points per point of differential"),
-    "recent": ("Last 10 games form gap", "points per point of differential"),
+    "efg": ("Shooting matchup (eFG%)", "points per percentage point of edge"),
+    "tov": ("Turnover matchup", "points per percentage point of edge"),
+    "orb": ("Offensive rebounding matchup", "points per percentage point of edge"),
+    "ftr": ("Free throw rate matchup", "points per percentage point of edge"),
+    "recent": ("Last 5 games form gap", "points per point of differential"),
     "rest": ("Extra rest", "points per extra day off vs. the opponent"),
-    "b2b_home": ("Home team on a back-to-back", ""),
-    "b2b_away": ("Away team on a back-to-back", ""),
-    "missing_home": ("Home team's missing players", "per 10 points of missing player value"),
-    "missing_away": ("Away team's missing players", "per 10 points of missing player value"),
+    "trank": ("T-Rank vs. our ratings", "per point T-Rank's projected margin differs from ours"),
 }
 
 
 def recipe_setup(recipe):
-    k, carry, years = recipe.get("elo_k", 20), recipe.get("elo_carry", 0.75), recipe.get("years", 3)
-    speed = "steady" if k <= 15 else "medium" if k <= 20 else "fast"
+    hl, carry, years = recipe.get("half_life"), recipe.get("carry", 0.6), recipe.get("years", 3)
     return [
-        ("Learns from:", f"the last {years} seasons of games"),
-        ("Team ratings:", f"{speed} - each result moves a team's Elo rating by up to {k} points"),
-        ("Over the summer:", f"keeps {carry:.0%} of each team's rating; the rest resets toward average"),
+        ("Learns from:", f"the last {years} seasons of Division I games"),
+        ("Team ratings:", f"recent games count more; a game's weight halves every {hl} days" if hl
+         else "every game this season counts the same"),
+        ("Over the summer:", f"each team starts from {carry:.0%} of last season's rating, which fades as games come in"),
     ]
 
 
@@ -508,12 +597,12 @@ def build_model(model, runs):
              f"games through {model_page.short_date(model.get('trained_through'))}" if model.get("trained_through") else ""),
             (f"{model.get('training_games', 0):,}", "Games learned from",
              " to ".join(model_page.short_date(d) for d in model.get("training_dates", []))),
-            ("Weekly", "Next check", "once 50+ new games are in; waits in the offseason"),
+            ("Weekly", "Next check", "once 300+ new games are in; waits in the offseason"),
             (rows[0]["decision"].split(" ")[0] if rows else "-", "Last decision",
              f"{rows[0]['tested']} versions tested" if rows else "no retrains yet"),
         ],
         "setup": recipe_setup(model.get("recipe", {})) + [
-            ("Looks at:", f"{len(now_w)} factors for every game, listed below, including injuries on the day"),
+            ("Looks at:", f"{len(now_w)} factors for every game, listed below"),
         ],
         "runs": rows,
         "score_name": "Better than guessing",
@@ -529,10 +618,11 @@ def build_model(model, runs):
 
 # ── Home page summary ────────────────────────────────────────────────────────
 def build_summary(history, model):
-    """summary.json for the NBA card on the home page (github.com/ant56-arch/ant56-arch.github.io)."""
+    """summary.json for a CBB card on the home page (github.com/ant56-arch/ant56-arch.github.io)."""
     picks = history["picks"]
     summary = {"updated": NOW.isoformat(), "heading": None, "picks": [], "record": None,
-               "empty": "No NBA picks yet. They start on opening night in late October.", "result_labels": ["WIN", "LOSS"],
+               "empty": "No college basketball picks yet. They start on opening night in early November.",
+               "result_labels": ["WIN", "LOSS"],
                "retrained": model.get("trained_at"), "model_url": "model.html"}
     if picks:
         latest = max(p["date"] for p in picks)
@@ -559,19 +649,18 @@ def build_summary(history, model):
     return summary
 
 
-# ── Legal pages ──────────────────────────────────────────────────────────────
 def main():
     history = load_json(os.path.join(HERE, "picks_history.json"), {"picks": []})
     model = load_json(os.path.join(HERE, "model_weights.json"), {})
-    games_slate = attach_picks(games_mod.load("nba"), history)
+    ratings = load_json(os.path.join(HERE, "ratings.json"), {})
     if os.path.exists(OUT_DIR):
         shutil.rmtree(OUT_DIR)
     os.makedirs(OUT_DIR)
     pages = {
-        "index.html": build_index(history, model),
+        "index.html": build_index(history, model, ratings),
+        "ratings.html": build_ratings(ratings),
         "history.html": build_history(history),
         "accuracy.html": build_accuracy(history, model),
-        "schedule.html": games_mod.schedule_redirect("nba"),
         "model.html": build_model(model, load_json(os.path.join(HERE, "model_history.json"), {"runs": []})["runs"]),
         "terms.html": games_mod.legal_redirect("terms"),
         "privacy.html": games_mod.legal_redirect("privacy"),
@@ -581,10 +670,9 @@ def main():
             f.write(html)
     with open(os.path.join(OUT_DIR, "summary.json"), "w") as f:
         json.dump(build_summary(history, model), f, indent=1)
-    games_mod.write_json(os.path.join(OUT_DIR, "games.json"), "nba", games_slate, NOW.isoformat())
     for asset in ASSETS:
         shutil.copy(os.path.join(WEB_DIR, asset), os.path.join(OUT_DIR, asset))
-    print(f"Built {len(pages)} NBA pages in {OUT_DIR}")
+    print(f"Built {len(pages)} CBB pages in {OUT_DIR}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,52 @@
+name: CBB Research Data Pull + Retrain
+
+# Pulls full men's college basketball seasons (every Division I game with team
+# box scores) from ESPN, plus T-Rank as it stood each day from Bart Torvik's
+# time machine, then refits the CBB model and re-runs its backtest on the
+# latest season. Run this once to seed CBB Edge before its first season; after
+# that the daily run stores every game and retrains weekly.
+
+on:
+  workflow_dispatch:
+    inputs:
+      seasons:
+        description: "Season end years, comma-separated (2026 = 2025-26). Blank = last three."
+        required: false
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r research/requirements.txt
+
+      - name: Pull seasons
+        env:
+          SEASONS: ${{ inputs.seasons }}
+        run: python cbb/research/pull_seasons.py
+
+      - name: Retrain model
+        env:
+          FORCE: '1'
+        run: python cbb/research/train.py
+
+      - name: Commit data and model
+        run: |
+          git config user.name "CBB Edge Bot"
+          git config user.email "actions@github.com"
+          git add cbb/data/ cbb/model_weights.json
+          [ -f cbb/model_history.json ] && git add cbb/model_history.json
+          git diff --staged --quiet && exit 0
+          git commit -m "Refresh CBB research data and retrain model"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push

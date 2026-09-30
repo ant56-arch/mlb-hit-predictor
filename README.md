@@ -110,6 +110,43 @@ Once a season is over (July), the daily run rolls that season's day files into
 do by hand. **NBA Research Data Pull + Retrain** is still there to rebuild the
 stored seasons from ESPN if ever needed.
 
+## CBB Edge (men's college basketball)
+The college basketball site lives in `cbb/` and publishes to
+https://ant56-arch.github.io/mlb-hit-predictor/cbb/ from the same daily
+workflow. Every run (any mode) runs `cbb/predict.py`, which:
+
+1. stores each finished day's Division I scores and team box scores from ESPN
+   (`cbb/data/days/`),
+2. grades pending picks against final scores,
+3. writes every Division I team's ratings to `cbb/ratings.json`, with Bart
+   Torvik's T-Rank alongside and a daily T-Rank snapshot in `cbb/data/trank/`, and
+4. gives every game between two Division I teams a pick, a win chance, a
+   projected score and a moneyline pick, refreshed until tip-off, then locked.
+
+The ratings (`cbb/model.py`) work the way KenPom's do. Possessions come from
+the box score (FGA - offensive rebounds + turnovers + 0.475 x FTA), and one
+weighted least-squares fit over every Division I game this season gives each
+team an adjusted offense, defense and tempo, corrected for opponents and home
+court. Teams start each season from part of last season's rating. Games against
+non-Division I teams count toward records but not ratings.
+
+The model predicts the home team's margin from the adjusted efficiency margin
+at the expected tempo, Elo, the four factors (shooting, turnovers, offensive
+rebounding, free throw rate) as matchups, last-5-game form, rest, home court,
+and how much T-Rank disagrees with our ratings. The win chance is the normal CDF
+of margin / sigma. Every feature is computed as of that morning.
+
+`cbb/build_pages.py` writes `dist/cbb/`: Home, Ratings (sortable, every team),
+History, Accuracy and Model.
+
+### Seeding and retraining
+Run **CBB Research Data Pull + Retrain** once to pull the last three seasons
+and T-Rank's daily history (Torvik's time machine) and fit the first model.
+After that the daily run retrains at most once a week, only after 300+ new
+games, with the same promote-only-if-better guard as NBA. Recipes vary how much
+recent games count in the ratings, how much of last season's rating carries
+over, and 2 or 3 years of games. Every run is logged to `cbb/model_history.json`.
+
 ## Files
 - `predict.py`: daily picks and results
 - `features.py`: feature definitions shared by training and prediction
@@ -120,3 +157,4 @@ stored seasons from ESPN if ever needed.
 - `research/`: season data pull and model training (pulled data goes to `research/data/`, not committed)
 - `teams/`: the MLB team game-winner model (pipeline, model, data) behind the Games tab
 - `nba/`: NBA Edge (pipeline, model, pages, data)
+- `cbb/`: CBB Edge, men's college basketball (pipeline, ratings, model, pages, data)
