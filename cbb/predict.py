@@ -117,18 +117,20 @@ def grade(history, games_by_id):
 
 
 # ── 3. ratings ───────────────────────────────────────────────────────────────
-def write_ratings(league, season, games):
-    table = M.team_table(league, TODAY)
+def write_ratings(league, season, games, final=False):
+    """final: the offseason, when the table is last season's final ratings."""
+    day = None if final else TODAY
+    table = M.team_table(league, day)
     if not table:
         return
     trank = torvik.fetch(season)
     matched = torvik.attach(table, trank)
     snapshot = torvik.by_team_id(trank, store.name_to_id(games, torvik.normalize))
-    if snapshot:  # the model learns from these once enough games have one
+    if snapshot and not final:  # the model learns from these once enough games have one
         store.save_trank(season, TODAY, snapshot)
-    r = league.ratings(TODAY)
+    r = league.ratings(day)
     save(RATINGS_FILE, {
-        "date": TODAY, "season": season, "teams": table,
+        "date": games[-1]["date"] if final else TODAY, "season": season, "final": final, "teams": table,
         "average": {"eff": round(r["mu"], 1), "tempo": round(r["mu_t"], 1),
                     "home_court": round(2 * r["h"] * r["mu_t"] / 100, 1)},
         "trank_matched": matched,
@@ -208,6 +210,16 @@ def main():
 
     if not in_season(TODAY):
         store.roll_up_days()  # the season is over: its day files become one season file
+        # Until the next season starts, the Ratings tab shows last season's final ratings.
+        if games and load(RATINGS_FILE, {}).get("season") != games[-1]["season"]:
+            league = M.League((weights or {}).get("league"), M.division_one(games), store.load_trank())
+            for g in games:
+                if g["home_pts"] != g["away_pts"]:
+                    league.update(g, box.get(g["id"]))
+            try:
+                write_ratings(league, games[-1]["season"], games, final=True)
+            except Exception as e:
+                print(f"  ratings failed: {e}")
     elif games or weights:
         league = M.League((weights or {}).get("league"), M.division_one(games), store.load_trank())
         for g in games:

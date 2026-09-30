@@ -301,12 +301,19 @@ def track_record(history, model):
     return card("Track Record", "Every pick graded against the final score", body)
 
 
+def as_of(ratings):
+    if ratings.get("final"):
+        s = ratings["season"]
+        return f"Final {s - 1}-{str(s)[2:]} ratings, through {day_label(ratings['date'])}. The new season starts from these"
+    return f"As of {day_label(ratings['date'])}"
+
+
 def ratings_preview(ratings, n=25):
     teams = (ratings or {}).get("teams", [])[:n]
     if not teams:
         return ""
     return card(f"Top {len(teams)} by Adjusted Efficiency",
-                f"As of {day_label(ratings['date'])}. Every team, the four factors and T-Rank are on the Ratings tab.",
+                f"{as_of(ratings)}. Every team, the four factors and T-Rank are on the Ratings tab.",
                 ratings_table(teams, compact=True))
 
 
@@ -400,7 +407,7 @@ def build_ratings(ratings):
       team's offense (O) and what its defense allows (D), not adjusted for opponents. SOS is the average AdjEM of
       the opponents played. T-Rank and Barthag are Bart Torvik's (barttorvik.com). Early in the season every team
       starts from part of last season's rating. Select a column header to sort.</div>"""
-    body = card("Ratings", f"All {len(teams)} Division I teams as of {day_label(ratings['date'])}, best first.",
+    body = card("Ratings", f"All {len(teams)} Division I teams, best first. {as_of(ratings)}.",
                 ratings_table(teams) + note)
     return page_shell("Ratings", "ratings.html", body)
 
