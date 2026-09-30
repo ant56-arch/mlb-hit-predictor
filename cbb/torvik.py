@@ -31,7 +31,7 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (CBB Edge; github.com/ant56-arch/mlb-hit-p
 # Torvik's names for schools ESPN names differently (after normalize()).
 ALIASES = {
     "connecticut": "uconn", "miami fl": "miami", "miami oh": "miami oh", "nc st": "nc st",
-    "mississippi": "ole miss", "pittsburgh": "pitt", "illinois chicago": "uic",
+    "mississippi": "ole miss", "illinois chicago": "uic",
     "louisiana lafayette": "louisiana", "texas a&m corpus chris": "texas a&m corpus christi",
     "southeast missouri st": "se missouri st", "arkansas pine bluff": "arkansas pine bluff",
     "cal st bakersfield": "cal st bakersfield", "umass lowell": "umass lowell",
