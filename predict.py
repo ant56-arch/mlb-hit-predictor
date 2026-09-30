@@ -397,7 +397,11 @@ def record_baselines(history, today):
     baselines = history.setdefault("baselines", {})
     missing = sorted({p["date"] for p in history["picks"] if p["date"] < today} - set(baselines), reverse=True)
     for day in missing[:BASELINE_DAYS_PER_RUN]:
-        result = day_baseline(day)
+        try:
+            result = day_baseline(day)
+        except requests.RequestException as e:
+            print(f"  baseline for {day} skipped: {e}")  # never block grading; next run retries
+            break
         if result and result[0]:
             baselines[day] = {"hitters": result[0], "with_hit": result[1]}
             print(f"  {day}: {result[1]} of {result[0]} hitters got a hit")
