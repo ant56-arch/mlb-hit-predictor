@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sports Edge has moved</title>
+<meta name="robots" content="noindex">
+<script>
+// Sports Edge moved to https://ant56-arch.github.io/ (one repo for every
+// site). Send old links to the same page at its new address.
+var p = location.pathname.replace(/^\/mlb-hit-predictor/, "") || "/";
+var m = p.match(/^\/(nba|cbb)(\/.*)?$/);
+location.replace((m ? "/" + m[1] + (m[2] || "/") : "/mlb" + p) + location.search + location.hash);
+</script>
+<meta http-equiv="refresh" content="1; url=https://ant56-arch.github.io/mlb/">
+</head>
+<body style="font-family: sans-serif; background: #121314; color: #eee; padding: 40px;">
+<p>This page moved to <a style="color: #e5793b" href="https://ant56-arch.github.io/mlb/">https://ant56-arch.github.io/mlb/</a>.</p>
+</body>
+</html>
