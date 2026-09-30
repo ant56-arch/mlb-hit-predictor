@@ -10,7 +10,9 @@ predict.py - daily MLB Edge pipeline. Two modes (MODE env var):
             who isn't starting is never picked.
   results - grade every pending pick from past days against box scores.
             A pick with no decision (didn't bat, 0 at-bats, postponed)
-            is voided rather than counted as a miss.
+            is voided rather than counted as a miss. Also records each
+            pick day's all-hitter baseline: how many hitters with an
+            at-bat got a hit, across every game that day.
 """
 
 import json
@@ -36,6 +38,7 @@ SLATE_FILE = os.path.join("data", "slate.json")
 MODEL_FILE = "model_weights.json"
 
 PICKS_PER_DAY = 10
+BASELINE_DAYS_PER_RUN = 15  # caps the one-time backfill of past pick days
 MAX_PICKS_PER_GAME = 2
 GAME_TYPES = {"R", "F", "D", "L", "W"}  # regular season + postseason, never spring training
 REGULAR_SHARE = 0.6  # without a posted lineup, only consider hitters who've played 60%+ of games
@@ -366,9 +369,45 @@ def batting_line(game_id, player_id):
     return None
 
 
+def day_baseline(day):
+    """(hitters with an at-bat, how many got a hit) across every game on `day`,
+    or None while any of them is still to finish."""
+    games = [g for d in get("schedule", sportId=1, date=day).get("dates", []) for g in d["games"]
+             if g.get("gameType") in GAME_TYPES]
+    stale = date.fromisoformat(day) < TODAY - timedelta(days=3)
+    hitters = with_hit = 0
+    for g in games:
+        st = g.get("status", {})
+        if st.get("abstractGameState") != "Final" or st.get("detailedState", "").startswith("Suspended"):
+            if st.get("detailedState") in ("Postponed", "Cancelled") or stale:
+                continue  # never played that day (or never will be)
+            return None
+        box = get(f"game/{g['gamePk']}/boxscore")
+        for side in ("home", "away"):
+            for p in box.get("teams", {}).get(side, {}).get("players", {}).values():
+                bat = p.get("stats", {}).get("batting", {})
+                if int(bat.get("atBats", 0)) > 0:
+                    hitters += 1
+                    with_hit += int(bat.get("hits", 0)) > 0
+    return hitters, with_hit
+
+
+def record_baselines(history, today):
+    """Store the all-hitter hit rate for pick days that don't have one yet, newest first."""
+    baselines = history.setdefault("baselines", {})
+    missing = sorted({p["date"] for p in history["picks"] if p["date"] < today} - set(baselines), reverse=True)
+    for day in missing[:BASELINE_DAYS_PER_RUN]:
+        result = day_baseline(day)
+        if result and result[0]:
+            baselines[day] = {"hitters": result[0], "with_hit": result[1]}
+            print(f"  {day}: {result[1]} of {result[0]} hitters got a hit")
+    history["baselines"] = dict(sorted(baselines.items()))
+
+
 def run_results():
     history = load_history()
     today = TODAY.isoformat()
+    record_baselines(history, today)
     for p in history["picks"]:
         # 0 at-bats (walked every time, or never got in) is no decision, not a miss.
         if p.get("got_hit") is False and p.get("at_bats") == 0:
@@ -376,6 +415,7 @@ def run_results():
 
     pending = [p for p in history["picks"] if p["got_hit"] is None and not p.get("void") and p["date"] < today]
     if not pending:
+        save_json(HISTORY_FILE, history)
         print("No pending picks.")
         return
     game_ids = sorted({p["game_id"] for p in pending})
